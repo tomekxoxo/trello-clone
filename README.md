@@ -29,4 +29,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deployed on Vercel
 
-[Vercel live version]([https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme](https://trello-clone-beryl.vercel.app/))
+[Trello-clone live version](https://trello-clone-beryl.vercel.app/)
