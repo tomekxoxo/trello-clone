@@ -1,3 +1,22 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:storybook/recommended",
+    "eslint:recommended",
+    "prettier",
+    "next"
+  ],
+  "rules": {
+    "@typescript-eslint/naming-convention": [
+      2,
+      {
+        "selector": "typeLike",
+        "format": ["PascalCase"]
+      },
+      { "selector": "typeAlias", "format": ["PascalCase"], "suffix": ["Type"] },
+      { "selector": "enum", "format": ["PascalCase"], "prefix": ["E"] },
+      { "selector": "interface", "format": ["PascalCase"], "prefix": ["I"] },
+      { "selector": "enumMember", "format": ["camelCase"] }
+    ]
+  }
 }
