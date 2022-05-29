@@ -17,6 +17,12 @@
       { "selector": "enum", "format": ["PascalCase"], "prefix": ["E"] },
       { "selector": "interface", "format": ["PascalCase"], "prefix": ["I"] },
       { "selector": "enumMember", "format": ["camelCase"] }
-    ]
-  }
+    ],
+    "sort-keys-fix/sort-keys-fix": "warn",
+    "better-styled-components/sort-declarations-alphabetically": 2,
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  },
+  "globals": { "JSX": true },
+  "plugins": ["sort-keys-fix", "better-styled-components", "simple-import-sort"]
 }
