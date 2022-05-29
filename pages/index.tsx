@@ -6,8 +6,6 @@ const Home: NextPage = () => {
     <div>
       <Head>
         <title>Trello Clone</title>
-        <meta name='description' content='dashboard trello' />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
     </div>
   );
