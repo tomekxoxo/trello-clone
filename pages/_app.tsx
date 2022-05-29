@@ -8,12 +8,22 @@ const GlobalStyle = createGlobalStyle`
 ${css`
   ${normalize};
   html {
-    font-size: 10px;
     font-family: 'Noto Sans';
     font-family: 'Poppins';
+    font-size: 10px;
   }
   * {
     box-sizing: border-box;
+  }
+
+  #__next {
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
   }
 `}`;
 

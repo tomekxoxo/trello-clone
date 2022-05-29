@@ -1,11 +1,11 @@
 import NextLink from 'next/link';
 
-interface ILink {
+interface ILinkProps {
   href: string;
   children: JSX.Element;
 }
 
-const Link = ({ href, children }: ILink) => {
+const Link = ({ href, children }: ILinkProps) => {
   return (
     <NextLink href={href} passHref>
       <a>{children}</a>

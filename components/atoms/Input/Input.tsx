@@ -5,11 +5,11 @@ import {
 } from 'Components/atoms/Input/Input.style';
 import { InputHTMLAttributes } from 'react';
 
-interface IInput extends InputHTMLAttributes<HTMLInputElement> {
+interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   button?: JSX.Element;
 }
 
-const Input = ({ button, ...restProps }: IInput) => {
+const Input = ({ button, ...restProps }: IInputProps) => {
   return (
     <StyledInputContainer>
       <StyledInput {...restProps} />

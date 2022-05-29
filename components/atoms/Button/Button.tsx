@@ -3,12 +3,12 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { useTheme } from 'styled-components';
 import { ThemeColorsType } from 'Utils/theme';
 
-interface IButton extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   color?: ThemeColorsType;
 }
 
-const Button = ({ children, color = 'blue1', ...restProps }: IButton) => {
+const Button = ({ children, color = 'blue1', ...restProps }: IButtonProps) => {
   const { colors } = useTheme();
   const backgroundColor = colors[color];
 
