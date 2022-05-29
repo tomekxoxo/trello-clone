@@ -4,6 +4,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  pageExtensions: ['*.tsx', '*.ts'],
 };
 
 module.exports = nextConfig;
