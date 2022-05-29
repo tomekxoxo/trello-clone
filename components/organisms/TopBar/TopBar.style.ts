@@ -7,6 +7,12 @@ export const StyledTopBar = styled.nav`
   display: flex;
   filter: drop-shadow(rgba(0, 0, 0, 0.05));
   height: 68px;
+  justify-content: space-between;
   padding: 0 24px;
-  width: 100%; ;
+  width: 100%;
+`;
+
+export const StyledTopBarSide = styled.div`
+  display: flex;
+  width: 50%;
 `;

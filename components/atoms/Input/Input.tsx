@@ -1,4 +1,8 @@
-import { StyledInput, StyledInputButton, StyledInputContainer } from 'Components/Input/Input.style';
+import {
+  StyledInput,
+  StyledInputButton,
+  StyledInputContainer,
+} from 'Components/atoms/Input/Input.style';
 import { InputHTMLAttributes } from 'react';
 
 interface IInput extends InputHTMLAttributes<HTMLInputElement> {

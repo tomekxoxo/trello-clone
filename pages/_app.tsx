@@ -1,4 +1,4 @@
-import TobBar from 'Components/TopBar/TobBar';
+import TopBar from 'Components/organisms/TopBar/TopBar';
 import type { AppProps } from 'next/app';
 import { createGlobalStyle, css, ThemeProvider } from 'styled-components';
 import { normalize } from 'styled-normalize';
@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <TobBar />
+        <TopBar />
         <Component {...pageProps} />
       </ThemeProvider>
     </>

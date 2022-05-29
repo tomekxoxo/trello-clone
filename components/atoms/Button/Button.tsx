@@ -1,4 +1,4 @@
-import { StyledButton } from 'Components/Button/Button.style';
+import { StyledButton } from 'Components/atoms/Button/Button.style';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { useTheme } from 'styled-components';
 import { ThemeColorsType } from 'Utils/theme';
