@@ -7,8 +7,8 @@ export const StyledTopBar = styled.nav`
   display: flex;
   filter: drop-shadow(rgba(0, 0, 0, 0.05));
   gap: 2.4rem;
-  height: 68px;
   justify-content: space-between;
+  min-height: 68px;
   padding: 0 24px;
   width: 100%;
 `;

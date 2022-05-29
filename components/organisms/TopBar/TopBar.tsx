@@ -9,11 +9,11 @@ import Logo from 'Public/logo.svg';
 
 import { StyledTopBar, StyledTopBarSide } from './TopBar.style';
 
-interface ITopBar {
+interface ITopBarProps {
   boardName?: string;
 }
 
-const TobBar = ({ boardName }: ITopBar) => {
+const TobBar = ({ boardName }: ITopBarProps) => {
   console.log(boardName);
   return (
     <StyledTopBar>
