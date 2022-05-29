@@ -9,6 +9,8 @@ export type DefaultThemeFontsType = typeof fonts;
 const colors = {
   blue1: 'rgba(47, 128, 237, 1)',
   blue3: 'rgba(86, 204, 242, 1)',
+  dark: 'rgba(51, 51, 51, 1)',
+  gray: '#F2F2F2',
   gray1: 'rgba(51, 51, 51, 1)',
   gray2: 'rgba(79, 79, 79, 1)',
   gray3: 'rgba(130, 130, 130, 1)',

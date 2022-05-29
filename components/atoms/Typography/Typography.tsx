@@ -1,4 +1,4 @@
-import { StyledTypography } from 'Components/Typography/Typography.style';
+import { StyledTypography } from 'Components/atoms/Typography/Typography.style';
 import { useTheme } from 'styled-components';
 import { ThemeColorsType, ThemeFontsType } from 'Utils/theme';
 
