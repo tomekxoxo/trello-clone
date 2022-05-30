@@ -1,9 +1,12 @@
 import Button from 'Components/atoms/Button/Button';
+import Modal from 'Components/atoms/Modal/Modal';
 import Typography from 'Components/atoms/Typography/Typography';
 import Card from 'Components/molecules/Card/Card';
 import { StyledBoards, StyledBoardsHeader, StyledBoardsList } from 'Pages/boards/index.style';
+import { useState } from 'react';
 
 const Boards = () => {
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const mockList = [
     {
       image: '/restaurant.jpeg',
@@ -222,13 +225,16 @@ const Boards = () => {
       ],
     },
   ];
+
+  const openModal = () => setIsModalOpen(true);
+
   return (
     <StyledBoards>
       <StyledBoardsHeader>
         <Typography color='dark' variant='h1'>
           All Boards
         </Typography>
-        <Button>
+        <Button onClick={openModal}>
           <Typography color='white' variant='h5'>
             Add
           </Typography>
@@ -239,6 +245,11 @@ const Boards = () => {
           <Card key={index} image={board.image} title={board.title} users={board.users} />
         ))}
       </StyledBoardsList>
+      {isModalOpen && (
+        <Modal width='307px' closeModal={() => setIsModalOpen(false)}>
+          <>asd</>
+        </Modal>
+      )}
     </StyledBoards>
   );
 };

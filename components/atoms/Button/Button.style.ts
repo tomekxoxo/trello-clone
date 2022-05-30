@@ -11,6 +11,5 @@ export const StyledButton = styled.button<IStyledButtonProps>`
   border-radius: 8px;
   cursor: pointer;
   display: flex;
-  height: 30px;
   padding: 9px;
 `;
