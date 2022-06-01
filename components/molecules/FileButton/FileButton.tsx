@@ -15,14 +15,20 @@ interface IFileButtonProps {
 
 const FileButton = ({ setFile, children, color = 'blue1', accept = '' }: IFileButtonProps) => {
   const loadImage = (event: ChangeEvent<HTMLInputElement>) => {
-    const image = event.target.files[0];
     const reader = new FileReader();
+    let image = null;
+
+    if (event.target.files && event.target.files.length > 0) {
+      image = event.target.files[0];
+    }
     reader.onload = () => {
       if (typeof reader.result === 'string') {
         setFile(reader.result);
       }
     };
-    reader.readAsDataURL(image);
+    if (image !== null) {
+      reader.readAsDataURL(image);
+    }
   };
 
   const { colors } = useTheme();
