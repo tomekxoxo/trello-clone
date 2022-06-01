@@ -2,15 +2,20 @@ import Button from 'Components/atoms/Button/Button';
 import Separator from 'Components/atoms/Separator/Separator';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledBoardNavigation } from 'Components/molecules/BoardNavigation/BoardNavigation.style';
+import { useRouter } from 'next/router';
 
 const BoardNavigation = () => {
+  const router = useRouter();
+
+  const goToBoards = () => router.push('/boards');
+
   return (
     <StyledBoardNavigation>
       <Typography color='dark' variant='h1'>
         Devchallenges Board
       </Typography>
       <Separator />
-      <Button color='gray'>
+      <Button color='gray' onClick={goToBoards}>
         <Typography color='gray3' variant='h4'>
           All boards
         </Typography>

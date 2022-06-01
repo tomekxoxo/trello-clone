@@ -17,7 +17,7 @@ const TobBar = ({ boardName }: ITopBarProps) => {
   return (
     <StyledTopBar>
       <StyledTopBarSide>
-        <Link href='/api/hello'>
+        <Link href='/'>
           <Image src='/logo.svg' alt='Application Logo' width={98} height={29} />
         </Link>
         <BoardNavigation />
