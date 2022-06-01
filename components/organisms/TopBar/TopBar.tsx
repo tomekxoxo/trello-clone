@@ -5,7 +5,6 @@ import Typography from 'Components/atoms/Typography/Typography';
 import AccountProfile from 'Components/molecules/AccountProfile/AccountProfile';
 import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigation';
 import Image from 'next/image';
-import Logo from 'Public/logo.svg';
 
 import { StyledTopBar, StyledTopBarSide } from './TopBar.style';
 
@@ -19,7 +18,7 @@ const TobBar = ({ boardName }: ITopBarProps) => {
     <StyledTopBar>
       <StyledTopBarSide>
         <Link href='/api/hello'>
-          <Image src={Logo} alt='Application Logo' />
+          <Image src='/logo.svg' alt='Application Logo' width={98} height={29} />
         </Link>
         <BoardNavigation />
       </StyledTopBarSide>
