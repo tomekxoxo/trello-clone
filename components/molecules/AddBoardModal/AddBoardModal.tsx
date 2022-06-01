@@ -1,4 +1,5 @@
 import Button from 'Components/atoms/Button/Button';
+import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Input from 'Components/atoms/Input/Input';
 import Modal from 'Components/atoms/Modal/Modal';
@@ -15,30 +16,36 @@ interface IAddBoardModalProps {
 }
 
 const AddBoardModal = ({ closeModal }: IAddBoardModalProps) => {
-  const [file, setFile] = useState('');
+  const [file, setFile] = useState('/panorama.svg');
 
   return (
     <Modal width='307px' closeModal={closeModal}>
       <StyledAddBoardModal>
-        {file && <Image width={259} height={78} src={file} alt='thumbnail' objectFit='cover' />}
+        {file && <Image width={259} height={140} src={file} alt='thumbnail' />}
         <Input placeholder='Add board title' />
         <StyledAddBoardModalButtons>
-          <FileButton setFile={setFile} color='gray6' accept='image/png, image/jpeg'>
+          <FileButton
+            icon={<Icon name='image' color='gray3' size='12' />}
+            setFile={setFile}
+            color='gray6'
+            accept='image/png, image/jpeg'
+            width='100%'
+          >
             <Typography color='gray3' variant='h4'>
               Cover
             </Typography>
           </FileButton>
-          <Button color='gray4'>
+          <Button color='gray6' width='100%' icon={<Icon name='lock' color='gray3' size='12' />}>
             <Typography color='gray3' variant='h4'>
               Private
             </Typography>
           </Button>
-          <Button color='white'>
+          <Button color='white' onClick={closeModal}>
             <Typography color='gray3' variant='h5'>
               Cancel
             </Typography>
           </Button>
-          <Button>
+          <Button icon={<Icon name='plus' color='white' size='12' />}>
             <Typography color='white' variant='h5'>
               Create
             </Typography>
