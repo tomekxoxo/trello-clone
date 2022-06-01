@@ -7,7 +7,7 @@ import { StyledBoards, StyledBoardsHeader, StyledBoardsList } from 'Pages/boards
 import { useState } from 'react';
 
 const Boards = () => {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const mockList = [
     {
       image: '/restaurant.jpeg',

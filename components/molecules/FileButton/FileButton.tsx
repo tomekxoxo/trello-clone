@@ -1,19 +1,25 @@
+import { IButtonProps } from 'Components/atoms/Button/Button';
 import {
   StyledFileButton,
+  StyledFileButtonIcon,
   StyledFileButtonInput,
 } from 'Components/molecules/FileButton/FIleButton.style';
-import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useTheme } from 'styled-components';
-import { ThemeColorsType } from 'Utils/theme';
 
-interface IFileButtonProps {
+interface IFileButtonProps extends IButtonProps {
   setFile: Dispatch<SetStateAction<string>>;
-  children: ReactNode;
-  color?: ThemeColorsType;
   accept?: string;
 }
 
-const FileButton = ({ setFile, children, color = 'blue1', accept = '' }: IFileButtonProps) => {
+const FileButton = ({
+  setFile,
+  children,
+  color = 'blue1',
+  accept = '',
+  icon,
+  width = 'fit-content',
+}: IFileButtonProps) => {
   const loadImage = (event: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
     let image = null;
@@ -35,7 +41,8 @@ const FileButton = ({ setFile, children, color = 'blue1', accept = '' }: IFileBu
   const backgroundColor = colors[color];
 
   return (
-    <StyledFileButton backgroundColor={backgroundColor}>
+    <StyledFileButton backgroundColor={backgroundColor} width={width}>
+      {icon && <StyledFileButtonIcon>{icon}</StyledFileButtonIcon>}
       {children}
       <StyledFileButtonInput type='file' accept={accept} onChange={loadImage} />
     </StyledFileButton>
