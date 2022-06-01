@@ -2,12 +2,15 @@ import { lazy, memo, Suspense } from 'react';
 import { useTheme } from 'styled-components';
 import { ThemeColorsType } from 'Utils/theme';
 
+type IconNameType = 'chevron' | 'image' | 'lock' | 'logo' | 'panorama' | 'plus' | 'xmark';
+
 interface IIconProps {
   color: ThemeColorsType;
-  name: string;
+  name: IconNameType;
+  size?: string;
 }
 
-const Icon = ({ name, color = 'blue1', ...props }: IIconProps) => {
+const Icon = ({ name, color = 'blue1', size = '16', ...props }: IIconProps) => {
   const { colors } = useTheme();
 
   const Component = lazy(() =>
@@ -21,7 +24,7 @@ const Icon = ({ name, color = 'blue1', ...props }: IIconProps) => {
 
   return (
     <Suspense fallback={false}>
-      <Component fill={colors[color]} {...props} width={16} height={16} />
+      <Component fill={colors[color]} {...props} width={size} height={size} />
     </Suspense>
   );
 };
