@@ -4,7 +4,7 @@ import { useTheme } from 'styled-components';
 import { ThemeColorsType } from 'Utils/theme';
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
+  children?: ReactNode;
   color?: ThemeColorsType;
   icon?: JSX.Element;
 }

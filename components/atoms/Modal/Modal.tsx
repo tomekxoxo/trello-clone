@@ -1,10 +1,9 @@
+import Icon from 'Components/atoms/Icon/Icon';
 import {
   StyledModalWrapperCloseButton,
   StyledModalWrapperContent,
   StyledModalWrapperOverlay,
 } from 'Components/atoms/Modal/Modal.style';
-import Image from 'next/image';
-import Xmark from 'Public/xmark.svg';
 import Modal from 'react-modal';
 
 interface IModalWrapperProps {
@@ -23,9 +22,10 @@ const ModalWrapper = ({ children, closeModal, width }: IModalWrapperProps) => {
       overlayClassName='_'
       contentElement={(props, children) => (
         <StyledModalWrapperContent {...props} width={width}>
-          <StyledModalWrapperCloseButton onClick={closeModal}>
-            <Image src={Xmark} alt='xmark' width={16} height={16} />
-          </StyledModalWrapperCloseButton>
+          <StyledModalWrapperCloseButton
+            onClick={closeModal}
+            icon={<Icon name='xmark' color='white' />}
+          ></StyledModalWrapperCloseButton>
           {children}
         </StyledModalWrapperContent>
       )}

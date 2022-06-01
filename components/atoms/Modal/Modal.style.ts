@@ -33,4 +33,5 @@ export const StyledModalWrapperCloseButton = styled(Button)`
   position: absolute;
   right: 1.2rem;
   top: 1.2rem;
+  z-index: 1;
 `;
