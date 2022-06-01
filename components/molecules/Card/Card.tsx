@@ -1,6 +1,7 @@
+import Image from 'Components/atoms/Image/Image';
 import Typography from 'Components/atoms/Typography/Typography';
-import User, { IUserProps } from 'Components/atoms/User/User';
-import { StyledCard, StyledCardImage, StyledCardUsers } from 'Components/molecules/Card/Card.style';
+import { StyledCard, StyledCardUsers } from 'Components/molecules/Card/Card.style';
+import User, { IUserProps } from 'Components/molecules/User/User';
 
 interface ICardProps {
   image?: string;
@@ -12,11 +13,12 @@ const Card = ({ image, title, users }: ICardProps) => {
   const maxUsers = 3;
   const usersToShow = users.slice(0, maxUsers);
   const hiddenUsers = users.length - maxUsers;
-  const hiddenUsersInfo = `+ ${hiddenUsers} others`;
+  const hasAnyHiddenUsers = hiddenUsers > 0;
+  const hiddenUsersInfo = hasAnyHiddenUsers ? `+ ${hiddenUsers} others` : '';
 
   return (
     <StyledCard>
-      {image && <StyledCardImage width={219} height={130} src={image} alt='restaurant image' />}
+      {image && <Image width={219} height={130} src={image} alt='restaurant image' />}
       <Typography variant='h2' font='notoSans' color='dark'>
         {title}
       </Typography>

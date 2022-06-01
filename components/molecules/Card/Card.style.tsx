@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import styled from 'styled-components';
 
 export const StyledCard = styled.div`
@@ -11,10 +10,6 @@ export const StyledCard = styled.div`
   gap: 1.2rem;
   padding: 1.2rem;
   width: 24.3rem;
-`;
-
-export const StyledCardImage = styled(Image)`
-  border-radius: 1.2rem;
 `;
 
 export const StyledCardUsers = styled.div`
