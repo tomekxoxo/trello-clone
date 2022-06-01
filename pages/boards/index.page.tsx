@@ -1,6 +1,7 @@
 import Button from 'Components/atoms/Button/Button';
-import Modal from 'Components/atoms/Modal/Modal';
+import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
+import AddBoardModal from 'Components/molecules/AddBoardModal/AddBoardModal';
 import Card from 'Components/molecules/Card/Card';
 import { StyledBoards, StyledBoardsHeader, StyledBoardsList } from 'Pages/boards/index.style';
 import { useState } from 'react';
@@ -15,9 +16,6 @@ const Boards = () => {
         { image: '/user.jpeg', name: 'John Doe' },
         { name: 'Tomasz Kasprowicz' },
         { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
       ],
     },
     {
@@ -228,13 +226,15 @@ const Boards = () => {
 
   const openModal = () => setIsModalOpen(true);
 
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <StyledBoards>
       <StyledBoardsHeader>
         <Typography color='dark' variant='h1'>
           All Boards
         </Typography>
-        <Button onClick={openModal}>
+        <Button onClick={openModal} icon={<Icon name='plus' color='white' />}>
           <Typography color='white' variant='h5'>
             Add
           </Typography>
@@ -245,11 +245,7 @@ const Boards = () => {
           <Card key={index} image={board.image} title={board.title} users={board.users} />
         ))}
       </StyledBoardsList>
-      {isModalOpen && (
-        <Modal width='307px' closeModal={() => setIsModalOpen(false)}>
-          <>asd</>
-        </Modal>
-      )}
+      {isModalOpen && <AddBoardModal closeModal={closeModal} />}
     </StyledBoards>
   );
 };
