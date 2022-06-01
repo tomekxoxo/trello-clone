@@ -1,15 +1,25 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface IStyledButtonProps {
   backgroundColor: string;
 }
 
-export const StyledButton = styled.button<IStyledButtonProps>`
+export const SharedButtonStyles = css`
   align-items: center;
-  background-color: ${({ backgroundColor }) => backgroundColor};
   border: none;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   padding: 9px;
+  width: fit-content;
+`;
+
+export const StyledButton = styled.button<IStyledButtonProps>`
+  ${SharedButtonStyles}
+  background-color: ${({ backgroundColor }) => backgroundColor};
+`;
+
+export const StyledButtonIcon = styled.div`
+  align-items: center;
+  display: flex;
 `;
