@@ -1,12 +1,11 @@
-import { Normalize } from 'styled-normalize';
+import Layout from 'Components/Layout/Layout';
 import type { AppProps } from 'next/app';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <>
-      <Normalize />
+    <Layout>
       <Component {...pageProps} />
-    </>
+    </Layout>
   );
 }
 
