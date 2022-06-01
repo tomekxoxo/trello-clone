@@ -17,6 +17,7 @@ const colors = {
   gray3: 'rgba(130, 130, 130, 1)',
   gray4: 'rgba(189, 189, 189, 1)',
   gray5: 'rgba(224, 224, 224, 1)',
+  gray6: 'rgba(242, 242, 242, 1)',
   green1: 'rgba(33, 150, 83, 1)',
   green3: 'rgba(111, 207, 151, 1)',
   orange: 'rgba(242, 153, 74, 1)',
