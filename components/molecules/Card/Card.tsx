@@ -6,14 +6,14 @@ import User, { IUserProps } from 'Components/molecules/User/User';
 interface ICardProps {
   image?: string;
   title: string;
-  users: IUserProps[];
+  users?: IUserProps[];
 }
 
 const Card = ({ image, title, users }: ICardProps) => {
   const maxUsers = 3;
-  const usersToShow = users.slice(0, maxUsers);
-  const hiddenUsers = users.length - maxUsers;
-  const hasAnyHiddenUsers = hiddenUsers > 0;
+  const usersToShow = users?.slice(0, maxUsers);
+  const hiddenUsers = users && users?.length - maxUsers;
+  const hasAnyHiddenUsers = hiddenUsers && hiddenUsers > 0;
   const hiddenUsersInfo = hasAnyHiddenUsers ? `+ ${hiddenUsers} others` : '';
 
   return (
@@ -23,7 +23,7 @@ const Card = ({ image, title, users }: ICardProps) => {
         {title}
       </Typography>
       <StyledCardUsers>
-        {usersToShow.map((user, index) => (
+        {usersToShow?.map((user, index) => (
           <User key={index} image={user.image} name={user.name} />
         ))}
         <Typography variant='h3' font='notoSans' color='gray4'>
