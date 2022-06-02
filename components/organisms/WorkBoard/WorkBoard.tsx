@@ -2,7 +2,7 @@ import { StyledWorkBoard } from 'Components/organisms/WorkBoard/WorkBoard.style'
 import WorkBoardColumn from 'Components/organisms/WorkBoardColumn/WorkBoardColumn';
 
 export interface IWorkBoardProps {
-  data?: any;
+  data?: string[];
 }
 
 const WorkBoard = ({ data }: IWorkBoardProps) => {

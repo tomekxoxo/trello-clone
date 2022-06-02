@@ -14,7 +14,7 @@ const User = ({ image, name }: IUserProps) => {
     .join('');
 
   return image ? (
-    <StyledUserImage src={image} alt={name} width={30} height={30} />
+    <StyledUserImage src={image} alt={name} width='34' height='34' />
   ) : (
     <Button color='gray4'>
       <Typography color='white' variant='h4'>
