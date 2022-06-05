@@ -4,15 +4,15 @@ import Typography from 'Components/atoms/Typography/Typography';
 import { StyledColumnHeader } from 'Components/molecules/ColumnHeader/ColumnHeader.style';
 
 export interface IColumnHeaderProps {
-  name: string;
+  status: string;
   onMenuClick: () => void;
 }
 
-const ColumnHeader = ({ name, onMenuClick }: IColumnHeaderProps) => {
+const ColumnHeader = ({ status, onMenuClick }: IColumnHeaderProps) => {
   return (
     <StyledColumnHeader>
       <Typography color='dark' variant='h3'>
-        {name}
+        {status}
       </Typography>
       <Button
         color='boardColor'

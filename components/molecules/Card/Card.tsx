@@ -4,9 +4,12 @@ import { StyledCard, StyledCardUsers } from 'Components/molecules/Card/Card.styl
 import User, { IUserProps } from 'Components/molecules/User/User';
 
 interface ICardProps {
+  id: number;
   image?: string;
   title: string;
   users?: IUserProps[];
+  index: number;
+  moveCard: (dragIndex: number, hoverIndex: number) => void;
 }
 
 const Card = ({ image, title, users }: ICardProps) => {
