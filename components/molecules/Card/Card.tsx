@@ -2,17 +2,18 @@ import Image from 'Components/atoms/Image/Image';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledCard, StyledCardUsers } from 'Components/molecules/Card/Card.style';
 import User, { IUserProps } from 'Components/molecules/User/User';
+import { ForwardedRef, forwardRef } from 'react';
 
 interface ICardProps {
-  id: number;
   image?: string;
   title: string;
   users?: IUserProps[];
-  index: number;
-  moveCard: (dragIndex: number, hoverIndex: number) => void;
 }
 
-const Card = ({ image, title, users }: ICardProps) => {
+const Card = (
+  { image, title, users, ...restProps }: ICardProps,
+  ref: ForwardedRef<HTMLDivElement>,
+) => {
   const maxUsers = 3;
   const usersToShow = users?.slice(0, maxUsers);
   const hiddenUsers = users && users?.length - maxUsers;
@@ -20,7 +21,7 @@ const Card = ({ image, title, users }: ICardProps) => {
   const hiddenUsersInfo = hasAnyHiddenUsers ? `+ ${hiddenUsers} others` : '';
 
   return (
-    <StyledCard>
+    <StyledCard ref={ref} {...restProps}>
       {image && <Image width={219} height={130} src={image} alt='restaurant image' />}
       <Typography variant='h2' font='notoSans' color='dark'>
         {title}
@@ -37,4 +38,4 @@ const Card = ({ image, title, users }: ICardProps) => {
   );
 };
 
-export default Card;
+export default forwardRef(Card);
