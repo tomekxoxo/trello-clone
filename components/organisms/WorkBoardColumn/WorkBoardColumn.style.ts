@@ -18,5 +18,4 @@ export const StyledWorkBoardContent = styled.div<IStyledWorkBoardContentProps>`
   flex-direction: column;
   gap: 1.2rem;
   height: 100%;
-  padding-top: 2.4rem;
 `;
