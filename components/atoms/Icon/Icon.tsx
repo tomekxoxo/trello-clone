@@ -14,7 +14,7 @@ type IconNameType =
   | 'ellipsis';
 
 interface IIconProps {
-  color: ThemeColorsType;
+  color?: ThemeColorsType;
   name: IconNameType;
   size?: string;
 }

@@ -1,3 +1,4 @@
+import AddAnotherButton from 'Components/molecules/AddAnotherButton/AddAnotherButton';
 import Card from 'Components/molecules/Card/Card';
 import ColumnHeader from 'Components/molecules/ColumnHeader/ColumnHeader';
 import {
@@ -54,6 +55,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
           </StyledWorkBoardContent>
         )}
       </Droppable>
+      <AddAnotherButton text='Add another card' />
     </StyledWorkBoardColumn>
   );
 };
