@@ -1,11 +1,13 @@
 import AddAnotherButton from 'Components/molecules/AddAnotherButton/AddAnotherButton';
 import Card, { ICardProps } from 'Components/molecules/Card/Card';
 import ColumnHeader from 'Components/molecules/ColumnHeader/ColumnHeader';
+import Multiline from 'Components/molecules/Multiline/Multiline';
 import {
   StyledWorkBoardColumn,
   StyledWorkBoardContent,
+  StyledWorkBoardMultilineWrapper,
 } from 'Components/organisms/WorkBoardColumn/WorkBoardColumn.style';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 export interface IWorkBoardColumnProps {
@@ -16,6 +18,8 @@ export interface IWorkBoardColumnProps {
 }
 
 const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
+  const [isMultilineOpen, setIsMultilineOpen] = useState(false);
+
   return (
     <StyledWorkBoardColumn>
       <ColumnHeader status={status} />
@@ -55,7 +59,19 @@ const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
           </StyledWorkBoardContent>
         )}
       </Droppable>
-      <AddAnotherButton text='Add another card' />
+      {isMultilineOpen && (
+        <StyledWorkBoardMultilineWrapper>
+          <Multiline
+            closeMultiline={() => setIsMultilineOpen(false)}
+            buttonText='Save'
+            placeholder='Enter a title for this card...'
+          />
+        </StyledWorkBoardMultilineWrapper>
+      )}
+      <AddAnotherButton
+        text='Add another card'
+        onClick={() => setIsMultilineOpen(prevState => !prevState)}
+      />
     </StyledWorkBoardColumn>
   );
 };

@@ -19,3 +19,9 @@ export const StyledWorkBoardContent = styled.div<IStyledWorkBoardContentProps>`
   gap: 1.2rem;
   height: 100%;
 `;
+
+export const StyledWorkBoardMultilineWrapper = styled.div`
+  bottom: 8.2rem;
+  position: sticky;
+  z-index: 3;
+`;
