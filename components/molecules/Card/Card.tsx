@@ -13,7 +13,7 @@ import ItemCounter from 'Components/molecules/ItemCounter/ItemCounter';
 import User, { IUserProps } from 'Components/molecules/User/User';
 import { ForwardedRef, forwardRef } from 'react';
 
-interface ICardProps {
+export interface ICardProps {
   image?: string;
   title: string;
   labels?: ILabelProps[];
@@ -21,11 +21,13 @@ interface ICardProps {
   canAddUser?: boolean;
   attachmentsCount?: number;
   messagesCount?: number;
+  id: number;
 }
 
 const Card = (
   {
     image,
+    id,
     title,
     users,
     attachmentsCount,
@@ -36,6 +38,8 @@ const Card = (
   }: ICardProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
+  console.log(id);
+
   const maxUsers = canAddUser ? 2 : 3;
   const usersToShow = users?.slice(0, maxUsers);
   const hiddenUsers = users && users?.length - maxUsers;

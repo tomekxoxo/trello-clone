@@ -1,5 +1,5 @@
 import AddAnotherButton from 'Components/molecules/AddAnotherButton/AddAnotherButton';
-import Card from 'Components/molecules/Card/Card';
+import Card, { ICardProps } from 'Components/molecules/Card/Card';
 import ColumnHeader from 'Components/molecules/ColumnHeader/ColumnHeader';
 import {
   StyledWorkBoardColumn,
@@ -12,7 +12,7 @@ export interface IWorkBoardColumnProps {
   status: string;
   cards: any;
   setCards: Dispatch<SetStateAction<any>>;
-  cardIds: any;
+  cardIds: number[];
 }
 
 const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
@@ -27,7 +27,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
             isHovered={snapshot.isDraggingOver}
           >
             {cardIds
-              .map(cardId => cards?.find(card => card.id === cardId))
+              .map(cardId => cards?.find((card: ICardProps) => card.id === cardId))
               .map((card, index) => {
                 if (!card) return;
                 return (
@@ -38,6 +38,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                         key={card.id}
+                        id={card.id}
                         image={card.image}
                         title={card.title}
                         users={card.users}
