@@ -1,7 +1,7 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
-import Label from 'Components/atoms/Label/Label';
+import Label, { ILabelProps } from 'Components/atoms/Label/Label';
 import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledCard,
@@ -16,7 +16,7 @@ import { ForwardedRef, forwardRef } from 'react';
 interface ICardProps {
   image?: string;
   title: string;
-  labels?: string[];
+  labels?: ILabelProps[];
   users?: IUserProps[];
   canAddUser?: boolean;
   attachmentsCount?: number;
@@ -50,7 +50,7 @@ const Card = (
       </Typography>
       <StyledCardLabels>
         {labels?.map(label => (
-          <Label key={label.name} name={label.name} />
+          <Label key={label.name} name={label.name} color='blue2' />
         ))}
       </StyledCardLabels>
       <StyledCardUsers>
