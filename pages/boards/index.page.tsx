@@ -10,6 +10,7 @@ const Boards = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const mockList = [
     {
+      id: 0,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -19,18 +20,7 @@ const Boards = () => {
       ],
     },
     {
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
+      id: 1,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -43,6 +33,7 @@ const Boards = () => {
       ],
     },
     {
+      id: 2,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -55,6 +46,7 @@ const Boards = () => {
       ],
     },
     {
+      id: 3,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -67,6 +59,7 @@ const Boards = () => {
       ],
     },
     {
+      id: 4,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -79,6 +72,7 @@ const Boards = () => {
       ],
     },
     {
+      id: 5,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -91,6 +85,7 @@ const Boards = () => {
       ],
     },
     {
+      id: 6,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -103,6 +98,7 @@ const Boards = () => {
       ],
     },
     {
+      id: 7,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -115,6 +111,7 @@ const Boards = () => {
       ],
     },
     {
+      id: 8,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -127,90 +124,7 @@ const Boards = () => {
       ],
     },
     {
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
+      id: 9,
       image: '/restaurant.jpeg',
       title: 'Restaurant',
       users: [
@@ -242,7 +156,13 @@ const Boards = () => {
       </StyledBoardsHeader>
       <StyledBoardsList>
         {mockList.map((board, index) => (
-          <Card key={index} image={board.image} title={board.title} users={board.users} />
+          <Card
+            id={board.id}
+            key={index}
+            image={board.image}
+            title={board.title}
+            users={board.users}
+          />
         ))}
       </StyledBoardsList>
       {isModalOpen && <AddBoardModal closeModal={closeModal} />}
