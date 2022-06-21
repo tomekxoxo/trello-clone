@@ -1,3 +1,4 @@
+import { IconPositionType } from 'Components/atoms/Button/Button';
 import styled, { css } from 'styled-components';
 
 interface IStyledButtonProps {
@@ -12,6 +13,8 @@ export const SharedButtonStyles = css`
   cursor: pointer;
   display: flex;
   gap: 0.8rem;
+  height: fit-content;
+  justify-content: space-between;
   padding: 9px;
   width: fit-content;
 `;
@@ -22,7 +25,12 @@ export const StyledButton = styled.button<IStyledButtonProps>`
   width: ${({ width }) => width};
 `;
 
-export const StyledButtonIcon = styled.div`
+interface IStyledButtonIconProps {
+  iconPosition: IconPositionType;
+}
+
+export const StyledButtonIcon = styled.div<IStyledButtonIconProps>`
   align-items: center;
   display: flex;
+  order: ${({ iconPosition }) => (iconPosition === 'left' ? 0 : 1)};
 `;

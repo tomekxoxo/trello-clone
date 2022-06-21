@@ -2,10 +2,22 @@ import { lazy, memo, Suspense } from 'react';
 import { useTheme } from 'styled-components';
 import { ThemeColorsType } from 'Utils/theme';
 
-type IconNameType = 'chevron' | 'image' | 'lock' | 'logo' | 'panorama' | 'plus' | 'xmark' | 'grid';
+export type IconNameType =
+  | 'chevron'
+  | 'image'
+  | 'lock'
+  | 'logo'
+  | 'panorama'
+  | 'plus'
+  | 'xmark'
+  | 'grid'
+  | 'ellipsis'
+  | 'paperclip'
+  | 'message'
+  | 'earth';
 
 interface IIconProps {
-  color: ThemeColorsType;
+  color?: ThemeColorsType;
   name: IconNameType;
   size?: string;
 }

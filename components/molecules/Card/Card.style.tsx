@@ -12,9 +12,21 @@ export const StyledCard = styled.div`
   width: 24.3rem;
 `;
 
+export const StyledCardLabels = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+`;
+
 export const StyledCardUsers = styled.div`
   align-items: center;
   display: flex;
   flex-wrap: wrap;
   gap: 1.2rem;
+`;
+
+export const StyledCardActions = styled.div`
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
 `;

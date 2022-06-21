@@ -5,6 +5,7 @@ import Typography from 'Components/atoms/Typography/Typography';
 import AccountProfile from 'Components/molecules/AccountProfile/AccountProfile';
 import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigation';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import { StyledTopBar, StyledTopBarSide } from './TopBar.style';
 
@@ -13,14 +14,17 @@ interface ITopBarProps {
 }
 
 const TobBar = ({ boardName }: ITopBarProps) => {
+  const { route } = useRouter();
+  const isBoardsPage = route === '/boards';
+
   console.log(boardName);
   return (
     <StyledTopBar>
       <StyledTopBarSide>
         <Link href='/'>
-          <Image src='/logo.svg' alt='Application Logo' width={98} height={29} />
+          <Image src='/logo.svg' alt='Application Logo' width={98} height={34} />
         </Link>
-        <BoardNavigation />
+        {!isBoardsPage && <BoardNavigation />}
       </StyledTopBarSide>
       <StyledTopBarSide>
         <Input
