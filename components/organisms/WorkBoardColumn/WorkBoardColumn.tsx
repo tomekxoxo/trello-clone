@@ -61,7 +61,11 @@ const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
       </Droppable>
       {isMultilineOpen && (
         <StyledWorkBoardMultilineWrapper>
-          <Multiline buttonText='Save' placeholder='Enter a title for this card...' />
+          <Multiline
+            closeMultiline={() => setIsMultilineOpen(false)}
+            buttonText='Save'
+            placeholder='Enter a title for this card...'
+          />
         </StyledWorkBoardMultilineWrapper>
       )}
       <AddAnotherButton
