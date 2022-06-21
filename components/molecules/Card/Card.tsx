@@ -1,20 +1,42 @@
+import Button from 'Components/atoms/Button/Button';
+import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
+import Label from 'Components/atoms/Label/Label';
 import Typography from 'Components/atoms/Typography/Typography';
-import { StyledCard, StyledCardUsers } from 'Components/molecules/Card/Card.style';
+import {
+  StyledCard,
+  StyledCardActions,
+  StyledCardLabels,
+  StyledCardUsers,
+} from 'Components/molecules/Card/Card.style';
+import ItemCounter from 'Components/molecules/ItemCounter/ItemCounter';
 import User, { IUserProps } from 'Components/molecules/User/User';
 import { ForwardedRef, forwardRef } from 'react';
 
 interface ICardProps {
   image?: string;
   title: string;
+  labels?: string[];
   users?: IUserProps[];
+  canAddUser?: boolean;
+  attachmentsCount?: number;
+  messagesCount?: number;
 }
 
 const Card = (
-  { image, title, users, ...restProps }: ICardProps,
+  {
+    image,
+    title,
+    users,
+    attachmentsCount,
+    messagesCount,
+    labels,
+    canAddUser,
+    ...restProps
+  }: ICardProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
-  const maxUsers = 3;
+  const maxUsers = canAddUser ? 2 : 3;
   const usersToShow = users?.slice(0, maxUsers);
   const hiddenUsers = users && users?.length - maxUsers;
   const hasAnyHiddenUsers = hiddenUsers && hiddenUsers > 0;
@@ -26,14 +48,28 @@ const Card = (
       <Typography variant='h2' font='notoSans' color='dark'>
         {title}
       </Typography>
+      <StyledCardLabels>
+        {labels?.map(label => (
+          <Label key={label.name} name={label.name} />
+        ))}
+      </StyledCardLabels>
       <StyledCardUsers>
         {usersToShow?.map((user, index) => (
           <User key={index} image={user.image} name={user.name} />
         ))}
-        <Typography variant='h3' font='notoSans' color='gray4'>
-          {hiddenUsersInfo}
-        </Typography>
+        {hiddenUsersInfo && (
+          <Typography variant='h3' font='notoSans' color='gray4'>
+            {hiddenUsersInfo}
+          </Typography>
+        )}
+        {canAddUser && (
+          <Button icon={<Icon name='plus' size='12' color='white' />} iconPosition='right' />
+        )}
       </StyledCardUsers>
+      <StyledCardActions>
+        {attachmentsCount && <ItemCounter icon='paperclip' count={2} />}
+        {messagesCount && <ItemCounter icon='message' count={5} />}
+      </StyledCardActions>
     </StyledCard>
   );
 };
