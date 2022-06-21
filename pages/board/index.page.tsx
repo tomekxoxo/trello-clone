@@ -1,6 +1,9 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
+import Dropdown from 'Components/molecules/Dropdown/Dropdown';
+import DropdownHeader from 'Components/molecules/DropdownHeader/DropdownHeader';
+import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
 import User from 'Components/molecules/User/User';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
@@ -8,25 +11,66 @@ import {
   StyledBoardNavigation,
   StyledBoardNavigationUsers,
 } from 'Pages/board/index.style';
+import { useState } from 'react';
 
-const index = () => {
-  const users = [
-    { image: '/user.jpeg', name: 'John Doe' },
-    { name: 'Tomasz Kasprowicz' },
-    { image: '/user.jpeg', name: 'Mark Black' },
-    { image: '/user.jpeg', name: 'Elon Musk' },
-    { image: '/user.jpeg', name: 'Marion Cotilard' },
-    { image: '/user.jpeg', name: 'Marion Cotilard' },
-  ];
+const users = [
+  { image: '/user.jpeg', name: 'John Doe' },
+  { name: 'Tomasz Kasprowicz' },
+  { image: '/user.jpeg', name: 'Mark Black' },
+  { image: '/user.jpeg', name: 'Elon Musk' },
+  { image: '/user.jpeg', name: 'Marion Cotilard' },
+  { image: '/user.jpeg', name: 'Marion Cotilard' },
+];
+
+const boardVisibilities = [
+  {
+    description: 'Anyone on the internet can see this.',
+    icon: <Icon name='earth' color='gray2' size='12' />,
+    label: 'Public',
+  },
+  {
+    description: 'Only board members can see this',
+    icon: <Icon name='lock' color='gray2' size='12' />,
+    label: 'Private',
+  },
+];
+
+const Index = () => {
+  const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
+
+  const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);
+
   return (
     <StyledBoard>
       <StyledBoardNavigation>
         <StyledBoardNavigationUsers>
-          <Button color='gray6' icon={<Icon name='lock' color='gray3' size='12' />}>
-            <Typography color='gray3' variant='h4'>
-              Private
-            </Typography>
-          </Button>
+          <Dropdown
+            closeDropdown={() => setIsVisibilityDropdownOpen(false)}
+            header={
+              <DropdownHeader label='Visibility' description='Choose who can see this board.' />
+            }
+            isOpen={isVisibilityDropdownOpen}
+            anchor={
+              <Button
+                onClick={handleVisibilityDropdownOpen}
+                color='gray6'
+                icon={<Icon name='lock' color='gray3' size='12' />}
+              >
+                <Typography color='gray3' variant='h4'>
+                  Private
+                </Typography>
+              </Button>
+            }
+          >
+            {boardVisibilities.map((option, index) => (
+              <DropdownItem
+                key={index}
+                icon={option.icon}
+                label={option.label}
+                description={option.description}
+              />
+            ))}
+          </Dropdown>
           {users.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
           ))}
@@ -48,4 +92,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

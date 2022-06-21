@@ -12,13 +12,12 @@ export interface IWorkBoardProps {
 const cardsMock = [
   {
     id: 0,
-    image: '/restaurant.jpeg',
-    title: 'Restaurant1',
-    users: [
-      { image: '/user.jpeg', name: 'John Doe' },
-      { name: 'Tomasz Kasprowicz' },
-      { image: '/user.jpeg', name: 'Mark Black' },
+    labels: [
+      { color: 'black', name: 'label1' },
+      { color: 'green', name: 'label2' },
     ],
+    title: 'Restaurant1',
+    users: [],
   },
   {
     id: 1,
@@ -34,9 +33,49 @@ const cardsMock = [
     ],
   },
   {
+    attachmentsCount: 3,
     id: 2,
     image: '/restaurant.jpeg',
+    messagesCount: 8,
     title: 'Restaurant3',
+    users: [
+      { image: '/user.jpeg', name: 'John Doe' },
+      { name: 'Tomasz Kasprowicz' },
+      { image: '/user.jpeg', name: 'Mark Black' },
+      { image: '/user.jpeg', name: 'Elon Musk' },
+      { image: '/user.jpeg', name: 'Marion Cotilard' },
+      { image: '/user.jpeg', name: 'Marion Cotilard' },
+    ],
+  },
+  {
+    attachmentsCount: 31,
+    id: 3,
+    image: '/restaurant.jpeg',
+    messagesCount: 42,
+    title: 'Restaurant4',
+    users: [
+      { image: '/user.jpeg', name: 'John Doe' },
+      { name: 'Tomasz Kasprowicz' },
+      { image: '/user.jpeg', name: 'Mark Black' },
+      { image: '/user.jpeg', name: 'Elon Musk' },
+      { image: '/user.jpeg', name: 'Marion Cotilard' },
+      { image: '/user.jpeg', name: 'Marion Cotilard' },
+    ],
+  },
+  {
+    attachmentsCount: 8,
+    id: 4,
+    image: '/restaurant.jpeg',
+    messagesCount: 4,
+    title: 'Restaurant5',
+    users: [],
+  },
+  {
+    attachmentsCount: 10,
+    id: 5,
+    image: '/restaurant.jpeg',
+    messagesCount: 41,
+    title: 'Restaurant6',
     users: [
       { image: '/user.jpeg', name: 'John Doe' },
       { name: 'Tomasz Kasprowicz' },
@@ -49,17 +88,18 @@ const cardsMock = [
 ];
 
 const columnsMock = [
-  { cardIds: [0, 1, 2], status: 'backlog' },
+  { cardIds: [0, 1, 2, 3, 4, 5], status: 'backlog' },
   { cardIds: [], status: 'wip' },
   { cardIds: [], status: 'qa' },
   { cardIds: [], status: 'done' },
 ];
 
 const WorkBoard = ({ data }: IWorkBoardProps) => {
-  console.log(data);
   const [cards, setCards] = useState(cardsMock);
   const [columns, setCloumns] = useState(columnsMock);
   const columnsCount = columns.length + 1;
+
+  console.log(data);
 
   const onDragEnd = (result: DropResult) => {
     const { source, destination, draggableId } = result;

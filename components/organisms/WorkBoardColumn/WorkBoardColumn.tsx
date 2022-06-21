@@ -18,12 +18,7 @@ export interface IWorkBoardColumnProps {
 const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
   return (
     <StyledWorkBoardColumn>
-      <ColumnHeader
-        status={status}
-        onMenuClick={() => {
-          return null;
-        }}
-      />
+      <ColumnHeader status={status} />
       <Droppable droppableId={status}>
         {(provided, snapshot) => (
           <StyledWorkBoardContent
@@ -46,6 +41,10 @@ const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
                         image={card.image}
                         title={card.title}
                         users={card.users}
+                        labels={card.labels}
+                        messagesCount={card.messagesCount}
+                        attachmentsCount={card.attachmentsCount}
+                        canAddUser
                       />
                     )}
                   </Draggable>
