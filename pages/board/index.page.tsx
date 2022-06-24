@@ -2,9 +2,9 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import Dropdown from 'Components/molecules/Dropdown/Dropdown';
-import DropdownHeader from 'Components/molecules/DropdownHeader/DropdownHeader';
 import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
 import InviteUserPopover from 'Components/molecules/Popover/Popover';
+import PopoverHeader from 'Components/molecules/PopoverHeader/PopoverHeader';
 import User from 'Components/molecules/User/User';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
@@ -49,7 +49,7 @@ const Index = () => {
           <Dropdown
             closeDropdown={() => setIsVisibilityDropdownOpen(false)}
             header={
-              <DropdownHeader label='Visibility' description='Choose who can see this board.' />
+              <PopoverHeader label='Visibility' description='Choose who can see this board.' />
             }
             isOpen={isVisibilityDropdownOpen}
             anchor={
