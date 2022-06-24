@@ -3,7 +3,7 @@ import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import Dropdown from 'Components/molecules/Dropdown/Dropdown';
 import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
-import InviteUserPopover from 'Components/molecules/Popover/Popover';
+import InviteUserPopover from 'Components/molecules/InviteUserPopover/InviteUserPopover';
 import PopoverHeader from 'Components/molecules/PopoverHeader/PopoverHeader';
 import User from 'Components/molecules/User/User';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
@@ -86,9 +86,7 @@ const Index = () => {
                 icon={<Icon name='plus' size='12' color='white' />}
               />
             }
-          >
-            <h1>asd</h1>
-          </InviteUserPopover>
+          />
         </StyledBoardNavigationUsers>
         <Button
           color='gray6'
