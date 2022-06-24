@@ -14,7 +14,8 @@ export type IconNameType =
   | 'ellipsis'
   | 'paperclip'
   | 'message'
-  | 'earth';
+  | 'earth'
+  | 'magnifying-glass';
 
 interface IIconProps {
   color?: ThemeColorsType;
