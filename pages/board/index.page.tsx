@@ -47,6 +47,7 @@ const Index = () => {
       <StyledBoardNavigation>
         <StyledBoardNavigationUsers>
           <Dropdown
+            width='24.5rem'
             closeDropdown={() => setIsVisibilityDropdownOpen(false)}
             header={<PopupHeader label='Visibility' description='Choose who can see this board.' />}
             isOpen={isVisibilityDropdownOpen}

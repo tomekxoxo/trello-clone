@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 interface IStyledDropdownContentProps {
   attachmentSide: 'left' | 'right';
+  width: string;
 }
 
 export const StyledDropdown = styled.div`
@@ -19,7 +20,7 @@ export const StyledDropdownContent = styled.div<IStyledDropdownContentProps>`
   margin-top: 1.2rem;
   max-height: 19.9rem;
   position: absolute;
-  width: 24rem;
+  width: ${({ width }) => width};
   z-index: 2;
   ${({ attachmentSide }) => (attachmentSide === 'left' ? 'left:0' : 'right:0')};
 `;

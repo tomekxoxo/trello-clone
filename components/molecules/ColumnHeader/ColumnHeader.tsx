@@ -30,6 +30,7 @@ const ColumnHeader = ({ status }: IColumnHeaderProps) => {
         {status}
       </Typography>
       <Dropdown
+        width='24.5rem'
         attachmentSide='right'
         closeDropdown={() => setIsOptionsDropdownOpen(false)}
         isOpen={isOptionsDropdownOpen}
