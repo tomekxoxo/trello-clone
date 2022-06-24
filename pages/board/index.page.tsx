@@ -38,7 +38,7 @@ const boardVisibilities = [
 
 const Index = () => {
   const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
-  const [isInvitationModalOpen, setisInvitationModalOpen] = useState(false);
+  const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
 
   const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);
 
@@ -77,10 +77,11 @@ const Index = () => {
             <User key={index} image={user.image} name={user.name} />
           ))}
           <InviteUserPopover
+            closePopover={() => setIsInvitationModalOpen(false)}
             isOpen={isInvitationModalOpen}
             anchor={
               <Button
-                onClick={() => setisInvitationModalOpen(prevState => !prevState)}
+                onClick={() => setIsInvitationModalOpen(prevState => !prevState)}
                 color='blue1'
                 icon={<Icon name='plus' size='12' color='white' />}
               />
