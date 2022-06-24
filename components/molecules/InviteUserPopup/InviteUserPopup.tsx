@@ -1,9 +1,28 @@
-import Button from 'Components/atoms/Button/Button';
-import Input from 'Components/atoms/Input/Input';
 import Typography from 'Components/atoms/Typography/Typography';
-import { StyledInviteUserPopup } from 'Components/molecules/InviteUserPopup/InviteUserPopup.style';
+import {
+  StyledInviteButton,
+  StyledInviteUserPopup,
+} from 'Components/molecules/InviteUserPopup/InviteUserPopup.style';
 import Popup from 'Components/molecules/Popup/Popup';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
+import SearchDropdown from 'Components/molecules/SearchDropdown/SearchDropdown';
+import User from 'Components/molecules/User/User';
+import { useState } from 'react';
+
+const resultsMock = [
+  { name: 'Morris Croft' },
+  { name: 'Kunal Hough' },
+  { name: 'Kierran Salinas' },
+  { name: 'Boris Johnson' },
+  { name: 'Morris Croft' },
+  { name: 'Kunal Hough' },
+  { name: 'Kierran Salinas' },
+  { name: 'Boris Johnson' },
+  { name: 'Morris Croft' },
+  { name: 'Kunal Hough' },
+  { name: 'Kierran Salinas' },
+  { name: 'Boris Johnson' },
+];
 
 interface IInviteUserPopupProps {
   attachmentSide?: 'left' | 'right';
@@ -18,16 +37,26 @@ const InviteUserPopup = ({
   closePopup,
   isOpen,
 }: IInviteUserPopupProps) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(true);
+
   return (
     <Popup anchor={anchor} attachmentSide={attachmentSide} closePopup={closePopup} isOpen={isOpen}>
       <StyledInviteUserPopup>
         <PopupHeader label='Invite to Board ' description='Search users you want to invite to' />
-        <Input placeholder='User...' />
-        <Button>
+        <SearchDropdown
+          isOpen={isDropdownOpen}
+          placeholder='User...'
+          closeDropdown={() => setIsDropdownOpen(false)}
+        >
+          {resultsMock?.map(({ name }, index) => {
+            return <User key={index} name={name} withName />;
+          })}
+        </SearchDropdown>
+        <StyledInviteButton>
           <Typography color='white' variant='h5'>
             Invite
           </Typography>
-        </Button>
+        </StyledInviteButton>
       </StyledInviteUserPopup>
     </Popup>
   );
