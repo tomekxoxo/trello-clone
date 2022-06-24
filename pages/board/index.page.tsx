@@ -4,7 +4,7 @@ import Typography from 'Components/atoms/Typography/Typography';
 import Dropdown from 'Components/molecules/Dropdown/Dropdown';
 import DropdownHeader from 'Components/molecules/DropdownHeader/DropdownHeader';
 import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
-import InviteUserPopup from 'Components/molecules/Popup/Popup';
+import InviteUserPopover from 'Components/molecules/Popover/Popover';
 import User from 'Components/molecules/User/User';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
@@ -76,7 +76,7 @@ const Index = () => {
           {users.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
           ))}
-          <InviteUserPopup
+          <InviteUserPopover
             isOpen={isInvitationModalOpen}
             anchor={
               <Button
@@ -87,7 +87,7 @@ const Index = () => {
             }
           >
             <h1>asd</h1>
-          </InviteUserPopup>
+          </InviteUserPopover>
         </StyledBoardNavigationUsers>
         <Button
           color='gray6'
