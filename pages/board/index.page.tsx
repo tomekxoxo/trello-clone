@@ -3,8 +3,8 @@ import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import Dropdown from 'Components/molecules/Dropdown/Dropdown';
 import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
-import InviteUserPopover from 'Components/molecules/InviteUserPopover/InviteUserPopover';
-import PopoverHeader from 'Components/molecules/PopoverHeader/PopoverHeader';
+import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopup';
+import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import User from 'Components/molecules/User/User';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
@@ -48,9 +48,7 @@ const Index = () => {
         <StyledBoardNavigationUsers>
           <Dropdown
             closeDropdown={() => setIsVisibilityDropdownOpen(false)}
-            header={
-              <PopoverHeader label='Visibility' description='Choose who can see this board.' />
-            }
+            header={<PopupHeader label='Visibility' description='Choose who can see this board.' />}
             isOpen={isVisibilityDropdownOpen}
             anchor={
               <Button
@@ -76,8 +74,8 @@ const Index = () => {
           {users.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
           ))}
-          <InviteUserPopover
-            closePopover={() => setIsInvitationModalOpen(false)}
+          <InviteUserPopup
+            closePopup={() => setIsInvitationModalOpen(false)}
             isOpen={isInvitationModalOpen}
             anchor={
               <Button

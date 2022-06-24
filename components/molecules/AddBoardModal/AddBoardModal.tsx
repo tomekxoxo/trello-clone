@@ -2,13 +2,13 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Input from 'Components/atoms/Input/Input';
-import Modal from 'Components/atoms/Modal/Modal';
 import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledAddBoardModal,
   StyledAddBoardModalButtons,
 } from 'Components/molecules/AddBoardModal/AddBoardModal.style';
 import FileButton from 'Components/molecules/FileButton/FileButton';
+import Modal from 'Components/molecules/Modal/Modal';
 import { useState } from 'react';
 
 interface IAddBoardModalProps {

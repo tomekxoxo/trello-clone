@@ -1,22 +1,22 @@
 import Typography from 'Components/atoms/Typography/Typography';
-import { StyledPopoverHeader } from 'Components/molecules/PopoverHeader/PopoverHeader.style';
+import { StyledPopupHeader } from 'Components/molecules/PopupHeader/PopupHeader.style';
 
-interface IPopoverHeaderProps {
+interface IPopupHeaderProps {
   label: string;
   description: string;
 }
 
-const PopoverHeader = ({ label, description }: IPopoverHeaderProps) => {
+const PopupHeader = ({ label, description }: IPopupHeaderProps) => {
   return (
-    <StyledPopoverHeader>
+    <StyledPopupHeader>
       <Typography variant='h4' color='gray2' weight='600'>
         {label}
       </Typography>
       <Typography variant='h4' font='notoSans' color='gray3' weight='400'>
         {description}
       </Typography>
-    </StyledPopoverHeader>
+    </StyledPopupHeader>
   );
 };
 
-export default PopoverHeader;
+export default PopupHeader;

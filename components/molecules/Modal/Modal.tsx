@@ -3,7 +3,7 @@ import {
   StyledModalWrapperCloseButton,
   StyledModalWrapperContent,
   StyledModalWrapperOverlay,
-} from 'Components/atoms/Modal/Modal.style';
+} from 'Components/molecules/Modal/Modal.style';
 import Modal from 'react-modal';
 
 interface IModalWrapperProps {

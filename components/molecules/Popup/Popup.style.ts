@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-export const StyledPopover = styled.div`
+export const StyledPopup = styled.div`
   position: relative;
 `;
 
-interface IStyledPopoverContentProps {
+interface IStyledPopupContentProps {
   attachmentSide: 'left' | 'right';
 }
 
-export const StyledPopoverContent = styled.div<IStyledPopoverContentProps>`
+export const StyledPopupContent = styled.div<IStyledPopupContentProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border: 0.1rem solid ${({ theme }) => theme.colors.gray5};
   border-radius: 1.2rem;
