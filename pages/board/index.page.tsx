@@ -4,6 +4,7 @@ import Typography from 'Components/atoms/Typography/Typography';
 import Dropdown from 'Components/molecules/Dropdown/Dropdown';
 import DropdownHeader from 'Components/molecules/DropdownHeader/DropdownHeader';
 import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
+import InviteUserPopup from 'Components/molecules/Popup/Popup';
 import User from 'Components/molecules/User/User';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
@@ -37,6 +38,7 @@ const boardVisibilities = [
 
 const Index = () => {
   const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
+  const [isInvitationModalOpen, setisInvitationModalOpen] = useState(false);
 
   const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);
 
@@ -74,6 +76,18 @@ const Index = () => {
           {users.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
           ))}
+          <InviteUserPopup
+            isOpen={isInvitationModalOpen}
+            anchor={
+              <Button
+                onClick={() => setisInvitationModalOpen(prevState => !prevState)}
+                color='blue1'
+                icon={<Icon name='plus' size='12' color='white' />}
+              />
+            }
+          >
+            <h1>asd</h1>
+          </InviteUserPopup>
         </StyledBoardNavigationUsers>
         <Button
           color='gray6'
