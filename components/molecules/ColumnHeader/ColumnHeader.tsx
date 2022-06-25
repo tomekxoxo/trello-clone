@@ -2,8 +2,8 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledColumnHeader } from 'Components/molecules/ColumnHeader/ColumnHeader.style';
-import Dropdown from 'Components/molecules/Dropdown/Dropdown';
-import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
+import Popup from 'Components/molecules/Popup/Popup';
+import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
 import { useState } from 'react';
 
 export interface IColumnHeaderProps {
@@ -29,9 +29,9 @@ const ColumnHeader = ({ status }: IColumnHeaderProps) => {
       <Typography color='dark' variant='h3'>
         {status}
       </Typography>
-      <Dropdown
+      <Popup
         attachmentSide='right'
-        closeDropdown={() => setIsOptionsDropdownOpen(false)}
+        closePopup={() => setIsOptionsDropdownOpen(false)}
         isOpen={isOptionsDropdownOpen}
         anchor={
           <Button
@@ -41,10 +41,12 @@ const ColumnHeader = ({ status }: IColumnHeaderProps) => {
           />
         }
       >
-        {ColumnOptions.map((option, index) => (
-          <DropdownItem key={index} label={option.label} labelColor='gray3' />
-        ))}
-      </Dropdown>
+        <>
+          {ColumnOptions.map((option, index) => (
+            <VisibilityItem key={index} label={option.label} labelColor='gray3' />
+          ))}
+        </>
+      </Popup>
     </StyledColumnHeader>
   );
 };

@@ -1,10 +1,11 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
-import Dropdown from 'Components/molecules/Dropdown/Dropdown';
-import DropdownHeader from 'Components/molecules/DropdownHeader/DropdownHeader';
-import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
+import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopup';
+import Popup from 'Components/molecules/Popup/Popup';
+import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import User from 'Components/molecules/User/User';
+import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
   StyledBoard,
@@ -37,6 +38,7 @@ const boardVisibilities = [
 
 const Index = () => {
   const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
+  const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
 
   const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);
 
@@ -44,11 +46,8 @@ const Index = () => {
     <StyledBoard>
       <StyledBoardNavigation>
         <StyledBoardNavigationUsers>
-          <Dropdown
-            closeDropdown={() => setIsVisibilityDropdownOpen(false)}
-            header={
-              <DropdownHeader label='Visibility' description='Choose who can see this board.' />
-            }
+          <Popup
+            closePopup={() => setIsVisibilityDropdownOpen(false)}
             isOpen={isVisibilityDropdownOpen}
             anchor={
               <Button
@@ -62,18 +61,32 @@ const Index = () => {
               </Button>
             }
           >
-            {boardVisibilities.map((option, index) => (
-              <DropdownItem
-                key={index}
-                icon={option.icon}
-                label={option.label}
-                description={option.description}
-              />
-            ))}
-          </Dropdown>
+            <>
+              <PopupHeader label='Visibility' description='Choose who can see this board.' />
+              {boardVisibilities.map((option, index) => (
+                <VisibilityItem
+                  key={index}
+                  icon={option.icon}
+                  label={option.label}
+                  description={option.description}
+                />
+              ))}
+            </>
+          </Popup>
           {users.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
           ))}
+          <InviteUserPopup
+            closePopup={() => setIsInvitationModalOpen(false)}
+            isOpen={isInvitationModalOpen}
+            anchor={
+              <Button
+                onClick={() => setIsInvitationModalOpen(prevState => !prevState)}
+                color='blue1'
+                icon={<Icon name='plus' size='12' color='white' />}
+              />
+            }
+          />
         </StyledBoardNavigationUsers>
         <Button
           color='gray6'

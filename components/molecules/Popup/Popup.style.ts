@@ -1,15 +1,14 @@
 import styled from 'styled-components';
 
-interface IStyledDropdownContentProps {
-  attachmentSide: 'left' | 'right';
-  width: string;
-}
-
-export const StyledDropdown = styled.div`
+export const StyledPopup = styled.div`
   position: relative;
 `;
 
-export const StyledDropdownContent = styled.div<IStyledDropdownContentProps>`
+interface IStyledPopupContentProps {
+  attachmentSide: 'left' | 'right';
+}
+
+export const StyledPopupContent = styled.div<IStyledPopupContentProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border: 0.1rem solid ${({ theme }) => theme.colors.gray5};
   border-radius: 1.2rem;
@@ -18,14 +17,9 @@ export const StyledDropdownContent = styled.div<IStyledDropdownContentProps>`
   flex-direction: column;
   height: fit-content;
   margin-top: 1.2rem;
-  max-height: 19.9rem;
+  padding: 1.2rem;
   position: absolute;
-  width: ${({ width }) => width};
+  width: 24rem;
   z-index: 2;
   ${({ attachmentSide }) => (attachmentSide === 'left' ? 'left:0' : 'right:0')};
-`;
-
-export const StyledDropdownContentScrollable = styled.div`
-  overflow-y: scroll;
-  padding: 1.2rem;
 `;

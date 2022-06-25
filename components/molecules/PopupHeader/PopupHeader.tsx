@@ -1,22 +1,22 @@
 import Typography from 'Components/atoms/Typography/Typography';
-import { StyledDropdownHeader } from 'Components/molecules/DropdownHeader/DropdownHeader.style';
+import { StyledPopupHeader } from 'Components/molecules/PopupHeader/PopupHeader.style';
 
-interface IDropdownHeaderProps {
+interface IPopupHeaderProps {
   label: string;
   description: string;
 }
 
-const DropdownHeader = ({ label, description }: IDropdownHeaderProps) => {
+const PopupHeader = ({ label, description }: IPopupHeaderProps) => {
   return (
-    <StyledDropdownHeader>
+    <StyledPopupHeader>
       <Typography variant='h4' color='gray2' weight='600'>
         {label}
       </Typography>
       <Typography variant='h4' font='notoSans' color='gray3' weight='400'>
         {description}
       </Typography>
-    </StyledDropdownHeader>
+    </StyledPopupHeader>
   );
 };
 
-export default DropdownHeader;
+export default PopupHeader;

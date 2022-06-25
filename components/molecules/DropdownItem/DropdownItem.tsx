@@ -1,33 +1,11 @@
-import Typography from 'Components/atoms/Typography/Typography';
-import {
-  StyledDropdownItem,
-  StyledDropdownItemHeader,
-} from 'Components/molecules/DropdownItem/DropdownItem.style';
-import { ThemeColorsType } from 'Utils/theme';
+import { StyledDropdownItem } from 'Components/molecules/DropdownItem/DropdownItem.style';
 
 interface IDropdownItemProps {
-  icon?: JSX.Element;
-  label: string;
-  labelColor?: ThemeColorsType;
-  description?: string;
+  children: JSX.Element[] | JSX.Element;
 }
 
-const DropdownItem = ({ icon, label, description, labelColor = 'gray2' }: IDropdownItemProps) => {
-  return (
-    <StyledDropdownItem>
-      <StyledDropdownItemHeader>
-        {icon}
-        <Typography variant='h4' font='notoSans' color={labelColor}>
-          {label}
-        </Typography>
-      </StyledDropdownItemHeader>
-      {description && (
-        <Typography weight='400' variant='h4' font='notoSans' color='gray3'>
-          {description}
-        </Typography>
-      )}
-    </StyledDropdownItem>
-  );
+const DropdownItem = ({ children, ...restProps }: IDropdownItemProps) => {
+  return <StyledDropdownItem {...restProps}>{children}</StyledDropdownItem>;
 };
 
 export default DropdownItem;

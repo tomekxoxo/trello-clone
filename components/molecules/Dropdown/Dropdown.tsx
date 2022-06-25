@@ -12,16 +12,16 @@ interface IDropdownProps {
   isOpen: boolean;
   closeDropdown: () => void;
   children: JSX.Element[];
-  header?: JSX.Element;
+  width?: string;
 }
 
 const Dropdown = ({
   anchor,
   isOpen,
   children,
-  header,
   closeDropdown,
   attachmentSide = 'left',
+  width = '100%',
 }: IDropdownProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, closeDropdown);
@@ -30,8 +30,7 @@ const Dropdown = ({
     <StyledDropdown ref={ref}>
       {anchor}
       {isOpen && (
-        <StyledDropdownContent attachmentSide={attachmentSide}>
-          {header}
+        <StyledDropdownContent width={width} attachmentSide={attachmentSide}>
           <StyledDropdownContentScrollable>{children}</StyledDropdownContentScrollable>
         </StyledDropdownContent>
       )}
