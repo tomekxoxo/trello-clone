@@ -20,17 +20,19 @@ const VisibilityItem = ({
 }: IVisibilityItemProps) => {
   return (
     <StyledVisibilityItem>
-      <StyledVisibilityItemHeader>
-        {icon}
-        <Typography variant='h4' font='notoSans' color={labelColor}>
-          {label}
-        </Typography>
-      </StyledVisibilityItemHeader>
-      {description && (
-        <Typography weight='400' variant='h4' font='notoSans' color='gray3'>
-          {description}
-        </Typography>
-      )}
+      <>
+        <StyledVisibilityItemHeader>
+          {icon}
+          <Typography variant='h4' font='notoSans' color={labelColor}>
+            {label}
+          </Typography>
+        </StyledVisibilityItemHeader>
+        {description && (
+          <Typography weight='400' variant='h4' font='notoSans' color='gray3'>
+            {description}
+          </Typography>
+        )}
+      </>
     </StyledVisibilityItem>
   );
 };

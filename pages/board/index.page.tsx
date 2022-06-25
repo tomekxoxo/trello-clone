@@ -1,8 +1,8 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
-import Dropdown from 'Components/molecules/Dropdown/Dropdown';
 import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopup';
+import Popup from 'Components/molecules/Popup/Popup';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import User from 'Components/molecules/User/User';
 import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
@@ -46,10 +46,8 @@ const Index = () => {
     <StyledBoard>
       <StyledBoardNavigation>
         <StyledBoardNavigationUsers>
-          <Dropdown
-            width='24.5rem'
-            closeDropdown={() => setIsVisibilityDropdownOpen(false)}
-            header={<PopupHeader label='Visibility' description='Choose who can see this board.' />}
+          <Popup
+            closePopup={() => setIsVisibilityDropdownOpen(false)}
             isOpen={isVisibilityDropdownOpen}
             anchor={
               <Button
@@ -63,15 +61,18 @@ const Index = () => {
               </Button>
             }
           >
-            {boardVisibilities.map((option, index) => (
-              <VisibilityItem
-                key={index}
-                icon={option.icon}
-                label={option.label}
-                description={option.description}
-              />
-            ))}
-          </Dropdown>
+            <>
+              <PopupHeader label='Visibility' description='Choose who can see this board.' />
+              {boardVisibilities.map((option, index) => (
+                <VisibilityItem
+                  key={index}
+                  icon={option.icon}
+                  label={option.label}
+                  description={option.description}
+                />
+              ))}
+            </>
+          </Popup>
           {users.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
           ))}

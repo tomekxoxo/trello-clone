@@ -12,7 +12,6 @@ interface IDropdownProps {
   isOpen: boolean;
   closeDropdown: () => void;
   children: JSX.Element[];
-  header?: JSX.Element;
   width?: string;
 }
 
@@ -20,7 +19,6 @@ const Dropdown = ({
   anchor,
   isOpen,
   children,
-  header,
   closeDropdown,
   attachmentSide = 'left',
   width = '100%',
@@ -33,7 +31,6 @@ const Dropdown = ({
       {anchor}
       {isOpen && (
         <StyledDropdownContent width={width} attachmentSide={attachmentSide}>
-          {header}
           <StyledDropdownContentScrollable>{children}</StyledDropdownContentScrollable>
         </StyledDropdownContent>
       )}
