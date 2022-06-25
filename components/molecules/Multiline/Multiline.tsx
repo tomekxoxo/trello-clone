@@ -55,8 +55,10 @@ const Multiline = ({
     setIsEditMode(false);
   };
 
-  const handleOnSubmitButtonClick = () => {
+  const handleOnSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     onSubmitButtonClick(innerValue);
+    setIsEditMode(false);
   };
 
   const handleOnSecondButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
