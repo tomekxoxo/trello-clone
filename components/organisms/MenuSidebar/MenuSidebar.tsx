@@ -45,12 +45,11 @@ const MenuSidebar = ({ closeSidebar }: IMenuSidebarProps) => {
         <SidebarSectionHeader title='Made on' iconName='calendar' />
         <SidebarSectionHeader title='Description' iconName='file-lines' />
         <Multiline
-          buttonText='Save'
-          onButtonClick={() => {
-            return;
-          }}
-          closeMultiline={() => {
-            return;
+          defaultValue='coś tam'
+          submitButtonText='Save'
+          secondButtonText='Cancel'
+          onSubmitButtonClick={value => {
+            console.log('save', value);
           }}
         />
         <SidebarSectionHeader title='Team' iconName='file-lines' />

@@ -62,9 +62,13 @@ const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
       {isMultilineOpen && (
         <StyledWorkBoardMultilineWrapper>
           <Multiline
-            closeMultiline={() => setIsMultilineOpen(false)}
-            buttonText='Save'
+            submitButtonText='Save'
             placeholder='Enter a title for this card...'
+            defaultValue=''
+            onSubmitButtonClick={value => {
+              console.log('add', value);
+              setIsMultilineOpen(false);
+            }}
           />
         </StyledWorkBoardMultilineWrapper>
       )}
