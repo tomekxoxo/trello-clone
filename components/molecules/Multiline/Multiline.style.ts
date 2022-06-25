@@ -1,4 +1,3 @@
-import Button from 'Components/atoms/Button/Button';
 import styled from 'styled-components';
 
 export const StyledMultilineContainer = styled.div`
@@ -26,8 +25,16 @@ export const StyledMultiline = styled.textarea`
   }
 `;
 
-export const StyledMultilineButton = styled(Button)`
+interface IStyledMultilineButtonsProps {
+  justifyContent: string;
+}
+
+export const StyledMultilineButtons = styled.div<IStyledMultilineButtonsProps>`
   bottom: 1.2rem;
-  left: 1.2rem;
+  display: flex;
+  gap: 1.2rem;
+  justify-content: ${({ justifyContent }) => justifyContent};
+  padding: 0 1.2rem;
   position: absolute;
+  width: 100%;
 `;
