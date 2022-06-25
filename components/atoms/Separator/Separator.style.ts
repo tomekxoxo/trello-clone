@@ -5,8 +5,8 @@ interface IStyledSeparatorProps {
   orientation: string;
 }
 
-export const StyledSeparator = styled.div<IStyledSeparatorProps>`
+export const StyledSeparator = styled.hr<IStyledSeparatorProps>`
   border: 1px solid ${({ color }) => color};
-  height: 100%;
-  transform: rotate(${({ orientation }) => (orientation === 'horizontal' ? '90deg' : '0')});
+  height: ${({ orientation }) => (orientation === 'horizontal' ? '0' : '100%')};
+  width: ${({ orientation }) => (orientation === 'horizontal' ? '100%' : '0')};
 `;
