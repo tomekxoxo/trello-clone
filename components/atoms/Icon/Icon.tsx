@@ -15,6 +15,9 @@ export type IconNameType =
   | 'paperclip'
   | 'message'
   | 'earth'
+  | 'user'
+  | 'file-lines'
+  | 'calendar'
   | 'magnifying-glass';
 
 interface IIconProps {
