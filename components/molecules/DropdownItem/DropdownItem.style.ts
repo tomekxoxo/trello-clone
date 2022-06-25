@@ -1,21 +1,13 @@
 import styled from 'styled-components';
 
 export const StyledDropdownItem = styled.div`
+  align-items: center;
   border-radius: 0.8rem;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  justify-content: center;
-  padding: 0.8rem;
+  padding: 0.2rem 0;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.gray};
   }
-`;
-
-export const StyledDropdownItemHeader = styled.header`
-  align-items: center;
-  display: flex;
-  gap: 0.8rem;
 `;

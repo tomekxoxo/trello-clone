@@ -2,10 +2,10 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import Dropdown from 'Components/molecules/Dropdown/Dropdown';
-import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
 import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopup';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import User from 'Components/molecules/User/User';
+import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
   StyledBoard,
@@ -64,7 +64,7 @@ const Index = () => {
             }
           >
             {boardVisibilities.map((option, index) => (
-              <DropdownItem
+              <VisibilityItem
                 key={index}
                 icon={option.icon}
                 label={option.label}

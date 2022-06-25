@@ -1,4 +1,5 @@
 import Typography from 'Components/atoms/Typography/Typography';
+import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
 import {
   StyledInviteButton,
   StyledInviteUserPopup,
@@ -49,7 +50,11 @@ const InviteUserPopup = ({
           closeDropdown={() => setIsDropdownOpen(false)}
         >
           {resultsMock?.map(({ name }, index) => {
-            return <User key={index} name={name} withName />;
+            return (
+              <DropdownItem key={index}>
+                <User name={name} withName />
+              </DropdownItem>
+            );
           })}
         </SearchDropdown>
         <StyledInviteButton>

@@ -17,7 +17,6 @@ export const StyledPopupContent = styled.div<IStyledPopupContentProps>`
   flex-direction: column;
   height: fit-content;
   margin-top: 1.2rem;
-  max-height: 19.9rem;
   padding: 1.2rem;
   position: absolute;
   width: 24rem;
