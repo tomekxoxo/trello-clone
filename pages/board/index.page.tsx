@@ -6,6 +6,7 @@ import Popup from 'Components/molecules/Popup/Popup';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import User from 'Components/molecules/User/User';
 import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
+import MenuSidebar from 'Components/organisms/MenuSidebar/MenuSidebar';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
   StyledBoard,
@@ -39,6 +40,7 @@ const boardVisibilities = [
 const Index = () => {
   const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
+  const [isShowMenuSidebarOpen, setIsShowMenuSidebarOpen] = useState(false);
 
   const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);
 
@@ -90,15 +92,16 @@ const Index = () => {
         </StyledBoardNavigationUsers>
         <Button
           color='gray6'
-          onClick={() => {
-            return null;
-          }}
+          onClick={() => setIsShowMenuSidebarOpen(true)}
           icon={<Icon name='ellipsis' color='gray3' />}
         >
           <Typography color='gray3' variant='h4'>
             Show Menu
           </Typography>
         </Button>
+        {isShowMenuSidebarOpen && (
+          <MenuSidebar closeSidebar={() => setIsShowMenuSidebarOpen(false)} />
+        )}
       </StyledBoardNavigation>
       <WorkBoard />
     </StyledBoard>
