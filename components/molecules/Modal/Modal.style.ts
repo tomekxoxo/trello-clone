@@ -26,6 +26,7 @@ export const StyledModalWrapperOverlay = styled.div`
   position: absolute;
   right: 0;
   top: 0;
+  z-index: 1;
 `;
 
 export const StyledModalWrapperCloseButton = styled(Button)`
