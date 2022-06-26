@@ -4,12 +4,14 @@ import styled, { css } from 'styled-components';
 interface IStyledButtonProps {
   backgroundColor: string;
   width: string;
+  borderColor: string;
 }
 
 export const SharedButtonStyles = css`
   align-items: center;
-  border: none;
   border-radius: 8px;
+  border-style: solid;
+  border-width: 1px;
   cursor: pointer;
   display: flex;
   gap: 0.8rem;
@@ -22,6 +24,7 @@ export const SharedButtonStyles = css`
 export const StyledButton = styled.button<IStyledButtonProps>`
   ${SharedButtonStyles}
   background-color: ${({ backgroundColor }) => backgroundColor};
+  border-color: ${({ borderColor }) => borderColor};
   width: ${({ width }) => width};
 `;
 

@@ -11,10 +11,12 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: JSX.Element;
   iconPosition?: IconPositionType;
   width?: string;
+  borderColor?: ThemeColorsType;
 }
 
 const Button = ({
   children,
+  borderColor = 'transparent',
   color = 'blue1',
   iconPosition = 'left',
   icon,
@@ -25,7 +27,12 @@ const Button = ({
   const backgroundColor = colors[color];
 
   return (
-    <StyledButton {...restProps} backgroundColor={backgroundColor} width={width}>
+    <StyledButton
+      {...restProps}
+      backgroundColor={backgroundColor}
+      width={width}
+      borderColor={borderColor}
+    >
       {icon && <StyledButtonIcon iconPosition={iconPosition}>{icon}</StyledButtonIcon>}
       {children}
     </StyledButton>
