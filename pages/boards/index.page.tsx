@@ -1,8 +1,8 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
-import AddBoardModal from 'Components/molecules/AddBoardModal/AddBoardModal';
 import Card from 'Components/molecules/Card/Card';
+import AddBoardModal from 'Components/organisms/AddBoardModal/AddBoardModal';
 import { StyledBoards, StyledBoardsHeader, StyledBoardsList } from 'Pages/boards/index.style';
 import { useState } from 'react';
 
