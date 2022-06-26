@@ -5,7 +5,6 @@ import Typography from 'Components/atoms/Typography/Typography';
 import Multiline from 'Components/molecules/Multiline/Multiline';
 import SidebarSectionHeader from 'Components/molecules/SidebarSectionHeader/SidebarSectionHeader';
 import SidebarTeamMember from 'Components/molecules/SidebarTeamMember/SidebarTeamMember';
-import User from 'Components/molecules/User/User';
 import {
   StyledMenuSidebar,
   StyledMenuSidebarContent,
@@ -54,9 +53,8 @@ const MenuSidebar = ({ closeSidebar }: IMenuSidebarProps) => {
       </StyledMenuSidebarHeader>
       <Separator orientation='horizontal' />
       <StyledMenuSidebarContent>
-        <SidebarSectionHeader title='Made by' iconName='user' />
-        <User withName name='Tomasz kasprowicz' />
-        <SidebarSectionHeader title='Made on' iconName='calendar' />
+        <SidebarSectionHeader title='Made by' iconName='user' description='Tomasz Kasprowicz' />
+        <SidebarSectionHeader title='Made on' iconName='calendar' description='May 26 2022' />
         <SidebarSectionHeader title='Description' iconName='file-lines' />
         <Multiline
           height='30rem'
