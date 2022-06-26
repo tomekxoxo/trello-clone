@@ -9,6 +9,7 @@ import {
 } from 'Components/molecules/AddBoardModal/AddBoardModal.style';
 import FileButton from 'Components/molecules/FileButton/FileButton';
 import Modal from 'Components/molecules/Modal/Modal';
+import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import { useState } from 'react';
 
 interface IAddBoardModalProps {
@@ -35,11 +36,7 @@ const AddBoardModal = ({ closeModal }: IAddBoardModalProps) => {
               Cover
             </Typography>
           </FileButton>
-          <Button color='gray6' width='100%' icon={<Icon name='lock' color='gray3' size='12' />}>
-            <Typography color='gray3' variant='h4'>
-              Private
-            </Typography>
-          </Button>
+          <VisibilityPopup attachmentSide='right' buttonWidth='100%' />
           <Button color='white' onClick={closeModal}>
             <Typography color='gray3' variant='h5'>
               Cancel
