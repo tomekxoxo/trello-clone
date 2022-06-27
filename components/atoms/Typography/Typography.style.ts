@@ -37,5 +37,5 @@ export const StyledTypography = styled.span<IStyledTypographyProps>`
   font-size: ${({ variant }) => variantMapping[variant].fontSize};
   font-weight: ${({ weight }) => weight};
   line-height: ${({ variant }) => variantMapping[variant].lineHeight};
-  white-space: nowrap;
+  white-space: break-spaces;
 `;
