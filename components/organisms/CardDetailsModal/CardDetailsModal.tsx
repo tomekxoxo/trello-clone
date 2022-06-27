@@ -74,7 +74,7 @@ const CardDetailsModal = ({ onCloseModal }: ICardDetailsModalProps) => {
             <SidebarSectionHeader
               title='Attachments'
               iconName='file-lines'
-              description={
+              button={
                 <Button
                   borderColor='gray3'
                   color='white'
