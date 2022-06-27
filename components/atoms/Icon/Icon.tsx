@@ -18,6 +18,7 @@ export type IconNameType =
   | 'user'
   | 'file-lines'
   | 'calendar'
+  | 'pen'
   | 'magnifying-glass';
 
 interface IIconProps {
