@@ -3,6 +3,7 @@ import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Typography from 'Components/atoms/Typography/Typography';
 import Attachment from 'Components/molecules/Attachment/Attachment';
+import Comment from 'Components/molecules/Comment/Comment';
 import FileButton from 'Components/molecules/FileButton/FileButton';
 import Modal from 'Components/molecules/Modal/Modal';
 import Multiline from 'Components/molecules/Multiline/Multiline';
@@ -10,6 +11,7 @@ import SidebarSectionHeader from 'Components/molecules/SidebarSectionHeader/Side
 import {
   StyledCardDetailsAsideSection,
   StyledCardDetailsAttachmentSection,
+  StyledCardDetailsCommentsSection,
   StyledCardDetailsInfoSection,
   StyledCardDetailsMainSection,
   StyledCardDetailsModal,
@@ -46,6 +48,12 @@ const attachmentsMock = [
     date: 'Added July 1, 2020',
     title: 'Reasoning by Ranganath a',
   },
+];
+
+const commentsMock = [
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet',
+
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet',
 ];
 
 const CardDetailsModal = ({ onCloseModal }: ICardDetailsModalProps) => {
@@ -99,16 +107,21 @@ const CardDetailsModal = ({ onCloseModal }: ICardDetailsModalProps) => {
                 />
               ))}
             </StyledCardDetailsAttachmentSection>
-            <SidebarSectionHeader title='Comments' iconName='pen' />
-            <Multiline
-              height='10rem'
-              defaultValue='Write a comment...'
-              submitButtonText='Comment'
-              secondButtonText='Cancel'
-              onSubmitButtonClick={value => {
-                console.log('save', value);
-              }}
-            />
+            <StyledCardDetailsCommentsSection>
+              <SidebarSectionHeader title='Comments' iconName='pen' />
+              <Multiline
+                height='10rem'
+                defaultValue='Write a comment...'
+                submitButtonText='Comment'
+                secondButtonText='Cancel'
+                onSubmitButtonClick={value => {
+                  console.log('save', value);
+                }}
+              />
+              {commentsMock.map((comment, index) => (
+                <Comment comment={comment} key={index} />
+              ))}
+            </StyledCardDetailsCommentsSection>
           </StyledCardDetailsMainSection>
           <StyledCardDetailsAsideSection>
             <SidebarSectionHeader title='Actions' iconName='user' />

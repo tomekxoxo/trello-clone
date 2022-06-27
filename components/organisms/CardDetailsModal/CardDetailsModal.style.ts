@@ -25,6 +25,12 @@ export const StyledCardDetailsAttachmentSection = styled.section`
   gap: 1.2rem;
 `;
 
+export const StyledCardDetailsCommentsSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;
+
 export const StyledCardDetailsAsideSection = styled.aside`
   display: flex;
   flex-direction: column;
