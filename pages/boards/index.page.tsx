@@ -8,6 +8,7 @@ import { useState } from 'react';
 
 const Boards = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const mockList = [
     {
       id: 0,

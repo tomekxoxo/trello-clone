@@ -3,7 +3,7 @@ import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Input from 'Components/atoms/Input/Input';
 import Typography from 'Components/atoms/Typography/Typography';
-import FileButton from 'Components/molecules/FileButton/FileButton';
+import CoverPopup from 'Components/molecules/CoverPopup/CoverPopup';
 import Modal from 'Components/molecules/Modal/Modal';
 import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import {
@@ -17,25 +17,15 @@ interface IAddBoardModalProps {
 }
 
 const AddBoardModal = ({ closeModal }: IAddBoardModalProps) => {
-  const [file, setFile] = useState('/panorama.svg');
+  const [cover, setCover] = useState('/panorama.svg');
 
   return (
     <Modal width='307px' closeModal={closeModal}>
       <StyledAddBoardModal>
-        {file && <Image width={259} height={140} src={file} alt='thumbnail' />}
+        {cover && <Image width={259} height={140} src={cover} alt='thumbnail' objectFit='cover' />}
         <Input placeholder='Add board title' />
         <StyledAddBoardModalButtons>
-          <FileButton
-            icon={<Icon name='image' color='gray3' size='12' />}
-            setFile={setFile}
-            color='gray6'
-            accept='image/png, image/jpeg'
-            width='100%'
-          >
-            <Typography color='gray3' variant='h4'>
-              Cover
-            </Typography>
-          </FileButton>
+          <CoverPopup setCover={setCover} />
           <VisibilityPopup attachmentSide='right' buttonWidth='100%' />
           <Button color='white' onClick={closeModal}>
             <Typography color='gray3' variant='h5'>

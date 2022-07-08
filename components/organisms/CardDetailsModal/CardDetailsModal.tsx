@@ -1,9 +1,9 @@
-import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Typography from 'Components/atoms/Typography/Typography';
 import Attachment from 'Components/molecules/Attachment/Attachment';
 import Comment from 'Components/molecules/Comment/Comment';
+import CoverPopup from 'Components/molecules/CoverPopup/CoverPopup';
 import FileButton from 'Components/molecules/FileButton/FileButton';
 import Modal from 'Components/molecules/Modal/Modal';
 import Multiline from 'Components/molecules/Multiline/Multiline';
@@ -57,12 +57,12 @@ const commentsMock = [
 ];
 
 const CardDetailsModal = ({ onCloseModal }: ICardDetailsModalProps) => {
-  const [file, setFile] = useState('/wayne-bishop-7YUW7fvIYoQ-unsplash.jpg');
+  const [cover, setCover] = useState('/wayne-bishop-7YUW7fvIYoQ-unsplash.jpg');
 
   return (
     <Modal closeModal={onCloseModal} width='66rem'>
       <StyledCardDetailsModal>
-        {file && <Image width={612} height={130} src={file} alt='thumbnail' objectFit='cover' />}
+        {cover && <Image width={612} height={130} src={cover} alt='thumbnail' objectFit='cover' />}
         <StyledCardDetailsInfoSection>
           <StyledCardDetailsMainSection>
             <Typography weight='400' color='dark' variant='h2'>
@@ -83,18 +83,19 @@ const CardDetailsModal = ({ onCloseModal }: ICardDetailsModalProps) => {
               title='Attachments'
               iconName='file-lines'
               button={
-                <Button
-                  borderColor='gray3'
-                  color='white'
-                  onClick={() => {
+                <FileButton
+                  icon={<Icon name='plus' color='gray3' />}
+                  setFile={() => {
                     return;
                   }}
-                  icon={<Icon name='plus' color='gray3' />}
+                  color='gray6'
+                  accept='image/png, image/jpeg'
+                  width='max-content'
                 >
                   <Typography color='gray3' variant='h5'>
-                    Add
+                    Add file
                   </Typography>
-                </Button>
+                </FileButton>
               }
             />
             <StyledCardDetailsAttachmentSection>
@@ -125,17 +126,7 @@ const CardDetailsModal = ({ onCloseModal }: ICardDetailsModalProps) => {
           </StyledCardDetailsMainSection>
           <StyledCardDetailsAsideSection>
             <SidebarSectionHeader title='Actions' iconName='user' />
-            <FileButton
-              icon={<Icon name='image' color='gray3' size='12' />}
-              setFile={setFile}
-              color='gray6'
-              accept='image/png, image/jpeg'
-              width='100%'
-            >
-              <Typography color='gray3' variant='h4'>
-                Cover
-              </Typography>
-            </FileButton>
+            <CoverPopup setCover={setCover} attachmentSide='right' />
           </StyledCardDetailsAsideSection>
         </StyledCardDetailsInfoSection>
       </StyledCardDetailsModal>
