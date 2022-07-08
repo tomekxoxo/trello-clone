@@ -25,9 +25,10 @@ interface IIconProps {
   color?: ThemeColorsType;
   name: IconNameType;
   size?: string;
+  onClick?: () => void;
 }
 
-const Icon = ({ name, color = 'blue1', size = '16', ...props }: IIconProps) => {
+const Icon = ({ name, color = 'blue1', size = '16', onClick, ...props }: IIconProps) => {
   const { colors } = useTheme();
 
   const Component = lazy(() =>
@@ -41,7 +42,7 @@ const Icon = ({ name, color = 'blue1', size = '16', ...props }: IIconProps) => {
 
   return (
     <Suspense fallback={false}>
-      <Component fill={colors[color]} {...props} width={size} height={size} />
+      <Component fill={colors[color]} {...props} width={size} height={size} onClick={onClick} />
     </Suspense>
   );
 };
