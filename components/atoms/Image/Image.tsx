@@ -2,8 +2,8 @@ import { StyledImage, StyledImageWrapper } from 'Components/atoms/Image/Image.st
 import { ImageProps } from 'next/image';
 
 const ImageWrapper = ({ onClick, ...restProps }: ImageProps) => (
-  <StyledImageWrapper>
-    <StyledImage {...restProps} onClick={onClick} />
+  <StyledImageWrapper onClick={onClick}>
+    <StyledImage {...restProps} />
   </StyledImageWrapper>
 );
 
