@@ -2,10 +2,15 @@ import { StyledDropdownItem } from 'Components/molecules/DropdownItem/DropdownIt
 
 interface IDropdownItemProps {
   children: JSX.Element[] | JSX.Element;
+  onClick?: () => void;
 }
 
-const DropdownItem = ({ children, ...restProps }: IDropdownItemProps) => {
-  return <StyledDropdownItem {...restProps}>{children}</StyledDropdownItem>;
+const DropdownItem = ({ children, onClick, ...restProps }: IDropdownItemProps) => {
+  return (
+    <StyledDropdownItem onClick={onClick} {...restProps}>
+      {children}
+    </StyledDropdownItem>
+  );
 };
 
 export default DropdownItem;

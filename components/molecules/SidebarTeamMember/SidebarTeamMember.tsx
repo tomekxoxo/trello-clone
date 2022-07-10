@@ -24,8 +24,8 @@ const SidebarTeamMember = ({
           Admin
         </Typography>
       ) : (
-        <Button color='red' onClick={removeMember}>
-          <Typography color='white' variant='h5'>
+        <Button color='transparent' borderColor='red' onClick={removeMember}>
+          <Typography color='red' variant='h5'>
             Remove
           </Typography>
         </Button>

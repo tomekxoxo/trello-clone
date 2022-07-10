@@ -9,14 +9,16 @@ export const StyledModalWrapperContent = styled.div<IStyledModalWrapperContentPr
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 0.8rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
   height: fit-content;
   left: 50%;
+  max-height: calc(100vh - 40px);
   outline: none;
   padding: 2.4rem;
   position: relative;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: ${({ width }) => width};
+  width: ${({ width }) => width}; ;
 `;
 
 export const StyledModalWrapperOverlay = styled.div`
@@ -26,6 +28,7 @@ export const StyledModalWrapperOverlay = styled.div`
   position: absolute;
   right: 0;
   top: 0;
+  z-index: 1;
 `;
 
 export const StyledModalWrapperCloseButton = styled(Button)`

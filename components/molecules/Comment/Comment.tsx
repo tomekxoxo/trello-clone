@@ -1,0 +1,68 @@
+import Button from 'Components/atoms/Button/Button';
+import Separator from 'Components/atoms/Separator/Separator';
+import Typography from 'Components/atoms/Typography/Typography';
+import {
+  StyledComment,
+  StyledCommentButtons,
+  StyledCommentHeader,
+} from 'Components/molecules/Comment/Comment.style';
+import Multiline from 'Components/molecules/Multiline/Multiline';
+import SidebarSectionHeader from 'Components/molecules/SidebarSectionHeader/SidebarSectionHeader';
+import User from 'Components/molecules/User/User';
+import { useState } from 'react';
+
+interface ICommentProps {
+  comment: string;
+}
+
+const Comment = ({ comment }: ICommentProps) => {
+  const [isEdit, setIsEdit] = useState(false);
+
+  const editComment = () => setIsEdit(true);
+
+  const cancelEdit = () => setIsEdit(false);
+
+  const deleteComment = () => {
+    return null;
+  };
+
+  return (
+    <StyledComment>
+      <StyledCommentHeader>
+        <User withName name='Tomasz Kasprowicz' image='/user.jpeg' />
+        <StyledCommentButtons>
+          <Button color='transparent' onClick={editComment}>
+            <Typography variant='h5' color='gray3'>
+              Edit
+            </Typography>
+          </Button>
+          <Button color='transparent' onClick={deleteComment}>
+            <Typography variant='h5' color='gray3'>
+              Delete
+            </Typography>
+          </Button>
+        </StyledCommentButtons>
+      </StyledCommentHeader>
+      <SidebarSectionHeader title='Made on' iconName='calendar' description='May 26 2022' />
+      {isEdit ? (
+        <Multiline
+          height='15rem'
+          defaultValue={comment}
+          submitButtonText='Edit'
+          secondButtonText='Cancel'
+          onSubmitButtonClick={value => {
+            console.log('save', value);
+          }}
+          onSecondButtonClick={cancelEdit}
+        />
+      ) : (
+        <Typography variant='h5' color='dark'>
+          {comment}
+        </Typography>
+      )}
+      <Separator orientation='horizontal' />
+    </StyledComment>
+  );
+};
+
+export default Comment;

@@ -6,20 +6,30 @@ import {
 import { ThemeColorsType } from 'Utils/theme';
 
 interface IVisibilityItemProps {
-  icon?: JSX.Element;
+  icon: JSX.Element;
   label: string;
   labelColor?: ThemeColorsType;
-  description?: string;
+  description: string;
+  onChoose: (params: { description: string; icon: JSX.Element; label: string }) => void;
 }
 
 const VisibilityItem = ({
   icon,
   label,
   description,
+  onChoose,
   labelColor = 'gray2',
 }: IVisibilityItemProps) => {
+  const handleOnChoose = () => {
+    onChoose({
+      description,
+      icon,
+      label,
+    });
+  };
+
   return (
-    <StyledVisibilityItem>
+    <StyledVisibilityItem onClick={handleOnChoose}>
       <>
         <StyledVisibilityItemHeader>
           {icon}

@@ -1,7 +1,7 @@
 import Button from 'Components/atoms/Button/Button';
+import Icon from 'Components/atoms/Icon/Icon';
 import Input from 'Components/atoms/Input/Input';
 import Link from 'Components/atoms/Link/Link';
-import Typography from 'Components/atoms/Typography/Typography';
 import AccountProfile from 'Components/molecules/AccountProfile/AccountProfile';
 import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigation';
 import Image from 'next/image';
@@ -28,14 +28,8 @@ const TobBar = ({ boardName }: ITopBarProps) => {
       </StyledTopBarSide>
       <StyledTopBarSide>
         <Input
-          placeholder='Keyword...'
-          button={
-            <Button>
-              <Typography color='white' variant='h5'>
-                Search
-              </Typography>
-            </Button>
-          }
+          placeholder='Filter cards'
+          button={<Button icon={<Icon name='magnifying-glass' color='white' size='12' />} />}
         />
         <AccountProfile />
       </StyledTopBarSide>

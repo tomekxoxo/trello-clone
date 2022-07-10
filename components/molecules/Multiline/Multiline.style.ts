@@ -1,12 +1,17 @@
 import styled from 'styled-components';
 
-export const StyledMultilineContainer = styled.div`
+interface IStyledMultilineContainerProps {
+  isEditMode: boolean;
+  height: string;
+}
+
+export const StyledMultilineContainer = styled.div<IStyledMultilineContainerProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border: 0.1rem solid ${({ theme }) => theme.colors.gray5};
   border-radius: 1.2rem;
   filter: drop-shadow(rgba(0, 0, 0, 0.05));
-  height: 12rem;
-  padding-bottom: 5rem;
+  height: ${({ height }) => height};
+  padding-bottom: ${({ isEditMode }) => (isEditMode ? '5rem' : '0rem')};
   position: relative;
 `;
 

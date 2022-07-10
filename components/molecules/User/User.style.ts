@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const StyledUser = styled.div`
   align-items: center;
   display: flex;
+  flex-shrink: 0;
   gap: 1.2rem;
 `;
 

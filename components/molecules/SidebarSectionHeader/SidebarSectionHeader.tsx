@@ -4,16 +4,29 @@ import { StyledSidebarSectionHeader } from 'Components/molecules/SidebarSectionH
 
 interface ISidebarSectionHeaderProps {
   title: string;
-  iconName: IconNameType;
+  description?: string;
+  button?: JSX.Element;
+  iconName?: IconNameType;
 }
 
-const SidebarSectionHeader = ({ title, iconName }: ISidebarSectionHeaderProps) => {
+const SidebarSectionHeader = ({
+  title,
+  description,
+  iconName,
+  button,
+}: ISidebarSectionHeaderProps) => {
   return (
     <StyledSidebarSectionHeader>
-      <Icon name={iconName} color='gray4' size='10' />
+      {iconName && <Icon name={iconName} color='gray4' size='10' />}
       <Typography color='gray4' weight='600' variant='h5'>
         {title}
       </Typography>
+      {description && (
+        <Typography color='dark' weight='600' variant='h5'>
+          {description}
+        </Typography>
+      )}
+      {button}
     </StyledSidebarSectionHeader>
   );
 };

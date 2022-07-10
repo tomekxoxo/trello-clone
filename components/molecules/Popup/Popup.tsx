@@ -10,12 +10,19 @@ export interface IPopupProps {
   closePopup: () => void;
 }
 
-const Popup = ({ anchor, attachmentSide = 'left', closePopup, isOpen, children }: IPopupProps) => {
+const Popup = ({
+  anchor,
+  attachmentSide = 'left',
+  closePopup,
+  isOpen,
+  children,
+  ...restProps
+}: IPopupProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, closePopup);
 
   return (
-    <StyledPopup ref={ref}>
+    <StyledPopup ref={ref} {...restProps}>
       {anchor}
       {isOpen && (
         <StyledPopupContent attachmentSide={attachmentSide}>{children}</StyledPopupContent>

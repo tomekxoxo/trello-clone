@@ -5,7 +5,6 @@ import Typography from 'Components/atoms/Typography/Typography';
 import Multiline from 'Components/molecules/Multiline/Multiline';
 import SidebarSectionHeader from 'Components/molecules/SidebarSectionHeader/SidebarSectionHeader';
 import SidebarTeamMember from 'Components/molecules/SidebarTeamMember/SidebarTeamMember';
-import User from 'Components/molecules/User/User';
 import {
   StyledMenuSidebar,
   StyledMenuSidebarContent,
@@ -28,6 +27,20 @@ const MenuSidebar = ({ closeSidebar }: IMenuSidebarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, closeSidebar);
 
+  const mockDescription = `Simple board to start on a project.
+
+  Each list can hold items (cards) that represent ideas or tasks.
+  
+  There 4 lists here:
+  
+  * Backlog 🤔 : Ideas are created here. Here people can describe the idea following three simple questions: Why you wish to do it, What it is, how can you do it.
+  
+  *   In Progress📚: Once the ideas is clearly defined, the task can move to #todo stage. Here the owner of the idea can move to #doing once s/he is ready. He can also wait a bit for other members to join.
+  * In Review ⚙️: On-going
+  * Completed 🙌🏽**: Finished
+  
+  You could add other lists like labels holding labels (with colors) in order to tag each card by a label if you wish.`;
+
   return (
     <StyledMenuSidebar ref={ref}>
       <StyledMenuSidebarHeader>
@@ -40,12 +53,12 @@ const MenuSidebar = ({ closeSidebar }: IMenuSidebarProps) => {
       </StyledMenuSidebarHeader>
       <Separator orientation='horizontal' />
       <StyledMenuSidebarContent>
-        <SidebarSectionHeader title='Made by' iconName='user' />
-        <User withName name='Tomasz kasprowicz' />
-        <SidebarSectionHeader title='Made on' iconName='calendar' />
+        <SidebarSectionHeader title='Made by' iconName='user' description='Tomasz Kasprowicz' />
+        <SidebarSectionHeader title='Made on' iconName='calendar' description='May 26 2022' />
         <SidebarSectionHeader title='Description' iconName='file-lines' />
         <Multiline
-          defaultValue='coś tam'
+          height='30rem'
+          defaultValue={mockDescription}
           submitButtonText='Save'
           secondButtonText='Cancel'
           onSubmitButtonClick={value => {

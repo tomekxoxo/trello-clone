@@ -27,6 +27,7 @@ const colors = {
   orange: 'rgba(242, 153, 74, 1)',
   purple1: 'rgba(155, 81, 224, 1)',
   red: 'rgba(235, 87, 87, 1)',
+  transparent: 'rgba(0,0,0, 0)',
   white: 'rgba(255, 255, 255, 1)',
   yellow: 'rgba(242, 201, 76, 1)',
 };

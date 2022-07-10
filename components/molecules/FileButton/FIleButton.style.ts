@@ -10,6 +10,7 @@ interface IStyledFileButtonProps {
 export const StyledFileButton = styled.label<IStyledFileButtonProps>`
   ${SharedButtonStyles};
   background-color: ${({ backgroundColor }) => backgroundColor};
+  border-color: ${({ theme }) => theme.colors.transparent};
   width: ${({ width }) => width};
 `;
 

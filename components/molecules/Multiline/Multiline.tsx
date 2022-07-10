@@ -12,6 +12,7 @@ import { ThemeColorsType } from 'Utils/theme';
 interface IMultilineProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   submitButtonText?: string;
   secondButtonText?: string;
+  height?: string;
   defaultValue: string;
   onSubmitButtonClick: (value: string) => void;
   onSecondButtonClick?: () => void;
@@ -23,6 +24,7 @@ interface IMultilineProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 }
 
 const Multiline = ({
+  height = '12rem',
   submitButtonText,
   onSubmitButtonClick,
   onSecondButtonClick,
@@ -55,8 +57,10 @@ const Multiline = ({
     setIsEditMode(false);
   };
 
-  const handleOnSubmitButtonClick = () => {
+  const handleOnSubmitButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     onSubmitButtonClick(innerValue);
+    setIsEditMode(false);
   };
 
   const handleOnSecondButtonClick = (e: MouseEvent<HTMLButtonElement>) => {
@@ -69,7 +73,12 @@ const Multiline = ({
   useClickOutside(containerRef, handleClickOutside);
 
   return (
-    <StyledMultilineContainer ref={containerRef} onClick={handleOnMultilineContainerClick}>
+    <StyledMultilineContainer
+      isEditMode={isEditMode}
+      ref={containerRef}
+      height={height}
+      onClick={handleOnMultilineContainerClick}
+    >
       <StyledMultiline
         onChange={handleOnChange}
         ref={multilineRef}

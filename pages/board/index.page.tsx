@@ -2,10 +2,8 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopup';
-import Popup from 'Components/molecules/Popup/Popup';
-import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import User from 'Components/molecules/User/User';
-import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
+import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import MenuSidebar from 'Components/organisms/MenuSidebar/MenuSidebar';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import {
@@ -24,57 +22,15 @@ const users = [
   { image: '/user.jpeg', name: 'Marion Cotilard' },
 ];
 
-const boardVisibilities = [
-  {
-    description: 'Anyone on the internet can see this.',
-    icon: <Icon name='earth' color='gray2' size='12' />,
-    label: 'Public',
-  },
-  {
-    description: 'Only board members can see this',
-    icon: <Icon name='lock' color='gray2' size='12' />,
-    label: 'Private',
-  },
-];
-
 const Index = () => {
-  const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const [isShowMenuSidebarOpen, setIsShowMenuSidebarOpen] = useState(false);
-
-  const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);
 
   return (
     <StyledBoard>
       <StyledBoardNavigation>
         <StyledBoardNavigationUsers>
-          <Popup
-            closePopup={() => setIsVisibilityDropdownOpen(false)}
-            isOpen={isVisibilityDropdownOpen}
-            anchor={
-              <Button
-                onClick={handleVisibilityDropdownOpen}
-                color='gray6'
-                icon={<Icon name='lock' color='gray3' size='12' />}
-              >
-                <Typography color='gray3' variant='h4'>
-                  Private
-                </Typography>
-              </Button>
-            }
-          >
-            <>
-              <PopupHeader label='Visibility' description='Choose who can see this board.' />
-              {boardVisibilities.map((option, index) => (
-                <VisibilityItem
-                  key={index}
-                  icon={option.icon}
-                  label={option.label}
-                  description={option.description}
-                />
-              ))}
-            </>
-          </Popup>
+          <VisibilityPopup />
           {users.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
           ))}

@@ -1,0 +1,55 @@
+import Button from 'Components/atoms/Button/Button';
+import Image from 'Components/atoms/Image/Image';
+import Typography from 'Components/atoms/Typography/Typography';
+import {
+  StyledAttachment,
+  StyledAttachmentButtons,
+  StyledAttachmentDetails,
+} from 'Components/molecules/Attachment/Attachment.style';
+import { useState } from 'react';
+
+export interface IAttachmentProps {
+  date: string;
+  title: string;
+  image?: null | string;
+}
+
+const Attachment = ({ date, title, image = null }: IAttachmentProps) => {
+  const [file] = useState(image || '/panorama.svg');
+
+  const handleDownload = () => {
+    return;
+  };
+
+  const handleDelete = () => {
+    return;
+  };
+
+  return (
+    <StyledAttachment>
+      {file && <Image width={80} height={53} src={file} alt='thumbnail' />}
+      <StyledAttachmentDetails>
+        <Typography color='gray4' variant='h4'>
+          {date}
+        </Typography>
+        <Typography color='dark' variant='h5'>
+          {title}
+        </Typography>
+        <StyledAttachmentButtons>
+          <Button borderColor='gray3' color='white' onClick={handleDownload}>
+            <Typography color='gray3' variant='h5'>
+              Download
+            </Typography>
+          </Button>
+          <Button borderColor='gray3' color='white' onClick={handleDelete}>
+            <Typography color='gray3' variant='h5'>
+              Delete
+            </Typography>
+          </Button>
+        </StyledAttachmentButtons>
+      </StyledAttachmentDetails>
+    </StyledAttachment>
+  );
+};
+
+export default Attachment;
