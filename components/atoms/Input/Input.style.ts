@@ -19,7 +19,7 @@ export const StyledInput = styled.input`
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
   filter: drop-shadow(rgba(0, 0, 0, 0.05));
   font-family: ${({ theme }) => theme.fonts.poppins};
-  height: 34px;
+  height: 3.2rem;
   line-height: 15px;
 
   padding: 9px 13px;
