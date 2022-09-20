@@ -1,5 +1,4 @@
 import Button from 'Components/atoms/Button/Button';
-import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledMultiline,
   StyledMultilineButtons,
@@ -89,17 +88,23 @@ const Multiline = ({
       {isEditMode && (
         <StyledMultilineButtons justifyContent={justifyContent}>
           {submitButtonText && (
-            <Button onClick={handleOnSubmitButtonClick} color={firstButtonColor}>
-              <Typography color={firstButtonTextColor} variant='h5' font='notoSans'>
-                {submitButtonText}
-              </Typography>
+            <Button
+              color={firstButtonTextColor}
+              variant='h5'
+              onClick={handleOnSubmitButtonClick}
+              backgroundColor={firstButtonColor}
+            >
+              {submitButtonText}
             </Button>
           )}
           {secondButtonText && (
-            <Button onClick={handleOnSecondButtonClick} color={secondButtonColor}>
-              <Typography color={secondButtonTextColor} variant='h5' font='notoSans'>
-                {secondButtonText}
-              </Typography>
+            <Button
+              variant='h5'
+              onClick={handleOnSecondButtonClick}
+              backgroundColor={secondButtonColor}
+              color={secondButtonTextColor}
+            >
+              {secondButtonText}
             </Button>
           )}
         </StyledMultilineButtons>

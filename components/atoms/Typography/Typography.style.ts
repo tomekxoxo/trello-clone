@@ -1,9 +1,9 @@
-import { VaritantType, WeightType } from 'Components/atoms/Typography/Typography';
+import { VariantType, WeightType } from 'Components/atoms/Typography/Typography';
 import styled from 'styled-components';
 
 interface IStyledTypographyProps {
   color: string;
-  variant: VaritantType;
+  variant: VariantType;
   weight: WeightType;
   font: string;
 }

@@ -1,6 +1,5 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
-import Typography from 'Components/atoms/Typography/Typography';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
 import { StyledVisibilityPopup } from 'Components/molecules/VisibilityPopup/VisibilityPopup.style';
@@ -41,14 +40,14 @@ const VisibilityPopup = ({ attachmentSide = 'left', buttonWidth }: IVisibilityPo
       isOpen={isVisibilityDropdownOpen}
       anchor={
         <Button
+          color='gray3'
           width={buttonWidth}
           onClick={handleVisibilityDropdownOpen}
-          color='gray6'
+          backgroundColor='gray6'
           icon={chosenOption.icon}
+          variant='h4'
         >
-          <Typography color='gray3' variant='h4'>
-            {chosenOption.label}
-          </Typography>
+          {chosenOption.label}
         </Button>
       }
       attachmentSide={attachmentSide}

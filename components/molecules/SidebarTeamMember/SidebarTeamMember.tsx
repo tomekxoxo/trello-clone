@@ -24,10 +24,14 @@ const SidebarTeamMember = ({
           Admin
         </Typography>
       ) : (
-        <Button color='transparent' borderColor='red' onClick={removeMember}>
-          <Typography color='red' variant='h5'>
-            Remove
-          </Typography>
+        <Button
+          color='red'
+          variant='h5'
+          backgroundColor='transparent'
+          borderColor='red'
+          onClick={removeMember}
+        >
+          Remove
         </Button>
       )}
     </StyledSidebarTeamMember>

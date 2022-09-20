@@ -2,7 +2,6 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Input from 'Components/atoms/Input/Input';
-import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledCoverPopup,
   StyledCoverPopupContent,
@@ -67,14 +66,14 @@ const CoverPopup = ({ setCover, attachmentSide = 'left' }: ICoverPopupProps) => 
     <StyledCoverPopup
       anchor={
         <Button
+          color='gray3'
           width='100%'
           onClick={handleVisibilityDropdownOpen}
-          color='gray6'
+          backgroundColor='gray6'
+          variant='h4'
           icon={<Icon name='image' color='gray2' size='12' />}
         >
-          <Typography color='gray3' variant='h4'>
-            Cover
-          </Typography>
+          Cover
         </Button>
       }
       attachmentSide={attachmentSide}

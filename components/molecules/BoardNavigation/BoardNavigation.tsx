@@ -16,10 +16,14 @@ const BoardNavigation = () => {
         Devchallenges Board
       </Typography>
       <Separator />
-      <Button color='gray' onClick={goToBoards} icon={<Icon name='grid' color='gray3' />}>
-        <Typography color='gray3' variant='h4'>
-          All boards
-        </Typography>
+      <Button
+        color='gray3'
+        variant='h4'
+        backgroundColor='gray'
+        onClick={goToBoards}
+        icon={<Icon name='grid' color='gray3' />}
+      >
+        All boards
       </Button>
     </StyledBoardNavigation>
   );

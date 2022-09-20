@@ -36,15 +36,23 @@ const Attachment = ({ date, title, image = null }: IAttachmentProps) => {
           {title}
         </Typography>
         <StyledAttachmentButtons>
-          <Button borderColor='gray3' color='white' onClick={handleDownload}>
-            <Typography color='gray3' variant='h5'>
-              Download
-            </Typography>
+          <Button
+            variant='h5'
+            borderColor='gray3'
+            backgroundColor='white'
+            onClick={handleDownload}
+            color='gray3'
+          >
+            Download
           </Button>
-          <Button borderColor='gray3' color='white' onClick={handleDelete}>
-            <Typography color='gray3' variant='h5'>
-              Delete
-            </Typography>
+          <Button
+            color='gray3'
+            variant='h5'
+            borderColor='gray3'
+            backgroundColor='white'
+            onClick={handleDelete}
+          >
+            Delete
           </Button>
         </StyledAttachmentButtons>
       </StyledAttachmentDetails>

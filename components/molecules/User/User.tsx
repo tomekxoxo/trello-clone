@@ -19,10 +19,8 @@ const User = ({ image, name, withName = false }: IUserProps) => {
       {image ? (
         <StyledUserImage src={image} alt={name} width='34' height='34' />
       ) : (
-        <Button color='gray4'>
-          <Typography color='white' variant='h4'>
-            {userInitals}
-          </Typography>
+        <Button variant='h4' backgroundColor='gray4'>
+          {userInitals}
         </Button>
       )}
       {withName && (

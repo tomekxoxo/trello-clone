@@ -31,15 +31,11 @@ const Comment = ({ comment }: ICommentProps) => {
       <StyledCommentHeader>
         <User withName name='Tomasz Kasprowicz' image='/user.jpeg' />
         <StyledCommentButtons>
-          <Button color='transparent' onClick={editComment}>
-            <Typography variant='h5' color='gray3'>
-              Edit
-            </Typography>
+          <Button color='gray3' variant='h5' backgroundColor='transparent' onClick={editComment}>
+            Edit
           </Button>
-          <Button color='transparent' onClick={deleteComment}>
-            <Typography variant='h5' color='gray3'>
-              Delete
-            </Typography>
+          <Button color='gray3' variant='h5' backgroundColor='transparent' onClick={deleteComment}>
+            Delete
           </Button>
         </StyledCommentButtons>
       </StyledCommentHeader>

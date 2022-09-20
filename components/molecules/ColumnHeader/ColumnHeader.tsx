@@ -35,6 +35,7 @@ const ColumnHeader = ({ status }: IColumnHeaderProps) => {
         isOpen={isOptionsDropdownOpen}
         anchor={
           <Button
+            backgroundColor='transparent'
             color='boardColor'
             onClick={handleVisibilityDropdownOpen}
             icon={<Icon name='ellipsis' color='gray3' />}
