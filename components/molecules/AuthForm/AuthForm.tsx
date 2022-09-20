@@ -86,7 +86,9 @@ const AuthForm = () => {
         })}
       />
       <StyledAuthButtons>
-        <Button variant='h5'>Submit</Button>
+        <Button variant='h5' type='submit'>
+          Submit
+        </Button>
         <Button color='dark' variant='h5' backgroundColor='transparent' onClick={changeAuthType}>
           {optionButtonText}
         </Button>
