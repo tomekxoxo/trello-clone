@@ -5,12 +5,10 @@ interface IDropdownItemProps {
   onClick?: () => void;
 }
 
-const DropdownItem = ({ children, onClick, ...restProps }: IDropdownItemProps) => {
-  return (
-    <StyledDropdownItem onClick={onClick} {...restProps}>
-      {children}
-    </StyledDropdownItem>
-  );
-};
+const DropdownItem = ({ children, onClick, ...restProps }: IDropdownItemProps) => (
+  <StyledDropdownItem onClick={onClick} {...restProps}>
+    {children}
+  </StyledDropdownItem>
+);
 
 export default DropdownItem;

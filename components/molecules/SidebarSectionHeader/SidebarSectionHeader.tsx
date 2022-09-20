@@ -14,21 +14,19 @@ const SidebarSectionHeader = ({
   description,
   iconName,
   button,
-}: ISidebarSectionHeaderProps) => {
-  return (
-    <StyledSidebarSectionHeader>
-      {iconName && <Icon name={iconName} color='gray4' size='10' />}
-      <Typography color='gray4' weight='600' variant='h5'>
-        {title}
+}: ISidebarSectionHeaderProps) => (
+  <StyledSidebarSectionHeader>
+    {iconName && <Icon name={iconName} color='gray4' size='10' />}
+    <Typography color='gray4' weight='600' variant='h5'>
+      {title}
+    </Typography>
+    {description && (
+      <Typography color='dark' weight='600' variant='h5'>
+        {description}
       </Typography>
-      {description && (
-        <Typography color='dark' weight='600' variant='h5'>
-          {description}
-        </Typography>
-      )}
-      {button}
-    </StyledSidebarSectionHeader>
-  );
-};
+    )}
+    {button}
+  </StyledSidebarSectionHeader>
+);
 
 export default SidebarSectionHeader;

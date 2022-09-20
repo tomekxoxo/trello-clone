@@ -12,31 +12,29 @@ interface IModalWrapperProps {
   width: string;
 }
 
-const ModalWrapper = ({ children, closeModal, width }: IModalWrapperProps) => {
-  return (
-    <Modal
-      shouldCloseOnOverlayClick={false}
-      isOpen={true}
-      onRequestClose={closeModal}
-      className='_'
-      overlayClassName='_'
-      contentElement={(props, children) => (
-        <StyledModalWrapperContent {...props} width={width}>
-          <StyledModalWrapperCloseButton
-            onClick={closeModal}
-            icon={<Icon name='xmark' color='white' />}
-          ></StyledModalWrapperCloseButton>
-          {children}
-        </StyledModalWrapperContent>
-      )}
-      overlayElement={(props, contentElement) => (
-        <StyledModalWrapperOverlay {...props}>{contentElement}</StyledModalWrapperOverlay>
-      )}
-    >
-      {children}
-    </Modal>
-  );
-};
+const ModalWrapper = ({ children, closeModal, width }: IModalWrapperProps) => (
+  <Modal
+    shouldCloseOnOverlayClick={false}
+    isOpen={true}
+    onRequestClose={closeModal}
+    className='_'
+    overlayClassName='_'
+    contentElement={(props, children) => (
+      <StyledModalWrapperContent {...props} width={width}>
+        <StyledModalWrapperCloseButton
+          onClick={closeModal}
+          icon={<Icon name='xmark' color='white' />}
+        ></StyledModalWrapperCloseButton>
+        {children}
+      </StyledModalWrapperContent>
+    )}
+    overlayElement={(props, contentElement) => (
+      <StyledModalWrapperOverlay {...props}>{contentElement}</StyledModalWrapperOverlay>
+    )}
+  >
+    {children}
+  </Modal>
+);
 
 Modal.setAppElement('#__next');
 
