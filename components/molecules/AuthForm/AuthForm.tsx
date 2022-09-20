@@ -9,13 +9,6 @@ import * as yup from 'yup';
 
 type AuthTypeType = 'login' | 'register';
 
-interface IFormInputs {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-}
-
 const schema = yup.object({
   email: yup.string().required(),
   firstName: yup.string().required(),
@@ -23,13 +16,15 @@ const schema = yup.object({
   password: yup.string().required(),
 });
 
+type SchemaType = yup.InferType<typeof schema>;
+
 const AuthForm = () => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<IFormInputs>({
+  } = useForm<SchemaType>({
     resolver: yupResolver(schema),
   });
 
@@ -44,7 +39,7 @@ const AuthForm = () => {
     reset();
   };
 
-  const onSubmit = (data: IFormInputs) => {
+  const onSubmit = (data: SchemaType) => {
     console.log(data);
   };
 
