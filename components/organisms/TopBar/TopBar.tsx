@@ -16,6 +16,7 @@ interface ITopBarProps {
 const TobBar = ({ boardName }: ITopBarProps) => {
   const { route } = useRouter();
   const isBoardsPage = route === '/boards';
+  const isAuthenticated = false;
 
   console.log(boardName);
   return (
@@ -24,15 +25,17 @@ const TobBar = ({ boardName }: ITopBarProps) => {
         <Link href='/'>
           <Image src='/logo.svg' alt='Application Logo' width={98} height={34} />
         </Link>
-        {!isBoardsPage && <BoardNavigation />}
+        {!isBoardsPage && isAuthenticated && <BoardNavigation />}
       </StyledTopBarSide>
-      <StyledTopBarSide>
-        <Input
-          placeholder='Filter cards'
-          button={<Button icon={<Icon name='magnifying-glass' color='white' size='12' />} />}
-        />
-        <AccountProfile />
-      </StyledTopBarSide>
+      {isAuthenticated && (
+        <StyledTopBarSide>
+          <Input
+            placeholder='Filter cards'
+            button={<Button icon={<Icon name='magnifying-glass' color='white' size='12' />} />}
+          />
+          <AccountProfile />
+        </StyledTopBarSide>
+      )}
     </StyledTopBar>
   );
 };
