@@ -1,21 +1,26 @@
+import ErrorMessage from 'Components/atoms/ErrorMessage/ErrorMessage';
 import {
   StyledInput,
   StyledInputButton,
   StyledInputContainer,
 } from 'Components/atoms/Input/Input.style';
-import { InputHTMLAttributes } from 'react';
+import { forwardRef, InputHTMLAttributes, Ref } from 'react';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   button?: JSX.Element;
+  errorText?: string;
 }
 
-const Input = ({ button, ...restProps }: IInputProps) => {
+const Input = ({ button, errorText, ...restProps }: IInputProps, ref: Ref<HTMLInputElement>) => {
   return (
-    <StyledInputContainer>
-      <StyledInput {...restProps} />
-      <StyledInputButton>{button}</StyledInputButton>
-    </StyledInputContainer>
+    <>
+      <StyledInputContainer>
+        <StyledInput {...restProps} ref={ref} />
+        <StyledInputButton>{button}</StyledInputButton>
+      </StyledInputContainer>
+      {errorText && <ErrorMessage message={errorText} />}
+    </>
   );
 };
 
-export default Input;
+export default forwardRef(Input);
