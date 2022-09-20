@@ -21,6 +21,7 @@ const Button = ({
   iconPosition = 'left',
   icon,
   width = 'fit-content',
+  type = 'button',
   ...restProps
 }: IButtonProps) => {
   const { colors } = useTheme();
@@ -32,6 +33,7 @@ const Button = ({
       backgroundColor={backgroundColor}
       width={width}
       borderColor={borderColor}
+      type={type}
     >
       {icon && <StyledButtonIcon iconPosition={iconPosition}>{icon}</StyledButtonIcon>}
       {children}
