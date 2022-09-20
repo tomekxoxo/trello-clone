@@ -17,7 +17,7 @@ const User = ({ image, name, withName = false }: IUserProps) => {
   return (
     <StyledUser>
       {image ? (
-        <StyledUserImage src={image} alt={name} width='34' height='34' />
+        <StyledUserImage src={image} alt={name} width='32' height='32' />
       ) : (
         <Button variant='h4' backgroundColor='gray4'>
           {userInitals}
