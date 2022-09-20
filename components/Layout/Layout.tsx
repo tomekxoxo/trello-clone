@@ -30,14 +30,12 @@ interface ILayoutProps {
   children: JSX.Element;
 }
 
-const Layout = ({ children }: ILayoutProps) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <TopBar />
-      {children}
-    </ThemeProvider>
-  );
-};
+const Layout = ({ children }: ILayoutProps) => (
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <TopBar />
+    {children}
+  </ThemeProvider>
+);
 
 export default Layout;

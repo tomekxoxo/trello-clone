@@ -5,12 +5,10 @@ interface ILinkProps {
   children: JSX.Element;
 }
 
-const Link = ({ href, children }: ILinkProps) => {
-  return (
-    <NextLink href={href} passHref>
-      <a>{children}</a>
-    </NextLink>
-  );
-};
+const Link = ({ href, children }: ILinkProps) => (
+  <NextLink href={href} passHref>
+    <a>{children}</a>
+  </NextLink>
+);
 
 export default Link;
