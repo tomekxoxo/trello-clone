@@ -1,13 +1,12 @@
+import AuthForm from 'Components/molecules/AuthForm/AuthForm';
 import type { NextPage } from 'next';
-import Head from 'next/head';
+import { StyledIndex } from 'Pages/index.style';
 
 const Home: NextPage = () => {
   return (
-    <div>
-      <Head>
-        <title>Trello Clone</title>
-      </Head>
-    </div>
+    <StyledIndex>
+      <AuthForm />
+    </StyledIndex>
   );
 };
 
