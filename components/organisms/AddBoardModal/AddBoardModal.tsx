@@ -30,7 +30,7 @@ const AddBoardModal = ({ closeModal }: IAddBoardModalProps) => {
             Cancel
           </Button>
           <Button variant='h5' icon={<Icon name='plus' color='white' size='12' />}>
-            Cancel
+            Create
           </Button>
         </StyledAddBoardModalButtons>
       </StyledAddBoardModal>
