@@ -2,8 +2,10 @@ import { StyledSeparator } from 'Components/atoms/Separator/Separator.style';
 import { useTheme } from 'styled-components';
 import { ThemeColorsType } from 'Utils/theme';
 
+export type OrientationType = 'vertical' | 'horizontal';
+
 interface ISeparatorProps {
-  orientation?: 'horizontal' | 'vertical';
+  orientation?: OrientationType;
   color?: ThemeColorsType;
 }
 

@@ -11,20 +11,18 @@ interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   errorText?: string;
 }
 
-const Input = ({ button, errorText, ...restProps }: IInputProps, ref: Ref<HTMLInputElement>) => {
-  return (
-    <>
-      <StyledInputContainer>
-        <StyledInput {...restProps} ref={ref} />
-        <StyledInputButton>{button}</StyledInputButton>
-      </StyledInputContainer>
-      {errorText && (
-        <Typography variant='h5' color='red'>
-          {errorText}
-        </Typography>
-      )}
-    </>
-  );
-};
+const Input = ({ button, errorText, ...restProps }: IInputProps, ref: Ref<HTMLInputElement>) => (
+  <>
+    <StyledInputContainer>
+      <StyledInput {...restProps} ref={ref} />
+      <StyledInputButton>{button}</StyledInputButton>
+    </StyledInputContainer>
+    {errorText && (
+      <Typography variant='h5' color='red'>
+        {errorText}
+      </Typography>
+    )}
+  </>
+);
 
 export default forwardRef(Input);
