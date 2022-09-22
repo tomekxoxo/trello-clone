@@ -8,11 +8,11 @@ interface IStyledModalWrapperContentProps {
 export const StyledModalWrapperContent = styled.div<IStyledModalWrapperContentProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 0.8rem;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 15px 7px -10px rgba(30, 30, 30, 0.1), 0px 10px 40px -5px rgba(30, 30, 30, 0.07);
   display: flex;
   height: fit-content;
   left: 50%;
-  max-height: calc(100vh - 40px);
+  max-height: calc(100vh - 8rem);
   outline: none;
   padding: 2.4rem;
   position: relative;
@@ -22,7 +22,7 @@ export const StyledModalWrapperContent = styled.div<IStyledModalWrapperContentPr
 `;
 
 export const StyledModalWrapperOverlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(4px);
   bottom: 0;
   left: 0;
   position: absolute;
