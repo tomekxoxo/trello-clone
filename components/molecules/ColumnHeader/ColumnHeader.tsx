@@ -1,8 +1,8 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
+import Popup from 'Components/atoms/Popup/Popup';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledColumnHeader } from 'Components/molecules/ColumnHeader/ColumnHeader.style';
-import Popup from 'Components/molecules/Popup/Popup';
 import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
 import { useState } from 'react';
 

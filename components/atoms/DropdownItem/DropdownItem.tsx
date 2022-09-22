@@ -1,4 +1,4 @@
-import { StyledDropdownItem } from 'Components/molecules/DropdownItem/DropdownItem.style';
+import { StyledDropdownItem } from 'Components/atoms/DropdownItem/DropdownItem.style';
 
 interface IDropdownItemProps {
   children: JSX.Element[] | JSX.Element;

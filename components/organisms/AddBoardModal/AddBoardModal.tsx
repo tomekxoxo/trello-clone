@@ -2,8 +2,8 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Input from 'Components/atoms/Input/Input';
+import Modal from 'Components/atoms/Modal/Modal';
 import CoverPopup from 'Components/molecules/CoverPopup/CoverPopup';
-import Modal from 'Components/molecules/Modal/Modal';
 import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import {
   StyledAddBoardModal,

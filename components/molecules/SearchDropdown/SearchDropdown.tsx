@@ -1,7 +1,7 @@
 import Button from 'Components/atoms/Button/Button';
+import Dropdown from 'Components/atoms/Dropdown/Dropdown';
 import Icon from 'Components/atoms/Icon/Icon';
 import Input from 'Components/atoms/Input/Input';
-import Dropdown from 'Components/molecules/Dropdown/Dropdown';
 import { StyledSearchDropdown } from 'Components/molecules/SearchDropdown/SearchDropdown.style';
 import useClickOutside from 'Hooks/useClickOutside';
 import { useRef } from 'react';

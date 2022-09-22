@@ -1,4 +1,4 @@
-import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
+import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
 import styled from 'styled-components';
 
 export const StyledVisibilityItem = styled(DropdownItem)`

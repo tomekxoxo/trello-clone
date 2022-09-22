@@ -1,6 +1,6 @@
 import Icon from 'Components/atoms/Icon/Icon';
+import Popup from 'Components/atoms/Popup/Popup';
 import { StyledAccountProfile } from 'Components/molecules/AccountProfile/AccountProfile.style';
-import Popup from 'Components/molecules/Popup/Popup';
 import User from 'Components/molecules/User/User';
 import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
 import { useState } from 'react';

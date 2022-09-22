@@ -1,11 +1,11 @@
+import FileButton from 'Components/atoms/FileButton/FileButton';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
+import Modal from 'Components/atoms/Modal/Modal';
 import Typography from 'Components/atoms/Typography/Typography';
 import Attachment from 'Components/molecules/Attachment/Attachment';
 import Comment from 'Components/molecules/Comment/Comment';
 import CoverPopup from 'Components/molecules/CoverPopup/CoverPopup';
-import FileButton from 'Components/molecules/FileButton/FileButton';
-import Modal from 'Components/molecules/Modal/Modal';
 import Multiline from 'Components/molecules/Multiline/Multiline';
 import SidebarSectionHeader from 'Components/molecules/SidebarSectionHeader/SidebarSectionHeader';
 import {

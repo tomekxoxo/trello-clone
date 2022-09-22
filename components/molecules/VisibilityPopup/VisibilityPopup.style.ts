@@ -1,4 +1,4 @@
-import Popup from 'Components/molecules/Popup/Popup';
+import Popup from 'Components/atoms/Popup/Popup';
 import styled from 'styled-components';
 
 export const StyledVisibilityPopup = styled(Popup)`
