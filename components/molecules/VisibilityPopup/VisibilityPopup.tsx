@@ -2,7 +2,10 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
-import { StyledVisibilityPopup } from 'Components/molecules/VisibilityPopup/VisibilityPopup.style';
+import {
+  StyledVisibilityPopup,
+  StyledVisibilityPopupContent,
+} from 'Components/molecules/VisibilityPopup/VisibilityPopup.style';
 import { useState } from 'react';
 
 const boardVisibilities = [
@@ -52,7 +55,7 @@ const VisibilityPopup = ({ attachmentSide = 'left', buttonWidth }: IVisibilityPo
       }
       attachmentSide={attachmentSide}
     >
-      <>
+      <StyledVisibilityPopupContent>
         <PopupHeader label='Visibility' description='Choose who can see this board.' />
         {boardVisibilities.map((option, index) => (
           <VisibilityItem
@@ -63,7 +66,7 @@ const VisibilityPopup = ({ attachmentSide = 'left', buttonWidth }: IVisibilityPo
             onChoose={handleOnChoose}
           />
         ))}
-      </>
+      </StyledVisibilityPopupContent>
     </StyledVisibilityPopup>
   );
 };
