@@ -24,7 +24,7 @@ const User = ({ image, name, withName = false }: IUserProps) => {
         </Button>
       )}
       {withName && (
-        <Typography color='gray1' font='notoSans' variant='h4' weight='700'>
+        <Typography color='gray1' variant='h4' weight='700'>
           {name}
         </Typography>
       )}

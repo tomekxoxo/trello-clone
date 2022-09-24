@@ -11,7 +11,7 @@ const PopupHeader = ({ label, description }: IPopupHeaderProps) => (
     <Typography variant='h4' color='gray2' weight='600'>
       {label}
     </Typography>
-    <Typography variant='h4' font='notoSans' color='gray3' weight='400'>
+    <Typography variant='h4' color='gray3' weight='400'>
       {description}
     </Typography>
   </StyledPopupHeader>

@@ -5,7 +5,6 @@ interface IStyledTypographyProps {
   color: string;
   variant: VariantType;
   weight: WeightType;
-  font: string;
 }
 
 const variantMapping = {
@@ -33,7 +32,6 @@ const variantMapping = {
 
 export const StyledTypography = styled.span<IStyledTypographyProps>`
   color: ${({ color }) => color};
-  font-family: ${({ font }) => font};
   font-size: ${({ variant }) => variantMapping[variant].fontSize};
   font-weight: ${({ weight }) => weight};
   line-height: ${({ variant }) => variantMapping[variant].lineHeight};
