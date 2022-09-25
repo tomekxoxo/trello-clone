@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledDropdownItem = styled.div`
   align-items: center;
-  border-radius: 0.8rem;
+  border-radius: 1.2rem;
   cursor: pointer;
   display: flex;
   padding: 1.2rem;
