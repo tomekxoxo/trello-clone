@@ -47,9 +47,11 @@ const MenuSidebar = ({ closeSidebar }: IMenuSidebarProps) => {
         <Typography color='gray1' weight='600' variant='h4'>
           Menu
         </Typography>
-        <Button onClick={closeSidebar} color='white'>
-          <Icon name='xmark' color='gray1' />
-        </Button>
+        <Button
+          onClick={closeSidebar}
+          backgroundColor='white'
+          icon={<Icon name='xmark' color='gray1' />}
+        />
       </StyledMenuSidebarHeader>
       <Separator orientation='horizontal' />
       <StyledMenuSidebarContent>

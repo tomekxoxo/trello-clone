@@ -2,7 +2,7 @@ import {
   StyledDropdown,
   StyledDropdownContent,
   StyledDropdownContentScrollable,
-} from 'Components/molecules/Dropdown/Dropdown.style';
+} from 'Components/atoms/Dropdown/Dropdown.style';
 import useClickOutside from 'Hooks/useClickOutside';
 import { useRef } from 'react';
 

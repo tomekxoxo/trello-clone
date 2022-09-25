@@ -1,3 +1,4 @@
+import Typography from 'Components/atoms/Typography/Typography';
 import styled from 'styled-components';
 
 export const StyledInputContainer = styled.div`
@@ -7,9 +8,14 @@ export const StyledInputContainer = styled.div`
 
 export const StyledInputButton = styled.div`
   position: absolute;
-  right: 2px;
+  right: 1px;
   top: 50%;
   transform: translateY(-50%);
+`;
+
+export const StyledInputError = styled(Typography)`
+  display: block;
+  margin: 0.8rem 0 0;
 `;
 
 export const StyledInput = styled.input`
@@ -18,11 +24,10 @@ export const StyledInput = styled.input`
   border-radius: 8px;
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.05);
   filter: drop-shadow(rgba(0, 0, 0, 0.05));
-  font-family: ${({ theme }) => theme.fonts.poppins};
-  height: 34px;
+  height: 3.2rem;
   line-height: 15px;
 
-  padding: 9px 13px;
+  padding: 8px 12px;
   width: 100%;
 
   &::placeholder {

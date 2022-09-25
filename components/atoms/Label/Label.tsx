@@ -13,7 +13,7 @@ const Label = ({ name, color = 'brightYellow' }: ILabelProps) => {
 
   return (
     <StyledLabel color={colors[color]}>
-      <Typography font='notoSans' variant='h5' color='yellow'>
+      <Typography variant='h5' color='yellow'>
         {name}
       </Typography>
     </StyledLabel>

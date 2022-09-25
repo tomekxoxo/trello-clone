@@ -33,12 +33,12 @@ const VisibilityItem = ({
       <>
         <StyledVisibilityItemHeader>
           {icon}
-          <Typography variant='h4' font='notoSans' color={labelColor}>
+          <Typography variant='h4' color={labelColor}>
             {label}
           </Typography>
         </StyledVisibilityItemHeader>
         {description && (
-          <Typography weight='400' variant='h4' font='notoSans' color='gray3'>
+          <Typography weight='400' variant='h4' color='gray3'>
             {description}
           </Typography>
         )}

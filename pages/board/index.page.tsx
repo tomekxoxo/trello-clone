@@ -1,6 +1,5 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
-import Typography from 'Components/atoms/Typography/Typography';
 import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopup';
 import User from 'Components/molecules/User/User';
 import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
@@ -47,13 +46,13 @@ const Index = () => {
           />
         </StyledBoardNavigationUsers>
         <Button
-          color='gray6'
+          color='gray3'
+          variant='h4'
+          backgroundColor='gray6'
           onClick={() => setIsShowMenuSidebarOpen(true)}
           icon={<Icon name='ellipsis' color='gray3' />}
         >
-          <Typography color='gray3' variant='h4'>
-            Show Menu
-          </Typography>
+          Show menu
         </Button>
         {isShowMenuSidebarOpen && (
           <MenuSidebar closeSidebar={() => setIsShowMenuSidebarOpen(false)} />

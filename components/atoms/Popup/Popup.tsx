@@ -1,4 +1,4 @@
-import { StyledPopup, StyledPopupContent } from 'Components/molecules/Popup/Popup.style';
+import { StyledPopup, StyledPopupContent } from 'Components/atoms/Popup/Popup.style';
 import useClickOutside from 'Hooks/useClickOutside';
 import { useRef } from 'react';
 

@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "check-types": "npx tsc --noemit",
-    "lint": "npm run check-types && next lint",
+    "lint": "next lint",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"

@@ -1,10 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 export type ThemeColorsType = keyof typeof colors;
-export type ThemeFontsType = keyof typeof fonts;
-
 export type DefaultThemeColorsType = typeof colors;
-export type DefaultThemeFontsType = typeof fonts;
 
 const colors = {
   blue1: 'rgba(47, 128, 237, 1)',
@@ -32,14 +29,8 @@ const colors = {
   yellow: 'rgba(242, 201, 76, 1)',
 };
 
-const fonts = {
-  notoSans: 'Noto Sans',
-  poppins: 'Poppins',
-};
-
 const theme: DefaultTheme = {
   colors,
-  fonts,
 };
 
 export default theme;

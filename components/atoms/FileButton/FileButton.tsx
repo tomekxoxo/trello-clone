@@ -3,7 +3,7 @@ import {
   StyledFileButton,
   StyledFileButtonIcon,
   StyledFileButtonInput,
-} from 'Components/molecules/FileButton/FIleButton.style';
+} from 'Components/atoms/FileButton/FIleButton.style';
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useTheme } from 'styled-components';
 

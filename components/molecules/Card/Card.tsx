@@ -54,7 +54,7 @@ const Card = (
     <>
       <StyledCard onClick={handleCardClick} ref={ref} {...restProps}>
         {image && <Image width={219} height={130} src={image} alt='restaurant image' />}
-        <Typography variant='h2' font='notoSans' color='dark'>
+        <Typography variant='h2' color='dark'>
           {title}
         </Typography>
         <StyledCardLabels>
@@ -67,7 +67,7 @@ const Card = (
             <User key={index} image={user.image} name={user.name} />
           ))}
           {hiddenUsersInfo && (
-            <Typography variant='h3' font='notoSans' color='gray4'>
+            <Typography variant='h3' color='gray4'>
               {hiddenUsersInfo}
             </Typography>
           )}

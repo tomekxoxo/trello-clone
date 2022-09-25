@@ -6,17 +6,15 @@ interface IPopupHeaderProps {
   description: string;
 }
 
-const PopupHeader = ({ label, description }: IPopupHeaderProps) => {
-  return (
-    <StyledPopupHeader>
-      <Typography variant='h4' color='gray2' weight='600'>
-        {label}
-      </Typography>
-      <Typography variant='h4' font='notoSans' color='gray3' weight='400'>
-        {description}
-      </Typography>
-    </StyledPopupHeader>
-  );
-};
+const PopupHeader = ({ label, description }: IPopupHeaderProps) => (
+  <StyledPopupHeader>
+    <Typography variant='h4' color='gray2' weight='600'>
+      {label}
+    </Typography>
+    <Typography variant='h4' color='gray3' weight='400'>
+      {description}
+    </Typography>
+  </StyledPopupHeader>
+);
 
 export default PopupHeader;

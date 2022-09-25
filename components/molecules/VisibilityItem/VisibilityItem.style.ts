@@ -1,11 +1,12 @@
-import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
+import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
 import styled from 'styled-components';
 
 export const StyledVisibilityItem = styled(DropdownItem)`
   align-items: flex-start;
   display: flex;
   flex-direction: column;
-  padding: 0.8rem;
+  padding: 0 0.8rem;
+  padding: 1.2rem;
 `;
 
 export const StyledVisibilityItemHeader = styled.header`

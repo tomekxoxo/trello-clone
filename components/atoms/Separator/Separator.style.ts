@@ -1,8 +1,9 @@
+import { OrientationType } from 'Components/atoms/Separator/Separator';
 import styled from 'styled-components';
 
 interface IStyledSeparatorProps {
   color: string;
-  orientation: string;
+  orientation: OrientationType;
 }
 
 export const StyledSeparator = styled.hr<IStyledSeparatorProps>`

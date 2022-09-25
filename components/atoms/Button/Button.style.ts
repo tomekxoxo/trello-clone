@@ -15,7 +15,7 @@ export const SharedButtonStyles = css`
   cursor: pointer;
   display: flex;
   gap: 0.8rem;
-  height: fit-content;
+  height: 3.2rem;
   justify-content: space-between;
   padding: 9px;
   width: fit-content;

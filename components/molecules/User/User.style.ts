@@ -6,6 +6,13 @@ export const StyledUser = styled.div`
   display: flex;
   flex-shrink: 0;
   gap: 1.2rem;
+  height: 3.2rem;
+  width: fit-content;
+
+  > button {
+    cursor: default;
+    width: 3.2rem;
+  }
 `;
 
 export const StyledUserImage = styled(Image)`

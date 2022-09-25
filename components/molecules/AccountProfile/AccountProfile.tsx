@@ -1,25 +1,30 @@
-import Icon from 'Components/atoms/Icon/Icon';
+// import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
+// import Icon from 'Components/atoms/Icon/Icon';
+// import Popup from 'Components/atoms/Popup/Popup';
+// import Typography from 'Components/atoms/Typography/Typography';
 import { StyledAccountProfile } from 'Components/molecules/AccountProfile/AccountProfile.style';
-import Popup from 'Components/molecules/Popup/Popup';
 import User from 'Components/molecules/User/User';
-import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 const AccountProfile = () => {
   const userName = 'Tomasz Kasprowicz';
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   return (
     <StyledAccountProfile>
       <User name={userName} withName />
-      <Popup
+      {/* <Popup
         anchor={<Icon name='chevron' color='dark' size='16' onClick={() => setIsPopupOpen(true)} />}
         isOpen={isPopupOpen}
         closePopup={() => setIsPopupOpen(false)}
         attachmentSide='right'
       >
-        <VisibilityItem label='Logout' labelColor='gray3' />
-      </Popup>
+        <DropdownItem>
+          <Typography color='gray3' variant='h4'>
+            Logout
+          </Typography>
+        </DropdownItem>
+      </Popup> */}
     </StyledAccountProfile>
   );
 };

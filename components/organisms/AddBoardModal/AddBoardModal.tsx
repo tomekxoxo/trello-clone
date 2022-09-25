@@ -2,9 +2,8 @@ import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Input from 'Components/atoms/Input/Input';
-import Typography from 'Components/atoms/Typography/Typography';
+import Modal from 'Components/atoms/Modal/Modal';
 import CoverPopup from 'Components/molecules/CoverPopup/CoverPopup';
-import Modal from 'Components/molecules/Modal/Modal';
 import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import {
   StyledAddBoardModal,
@@ -27,15 +26,11 @@ const AddBoardModal = ({ closeModal }: IAddBoardModalProps) => {
         <StyledAddBoardModalButtons>
           <CoverPopup setCover={setCover} />
           <VisibilityPopup attachmentSide='right' buttonWidth='100%' />
-          <Button color='white' onClick={closeModal}>
-            <Typography color='gray3' variant='h5'>
-              Cancel
-            </Typography>
+          <Button color='gray3' variant='h5' backgroundColor='white' onClick={closeModal}>
+            Cancel
           </Button>
-          <Button icon={<Icon name='plus' color='white' size='12' />}>
-            <Typography color='white' variant='h5'>
-              Create
-            </Typography>
+          <Button variant='h5' icon={<Icon name='plus' color='white' size='12' />}>
+            Create
           </Button>
         </StyledAddBoardModalButtons>
       </StyledAddBoardModal>

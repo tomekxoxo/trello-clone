@@ -27,5 +27,4 @@ export const StyledDropdownContent = styled.div<IStyledDropdownContentProps>`
 
 export const StyledDropdownContentScrollable = styled.div`
   overflow-y: scroll;
-  padding: 1.2rem;
 `;

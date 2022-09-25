@@ -149,10 +149,8 @@ const Boards = () => {
         <Typography color='dark' variant='h1'>
           All Boards
         </Typography>
-        <Button onClick={openModal} icon={<Icon name='plus' color='white' />}>
-          <Typography color='white' variant='h5'>
-            Add
-          </Typography>
+        <Button onClick={openModal} icon={<Icon name='plus' color='white' />} variant='h5'>
+          Add
         </Button>
       </StyledBoardsHeader>
       <StyledBoardsList>

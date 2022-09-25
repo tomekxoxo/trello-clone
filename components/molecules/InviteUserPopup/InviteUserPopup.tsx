@@ -1,10 +1,9 @@
-import Typography from 'Components/atoms/Typography/Typography';
-import DropdownItem from 'Components/molecules/DropdownItem/DropdownItem';
+import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
+import Popup from 'Components/atoms/Popup/Popup';
 import {
   StyledInviteButton,
   StyledInviteUserPopup,
 } from 'Components/molecules/InviteUserPopup/InviteUserPopup.style';
-import Popup from 'Components/molecules/Popup/Popup';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import SearchDropdown from 'Components/molecules/SearchDropdown/SearchDropdown';
 import User from 'Components/molecules/User/User';
@@ -57,10 +56,8 @@ const InviteUserPopup = ({
             );
           })}
         </SearchDropdown>
-        <StyledInviteButton>
-          <Typography color='white' variant='h5'>
-            Invite
-          </Typography>
+        <StyledInviteButton color='white' variant='h5'>
+          Invite
         </StyledInviteButton>
       </StyledInviteUserPopup>
     </Popup>
