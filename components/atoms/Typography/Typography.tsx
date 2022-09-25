@@ -17,11 +17,12 @@ const Typography = ({
   color = 'blue1',
   weight = '500',
   children,
+  ...restProps
 }: ITypographyProps) => {
   const { colors } = useTheme();
 
   return (
-    <StyledTypography weight={weight} variant={variant} color={colors[color]}>
+    <StyledTypography weight={weight} variant={variant} color={colors[color]} {...restProps}>
       {children}
     </StyledTypography>
   );

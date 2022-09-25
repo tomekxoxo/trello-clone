@@ -1,3 +1,4 @@
+import Typography from 'Components/atoms/Typography/Typography';
 import styled from 'styled-components';
 
 export const StyledInputContainer = styled.div`
@@ -12,6 +13,11 @@ export const StyledInputButton = styled.div`
   transform: translateY(-50%);
 `;
 
+export const StyledInputError = styled(Typography)`
+  display: block;
+  margin: 0.8rem 0 0;
+`;
+
 export const StyledInput = styled.input`
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid rgba(224, 224, 224, 1);
@@ -21,7 +27,7 @@ export const StyledInput = styled.input`
   height: 3.2rem;
   line-height: 15px;
 
-  padding: 9px 13px;
+  padding: 8px 12px;
   width: 100%;
 
   &::placeholder {

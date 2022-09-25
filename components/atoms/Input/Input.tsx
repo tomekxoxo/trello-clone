@@ -2,8 +2,8 @@ import {
   StyledInput,
   StyledInputButton,
   StyledInputContainer,
+  StyledInputError,
 } from 'Components/atoms/Input/Input.style';
-import Typography from 'Components/atoms/Typography/Typography';
 import { forwardRef, InputHTMLAttributes, Ref } from 'react';
 
 interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -16,12 +16,12 @@ const Input = ({ button, errorText, ...restProps }: IInputProps, ref: Ref<HTMLIn
     <StyledInputContainer>
       <StyledInput {...restProps} ref={ref} />
       <StyledInputButton>{button}</StyledInputButton>
+      {errorText && (
+        <StyledInputError variant='h5' color='red'>
+          {errorText}
+        </StyledInputError>
+      )}
     </StyledInputContainer>
-    {errorText && (
-      <Typography variant='h5' color='red'>
-        {errorText}
-      </Typography>
-    )}
   </>
 );
 
