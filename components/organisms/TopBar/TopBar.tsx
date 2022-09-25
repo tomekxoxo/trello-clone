@@ -16,7 +16,7 @@ interface ITopBarProps {
 const TobBar = ({ boardName }: ITopBarProps) => {
   const { route } = useRouter();
   const isBoardsPage = route === '/boards';
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   console.log(boardName);
   return (

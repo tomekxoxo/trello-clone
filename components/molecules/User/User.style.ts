@@ -7,7 +7,7 @@ export const StyledUser = styled.div`
   flex-shrink: 0;
   gap: 1.2rem;
   height: 3.2rem;
-  width: 3.2rem;
+  width: fit-content;
 
   > button {
     cursor: default;
