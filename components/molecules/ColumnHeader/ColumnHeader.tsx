@@ -1,9 +1,9 @@
 import Button from 'Components/atoms/Button/Button';
+import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
 import Icon from 'Components/atoms/Icon/Icon';
 import Popup from 'Components/atoms/Popup/Popup';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledColumnHeader } from 'Components/molecules/ColumnHeader/ColumnHeader.style';
-import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
 import { useState } from 'react';
 
 export interface IColumnHeaderProps {
@@ -44,7 +44,11 @@ const ColumnHeader = ({ status }: IColumnHeaderProps) => {
       >
         <>
           {ColumnOptions.map((option, index) => (
-            <VisibilityItem key={index} label={option.label} labelColor='gray3' />
+            <DropdownItem key={index}>
+              <Typography color='gray3' variant='h4'>
+                {option.label}
+              </Typography>
+            </DropdownItem>
           ))}
         </>
       </Popup>
