@@ -8,7 +8,7 @@ export const StyledInputContainer = styled.div`
 
 export const StyledInputButton = styled.div`
   position: absolute;
-  right: 2px;
+  right: 1px;
   top: 50%;
   transform: translateY(-50%);
 `;
