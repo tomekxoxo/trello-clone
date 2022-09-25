@@ -6,6 +6,7 @@ export const StyledVisibilityItem = styled(DropdownItem)`
   display: flex;
   flex-direction: column;
   padding: 0 0.8rem;
+  padding: 1.2rem;
 `;
 
 export const StyledVisibilityItemHeader = styled.header`
