@@ -92,9 +92,7 @@ const CardDetailsModal = ({ onCloseModal }: ICardDetailsModalProps) => {
                   accept='image/png, image/jpeg'
                   width='max-content'
                 >
-                  <Typography color='gray3' variant='h5'>
-                    Add file
-                  </Typography>
+                  Add file
                 </FileButton>
               }
             />

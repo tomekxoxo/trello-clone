@@ -1,6 +1,5 @@
 import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
 import Popup from 'Components/atoms/Popup/Popup';
-import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledInviteButton,
   StyledInviteUserPopup,
@@ -57,10 +56,8 @@ const InviteUserPopup = ({
             );
           })}
         </SearchDropdown>
-        <StyledInviteButton>
-          <Typography color='white' variant='h5'>
-            Invite
-          </Typography>
+        <StyledInviteButton color='white' variant='h5'>
+          Invite
         </StyledInviteButton>
       </StyledInviteUserPopup>
     </Popup>
