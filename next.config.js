@@ -13,7 +13,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  pageExtensions: ['page.tsx'],
+  pageExtensions: ['page.tsx', 'page.ts', 'api.ts'],
   experimental: {
     concurrentFeatures: true,
   },
