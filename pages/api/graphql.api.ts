@@ -1,23 +1,8 @@
-import { ApolloServer, gql } from 'apollo-server-micro';
+import { ApolloServer } from 'apollo-server-micro';
 import Cors from 'micro-cors';
 import { PageConfig } from 'next';
-
-const typeDefs = gql`
-  type Query {
-    getUsers: [User!]!
-  }
-  type User {
-    name: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    getUsers() {
-      return [{ name: 'Nextjs' }];
-    },
-  },
-};
+import { resolvers } from 'Pages/api/schema/resolver';
+import { typeDefs } from 'Pages/api/schema/type';
 
 const cors = Cors({
   allowCredentials: true,
