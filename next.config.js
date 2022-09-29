@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 
+const { withSentryConfig } = require('@sentry/nextjs');
+
 const nextConfig = {
   webpack(config) {
     config.module.rules.push({
@@ -20,6 +22,12 @@ const nextConfig = {
   images: {
     domains: ['images.pexels.com'],
   },
+  sentry: {
+    hideSourceMaps: true,
+    autoInstrumentServerFunctions: true,
+  },
 };
 
-module.exports = nextConfig;
+const sentryWebpackPluginOptions = { silent: true };
+
+module.exports = withSentryConfig(nextConfig, sentryWebpackPluginOptions);
