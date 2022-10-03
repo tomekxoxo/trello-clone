@@ -4,19 +4,17 @@ import jwt from 'jsonwebtoken';
 
 export const JWT_SECRET = process.env.JWT_SECRET as string;
 
-function getTokenPayload(token: string) {
-  return jwt.verify(token, JWT_SECRET, error => {
+const getTokenPayload = (token: string) =>
+  jwt.verify(token, JWT_SECRET, error => {
     if (error) {
       throw new AuthenticationError('Token expired, please login again');
     }
   });
-}
 
-export function signTokenPayload(userId: string) {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' });
-}
+export const signTokenPayload = (userId: string) =>
+  jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' });
 
-export function authenticate(req: MicroRequest) {
+export const authenticate = (req: MicroRequest) => {
   if (req) {
     const authHeader = req.headers.authorization;
     if (authHeader) {
@@ -29,4 +27,4 @@ export function authenticate(req: MicroRequest) {
   }
 
   throw new AuthenticationError('Not authenticated');
-}
+};
