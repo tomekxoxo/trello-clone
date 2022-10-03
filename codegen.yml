@@ -6,6 +6,8 @@ generates:
       - 'typescript'
       - 'typescript-resolvers'
       - 'typescript-mongodb'
+    config:
+      contextType: 'graphql/context#Context'
   ./graphql.schema.json:
     plugins:
       - 'introspection'
