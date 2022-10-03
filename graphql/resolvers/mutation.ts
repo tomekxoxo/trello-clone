@@ -1,8 +1,7 @@
 import bcrypt from 'bcryptjs';
-import { JWT_SECRET } from 'graphql/auth';
+import { signTokenPayload } from 'graphql/auth';
 import type { Context } from 'graphql/context';
 import type { MutationLoginArgs, MutationRegisterArgs, MutationResolvers } from 'graphql/typesGen';
-import jwt from 'jsonwebtoken';
 
 const register = async (_parent: unknown, args: MutationRegisterArgs, context: Context) => {
   const { user } = args;
@@ -11,7 +10,7 @@ const register = async (_parent: unknown, args: MutationRegisterArgs, context: C
 
   const createdUser = await context.prisma.user.create({ data: { ...user, password } });
 
-  const token = jwt.sign({ userId: createdUser.id }, JWT_SECRET, { expiresIn: '1h' });
+  const token = signTokenPayload(createdUser.id);
 
   return {
     token,
@@ -32,7 +31,7 @@ const login = async (_parent: unknown, args: MutationLoginArgs, context: Context
     throw new Error('Invalid password');
   }
 
-  const token = jwt.sign({ userId: foundUser.id }, JWT_SECRET, { expiresIn: '1h' });
+  const token = signTokenPayload(foundUser.id);
 
   return {
     token,

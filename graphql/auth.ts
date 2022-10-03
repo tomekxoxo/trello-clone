@@ -12,6 +12,10 @@ function getTokenPayload(token: string) {
   });
 }
 
+export function signTokenPayload(userId: string) {
+  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '1h' });
+}
+
 export function authenticate(req: MicroRequest) {
   if (req) {
     const authHeader = req.headers.authorization;
