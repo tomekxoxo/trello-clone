@@ -43,7 +43,6 @@
     "@graphql-codegen/cli": "2.13.1",
     "@graphql-codegen/introspection": "2.2.1",
     "@graphql-codegen/typescript": "2.7.3",
-    "@graphql-codegen/typescript-mongodb": "2.4.3",
     "@graphql-codegen/typescript-resolvers": "2.7.3",
     "@storybook/addon-actions": "^6.5.3",
     "@storybook/addon-essentials": "^6.5.3",
