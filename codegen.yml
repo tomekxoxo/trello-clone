@@ -1,11 +1,12 @@
 overwrite: true
 schema: 'http://localhost:3000/api/graphql'
 generates:
-  pages/api/typesGen.ts:
+  graphql/typesGen.ts:
     plugins:
       - 'typescript'
       - 'typescript-resolvers'
-      - 'typescript-mongodb'
+    config:
+      contextType: 'graphql/context#Context'
   ./graphql.schema.json:
     plugins:
       - 'introspection'

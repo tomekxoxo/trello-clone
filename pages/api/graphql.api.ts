@@ -1,15 +1,21 @@
 import { ApolloServer } from 'apollo-server-micro';
+import { createContext } from 'graphql/context';
+import resolvers from 'graphql/resolvers';
 import Cors from 'micro-cors';
 import { PageConfig } from 'next';
-import { resolvers } from 'Pages/api/schema/resolver';
-import { typeDefs } from 'Pages/api/schema/type';
+
+import { typeDefs } from '../../graphql/type';
 
 const cors = Cors({
   allowCredentials: true,
   origin: 'https://studio.apollographql.com',
 });
 
-const apolloServer = new ApolloServer({ resolvers, typeDefs });
+const apolloServer = new ApolloServer({
+  context: createContext,
+  resolvers,
+  typeDefs,
+});
 
 const startServer = apolloServer.start();
 
