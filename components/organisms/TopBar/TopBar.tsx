@@ -6,6 +6,7 @@ import AccountProfile from 'Components/molecules/AccountProfile/AccountProfile';
 import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 
 import { StyledTopBar, StyledTopBarSide } from './TopBar.style';
 
@@ -16,7 +17,9 @@ interface ITopBarProps {
 const TobBar = ({ boardName }: ITopBarProps) => {
   const { route } = useRouter();
   const isBoardsPage = route === '/boards';
-  const isAuthenticated = true;
+  const { data: session } = useSession();
+
+  const isAuthenticated = session?.user?.email;
 
   console.log(boardName);
   return (
