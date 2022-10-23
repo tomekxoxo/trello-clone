@@ -3,6 +3,8 @@ import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import Card from 'Components/molecules/Card/Card';
 import AddBoardModal from 'Components/organisms/AddBoardModal/AddBoardModal';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import { StyledBoards, StyledBoardsHeader, StyledBoardsList } from 'Pages/boards/index.style';
 import { useState } from 'react';
 
@@ -167,6 +169,23 @@ const Boards = () => {
       {isModalOpen && <AddBoardModal closeModal={closeModal} />}
     </StyledBoards>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 };
 
 export default Boards;

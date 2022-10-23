@@ -5,6 +5,8 @@ import User from 'Components/molecules/User/User';
 import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import MenuSidebar from 'Components/organisms/MenuSidebar/MenuSidebar';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
+import { GetServerSideProps } from 'next';
+import { getSession } from 'next-auth/react';
 import {
   StyledBoard,
   StyledBoardNavigation,
@@ -61,6 +63,23 @@ const Index = () => {
       <WorkBoard />
     </StyledBoard>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: { session },
+  };
 };
 
 export default Index;
