@@ -7,10 +7,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@unique([provider, providerAccountId])
+}
 model User {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  email     String @unique
-  firstName String
-  lastName  String
-  password  String
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  origin        Origin @default(GOOGLE) 
+}
+enum Origin {
+  LOCAL
+  GOOGLE
+
 }
