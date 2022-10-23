@@ -7,6 +7,7 @@ export type IconNameType =
   | 'image'
   | 'lock'
   | 'logo'
+  | 'google'
   | 'panorama'
   | 'plus'
   | 'xmark'
