@@ -29,11 +29,28 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
+  password      String? 
   accounts      Account[]
   origin        Origin @default(GOOGLE) 
 }
+// model Board {
+//   id        String  @id @default(auto()) @map("_id") @db.ObjectId
+//   name      String
+//   owner     User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+//   ownerId   String
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+//   image     String?
+//   visibility Visibility @default(PUBLIC)
+//   users 
+//   columns   Column[]
+//   tasks     Task[]
+// }
 enum Origin {
   LOCAL
   GOOGLE
-
 }
+// enum Visibility {
+//   PUBLIC
+//   PRIVATE
+// }
