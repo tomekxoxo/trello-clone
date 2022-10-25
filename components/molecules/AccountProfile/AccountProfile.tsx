@@ -9,17 +9,17 @@ import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 const AccountProfile = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+
+  console.log(session, status);
 
   const userName = session?.user?.name;
   const image = session?.user?.image;
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: '/' });
+    await signOut({ callbackUrl: '/login' });
   };
-
-  console.log(useSession());
 
   return (
     <StyledAccountProfile>
