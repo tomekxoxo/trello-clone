@@ -3,12 +3,12 @@ import {
   StyledVisibilityItem,
   StyledVisibilityItemHeader,
 } from 'Components/molecules/VisibilityItem/VisibilityItem.style';
-import { ThemeColorsType } from 'Utils/theme';
+import { ThemeColors } from 'Utils/theme';
 
-interface IVisibilityItemProps {
+interface VisibilityItemProps {
   icon: JSX.Element;
   label: string;
-  labelColor?: ThemeColorsType;
+  labelColor?: ThemeColors;
   description: string;
   onChoose: (params: { description: string; icon: JSX.Element; label: string }) => void;
 }
@@ -19,7 +19,7 @@ const VisibilityItem = ({
   description,
   onChoose,
   labelColor = 'gray2',
-}: IVisibilityItemProps) => {
+}: VisibilityItemProps) => {
   const handleOnChoose = () => {
     onChoose({
       description,

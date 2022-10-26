@@ -1,14 +1,14 @@
 import { StyledLabel } from 'Components/atoms/Label/Label.style';
 import Typography from 'Components/atoms/Typography/Typography';
 import { useTheme } from 'styled-components';
-import { ThemeColorsType } from 'Utils/theme';
+import { ThemeColors } from 'Utils/theme';
 
-export interface ILabelProps {
+export interface LabelProps {
   name: string;
-  color: ThemeColorsType;
+  color: ThemeColors;
 }
 
-const Label = ({ name, color = 'brightYellow' }: ILabelProps) => {
+const Label = ({ name, color = 'brightYellow' }: LabelProps) => {
   const { colors } = useTheme();
 
   return (

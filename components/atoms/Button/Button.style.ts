@@ -1,7 +1,7 @@
-import { IconPositionType } from 'Components/atoms/Button/Button';
+import { IconPosition } from 'Components/atoms/Button/Button';
 import styled, { css } from 'styled-components';
 
-interface IStyledButtonProps {
+interface StyledButtonProps {
   backgroundColor: string;
   width: string;
   borderColor: string;
@@ -21,18 +21,18 @@ export const SharedButtonStyles = css`
   width: fit-content;
 `;
 
-export const StyledButton = styled.button<IStyledButtonProps>`
+export const StyledButton = styled.button<StyledButtonProps>`
   ${SharedButtonStyles}
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-color: ${({ borderColor }) => borderColor};
   width: ${({ width }) => width};
 `;
 
-interface IStyledButtonIconProps {
-  iconPosition: IconPositionType;
+interface StyledButtonIconProps {
+  iconPosition: IconPosition;
 }
 
-export const StyledButtonIcon = styled.div<IStyledButtonIconProps>`
+export const StyledButtonIcon = styled.div<StyledButtonIconProps>`
   align-items: center;
   display: flex;
   order: ${({ iconPosition }) => (iconPosition === 'left' ? 0 : 1)};

@@ -11,11 +11,11 @@ import {
 } from 'Components/organisms/AddBoardModal/AddBoardModal.style';
 import { useState } from 'react';
 
-interface IAddBoardModalProps {
+interface AddBoardModalProps {
   closeModal: () => void;
 }
 
-const AddBoardModal = ({ closeModal }: IAddBoardModalProps) => {
+const AddBoardModal = ({ closeModal }: AddBoardModalProps) => {
   const [cover, setCover] = useState('/panorama.svg');
 
   return (

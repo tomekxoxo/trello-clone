@@ -1,11 +1,11 @@
 import Button from 'Components/atoms/Button/Button';
 import styled from 'styled-components';
 
-interface IStyledModalWrapperContentProps {
+interface StyledModalWrapperContentProps {
   width: string;
 }
 
-export const StyledModalWrapperContent = styled.div<IStyledModalWrapperContentProps>`
+export const StyledModalWrapperContent = styled.div<StyledModalWrapperContentProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 0.8rem;
   box-shadow: 0px 15px 7px -10px rgba(30, 30, 30, 0.1), 0px 10px 40px -5px rgba(30, 30, 30, 0.07);

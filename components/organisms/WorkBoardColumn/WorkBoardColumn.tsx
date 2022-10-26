@@ -1,5 +1,5 @@
 import AddAnotherButton from 'Components/molecules/AddAnotherButton/AddAnotherButton';
-import Card, { ICardProps } from 'Components/molecules/Card/Card';
+import Card, { CardProps } from 'Components/molecules/Card/Card';
 import ColumnHeader from 'Components/molecules/ColumnHeader/ColumnHeader';
 import Multiline from 'Components/molecules/Multiline/Multiline';
 import {
@@ -10,14 +10,14 @@ import {
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
-export interface IWorkBoardColumnProps {
+export interface WorkBoardColumnProps {
   status: string;
   cards: any;
   setCards: Dispatch<SetStateAction<any>>;
   cardIds: number[];
 }
 
-const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
+const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
   const [isMultilineOpen, setIsMultilineOpen] = useState(false);
 
   return (
@@ -31,7 +31,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: IWorkBoardColumnProps) => {
             isHovered={snapshot.isDraggingOver}
           >
             {cardIds
-              .map(cardId => cards?.find((card: ICardProps) => card.id === cardId))
+              .map(cardId => cards?.find((card: CardProps) => card.id === cardId))
               .map((card, index) => {
                 if (!card) return;
                 return (

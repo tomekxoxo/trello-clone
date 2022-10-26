@@ -1,12 +1,12 @@
-import Button, { IButtonProps } from 'Components/atoms/Button/Button';
+import Button, { ButtonProps } from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import { StyledAddAnotherButtonWrapper } from 'Components/molecules/AddAnotherButton/AddAnotherButton.style';
 
-interface IAddAnotherButtonProps extends IButtonProps {
+interface AddAnotherButtonProps extends ButtonProps {
   text: string;
 }
 
-const AddAnotherButton = ({ text, ...restProps }: IAddAnotherButtonProps) => (
+const AddAnotherButton = ({ text, ...restProps }: AddAnotherButtonProps) => (
   <StyledAddAnotherButtonWrapper>
     <Button
       {...restProps}

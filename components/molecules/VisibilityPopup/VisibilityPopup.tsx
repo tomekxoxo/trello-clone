@@ -21,12 +21,12 @@ const boardVisibilities = [
   },
 ];
 
-export interface IVisibilityPopupProps {
+export interface VisibilityPopupProps {
   attachmentSide?: 'left' | 'right';
   buttonWidth?: string;
 }
 
-const VisibilityPopup = ({ attachmentSide = 'left', buttonWidth }: IVisibilityPopupProps) => {
+const VisibilityPopup = ({ attachmentSide = 'left', buttonWidth }: VisibilityPopupProps) => {
   const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
   const [chosenOption, setChosenOption] = useState(boardVisibilities[0]);
 

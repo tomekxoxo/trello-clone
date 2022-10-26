@@ -1,12 +1,12 @@
-import { OrientationType } from 'Components/atoms/Separator/Separator';
+import { Orientation } from 'Components/atoms/Separator/Separator';
 import styled from 'styled-components';
 
-interface IStyledSeparatorProps {
+interface StyledSeparatorProps {
   color: string;
-  orientation: OrientationType;
+  orientation: Orientation;
 }
 
-export const StyledSeparator = styled.hr<IStyledSeparatorProps>`
+export const StyledSeparator = styled.hr<StyledSeparatorProps>`
   border: 1px solid ${({ color }) => color};
   height: ${({ orientation }) => (orientation === 'horizontal' ? '0' : '100%')};
   width: ${({ orientation }) => (orientation === 'horizontal' ? '100%' : '0')};

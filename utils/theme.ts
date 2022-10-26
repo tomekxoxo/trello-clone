@@ -1,7 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
-export type ThemeColorsType = keyof typeof colors;
-export type DefaultThemeColorsType = typeof colors;
+export type ThemeColors = keyof typeof colors;
+export type DefaultThemeColors = typeof colors;
 
 export const colors = {
   blue1: 'rgba(47, 128, 237, 1)',

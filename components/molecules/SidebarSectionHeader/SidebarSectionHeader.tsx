@@ -1,12 +1,12 @@
-import Icon, { IconNameType } from 'Components/atoms/Icon/Icon';
+import Icon, { IconName } from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledSidebarSectionHeader } from 'Components/molecules/SidebarSectionHeader/SidebarSectionHeader.style';
 
-interface ISidebarSectionHeaderProps {
+interface SidebarSectionHeaderProps {
   title: string;
   description?: string;
   button?: JSX.Element;
-  iconName?: IconNameType;
+  iconName?: IconName;
 }
 
 const SidebarSectionHeader = ({
@@ -14,7 +14,7 @@ const SidebarSectionHeader = ({
   description,
   iconName,
   button,
-}: ISidebarSectionHeaderProps) => (
+}: SidebarSectionHeaderProps) => (
   <StyledSidebarSectionHeader>
     {iconName && <Icon name={iconName} color='gray4' size='10' />}
     <Typography color='gray4' weight='600' variant='h5'>

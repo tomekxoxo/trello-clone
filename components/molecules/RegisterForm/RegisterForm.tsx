@@ -9,10 +9,10 @@ import { schema } from 'Components/molecules/RegisterForm/validation';
 import useAuth from 'Hooks/useAuth';
 import * as yup from 'yup';
 
-type SchemaType = yup.InferType<typeof schema>;
+type Schema = yup.InferType<typeof schema>;
 
 const RegisterForm = () => {
-  const { changeAuthType, errors, handleSubmit, onSubmit, register } = useAuth<SchemaType>({
+  const { changeAuth, errors, handleSubmit, onSubmit, register } = useAuth<Schema>({
     changeTo: 'login',
     schema,
   });
@@ -40,7 +40,7 @@ const RegisterForm = () => {
         <Button variant='h5' type='submit'>
           Submit
         </Button>
-        <Button color='dark' variant='h5' backgroundColor='transparent' onClick={changeAuthType}>
+        <Button color='dark' variant='h5' backgroundColor='transparent' onClick={changeAuth}>
           Login
         </Button>
       </StyledAuthButtons>

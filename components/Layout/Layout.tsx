@@ -26,11 +26,11 @@ ${css`
   }
 `}`;
 
-interface ILayoutProps {
+interface LayoutProps {
   children: JSX.Element;
 }
 
-const Layout = ({ children }: ILayoutProps) => (
+const Layout = ({ children }: LayoutProps) => (
   <ThemeProvider theme={theme}>
     <GlobalStyle />
     <TopBar />

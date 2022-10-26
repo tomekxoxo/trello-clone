@@ -18,7 +18,7 @@ export async function createContext({
 }: {
   req: MicroRequest;
   res: ServerResponse;
-}): Context {
+}): Promise<Context> {
   const session = await getSession({ req });
 
   return { prisma, req, res, session };

@@ -6,13 +6,13 @@ import {
 } from 'Components/atoms/Modal/Modal.style';
 import Modal from 'react-modal';
 
-interface IModalWrapperProps {
+interface ModalWrapperProps {
   children: JSX.Element;
   closeModal: () => void;
   width: string;
 }
 
-const ModalWrapper = ({ children, closeModal, width }: IModalWrapperProps) => (
+const ModalWrapper = ({ children, closeModal, width }: ModalWrapperProps) => (
   <Modal
     shouldCloseOnOverlayClick={false}
     isOpen={true}

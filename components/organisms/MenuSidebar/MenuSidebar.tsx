@@ -19,11 +19,11 @@ const membersMock = [
   { isAdmin: false, userImage: '', userName: 'Michał Mostowiak' },
 ];
 
-interface IMenuSidebarProps {
+interface MenuSidebarProps {
   closeSidebar: () => void;
 }
 
-const MenuSidebar = ({ closeSidebar }: IMenuSidebarProps) => {
+const MenuSidebar = ({ closeSidebar }: MenuSidebarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, closeSidebar);
 

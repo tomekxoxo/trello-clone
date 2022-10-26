@@ -7,11 +7,11 @@ import { StyledAuthButtons, StyledLoginForm } from 'Components/molecules/LoginFo
 import useAuth from 'Hooks/useAuth';
 import { InferType } from 'yup';
 
-export type LoginSchemaType = InferType<typeof loginSchema>;
+export type LoginSchema = InferType<typeof loginSchema>;
 
 const LoginForm = () => {
-  const { changeAuthType, handleGoogleSignIn, errors, handleSubmit, onSubmit, register } =
-    useAuth<LoginSchemaType>({
+  const { changeAuth, handleGoogleSignIn, errors, handleSubmit, onSubmit, register } =
+    useAuth<LoginSchema>({
       changeTo: 'register',
       schema: loginSchema,
     });
@@ -32,7 +32,7 @@ const LoginForm = () => {
         <Button variant='h5' type='submit'>
           Submit
         </Button>
-        <Button color='dark' variant='h5' backgroundColor='transparent' onClick={changeAuthType}>
+        <Button color='dark' variant='h5' backgroundColor='transparent' onClick={changeAuth}>
           Register
         </Button>
       </StyledAuthButtons>

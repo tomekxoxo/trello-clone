@@ -2,13 +2,13 @@ import Button from 'Components/atoms/Button/Button';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledUser, StyledUserImage } from 'Components/molecules/User/User.style';
 
-export interface IUserProps {
+export interface UserProps {
   image?: string;
   name: string;
   withName?: boolean;
 }
 
-const User = ({ image, name, withName = false }: IUserProps) => {
+const User = ({ image, name, withName = false }: UserProps) => {
   const userInitals = name
     .split(' ')
     .map(name => name[0])

@@ -1,12 +1,12 @@
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledPopupHeader } from 'Components/molecules/PopupHeader/PopupHeader.style';
 
-interface IPopupHeaderProps {
+interface PopupHeaderProps {
   label: string;
   description: string;
 }
 
-const PopupHeader = ({ label, description }: IPopupHeaderProps) => (
+const PopupHeader = ({ label, description }: PopupHeaderProps) => (
   <StyledPopupHeader>
     <Typography variant='h4' color='gray2' weight='600'>
       {label}

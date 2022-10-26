@@ -11,7 +11,7 @@ import {
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 
-export interface IPhotoSrc {
+export interface PhotoSrc {
   original: string;
   large2x: string;
   large: string;
@@ -22,7 +22,7 @@ export interface IPhotoSrc {
   tiny: string;
 }
 
-export interface IPhoto {
+export interface Photo {
   id: number;
   width: number;
   height: number;
@@ -31,19 +31,19 @@ export interface IPhoto {
   photographer_url: string;
   photographer_id: number;
   avg_color: string;
-  src: IPhotoSrc;
+  src: PhotoSrc;
   liked: boolean;
   alt: string;
 }
 
-interface ICoverPopupProps {
+interface CoverPopupProps {
   setCover: Dispatch<SetStateAction<string>>;
   attachmentSide?: 'left' | 'right';
 }
 
-const CoverPopup = ({ setCover, attachmentSide = 'left' }: ICoverPopupProps) => {
+const CoverPopup = ({ setCover, attachmentSide = 'left' }: CoverPopupProps) => {
   const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
-  const [photos, setPhotos] = useState<IPhoto[]>([]);
+  const [photos, setPhotos] = useState<Photo[]>([]);
   const [inputValue, setInputValue] = useState('');
 
   const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);

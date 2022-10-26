@@ -10,11 +10,11 @@ import { useSession } from 'next-auth/react';
 
 import { StyledTopBar, StyledTopBarSide } from './TopBar.style';
 
-interface ITopBarProps {
+interface TopBarProps {
   boardName?: string;
 }
 
-const TobBar = ({ boardName }: ITopBarProps) => {
+const TobBar = ({ boardName }: TopBarProps) => {
   const { route } = useRouter();
   const isBoardsPage = route === '/';
   const { data: session } = useSession();

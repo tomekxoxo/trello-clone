@@ -2,12 +2,12 @@ import { SharedButtonStyles } from 'Components/atoms/Button/Button.style';
 import Input from 'Components/atoms/Input/Input';
 import styled from 'styled-components';
 
-interface IStyledFileButtonProps {
+interface StyledFileButtonProps {
   backgroundColor: string;
   width: string;
 }
 
-export const StyledFileButton = styled.label<IStyledFileButtonProps>`
+export const StyledFileButton = styled.label<StyledFileButtonProps>`
   ${SharedButtonStyles};
   background-color: ${({ backgroundColor }) => backgroundColor};
   border-color: ${({ theme }) => theme.colors.transparent};

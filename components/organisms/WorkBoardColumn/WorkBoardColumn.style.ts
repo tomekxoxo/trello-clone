@@ -5,11 +5,11 @@ export const StyledWorkBoardColumn = styled.div`
   flex-direction: column;
 `;
 
-interface IStyledWorkBoardContentProps {
+interface StyledWorkBoardContentProps {
   isHovered: boolean;
 }
 
-export const StyledWorkBoardContent = styled.div<IStyledWorkBoardContentProps>`
+export const StyledWorkBoardContent = styled.div<StyledWorkBoardContentProps>`
   background-color: ${({ isHovered, theme }) => isHovered && theme.colors.blue2};
   border: 0.2rem dashed
     ${({ isHovered, theme }) => (isHovered ? theme.colors.blue1 : 'transparent')};

@@ -11,11 +11,11 @@ import SidebarSectionHeader from 'Components/molecules/SidebarSectionHeader/Side
 import User from 'Components/molecules/User/User';
 import { useState } from 'react';
 
-interface ICommentProps {
+interface CommentProps {
   comment: string;
 }
 
-const Comment = ({ comment }: ICommentProps) => {
+const Comment = ({ comment }: CommentProps) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const editComment = () => setIsEdit(true);

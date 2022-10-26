@@ -1,20 +1,20 @@
 import { StyledButton, StyledButtonIcon } from 'Components/atoms/Button/Button.style';
-import Typography, { VariantType } from 'Components/atoms/Typography/Typography';
+import Typography, { Variant } from 'Components/atoms/Typography/Typography';
 import { ButtonHTMLAttributes } from 'react';
 import { useTheme } from 'styled-components';
-import { ThemeColorsType } from 'Utils/theme';
+import { ThemeColors } from 'Utils/theme';
 
-export type IconPositionType = 'left' | 'right';
+export type IconPosition = 'left' | 'right';
 
-export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  backgroundColor?: ThemeColorsType;
-  color?: ThemeColorsType;
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  backgroundColor?: ThemeColors;
+  color?: ThemeColors;
   icon?: JSX.Element;
-  iconPosition?: IconPositionType;
+  iconPosition?: IconPosition;
   width?: string;
-  borderColor?: ThemeColorsType;
+  borderColor?: ThemeColors;
   children?: string;
-  variant?: VariantType;
+  variant?: Variant;
 }
 
 const Button = ({
@@ -28,7 +28,7 @@ const Button = ({
   width = 'fit-content',
   type = 'button',
   ...restProps
-}: IButtonProps) => {
+}: ButtonProps) => {
   const { colors } = useTheme();
 
   return (
