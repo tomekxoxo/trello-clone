@@ -6,14 +6,14 @@ import { StyledSearchDropdown } from 'Components/molecules/SearchDropdown/Search
 import useClickOutside from 'Hooks/useClickOutside';
 import { useRef } from 'react';
 
-interface ISearchDropdownProps {
+interface SearchDropdownProps {
   children: JSX.Element[];
   placeholder?: string;
   isOpen: boolean;
   closeDropdown: () => void;
 }
 
-const SearchDropdown = ({ isOpen, children, placeholder, closeDropdown }: ISearchDropdownProps) => {
+const SearchDropdown = ({ isOpen, children, placeholder, closeDropdown }: SearchDropdownProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, closeDropdown);
 

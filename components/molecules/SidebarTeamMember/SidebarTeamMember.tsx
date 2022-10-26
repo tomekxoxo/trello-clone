@@ -3,7 +3,7 @@ import Typography from 'Components/atoms/Typography/Typography';
 import { StyledSidebarTeamMember } from 'Components/molecules/SidebarTeamMember/SidebarTeamMember.style';
 import User from 'Components/molecules/User/User';
 
-interface ISidebarTeamMemberProps {
+interface SidebarTeamMemberProps {
   userImage?: string;
   userName: string;
   isAdmin?: boolean;
@@ -15,7 +15,7 @@ const SidebarTeamMember = ({
   userName,
   isAdmin,
   removeMember,
-}: ISidebarTeamMemberProps) => (
+}: SidebarTeamMemberProps) => (
   <StyledSidebarTeamMember>
     <User name={userName} image={userImage} withName />
     {isAdmin ? (

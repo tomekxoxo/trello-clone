@@ -5,7 +5,7 @@ import { produce } from 'immer';
 import { useEffect, useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
-export interface IWorkBoardProps {
+export interface WorkBoardProps {
   data?: string[];
 }
 
@@ -94,7 +94,7 @@ const columnsMock = [
   { cardIds: [], status: 'done' },
 ];
 
-const WorkBoard = ({ data }: IWorkBoardProps) => {
+const WorkBoard = ({ data }: WorkBoardProps) => {
   const [cards, setCards] = useState(cardsMock);
   const [columns, setCloumns] = useState(columnsMock);
   const columnsCount = columns.length + 1;

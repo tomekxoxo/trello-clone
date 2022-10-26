@@ -10,4 +10,4 @@ export const schema = yup
   })
   .concat(registerSchema);
 
-export type SchemaType = yup.InferType<typeof schema>;
+export type Schema = yup.InferType<typeof schema>;

@@ -1,14 +1,14 @@
 import { StyledTypography } from 'Components/atoms/Typography/Typography.style';
 import { useTheme } from 'styled-components';
-import { ThemeColorsType } from 'Utils/theme';
+import { ThemeColors } from 'Utils/theme';
 
-export type VariantType = 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
-export type WeightType = '700' | '600' | '500' | '400';
+export type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5';
+export type Weight = '700' | '600' | '500' | '400';
 
-interface ITypographyProps {
-  variant?: VariantType;
-  color?: ThemeColorsType;
-  weight?: WeightType;
+interface TypographyProps {
+  variant?: Variant;
+  color?: ThemeColors;
+  weight?: Weight;
   children: string;
 }
 
@@ -18,7 +18,7 @@ const Typography = ({
   weight = '500',
   children,
   ...restProps
-}: ITypographyProps) => {
+}: TypographyProps) => {
   const { colors } = useTheme();
 
   return (

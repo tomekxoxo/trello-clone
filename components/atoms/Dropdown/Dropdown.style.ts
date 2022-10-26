@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-interface IStyledDropdownContentProps {
+interface StyledDropdownContentProps {
   attachmentSide: 'left' | 'right';
   width: string;
 }
@@ -9,7 +9,7 @@ export const StyledDropdown = styled.div`
   position: relative;
 `;
 
-export const StyledDropdownContent = styled.div<IStyledDropdownContentProps>`
+export const StyledDropdownContent = styled.div<StyledDropdownContentProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border: 0.1rem solid ${({ theme }) => theme.colors.gray5};
   border-radius: 1.2rem;

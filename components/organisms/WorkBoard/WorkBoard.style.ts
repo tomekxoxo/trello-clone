@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-interface IStyledWorkBoardProps {
+interface StyledWorkBoardProps {
   columnsCount: number;
 }
 
-export const StyledWorkBoard = styled.div<IStyledWorkBoardProps>`
+export const StyledWorkBoard = styled.div<StyledWorkBoardProps>`
   background-color: ${({ theme }) => theme.colors.boardColor};
   border-radius: 1.2rem;
   display: grid;

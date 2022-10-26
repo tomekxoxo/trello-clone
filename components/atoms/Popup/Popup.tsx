@@ -2,7 +2,7 @@ import { StyledPopup, StyledPopupContent } from 'Components/atoms/Popup/Popup.st
 import useClickOutside from 'Hooks/useClickOutside';
 import { useRef } from 'react';
 
-export interface IPopupProps {
+export interface PopupProps {
   anchor: JSX.Element;
   children: JSX.Element;
   attachmentSide?: 'left' | 'right';
@@ -17,7 +17,7 @@ const Popup = ({
   isOpen,
   children,
   ...restProps
-}: IPopupProps) => {
+}: PopupProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, closePopup);
 

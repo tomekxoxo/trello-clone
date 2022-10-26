@@ -6,19 +6,19 @@ import {
 } from 'Components/molecules/Multiline/Multiline.style';
 import useClickOutside from 'Hooks/useClickOutside';
 import { ChangeEvent, MouseEvent, TextareaHTMLAttributes, useRef, useState } from 'react';
-import { ThemeColorsType } from 'Utils/theme';
+import { ThemeColors } from 'Utils/theme';
 
-interface IMultilineProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface MultilineProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   submitButtonText?: string;
   secondButtonText?: string;
   height?: string;
   defaultValue: string;
   onSubmitButtonClick: (value: string) => void;
   onSecondButtonClick?: () => void;
-  firstButtonColor?: ThemeColorsType;
-  firstButtonTextColor?: ThemeColorsType;
-  secondButtonColor?: ThemeColorsType;
-  secondButtonTextColor?: ThemeColorsType;
+  firstButtonColor?: ThemeColors;
+  firstButtonTextColor?: ThemeColors;
+  secondButtonColor?: ThemeColors;
+  secondButtonTextColor?: ThemeColors;
   justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
 }
 
@@ -35,7 +35,7 @@ const Multiline = ({
   firstButtonColor = 'green1',
   secondButtonTextColor = 'gray3',
   ...restProps
-}: IMultilineProps) => {
+}: MultilineProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [innerValue, setInnerValue] = useState(defaultValue);
 

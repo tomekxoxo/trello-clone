@@ -1,13 +1,13 @@
-import Icon, { IconNameType } from 'Components/atoms/Icon/Icon';
+import Icon, { IconName } from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledItemCounter } from 'Components/molecules/ItemCounter/ItemCounter.style';
 
-interface IItemCounterProps {
-  icon: IconNameType;
+interface ItemCounterProps {
+  icon: IconName;
   count: number;
 }
 
-const ItemCounter = ({ icon, count }: IItemCounterProps) => (
+const ItemCounter = ({ icon, count }: ItemCounterProps) => (
   <StyledItemCounter>
     <Icon name={icon} color='gray4' />
     <Typography variant='h5' color='gray4'>

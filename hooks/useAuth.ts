@@ -20,7 +20,7 @@ const REGISTER = gql`
   }
 `;
 
-function useAuth<InputsType extends FieldValues>({
+function useAuth<Inputs extends FieldValues>({
   schema,
   changeTo,
 }: {
@@ -31,7 +31,7 @@ function useAuth<InputsType extends FieldValues>({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<InputsType>({
+  } = useForm<Inputs>({
     resolver: yupResolver(schema),
   });
 
@@ -39,9 +39,9 @@ function useAuth<InputsType extends FieldValues>({
 
   const [registerMutation] = useMutation(REGISTER);
 
-  const changeAuthType = () => router.push(changeTo);
+  const changeAuth = () => router.push(changeTo);
 
-  const handleLogin = async (data: InputsType) => {
+  const handleLogin = async (data: Inputs) => {
     await signIn('credentials', {
       ...data,
       redirect: false,
@@ -51,7 +51,7 @@ function useAuth<InputsType extends FieldValues>({
     });
   };
 
-  const onSubmit = async (data: InputsType) => {
+  const onSubmit = async (data: Inputs) => {
     if (changeTo === 'register') {
       handleLogin(data);
     } else {
@@ -69,7 +69,7 @@ function useAuth<InputsType extends FieldValues>({
   const handleGoogleSignIn = async () => await signIn('google', { callbackUrl: '/' });
 
   return {
-    changeAuthType,
+    changeAuth,
     errors,
     handleGoogleSignIn,
     handleSubmit,

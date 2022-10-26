@@ -8,13 +8,13 @@ import {
 } from 'Components/molecules/Attachment/Attachment.style';
 import { useState } from 'react';
 
-export interface IAttachmentProps {
+export interface AttachmentProps {
   date: string;
   title: string;
   image?: null | string;
 }
 
-const Attachment = ({ date, title, image = null }: IAttachmentProps) => {
+const Attachment = ({ date, title, image = null }: AttachmentProps) => {
   const [file] = useState(image || '/panorama.svg');
 
   const handleDownload = () => {

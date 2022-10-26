@@ -1,7 +1,7 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
-import Label, { ILabelProps } from 'Components/atoms/Label/Label';
+import Label, { LabelProps } from 'Components/atoms/Label/Label';
 import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledCard,
@@ -10,15 +10,15 @@ import {
   StyledCardUsers,
 } from 'Components/molecules/Card/Card.style';
 import ItemCounter from 'Components/molecules/ItemCounter/ItemCounter';
-import User, { IUserProps } from 'Components/molecules/User/User';
+import User, { UserProps } from 'Components/molecules/User/User';
 import CardDetailsModal from 'Components/organisms/CardDetailsModal/CardDetailsModal';
 import { ForwardedRef, forwardRef, useState } from 'react';
 
-export interface ICardProps {
+export interface CardProps {
   image?: string;
   title: string;
-  labels?: ILabelProps[];
-  users?: IUserProps[];
+  labels?: LabelProps[];
+  users?: UserProps[];
   canAddUser?: boolean;
   attachmentsCount?: number;
   messagesCount?: number;
@@ -36,7 +36,7 @@ const Card = (
     labels,
     canAddUser,
     ...restProps
-  }: ICardProps,
+  }: CardProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
   console.log(id);

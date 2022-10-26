@@ -6,7 +6,7 @@ import {
 import useClickOutside from 'Hooks/useClickOutside';
 import { useRef } from 'react';
 
-interface IDropdownProps {
+interface DropdownProps {
   anchor: JSX.Element;
   attachmentSide?: 'left' | 'right';
   isOpen: boolean;
@@ -22,7 +22,7 @@ const Dropdown = ({
   closeDropdown,
   attachmentSide = 'left',
   width = '100%',
-}: IDropdownProps) => {
+}: DropdownProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, closeDropdown);
 

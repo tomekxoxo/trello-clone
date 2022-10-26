@@ -24,7 +24,7 @@ const resultsMock = [
   { name: 'Boris Johnson' },
 ];
 
-interface IInviteUserPopupProps {
+interface InviteUserPopupProps {
   attachmentSide?: 'left' | 'right';
   isOpen: boolean;
   closePopup: () => void;
@@ -36,7 +36,7 @@ const InviteUserPopup = ({
   attachmentSide = 'left',
   closePopup,
   isOpen,
-}: IInviteUserPopupProps) => {
+}: InviteUserPopupProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
 
   return (

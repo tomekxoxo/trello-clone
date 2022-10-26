@@ -1,10 +1,10 @@
-import { VariantType, WeightType } from 'Components/atoms/Typography/Typography';
+import { Variant, Weight } from 'Components/atoms/Typography/Typography';
 import styled from 'styled-components';
 
-interface IStyledTypographyProps {
+interface StyledTypographyProps {
   color: string;
-  variant: VariantType;
-  weight: WeightType;
+  variant: Variant;
+  weight: Weight;
 }
 
 const variantMapping = {
@@ -30,7 +30,7 @@ const variantMapping = {
   },
 };
 
-export const StyledTypography = styled.span<IStyledTypographyProps>`
+export const StyledTypography = styled.span<StyledTypographyProps>`
   color: ${({ color }) => color};
   font-size: ${({ variant }) => variantMapping[variant].fontSize};
   font-weight: ${({ weight }) => weight};

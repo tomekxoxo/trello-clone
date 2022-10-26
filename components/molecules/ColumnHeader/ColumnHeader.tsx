@@ -6,7 +6,7 @@ import Typography from 'Components/atoms/Typography/Typography';
 import { StyledColumnHeader } from 'Components/molecules/ColumnHeader/ColumnHeader.style';
 import { useState } from 'react';
 
-export interface IColumnHeaderProps {
+export interface ColumnHeaderProps {
   status: string;
 }
 
@@ -19,7 +19,7 @@ const ColumnOptions = [
   },
 ];
 
-const ColumnHeader = ({ status }: IColumnHeaderProps) => {
+const ColumnHeader = ({ status }: ColumnHeaderProps) => {
   const [isOptionsDropdownOpen, setIsOptionsDropdownOpen] = useState(false);
 
   const handleVisibilityDropdownOpen = () => setIsOptionsDropdownOpen(prevState => !prevState);

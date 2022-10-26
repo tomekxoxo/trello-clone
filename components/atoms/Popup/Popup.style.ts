@@ -4,11 +4,11 @@ export const StyledPopup = styled.div`
   position: relative;
 `;
 
-interface IStyledPopupContentProps {
+interface StyledPopupContentProps {
   attachmentSide: 'left' | 'right';
 }
 
-export const StyledPopupContent = styled.div<IStyledPopupContentProps>`
+export const StyledPopupContent = styled.div<StyledPopupContentProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border: 0.1rem solid ${({ theme }) => theme.colors.gray5};
   border-radius: 1.2rem;

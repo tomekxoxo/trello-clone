@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-interface IStyledMultilineContainerProps {
+interface StyledMultilineContainerProps {
   isEditMode: boolean;
   height: string;
 }
 
-export const StyledMultilineContainer = styled.div<IStyledMultilineContainerProps>`
+export const StyledMultilineContainer = styled.div<StyledMultilineContainerProps>`
   background-color: ${({ theme }) => theme.colors.white};
   border: 0.1rem solid ${({ theme }) => theme.colors.gray5};
   border-radius: 1.2rem;
@@ -30,11 +30,11 @@ export const StyledMultiline = styled.textarea`
   }
 `;
 
-interface IStyledMultilineButtonsProps {
+interface StyledMultilineButtonsProps {
   justifyContent: string;
 }
 
-export const StyledMultilineButtons = styled.div<IStyledMultilineButtonsProps>`
+export const StyledMultilineButtons = styled.div<StyledMultilineButtonsProps>`
   bottom: 1.2rem;
   display: flex;
   gap: 1.2rem;

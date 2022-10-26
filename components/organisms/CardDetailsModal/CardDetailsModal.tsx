@@ -18,7 +18,7 @@ import {
 } from 'Components/organisms/CardDetailsModal/CardDetailsModal.style';
 import { useState } from 'react';
 
-export interface ICardDetailsModalProps {
+export interface CardDetailsModalProps {
   onCloseModal: () => void;
 }
 
@@ -56,7 +56,7 @@ const commentsMock = [
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet',
 ];
 
-const CardDetailsModal = ({ onCloseModal }: ICardDetailsModalProps) => {
+const CardDetailsModal = ({ onCloseModal }: CardDetailsModalProps) => {
   const [cover, setCover] = useState('/wayne-bishop-7YUW7fvIYoQ-unsplash.jpg');
 
   return (

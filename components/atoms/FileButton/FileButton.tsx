@@ -1,4 +1,4 @@
-import { IButtonProps } from 'Components/atoms/Button/Button';
+import { ButtonProps } from 'Components/atoms/Button/Button';
 import {
   StyledFileButton,
   StyledFileButtonIcon,
@@ -7,7 +7,7 @@ import {
 import { ChangeEvent, Dispatch, SetStateAction } from 'react';
 import { useTheme } from 'styled-components';
 
-interface IFileButtonProps extends IButtonProps {
+interface FileButtonProps extends ButtonProps {
   setFile: Dispatch<SetStateAction<string>>;
   accept?: string;
 }
@@ -19,7 +19,7 @@ const FileButton = ({
   accept = '',
   icon,
   width = 'fit-content',
-}: IFileButtonProps) => {
+}: FileButtonProps) => {
   const loadImage = (event: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
     let image = null;

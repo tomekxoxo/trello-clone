@@ -2,7 +2,7 @@ import { Severity } from 'Hooks/useSnackbar';
 import styled from 'styled-components';
 import { colors } from 'Utils/theme';
 
-interface IStyledSnackbarProps {
+interface StyledSnackbarProps {
   severity: Severity;
 }
 
@@ -13,7 +13,7 @@ const mapSeverityToColor = {
   warning: colors.orange,
 };
 
-export const StyledSnackbar = styled.div<IStyledSnackbarProps>`
+export const StyledSnackbar = styled.div<StyledSnackbarProps>`
   align-items: center;
   align-items: center;
   background-color: ${({ severity }) => mapSeverityToColor[severity]};

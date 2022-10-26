@@ -1,8 +1,8 @@
 import { lazy, memo, Suspense } from 'react';
 import { useTheme } from 'styled-components';
-import { ThemeColorsType } from 'Utils/theme';
+import { ThemeColors } from 'Utils/theme';
 
-export type IconNameType =
+export type IconName =
   | 'chevron'
   | 'image'
   | 'lock'
@@ -26,14 +26,14 @@ export type IconNameType =
   | 'triangle-exclamation'
   | 'magnifying-glass';
 
-interface IIconProps {
-  color?: ThemeColorsType;
-  name: IconNameType;
+interface IconProps {
+  color?: ThemeColors;
+  name: IconName;
   size?: string;
   onClick?: () => void;
 }
 
-const Icon = ({ name, color = 'blue1', size = '16', onClick, ...props }: IIconProps) => {
+const Icon = ({ name, color = 'blue1', size = '16', onClick, ...props }: IconProps) => {
   const { colors } = useTheme();
 
   const Component = lazy(() =>

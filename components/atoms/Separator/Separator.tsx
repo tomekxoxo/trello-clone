@@ -1,15 +1,15 @@
 import { StyledSeparator } from 'Components/atoms/Separator/Separator.style';
 import { useTheme } from 'styled-components';
-import { ThemeColorsType } from 'Utils/theme';
+import { ThemeColors } from 'Utils/theme';
 
-export type OrientationType = 'vertical' | 'horizontal';
+export type Orientation = 'vertical' | 'horizontal';
 
-interface ISeparatorProps {
-  orientation?: OrientationType;
-  color?: ThemeColorsType;
+interface SeparatorProps {
+  orientation?: Orientation;
+  color?: ThemeColors;
 }
 
-const Separator = ({ orientation = 'vertical', color = 'gray5' }: ISeparatorProps) => {
+const Separator = ({ orientation = 'vertical', color = 'gray5' }: SeparatorProps) => {
   const { colors } = useTheme();
 
   return <StyledSeparator color={colors[color]} orientation={orientation} />;
