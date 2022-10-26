@@ -1,8 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from 'Components/atoms/Button/Button';
+import Icon from 'Components/atoms/Icon/Icon';
 import Input from 'Components/atoms/Input/Input';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledAuthButtons, StyledAuthForm } from 'Components/molecules/AuthForm/AuthForm.style';
+import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
@@ -25,7 +27,7 @@ const AuthForm = () => {
     reset,
     formState: { errors },
   } = useForm<SchemaType>({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(schema),
   });
 
   const [authType, setAuthType] = useState<AuthTypeType>('login');
@@ -39,8 +41,18 @@ const AuthForm = () => {
     reset();
   };
 
-  const onSubmit = (data: SchemaType) => {
-    console.log(data);
+  const onSubmit = async (data: SchemaType) => {
+    await signIn('credentials', {
+      callbackUrl: '/boards',
+      email: data.email,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      password: data.password,
+    });
+  };
+
+  const handleSignIn = async () => {
+    await signIn('google', { callbackUrl: '/boards' });
   };
 
   return (
@@ -53,32 +65,21 @@ const AuthForm = () => {
           <Input
             placeholder='First name'
             errorText={errors.firstName?.message}
-            {...register('firstName', {
-              required: true,
-            })}
+            {...register('firstName')}
           />
           <Input
             placeholder='Last name'
             errorText={errors.lastName?.message}
-            {...register('lastName', {
-              required: true,
-            })}
+            {...register('lastName')}
           />
         </>
       )}
-      <Input
-        placeholder='Email'
-        errorText={errors.email?.message}
-        {...register('email', {
-          required: true,
-        })}
-      />
+      <Input placeholder='Email' errorText={errors.email?.message} {...register('email')} />
       <Input
         placeholder='Pasword'
         errorText={errors.password?.message}
-        {...register('password', {
-          required: true,
-        })}
+        {...register('password')}
+        type='password'
       />
       <StyledAuthButtons>
         <Button variant='h5' type='submit'>
@@ -88,6 +89,9 @@ const AuthForm = () => {
           {optionButtonText}
         </Button>
       </StyledAuthButtons>
+      <Button variant='h5' icon={<Icon name='google' color='white' />} onClick={handleSignIn}>
+        Continue with Google
+      </Button>
     </StyledAuthForm>
   );
 };

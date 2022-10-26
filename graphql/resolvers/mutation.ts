@@ -1,42 +1,40 @@
 import bcrypt from 'bcryptjs';
-import { signTokenPayload } from 'graphql/auth';
+import { registerSchema } from 'common/validations';
 import type { Context } from 'graphql/context';
-import type { MutationLoginArgs, MutationRegisterArgs, MutationResolvers } from 'graphql/typesGen';
+import { MutationRegisterArgs, MutationResolvers } from 'graphql/typesGen';
 
 const register = async (_parent: unknown, args: MutationRegisterArgs, context: Context) => {
-  const { user } = args;
+  const { credentials } = args;
+  const { email, password, name } = credentials;
 
-  const password = await bcrypt.hash(user.password, 10);
+  await registerSchema.validate({ email, name, password });
 
-  const createdUser = await context.prisma.user.create({ data: { ...user, password } });
+  const foundUser = await context.prisma.user.findFirst({
+    where: {
+      AND: [
+        {
+          email,
+        },
+        {
+          origin: 'LOCAL',
+        },
+      ],
+    },
+  });
 
-  const token = signTokenPayload(createdUser.id);
+  if (foundUser) throw new Error('User already exists');
 
-  return {
-    token,
-    user: createdUser,
-  };
+  const hashedPassword = await bcrypt.hash(password, 10);
+  const user = await context.prisma.user.create({
+    data: {
+      email,
+      name,
+      origin: 'LOCAL',
+      password: hashedPassword,
+    },
+  });
+
+  return user;
 };
 
-const login = async (_parent: unknown, args: MutationLoginArgs, context: Context) => {
-  const { user } = args;
-
-  const foundUser = await context.prisma.user.findUnique({ where: { email: user.email } });
-  if (!foundUser) {
-    throw new Error('No such user found');
-  }
-
-  const valid = await bcrypt.compare(user.password, foundUser.password);
-  if (!valid) {
-    throw new Error('Invalid password');
-  }
-
-  const token = signTokenPayload(foundUser.id);
-
-  return {
-    token,
-    user: foundUser,
-  };
-};
-
-export const mutation: MutationResolvers = { login, register };
+export const mutation: MutationResolvers = { register };
