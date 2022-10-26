@@ -8,7 +8,7 @@ import { useRouter } from 'next/router';
 const BoardNavigation = () => {
   const router = useRouter();
 
-  const goToBoards = () => router.push('/boards');
+  const goToBoards = () => router.push('/');
 
   return (
     <StyledBoardNavigation>

@@ -1,5 +1,8 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import NextAuth, { NextAuthOptions } from 'next-auth';
+import bcrypt from 'bcryptjs';
+import { loginSchema } from 'common/validations';
+import NextAuth from 'next-auth';
+import { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -25,6 +28,14 @@ const cookiesPolicy =
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    session: async ({ session, token }) => {
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
+      }
+      return session;
+    },
+  },
   cookies: cookiesPolicy,
   providers: [
     GoogleProvider({
@@ -32,24 +43,37 @@ export const authOptions: NextAuthOptions = {
       clientSecret,
     }),
     CredentialsProvider({
-      async authorize(credentials: {
-        email: string;
-        password: string;
-        firstName: string;
-        lastName: string;
-      }) {
-        const { email, password, firstName, lastName } = credentials;
-        const user = await prisma.user.findUnique({
+      async authorize(credentials) {
+        if (credentials === undefined) return null;
+        const { email, password } = credentials;
+
+        const foundUser = await prisma.user.findFirst({
           where: {
-            email,
+            AND: [
+              {
+                email,
+              },
+              {
+                origin: 'LOCAL',
+              },
+            ],
           },
         });
 
-        if (!user) {
-          throw new Error('No user found');
+        if (foundUser && foundUser.password) {
+          await loginSchema.validate({ email, password });
+          const isPasswordValid = await bcrypt.compare(password, foundUser.password);
+          if (!isPasswordValid) throw new Error('Invalid password');
+          return foundUser;
         }
 
-        return user;
+        throw new Error('User not found');
+      },
+      credentials: {
+        email: {
+          type: 'email',
+        },
+        password: { type: 'password' },
       },
       type: 'credentials',
     }),

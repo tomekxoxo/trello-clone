@@ -16,12 +16,12 @@ interface ITopBarProps {
 
 const TobBar = ({ boardName }: ITopBarProps) => {
   const { route } = useRouter();
-  const isBoardsPage = route === '/boards';
+  const isBoardsPage = route === '/';
   const { data: session } = useSession();
 
   const isAuthenticated = session?.user?.email;
 
-  console.log(boardName);
+  console.log(boardName, isAuthenticated);
   return (
     <StyledTopBar>
       <StyledTopBarSide>
