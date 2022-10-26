@@ -20,6 +20,10 @@ export type IconNameType =
   | 'file-lines'
   | 'calendar'
   | 'pen'
+  | 'exclamation'
+  | 'circle-check'
+  | 'circle-exclamation'
+  | 'triangle-exclamation'
   | 'magnifying-glass';
 
 interface IIconProps {

@@ -1,5 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
+import useSnackbar from 'Hooks/useSnackbar';
 import router from 'next/router';
 import { signIn } from 'next-auth/react';
 import { FieldValues, useForm } from 'react-hook-form';
@@ -34,22 +35,19 @@ function useAuth<InputsType extends FieldValues>({
     resolver: yupResolver(schema),
   });
 
+  const showSnackbar = useSnackbar(state => state.showSnackbar);
+
   const [registerMutation] = useMutation(REGISTER);
 
-  const changeAuthType = () => {
-    router.push(changeTo);
-  };
+  const changeAuthType = () => router.push(changeTo);
 
   const handleLogin = async (data: InputsType) => {
     await signIn('credentials', {
       ...data,
       redirect: false,
     }).then(res => {
-      if (res?.ok) {
-        router.push('/');
-      } else {
-        console.log('Credentials do not match!', res?.error);
-      }
+      if (res?.ok) router.push('/');
+      if (res?.error) showSnackbar(res.error, 'error');
     });
   };
 
@@ -60,9 +58,7 @@ function useAuth<InputsType extends FieldValues>({
       const credentials = { email: data.email, name: data.name, password: data.password };
       await registerMutation({
         onCompleted: () => router.push('/login'),
-        onError: err => {
-          console.log(err);
-        },
+        onError: err => showSnackbar(err.message, 'error'),
         variables: {
           credentials,
         },
@@ -70,9 +66,7 @@ function useAuth<InputsType extends FieldValues>({
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    await signIn('google', { callbackUrl: '/' });
-  };
+  const handleGoogleSignIn = async () => await signIn('google', { callbackUrl: '/' });
 
   return {
     changeAuthType,
