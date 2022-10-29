@@ -7,7 +7,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import type { AnyObjectSchema } from 'yup';
 
 const REGISTER = gql`
-  mutation Register($credentials: registerInput!) {
+  mutation Register($credentials: RegisterInput!) {
     register(credentials: $credentials) {
       id
       name
