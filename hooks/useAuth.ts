@@ -13,7 +13,6 @@ const REGISTER = gql`
       name
       email
       emailVerified
-      password
       image
       origin
     }

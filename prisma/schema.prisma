@@ -20,37 +20,23 @@ model Account {
   scope             String?
   id_token          String? @db.String
   session_state     String?
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@unique([provider, providerAccountId])
 }
+
 model User {
   id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  password      String? 
+  password      String?
   accounts      Account[]
-  origin        Origin @default(GOOGLE) 
+  origin        Origin    @default(GOOGLE)
 }
-// model Board {
-//   id        String  @id @default(auto()) @map("_id") @db.ObjectId
-//   name      String
-//   owner     User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-//   ownerId   String
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   image     String?
-//   visibility Visibility @default(PUBLIC)
-//   users 
-//   columns   Column[]
-//   tasks     Task[]
-// }
+
 enum Origin {
   LOCAL
   GOOGLE
 }
-// enum Visibility {
-//   PUBLIC
-//   PRIVATE
-// }

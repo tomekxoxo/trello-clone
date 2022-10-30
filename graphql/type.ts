@@ -6,12 +6,11 @@ export const typeDefs = gql`
     name: String!
     email: String!
     emailVerified: String
-    password: String
     image: String
     origin: String!
   }
 
-  input registerInput {
+  input RegisterInput {
     name: String!
     email: String!
     password: String!
@@ -22,6 +21,6 @@ export const typeDefs = gql`
   }
 
   type Mutation {
-    register(credentials: registerInput!): User!
+    register(credentials: RegisterInput!): User!
   }
 `;
