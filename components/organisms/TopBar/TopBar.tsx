@@ -19,18 +19,18 @@ const TobBar = ({ boardName }: TopBarProps) => {
   const isBoardsPage = route === '/';
   const { data: session } = useSession();
 
-  const isAuthenticated = session?.user?.email;
+  const authenticate = session?.user?.email;
 
-  console.log(boardName, isAuthenticated);
+  console.log(boardName, authenticate);
   return (
     <StyledTopBar>
       <StyledTopBarSide>
         <Link href='/'>
           <Image src='/logo.svg' alt='Application Logo' width={98} height={34} />
         </Link>
-        {!isBoardsPage && isAuthenticated && <BoardNavigation />}
+        {!isBoardsPage && authenticate && <BoardNavigation />}
       </StyledTopBarSide>
-      {isAuthenticated && (
+      {authenticate && (
         <StyledTopBarSide>
           <Input
             placeholder='Filter cards'

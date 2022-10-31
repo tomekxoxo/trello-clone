@@ -30,7 +30,7 @@ const Snackbar = () => {
 
   return (
     <StyledSnackbar severity={severity}>
-      <Icon name={getIcon()} color='white' />;
+      <Icon name={getIcon()} color='white' />
       <Typography variant='h4' color='white'>
         {message}
       </Typography>

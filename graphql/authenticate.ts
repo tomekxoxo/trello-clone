@@ -1,10 +1,9 @@
 import { GraphQLError } from 'graphql';
 import type { Context } from 'graphql/context';
-import { getSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 
-export const isAuthenticated = async (context: Context) => {
-  const { req } = context;
-  const session = await getSession({ req });
+export const authenticate = async (context: Context): Promise<{ session: Session }> => {
+  const { session } = context;
 
   if (!session) {
     throw new GraphQLError('User is not authenticated', {
@@ -15,5 +14,5 @@ export const isAuthenticated = async (context: Context) => {
     });
   }
 
-  return;
+  return { session };
 };
