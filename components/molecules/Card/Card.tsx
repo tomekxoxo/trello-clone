@@ -53,7 +53,9 @@ const Card = (
   return (
     <>
       <StyledCard onClick={handleCardClick} ref={ref} {...restProps}>
-        {image && <Image width={219} height={130} src={image} alt='restaurant image' />}
+        {image && (
+          <Image width={219} height={130} src={image} alt='restaurant image' objectFit='cover' />
+        )}
         <Typography variant='h2' color='dark'>
           {title}
         </Typography>
