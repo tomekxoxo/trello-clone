@@ -13,11 +13,10 @@
     "prisma-push": "prisma db push",
     "prisma-studio": "prisma studio",
     "prisma-generate": "prisma generate --watch",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config --watch codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
-    "@graphql-codegen/cli": "^2.13.1",
     "@hookform/resolvers": "^2.9.8",
     "@next-auth/prisma-adapter": "^1.0.5",
     "@prisma/client": "^4.4.0",
@@ -45,9 +44,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.0",
-    "@graphql-codegen/cli": "2.13.1",
+    "@graphql-codegen/cli": "2.13.8",
+    "@graphql-codegen/client-preset": "^1.1.2",
+    "@graphql-codegen/import-types-preset": "^2.2.6",
     "@graphql-codegen/introspection": "2.2.1",
     "@graphql-codegen/typescript": "2.7.3",
+    "@graphql-codegen/typescript-operations": "^2.5.5",
+    "@graphql-codegen/typescript-react-apollo": "^3.3.6",
     "@graphql-codegen/typescript-resolvers": "2.7.3",
     "@storybook/addon-actions": "^6.5.3",
     "@storybook/addon-essentials": "^6.5.3",

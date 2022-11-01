@@ -102,11 +102,13 @@ export const typeDefs = gql`
   input BoardInput {
     name: String!
     image: String
+    description: String
     visibility: Visiblity!
   }
 
   type Query {
     users: [User]!
+    boards: [Board]!
   }
 
   type Mutation {

@@ -1,0 +1,12 @@
+query Boards {
+  boards {
+    name
+    id
+    ownerId
+    image
+    users {
+      name
+      image
+    }
+  }
+}
