@@ -5,7 +5,9 @@ import User from 'Components/molecules/User/User';
 import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import MenuSidebar from 'Components/organisms/MenuSidebar/MenuSidebar';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
+import useVisibilityPopup from 'Hooks/useVisibilityPopup';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import {
   StyledBoard,
@@ -27,11 +29,18 @@ const Index = () => {
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const [isShowMenuSidebarOpen, setIsShowMenuSidebarOpen] = useState(false);
 
+  const { chosenOption, setChosenOption } = useVisibilityPopup();
+
+  const router = useRouter();
+  const { id } = router.query;
+
+  console.log('tomasz', id);
+
   return (
     <StyledBoard>
       <StyledBoardNavigation>
         <StyledBoardNavigationUsers>
-          <VisibilityPopup />
+          <VisibilityPopup chosenOption={chosenOption} setChosenOption={setChosenOption} />
           {users.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
           ))}
