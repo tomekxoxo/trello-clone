@@ -1,38 +1,45 @@
 import Button from 'Components/atoms/Button/Button';
-import Icon from 'Components/atoms/Icon/Icon';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
 import {
   StyledVisibilityPopup,
   StyledVisibilityPopupContent,
 } from 'Components/molecules/VisibilityPopup/VisibilityPopup.style';
-import { useState } from 'react';
-
-const boardVisibilities = [
-  {
-    description: 'Anyone on the internet can see this.',
-    icon: <Icon name='earth' color='gray2' size='12' />,
-    label: 'Public',
-  },
-  {
-    description: 'Only board members can see this',
-    icon: <Icon name='lock' color='gray2' size='12' />,
-    label: 'Private',
-  },
-];
+import { Visiblity } from 'graphql/generated/types';
+import useVisibilityPopup from 'Hooks/useVisibilityPopup';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 export interface VisibilityPopupProps {
   attachmentSide?: 'left' | 'right';
   buttonWidth?: string;
+  chosenOption: {
+    description: string;
+    icon: JSX.Element;
+    label: string;
+    value: Visiblity;
+  };
+  setChosenOption: Dispatch<
+    SetStateAction<{
+      description: string;
+      icon: JSX.Element;
+      label: string;
+      value: Visiblity;
+    }>
+  >;
 }
 
-const VisibilityPopup = ({ attachmentSide = 'left', buttonWidth }: VisibilityPopupProps) => {
+const VisibilityPopup = ({
+  attachmentSide = 'left',
+  buttonWidth,
+  setChosenOption,
+  chosenOption,
+}: VisibilityPopupProps) => {
   const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
-  const [chosenOption, setChosenOption] = useState(boardVisibilities[0]);
+  const { boardVisibilities } = useVisibilityPopup();
 
   const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);
 
-  const handleOnChoose = (params: { description: string; icon: JSX.Element; label: string }) => {
+  const handleOnChoose = (params: typeof chosenOption) => {
     setChosenOption(params);
     handleVisibilityDropdownOpen();
   };
@@ -62,6 +69,7 @@ const VisibilityPopup = ({ attachmentSide = 'left', buttonWidth }: VisibilityPop
             key={index}
             icon={option.icon}
             label={option.label}
+            value={option.value}
             description={option.description}
             onChoose={handleOnChoose}
           />

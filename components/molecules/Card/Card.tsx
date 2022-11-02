@@ -15,19 +15,19 @@ import CardDetailsModal from 'Components/organisms/CardDetailsModal/CardDetailsM
 import { ForwardedRef, forwardRef, useState } from 'react';
 
 export interface CardProps {
-  image?: string;
+  image?: string | null;
   title: string;
   labels?: LabelProps[];
   users?: UserProps[];
   canAddUser?: boolean;
   attachmentsCount?: number;
   messagesCount?: number;
-  id: number;
+  id: string;
 }
 
 const Card = (
   {
-    image,
+    image = '/panorama.svg',
     id,
     title,
     users,
@@ -59,11 +59,13 @@ const Card = (
         <Typography variant='h2' color='dark'>
           {title}
         </Typography>
-        <StyledCardLabels>
-          {labels?.map(label => (
-            <Label key={label.name} name={label.name} color='blue2' />
-          ))}
-        </StyledCardLabels>
+        {!!labels?.length && (
+          <StyledCardLabels>
+            {labels.map(label => (
+              <Label key={label.name} name={label.name} color='blue2' />
+            ))}
+          </StyledCardLabels>
+        )}
         <StyledCardUsers>
           {usersToShow?.map((user, index) => (
             <User key={index} image={user.image} name={user.name} />
@@ -77,10 +79,12 @@ const Card = (
             <Button icon={<Icon name='plus' size='12' color='white' />} iconPosition='right' />
           )}
         </StyledCardUsers>
-        <StyledCardActions>
-          {attachmentsCount && <ItemCounter icon='paperclip' count={2} />}
-          {messagesCount && <ItemCounter icon='message' count={5} />}
-        </StyledCardActions>
+        {(attachmentsCount || messagesCount) && (
+          <StyledCardActions>
+            {attachmentsCount && <ItemCounter icon='paperclip' count={2} />}
+            {messagesCount && <ItemCounter icon='message' count={5} />}
+          </StyledCardActions>
+        )}
       </StyledCard>
       {isDetailsModalOpen && <CardDetailsModal onCloseModal={handleCardClick} />}
     </>
