@@ -2,6 +2,7 @@ import AddAnotherButton from 'Components/molecules/AddAnotherButton/AddAnotherBu
 import Card, { CardProps } from 'Components/molecules/Card/Card';
 import ColumnHeader from 'Components/molecules/ColumnHeader/ColumnHeader';
 import Multiline from 'Components/molecules/Multiline/Multiline';
+import CardDetailsModal from 'Components/organisms/CardDetailsModal/CardDetailsModal';
 import {
   StyledWorkBoardColumn,
   StyledWorkBoardContent,
@@ -19,6 +20,7 @@ export interface WorkBoardColumnProps {
 
 const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
   const [isMultilineOpen, setIsMultilineOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
   return (
     <StyledWorkBoardColumn>
@@ -50,6 +52,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
                         messagesCount={card.messagesCount}
                         attachmentsCount={card.attachmentsCount}
                         canAddUser
+                        onClick={() => setIsDetailsModalOpen(true)}
                       />
                     )}
                   </Draggable>
@@ -72,6 +75,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
           />
         </StyledWorkBoardMultilineWrapper>
       )}
+      {isDetailsModalOpen && <CardDetailsModal onCloseModal={() => setIsDetailsModalOpen(false)} />}
       <AddAnotherButton
         text='Add another card'
         onClick={() => setIsMultilineOpen(prevState => !prevState)}

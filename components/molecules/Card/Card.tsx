@@ -11,8 +11,7 @@ import {
 } from 'Components/molecules/Card/Card.style';
 import ItemCounter from 'Components/molecules/ItemCounter/ItemCounter';
 import User, { UserProps } from 'Components/molecules/User/User';
-import CardDetailsModal from 'Components/organisms/CardDetailsModal/CardDetailsModal';
-import { ForwardedRef, forwardRef, useState } from 'react';
+import { ForwardedRef, forwardRef } from 'react';
 
 export interface CardProps {
   image?: string | null;
@@ -23,6 +22,7 @@ export interface CardProps {
   attachmentsCount?: number;
   messagesCount?: number;
   id: string;
+  onClick: () => void;
 }
 
 const Card = (
@@ -35,12 +35,12 @@ const Card = (
     messagesCount,
     labels,
     canAddUser,
+    onClick,
     ...restProps
   }: CardProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
   console.log(id);
-  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
   const maxUsers = canAddUser ? 2 : 3;
   const usersToShow = users?.slice(0, maxUsers);
@@ -48,11 +48,9 @@ const Card = (
   const hasAnyHiddenUsers = hiddenUsers && hiddenUsers > 0;
   const hiddenUsersInfo = hasAnyHiddenUsers ? `+ ${hiddenUsers} others` : '';
 
-  const handleCardClick = () => setIsDetailsModalOpen(prevState => !prevState);
-
   return (
     <>
-      <StyledCard onClick={handleCardClick} ref={ref} {...restProps}>
+      <StyledCard onClick={onClick} ref={ref} {...restProps}>
         {image && (
           <Image width={219} height={130} src={image} alt='restaurant image' objectFit='cover' />
         )}
@@ -86,7 +84,6 @@ const Card = (
           </StyledCardActions>
         )}
       </StyledCard>
-      {isDetailsModalOpen && <CardDetailsModal onCloseModal={handleCardClick} />}
     </>
   );
 };
