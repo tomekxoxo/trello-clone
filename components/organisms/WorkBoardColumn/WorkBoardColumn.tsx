@@ -33,7 +33,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
             isHovered={snapshot.isDraggingOver}
           >
             {cardIds
-              .map(cardId => cards?.find((card: CardProps) => card.id === cardId))
+              .map(cardId => cards?.find((card: CardProps) => +card.id === cardId))
               .map((card, index) => {
                 if (!card) return;
                 return (
