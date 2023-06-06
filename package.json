@@ -13,7 +13,8 @@
     "prisma-push": "prisma db push",
     "prisma-studio": "prisma studio",
     "prisma-generate": "prisma generate --watch",
-    "codegen": "graphql-codegen --config --watch codegen.ts"
+    "codegen": "graphql-codegen --config --watch codegen.ts",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@apollo/client": "^3.7.0",
