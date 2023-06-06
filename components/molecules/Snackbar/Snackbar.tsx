@@ -10,9 +10,11 @@ const Snackbar = () => {
   const severity = useSnackbar(state => state.severity);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       clearSnackbar();
     }, 5000);
+
+    return () => clearTimeout(timeout);
   }, [clearSnackbar]);
 
   const getIcon = () => {
