@@ -60,7 +60,7 @@
     "@storybook/manager-webpack5": "^6.5.16",
     "@storybook/react": "^7.0.18",
     "@storybook/testing-library": "^0.1.0",
-    "@testing-library/react": "^12.1.4",
+    "@testing-library/react": "^14.0.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/micro-cors": "^0.1.2",
     "@types/node": "17.0.21",
