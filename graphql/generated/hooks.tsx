@@ -58,7 +58,7 @@ export type AddBoardMutationOptions = Apollo.BaseMutationOptions<
   Types.AddBoardMutationVariables
 >;
 export const BoardDocument = gql`
-  query Board($boardId: String!) {
+  query Board($boardId: ID!) {
     board(id: $boardId) {
       id
       image
@@ -101,7 +101,7 @@ export type BoardQueryHookResult = ReturnType<typeof useBoardQuery>;
 export type BoardLazyQueryHookResult = ReturnType<typeof useBoardLazyQuery>;
 export type BoardQueryResult = Apollo.QueryResult<Types.BoardQuery, Types.BoardQueryVariables>;
 export const BoardUsersDocument = gql`
-  query BoardUsers($boardUsersId: String!) {
+  query BoardUsers($boardUsersId: ID!) {
     boardUsers(id: $boardUsersId) {
       id
       name
@@ -198,3 +198,55 @@ export function useBoardsLazyQuery(
 export type BoardsQueryHookResult = ReturnType<typeof useBoardsQuery>;
 export type BoardsLazyQueryHookResult = ReturnType<typeof useBoardsLazyQuery>;
 export type BoardsQueryResult = Apollo.QueryResult<Types.BoardsQuery, Types.BoardsQueryVariables>;
+export const ChangeBoardVisibilityDocument = gql`
+  mutation ChangeBoardVisibility($visbility: VisibilityInput!) {
+    changeBoardVisibility(visbility: $visbility) {
+      name
+      visibility
+      id
+    }
+  }
+`;
+export type ChangeBoardVisibilityMutationFn = Apollo.MutationFunction<
+  Types.ChangeBoardVisibilityMutation,
+  Types.ChangeBoardVisibilityMutationVariables
+>;
+
+/**
+ * __useChangeBoardVisibilityMutation__
+ *
+ * To run a mutation, you first call `useChangeBoardVisibilityMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useChangeBoardVisibilityMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [changeBoardVisibilityMutation, { data, loading, error }] = useChangeBoardVisibilityMutation({
+ *   variables: {
+ *      visbility: // value for 'visbility'
+ *   },
+ * });
+ */
+export function useChangeBoardVisibilityMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.ChangeBoardVisibilityMutation,
+    Types.ChangeBoardVisibilityMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.ChangeBoardVisibilityMutation,
+    Types.ChangeBoardVisibilityMutationVariables
+  >(ChangeBoardVisibilityDocument, options);
+}
+export type ChangeBoardVisibilityMutationHookResult = ReturnType<
+  typeof useChangeBoardVisibilityMutation
+>;
+export type ChangeBoardVisibilityMutationResult =
+  Apollo.MutationResult<Types.ChangeBoardVisibilityMutation>;
+export type ChangeBoardVisibilityMutationOptions = Apollo.BaseMutationOptions<
+  Types.ChangeBoardVisibilityMutation,
+  Types.ChangeBoardVisibilityMutationVariables
+>;

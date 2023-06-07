@@ -68,11 +68,16 @@ export type Label = {
 export type Mutation = {
   __typename?: 'Mutation';
   addBoard: Board;
+  changeBoardVisibility: Board;
   register: User;
 };
 
 export type MutationAddBoardArgs = {
   board: BoardInput;
+};
+
+export type MutationChangeBoardVisibilityArgs = {
+  visbility: VisibilityInput;
 };
 
 export type MutationRegisterArgs = {
@@ -93,11 +98,11 @@ export type Query = {
 };
 
 export type QueryBoardArgs = {
-  id: Scalars['String'];
+  id: Scalars['ID'];
 };
 
 export type QueryBoardUsersArgs = {
-  id: Scalars['String'];
+  id: Scalars['ID'];
 };
 
 export type RegisterInput = {
@@ -152,3 +157,8 @@ export enum Visibility {
   private = 'PRIVATE',
   public = 'PUBLIC',
 }
+
+export type VisibilityInput = {
+  id: Scalars['ID'];
+  visibility: Visibility;
+};

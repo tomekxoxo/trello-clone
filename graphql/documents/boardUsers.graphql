@@ -1,4 +1,4 @@
-query BoardUsers($boardUsersId: String!) {
+query BoardUsers($boardUsersId: ID!) {
   boardUsers(id: $boardUsersId) {
     id
     name

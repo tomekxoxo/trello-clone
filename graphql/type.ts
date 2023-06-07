@@ -106,15 +106,21 @@ export const typeDefs = gql`
     visibility: Visibility!
   }
 
+  input VisibilityInput {
+    id: ID!
+    visibility: Visibility!
+  }
+
   type Query {
     users: [User]!
-    boardUsers(id: String!): [User]!
-    board(id: String!): Board!
+    boardUsers(id: ID!): [User]!
+    board(id: ID!): Board!
     boards: [Board]!
   }
 
   type Mutation {
     register(credentials: RegisterInput!): User!
     addBoard(board: BoardInput!): Board!
+    changeBoardVisibility(visbility: VisibilityInput!): Board!
   }
 `;

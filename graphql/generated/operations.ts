@@ -16,7 +16,7 @@ export type AddBoardMutation = {
 };
 
 export type BoardQueryVariables = Types.Exact<{
-  boardId: Types.Scalars['String'];
+  boardId: Types.Scalars['ID'];
 }>;
 
 export type BoardQuery = {
@@ -32,7 +32,7 @@ export type BoardQuery = {
 };
 
 export type BoardUsersQueryVariables = Types.Exact<{
-  boardUsersId: Types.Scalars['String'];
+  boardUsersId: Types.Scalars['ID'];
 }>;
 
 export type BoardUsersQuery = {
@@ -57,4 +57,18 @@ export type BoardsQuery = {
     image?: string | null;
     users: Array<{ __typename?: 'User'; name: string; image?: string | null } | null>;
   } | null>;
+};
+
+export type ChangeBoardVisibilityMutationVariables = Types.Exact<{
+  visbility: Types.VisibilityInput;
+}>;
+
+export type ChangeBoardVisibilityMutation = {
+  __typename?: 'Mutation';
+  changeBoardVisibility: {
+    __typename?: 'Board';
+    name: string;
+    visibility: Types.Visibility;
+    id: string;
+  };
 };

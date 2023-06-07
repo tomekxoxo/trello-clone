@@ -1,7 +1,6 @@
-import * as Types from 'graphql/generated/types';
-
 import { GraphQLResolveInfo } from 'graphql';
 import { Context } from 'graphql/context';
+import * as Types from 'graphql/generated/types';
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -104,6 +103,7 @@ export type ResolversTypes = {
   Task: ResolverTypeWrapper<Types.Task>;
   User: ResolverTypeWrapper<Types.User>;
   Visibility: Types.Visibility;
+  VisibilityInput: Types.VisibilityInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -121,6 +121,7 @@ export type ResolversParentTypes = {
   String: Types.Scalars['String'];
   Task: Types.Task;
   User: Types.User;
+  VisibilityInput: Types.VisibilityInput;
 };
 
 export type BoardResolvers<
@@ -198,6 +199,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<Types.MutationAddBoardArgs, 'board'>
+  >;
+  changeBoardVisibility?: Resolver<
+    ResolversTypes['Board'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationChangeBoardVisibilityArgs, 'visbility'>
   >;
   register?: Resolver<
     ResolversTypes['User'],

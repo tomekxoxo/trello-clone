@@ -1,5 +1,4 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Visibility } from '@prisma/client';
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
@@ -14,6 +13,7 @@ import {
 } from 'Components/organisms/AddBoardModal/AddBoardModal.style';
 import { Schema, schema } from 'Components/organisms/AddBoardModal/validation';
 import { useAddBoardMutation } from 'graphql/generated/hooks';
+import { Visibility } from 'graphql/generated/types';
 import useVisibilityPopup from 'Hooks/useVisibilityPopup';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -25,7 +25,7 @@ interface AddBoardModalProps {
 const AddBoardModal = ({ closeModal }: AddBoardModalProps) => {
   const [cover, setCover] = useState('/panorama.svg');
   const [addBoardMutation] = useAddBoardMutation();
-  const { chosenOption, setChosenOption } = useVisibilityPopup(Visibility.PUBLIC);
+  const { chosenOption, setChosenOption } = useVisibilityPopup(Visibility.public);
 
   const {
     register,
@@ -43,7 +43,7 @@ const AddBoardModal = ({ closeModal }: AddBoardModalProps) => {
           description: data.boardDescription,
           image: cover,
           name: data.boardName,
-          visibility: chosenOption?.value || Visibility.PUBLIC,
+          visibility: chosenOption?.value || Visibility.public,
         },
       },
     });

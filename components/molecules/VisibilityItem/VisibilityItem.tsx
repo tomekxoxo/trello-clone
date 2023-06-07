@@ -1,9 +1,9 @@
-import { Visibility } from '@prisma/client';
 import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledVisibilityItem,
   StyledVisibilityItemHeader,
 } from 'Components/molecules/VisibilityItem/VisibilityItem.style';
+import { Visibility } from 'graphql/generated/types';
 import { ThemeColors } from 'Utils/theme';
 
 interface VisibilityItemProps {

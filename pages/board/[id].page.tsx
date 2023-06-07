@@ -30,7 +30,7 @@ const Index = () => {
     <StyledBoard>
       <StyledBoardNavigation>
         {boardData?.board.visibility && (
-          <BoardNavigation userData={userData} visibility={boardData?.board.visibility} />
+          <BoardNavigation userData={userData} visibility={boardData?.board.visibility} id={id} />
         )}
         <Button
           color='gray3'

@@ -3,7 +3,11 @@ import { registerSchema } from 'common/validations';
 import { authenticate } from 'graphql/authenticate';
 import { Context } from 'graphql/context';
 import { MutationResolvers } from 'graphql/generated/resolvers';
-import { MutationAddBoardArgs, MutationRegisterArgs } from 'graphql/generated/types';
+import {
+  MutationAddBoardArgs,
+  MutationChangeBoardVisibilityArgs,
+  MutationRegisterArgs,
+} from 'graphql/generated/types';
 
 const register = async (_parent: unknown, args: MutationRegisterArgs, context: Context) => {
   const { credentials } = args;
@@ -89,4 +93,23 @@ const addBoard = async (_parent: unknown, args: MutationAddBoardArgs, context: C
   return newBoard;
 };
 
-export const mutation: MutationResolvers = { addBoard, register };
+const changeBoardVisibility = async (
+  _parent: unknown,
+  args: MutationChangeBoardVisibilityArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { visbility } = args;
+
+  const board = await context.prisma.board.update({
+    data: {
+      visibility: visbility.visibility,
+    },
+    where: {
+      id: visbility.id,
+    },
+  });
+
+  return board;
+};
+export const mutation: MutationResolvers = { addBoard, changeBoardVisibility, register };

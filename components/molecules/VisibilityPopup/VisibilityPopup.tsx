@@ -1,4 +1,3 @@
-import { Visibility } from '@prisma/client';
 import Button from 'Components/atoms/Button/Button';
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import VisibilityItem from 'Components/molecules/VisibilityItem/VisibilityItem';
@@ -6,8 +5,9 @@ import {
   StyledVisibilityPopup,
   StyledVisibilityPopupContent,
 } from 'Components/molecules/VisibilityPopup/VisibilityPopup.style';
+import { Visibility } from 'graphql/generated/types';
 import useVisibilityPopup from 'Hooks/useVisibilityPopup';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 export interface VisibilityPopupProps {
   attachmentSide?: 'left' | 'right';
@@ -20,17 +20,16 @@ export interface VisibilityPopupProps {
         value: Visibility;
       }
     | undefined;
-  setChosenOption: Dispatch<
-    SetStateAction<
+  setChosenOption: (
+    params:
       | {
           description: string;
           icon: JSX.Element;
           label: string;
           value: Visibility;
         }
-      | undefined
-    >
-  >;
+      | undefined,
+  ) => void;
 }
 
 const VisibilityPopup = ({
@@ -40,7 +39,7 @@ const VisibilityPopup = ({
   chosenOption,
 }: VisibilityPopupProps) => {
   const [isVisibilityDropdownOpen, setIsVisibilityDropdownOpen] = useState(false);
-  const { boardVisibilities } = useVisibilityPopup(Visibility.PUBLIC);
+  const { boardVisibilities } = useVisibilityPopup(Visibility.public);
 
   const handleVisibilityDropdownOpen = () => setIsVisibilityDropdownOpen(prevState => !prevState);
 
@@ -48,8 +47,6 @@ const VisibilityPopup = ({
     setChosenOption(params);
     handleVisibilityDropdownOpen();
   };
-
-  console.log('cwele', chosenOption);
 
   if (!chosenOption) return null;
 
