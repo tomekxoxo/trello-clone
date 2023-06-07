@@ -27,7 +27,7 @@ export type BoardQuery = {
     image?: string | null;
     name: string;
     ownerId: string;
-    visibility: Types.Visiblity;
+    visibility: Types.Visibility;
   };
 };
 

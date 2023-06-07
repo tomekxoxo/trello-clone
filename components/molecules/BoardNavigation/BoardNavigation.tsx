@@ -1,41 +1,41 @@
+import { Visibility } from '@prisma/client';
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
-import Separator from 'Components/atoms/Separator/Separator';
-import Typography from 'Components/atoms/Typography/Typography';
 import { StyledBoardNavigation } from 'Components/molecules/BoardNavigation/BoardNavigation.style';
-import { useBoardQuery } from 'graphql/generated/hooks';
-import { useRouter } from 'next/router';
+import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopup';
+import User from 'Components/molecules/User/User';
+import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
+import { BoardUsersQuery } from 'graphql/generated/operations';
+import useVisibilityPopup from 'Hooks/useVisibilityPopup';
+import React, { useState } from 'react';
 
-const BoardNavigation = () => {
-  const router = useRouter();
+interface BoardNavigationProps {
+  userData: BoardUsersQuery | undefined;
+  visibility: Visibility;
+}
 
-  const id = router.query.id as unknown as string;
-
-  const goToBoards = () => router.push('/');
-
-  const { data } = useBoardQuery({
-    variables: {
-      boardId: id,
-    },
-  });
+const BoardNavigation = ({ userData, visibility }: BoardNavigationProps) => {
+  const { chosenOption, setChosenOption } = useVisibilityPopup(visibility);
+  const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
 
   return (
     <StyledBoardNavigation>
-      {data?.board.name && (
-        <Typography color='dark' variant='h1'>
-          {data?.board.name}
-        </Typography>
-      )}
-      <Separator />
-      <Button
-        color='gray3'
-        variant='h4'
-        backgroundColor='gray'
-        onClick={goToBoards}
-        icon={<Icon name='grid' color='gray3' />}
-      >
-        All boards
-      </Button>
+      <VisibilityPopup chosenOption={chosenOption} setChosenOption={setChosenOption} />
+      {userData?.boardUsers.map((user, index) => {
+        if (!user) return;
+        return <User key={index} image={user?.image} name={user.name} />;
+      })}
+      <InviteUserPopup
+        closePopup={() => setIsInvitationModalOpen(false)}
+        isOpen={isInvitationModalOpen}
+        anchor={
+          <Button
+            onClick={() => setIsInvitationModalOpen(prevState => !prevState)}
+            color='blue1'
+            icon={<Icon name='plus' size='12' color='white' />}
+          />
+        }
+      />
     </StyledBoardNavigation>
   );
 };

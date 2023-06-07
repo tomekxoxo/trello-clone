@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Visibility } from '@prisma/client';
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
@@ -24,7 +25,7 @@ interface AddBoardModalProps {
 const AddBoardModal = ({ closeModal }: AddBoardModalProps) => {
   const [cover, setCover] = useState('/panorama.svg');
   const [addBoardMutation] = useAddBoardMutation();
-  const { chosenOption, setChosenOption } = useVisibilityPopup();
+  const { chosenOption, setChosenOption } = useVisibilityPopup(Visibility.PUBLIC);
 
   const {
     register,
@@ -42,7 +43,7 @@ const AddBoardModal = ({ closeModal }: AddBoardModalProps) => {
           description: data.boardDescription,
           image: cover,
           name: data.boardName,
-          visibility: chosenOption.value,
+          visibility: chosenOption?.value || Visibility.PUBLIC,
         },
       },
     });

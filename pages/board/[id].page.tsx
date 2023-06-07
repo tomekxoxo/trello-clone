@@ -1,25 +1,16 @@
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
-import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopup';
-import User from 'Components/molecules/User/User';
-import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
+import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigation';
 import MenuSidebar from 'Components/organisms/MenuSidebar/MenuSidebar';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
-import { useBoardUsersQuery } from 'graphql/generated/hooks';
-import useVisibilityPopup from 'Hooks/useVisibilityPopup';
+import { useBoardQuery, useBoardUsersQuery } from 'graphql/generated/hooks';
 import { useRouter } from 'next/router';
-import {
-  StyledBoard,
-  StyledBoardNavigation,
-  StyledBoardNavigationUsers,
-} from 'Pages/board/index.style';
+import { StyledBoard, StyledBoardNavigation } from 'Pages/board/index.style';
 import { useState } from 'react';
 
 const Index = () => {
-  const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const [isShowMenuSidebarOpen, setIsShowMenuSidebarOpen] = useState(false);
 
-  const { chosenOption, setChosenOption } = useVisibilityPopup();
   const router = useRouter();
   const id = router.query.id as unknown as string;
 
@@ -29,27 +20,18 @@ const Index = () => {
     },
   });
 
+  const { data: boardData } = useBoardQuery({
+    variables: {
+      boardId: id,
+    },
+  });
+
   return (
     <StyledBoard>
       <StyledBoardNavigation>
-        <StyledBoardNavigationUsers>
-          <VisibilityPopup chosenOption={chosenOption} setChosenOption={setChosenOption} />
-          {userData?.boardUsers.map((user, index) => {
-            if (!user) return;
-            return <User key={index} image={user?.image} name={user.name} />;
-          })}
-          <InviteUserPopup
-            closePopup={() => setIsInvitationModalOpen(false)}
-            isOpen={isInvitationModalOpen}
-            anchor={
-              <Button
-                onClick={() => setIsInvitationModalOpen(prevState => !prevState)}
-                color='blue1'
-                icon={<Icon name='plus' size='12' color='white' />}
-              />
-            }
-          />
-        </StyledBoardNavigationUsers>
+        {boardData?.board.visibility && (
+          <BoardNavigation userData={userData} visibility={boardData?.board.visibility} />
+        )}
         <Button
           color='gray3'
           variant='h4'

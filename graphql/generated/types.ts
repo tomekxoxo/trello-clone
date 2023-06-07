@@ -23,14 +23,14 @@ export type Board = {
   tasks?: Maybe<Array<Maybe<Task>>>;
   users: Array<Maybe<User>>;
   usersIds?: Maybe<Array<Maybe<Scalars['String']>>>;
-  visibility: Visiblity;
+  visibility: Visibility;
 };
 
 export type BoardInput = {
   description?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
-  visibility: Visiblity;
+  visibility: Visibility;
 };
 
 export type Column = {
@@ -148,7 +148,7 @@ export type User = {
   tasksIds?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
-export enum Visiblity {
+export enum Visibility {
   private = 'PRIVATE',
   public = 'PUBLIC',
 }

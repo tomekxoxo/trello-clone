@@ -3,7 +3,7 @@ import Icon from 'Components/atoms/Icon/Icon';
 import Input from 'Components/atoms/Input/Input';
 import Link from 'Components/atoms/Link/Link';
 import AccountProfile from 'Components/molecules/AccountProfile/AccountProfile';
-import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigation';
+import TopbarNavigation from 'Components/molecules/TopbarNavigation/TopbarNavigation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
@@ -23,7 +23,7 @@ const TopBar = () => {
         <Link href='/'>
           <Image src='/logo.svg' alt='Application Logo' width={98} height={34} />
         </Link>
-        {!isBoardsPage && authenticate && <BoardNavigation />}
+        {!isBoardsPage && authenticate && <TopbarNavigation />}
       </StyledTopBarSide>
       {authenticate && (
         <StyledTopBarSide>

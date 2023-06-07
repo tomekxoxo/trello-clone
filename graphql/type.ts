@@ -22,7 +22,7 @@ export const typeDefs = gql`
     name: String!
     ownerId: String!
     image: String
-    visibility: Visiblity!
+    visibility: Visibility!
     owner: User!
     users: [User]!
     tasks: [Task]
@@ -81,7 +81,7 @@ export const typeDefs = gql`
     GOOGLE
   }
 
-  enum Visiblity {
+  enum Visibility {
     PUBLIC
     PRIVATE
   }
@@ -103,7 +103,7 @@ export const typeDefs = gql`
     name: String!
     image: String
     description: String
-    visibility: Visiblity!
+    visibility: Visibility!
   }
 
   type Query {
