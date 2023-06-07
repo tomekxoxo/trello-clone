@@ -210,6 +210,18 @@ export type QueryResolvers<
   ContextType = Context,
   ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query'],
 > = {
+  board?: Resolver<
+    ResolversTypes['Board'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.QueryBoardArgs, 'id'>
+  >;
+  boardUsers?: Resolver<
+    Array<Types.Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType,
+    RequireFields<Types.QueryBoardUsersArgs, 'id'>
+  >;
   boards?: Resolver<Array<Types.Maybe<ResolversTypes['Board']>>, ParentType, ContextType>;
   users?: Resolver<Array<Types.Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
 };

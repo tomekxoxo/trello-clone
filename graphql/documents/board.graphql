@@ -1,0 +1,9 @@
+query Board($boardId: String!) {
+  board(id: $boardId) {
+    id
+    image
+    name
+    ownerId
+    visibility
+  }
+}

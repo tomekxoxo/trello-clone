@@ -10,18 +10,13 @@ import { useSession } from 'next-auth/react';
 
 import { StyledTopBar, StyledTopBarSide } from './TopBar.style';
 
-interface TopBarProps {
-  boardName?: string;
-}
-
-const TobBar = ({ boardName }: TopBarProps) => {
+const TopBar = () => {
   const { route } = useRouter();
   const isBoardsPage = route === '/';
   const { data: session } = useSession();
 
   const authenticate = session?.user?.email;
 
-  console.log(boardName, authenticate);
   return (
     <StyledTopBar>
       <StyledTopBarSide>
@@ -43,4 +38,4 @@ const TobBar = ({ boardName }: TopBarProps) => {
   );
 };
 
-export default TobBar;
+export default TopBar;

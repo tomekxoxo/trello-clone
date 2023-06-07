@@ -15,6 +15,36 @@ export type AddBoardMutation = {
   };
 };
 
+export type BoardQueryVariables = Types.Exact<{
+  boardId: Types.Scalars['String'];
+}>;
+
+export type BoardQuery = {
+  __typename?: 'Query';
+  board: {
+    __typename?: 'Board';
+    id: string;
+    image?: string | null;
+    name: string;
+    ownerId: string;
+    visibility: Types.Visiblity;
+  };
+};
+
+export type BoardUsersQueryVariables = Types.Exact<{
+  boardUsersId: Types.Scalars['String'];
+}>;
+
+export type BoardUsersQuery = {
+  __typename?: 'Query';
+  boardUsers: Array<{
+    __typename?: 'User';
+    id: string;
+    name: string;
+    image?: string | null;
+  } | null>;
+};
+
 export type BoardsQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type BoardsQuery = {

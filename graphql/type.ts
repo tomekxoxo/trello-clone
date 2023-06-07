@@ -108,6 +108,8 @@ export const typeDefs = gql`
 
   type Query {
     users: [User]!
+    boardUsers(id: String!): [User]!
+    board(id: String!): Board!
     boards: [Board]!
   }
 

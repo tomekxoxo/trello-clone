@@ -5,10 +5,9 @@ import User from 'Components/molecules/User/User';
 import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import MenuSidebar from 'Components/organisms/MenuSidebar/MenuSidebar';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
+import { useBoardUsersQuery } from 'graphql/generated/hooks';
 import useVisibilityPopup from 'Hooks/useVisibilityPopup';
-import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { getSession } from 'next-auth/react';
 import {
   StyledBoard,
   StyledBoardNavigation,
@@ -16,34 +15,29 @@ import {
 } from 'Pages/board/index.style';
 import { useState } from 'react';
 
-const users = [
-  { image: '/user.jpeg', name: 'John Doe' },
-  { name: 'Tomasz Kasprowicz' },
-  { image: '/user.jpeg', name: 'Mark Black' },
-  { image: '/user.jpeg', name: 'Elon Musk' },
-  { image: '/user.jpeg', name: 'Marion Cotilard' },
-  { image: '/user.jpeg', name: 'Marion Cotilard' },
-];
-
 const Index = () => {
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const [isShowMenuSidebarOpen, setIsShowMenuSidebarOpen] = useState(false);
 
   const { chosenOption, setChosenOption } = useVisibilityPopup();
-
   const router = useRouter();
-  const { id } = router.query;
+  const id = router.query.id as unknown as string;
 
-  console.log('tomasz', id);
+  const { data: userData } = useBoardUsersQuery({
+    variables: {
+      boardUsersId: id,
+    },
+  });
 
   return (
     <StyledBoard>
       <StyledBoardNavigation>
         <StyledBoardNavigationUsers>
           <VisibilityPopup chosenOption={chosenOption} setChosenOption={setChosenOption} />
-          {users.map((user, index) => (
-            <User key={index} image={user.image} name={user.name} />
-          ))}
+          {userData?.boardUsers.map((user, index) => {
+            if (!user) return;
+            return <User key={index} image={user?.image} name={user.name} />;
+          })}
           <InviteUserPopup
             closePopup={() => setIsInvitationModalOpen(false)}
             isOpen={isInvitationModalOpen}
@@ -72,23 +66,6 @@ const Index = () => {
       <WorkBoard />
     </StyledBoard>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async context => {
-  const session = await getSession(context);
-
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {},
-  };
 };
 
 export default Index;

@@ -1,0 +1,7 @@
+query BoardUsers($boardUsersId: String!) {
+  boardUsers(id: $boardUsersId) {
+    id
+    name
+    image
+  }
+}

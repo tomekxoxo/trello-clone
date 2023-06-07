@@ -1,11 +1,34 @@
 import { authenticate } from 'graphql/authenticate';
 import type { Context } from 'graphql/context';
 import { QueryResolvers } from 'graphql/generated/resolvers';
+import { QueryBoardArgs, QueryBoardUsersArgs } from 'graphql/generated/types';
 
 const users = async (_parent: unknown, _args: unknown, context: Context) => {
   await authenticate(context);
   const users = await context.prisma.user.findMany();
   return users;
+};
+
+const boardUsers = async (_parent: unknown, args: QueryBoardUsersArgs, context: Context) => {
+  await authenticate(context);
+  const users = await context.prisma.user.findMany({
+    where: {
+      boardsIds: {
+        has: args.id,
+      },
+    },
+  });
+  return users;
+};
+
+const board = async (_parent: unknown, args: QueryBoardArgs, context: Context) => {
+  await authenticate(context);
+  const board = await context.prisma.board.findUnique({
+    where: {
+      id: args.id,
+    },
+  });
+  return board;
 };
 
 const boards = async (_parent: unknown, _args: unknown, context: Context) => {
@@ -31,4 +54,4 @@ const boards = async (_parent: unknown, _args: unknown, context: Context) => {
   return boards;
 };
 
-export const query: QueryResolvers = { boards, users };
+export const query: QueryResolvers = { board, boardUsers, boards, users };

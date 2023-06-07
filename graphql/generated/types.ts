@@ -86,8 +86,18 @@ export enum Origin {
 
 export type Query = {
   __typename?: 'Query';
+  board: Board;
+  boardUsers: Array<Maybe<User>>;
   boards: Array<Maybe<Board>>;
   users: Array<Maybe<User>>;
+};
+
+export type QueryBoardArgs = {
+  id: Scalars['String'];
+};
+
+export type QueryBoardUsersArgs = {
+  id: Scalars['String'];
 };
 
 export type RegisterInput = {

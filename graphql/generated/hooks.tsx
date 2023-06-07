@@ -57,6 +57,99 @@ export type AddBoardMutationOptions = Apollo.BaseMutationOptions<
   Types.AddBoardMutation,
   Types.AddBoardMutationVariables
 >;
+export const BoardDocument = gql`
+  query Board($boardId: String!) {
+    board(id: $boardId) {
+      id
+      image
+      name
+      ownerId
+      visibility
+    }
+  }
+`;
+
+/**
+ * __useBoardQuery__
+ *
+ * To run a query within a React component, call `useBoardQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBoardQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBoardQuery({
+ *   variables: {
+ *      boardId: // value for 'boardId'
+ *   },
+ * });
+ */
+export function useBoardQuery(
+  baseOptions: Apollo.QueryHookOptions<Types.BoardQuery, Types.BoardQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Types.BoardQuery, Types.BoardQueryVariables>(BoardDocument, options);
+}
+export function useBoardLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<Types.BoardQuery, Types.BoardQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Types.BoardQuery, Types.BoardQueryVariables>(BoardDocument, options);
+}
+export type BoardQueryHookResult = ReturnType<typeof useBoardQuery>;
+export type BoardLazyQueryHookResult = ReturnType<typeof useBoardLazyQuery>;
+export type BoardQueryResult = Apollo.QueryResult<Types.BoardQuery, Types.BoardQueryVariables>;
+export const BoardUsersDocument = gql`
+  query BoardUsers($boardUsersId: String!) {
+    boardUsers(id: $boardUsersId) {
+      id
+      name
+      image
+    }
+  }
+`;
+
+/**
+ * __useBoardUsersQuery__
+ *
+ * To run a query within a React component, call `useBoardUsersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBoardUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBoardUsersQuery({
+ *   variables: {
+ *      boardUsersId: // value for 'boardUsersId'
+ *   },
+ * });
+ */
+export function useBoardUsersQuery(
+  baseOptions: Apollo.QueryHookOptions<Types.BoardUsersQuery, Types.BoardUsersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Types.BoardUsersQuery, Types.BoardUsersQueryVariables>(
+    BoardUsersDocument,
+    options,
+  );
+}
+export function useBoardUsersLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<Types.BoardUsersQuery, Types.BoardUsersQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Types.BoardUsersQuery, Types.BoardUsersQueryVariables>(
+    BoardUsersDocument,
+    options,
+  );
+}
+export type BoardUsersQueryHookResult = ReturnType<typeof useBoardUsersQuery>;
+export type BoardUsersLazyQueryHookResult = ReturnType<typeof useBoardUsersLazyQuery>;
+export type BoardUsersQueryResult = Apollo.QueryResult<
+  Types.BoardUsersQuery,
+  Types.BoardUsersQueryVariables
+>;
 export const BoardsDocument = gql`
   query Boards {
     boards {
