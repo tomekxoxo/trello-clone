@@ -5,9 +5,17 @@ interface StyledMultilineContainerProps {
 }
 
 export const StyledMultilineContainer = styled.div<StyledMultilineContainerProps>`
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 0.1rem solid ${({ theme }) => theme.colors.gray5};
+  border-radius: 1.2rem;
+
   filter: drop-shadow(rgba(0, 0, 0, 0.05));
   padding-bottom: ${({ isEditMode }) => (isEditMode ? '5rem' : '0rem')};
   position: relative;
+
+  & > textarea {
+    border: none;
+  }
 `;
 
 interface StyledMultilineButtonsProps {

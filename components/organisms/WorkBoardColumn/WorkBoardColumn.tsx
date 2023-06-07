@@ -8,17 +8,18 @@ import {
   StyledWorkBoardContent,
   StyledWorkBoardMultilineWrapper,
 } from 'Components/organisms/WorkBoardColumn/WorkBoardColumn.style';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 export interface WorkBoardColumnProps {
   status: string;
-  cards: any;
-  setCards: Dispatch<SetStateAction<any>>;
+  cards: CardProps[];
+  // setCards: Dispatch<SetStateAction<any>>;
   cardIds: number[];
+  index: number;
 }
 
-const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
+const WorkBoardColumn = ({ status, cards, cardIds, index }: WorkBoardColumnProps) => {
   const [isMultilineOpen, setIsMultilineOpen] = useState(false);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
@@ -76,10 +77,12 @@ const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
         </StyledWorkBoardMultilineWrapper>
       )}
       {isDetailsModalOpen && <CardDetailsModal onCloseModal={() => setIsDetailsModalOpen(false)} />}
-      <AddAnotherButton
-        text='Add another card'
-        onClick={() => setIsMultilineOpen(prevState => !prevState)}
-      />
+      {index === 0 && (
+        <AddAnotherButton
+          text='Add another card'
+          onClick={() => setIsMultilineOpen(prevState => !prevState)}
+        />
+      )}
     </StyledWorkBoardColumn>
   );
 };

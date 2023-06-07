@@ -1,4 +1,3 @@
-import AddAnotherButton from 'Components/molecules/AddAnotherButton/AddAnotherButton';
 import { StyledWorkBoard } from 'Components/organisms/WorkBoard/WorkBoard.style';
 import WorkBoardColumn from 'Components/organisms/WorkBoardColumn/WorkBoardColumn';
 import { produce } from 'immer';
@@ -97,7 +96,7 @@ const columnsMock = [
 const WorkBoard = ({ data }: WorkBoardProps) => {
   const [cards, setCards] = useState(cardsMock);
   const [columns, setCloumns] = useState(columnsMock);
-  const columnsCount = columns.length + 1;
+  const columnsCount = columns.length;
 
   console.log(data);
 
@@ -133,13 +132,13 @@ const WorkBoard = ({ data }: WorkBoardProps) => {
             {columns.map(({ status, cardIds }, index) => (
               <WorkBoardColumn
                 key={index}
+                index={index}
                 status={status}
                 cardIds={cardIds}
                 cards={cards}
                 setCards={setCards}
               />
             ))}
-            <AddAnotherButton text='Add another column' />
           </StyledWorkBoard>
         </DragDropContext>
       ) : null}
