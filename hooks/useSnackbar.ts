@@ -1,4 +1,4 @@
-import create from 'zustand';
+import { create } from 'zustand';
 
 export type Severity = 'error' | 'success' | 'info' | 'warning';
 

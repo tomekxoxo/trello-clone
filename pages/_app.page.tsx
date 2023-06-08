@@ -3,6 +3,7 @@ import Layout from 'Components/Layout/Layout';
 import Snackbar from 'Components/molecules/Snackbar/Snackbar';
 import useSnackbar from 'Hooks/useSnackbar';
 import type { AppProps } from 'next/app';
+import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 
 const apolloClient = new ApolloClient({
@@ -10,7 +11,13 @@ const apolloClient = new ApolloClient({
   uri: '/api/graphql',
 });
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+interface MyAppProps extends AppProps {
+  pageProps: {
+    session: Session | null;
+  };
+}
+
+function MyApp({ Component, pageProps: { session, ...pageProps } }: MyAppProps) {
   const isVisible = useSnackbar(state => state.isVisible);
 
   return (

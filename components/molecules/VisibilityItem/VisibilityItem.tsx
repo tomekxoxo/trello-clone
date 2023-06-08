@@ -3,14 +3,21 @@ import {
   StyledVisibilityItem,
   StyledVisibilityItemHeader,
 } from 'Components/molecules/VisibilityItem/VisibilityItem.style';
+import { Visibility } from 'graphql/generated/types';
 import { ThemeColors } from 'Utils/theme';
 
 interface VisibilityItemProps {
   icon: JSX.Element;
   label: string;
+  value: Visibility;
   labelColor?: ThemeColors;
   description: string;
-  onChoose: (params: { description: string; icon: JSX.Element; label: string }) => void;
+  onChoose: (params: {
+    description: string;
+    icon: JSX.Element;
+    label: string;
+    value: Visibility;
+  }) => void;
 }
 
 const VisibilityItem = ({
@@ -18,6 +25,7 @@ const VisibilityItem = ({
   label,
   description,
   onChoose,
+  value,
   labelColor = 'gray2',
 }: VisibilityItemProps) => {
   const handleOnChoose = () => {
@@ -25,6 +33,7 @@ const VisibilityItem = ({
       description,
       icon,
       label,
+      value,
     });
   };
 

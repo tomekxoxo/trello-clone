@@ -1,161 +1,23 @@
-import { gql, useQuery } from '@apollo/client';
 import Button from 'Components/atoms/Button/Button';
 import Icon from 'Components/atoms/Icon/Icon';
 import Typography from 'Components/atoms/Typography/Typography';
 import Card from 'Components/molecules/Card/Card';
 import AddBoardModal from 'Components/organisms/AddBoardModal/AddBoardModal';
+import { useBoardsQuery } from 'graphql/generated/hooks';
 import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
 import { StyledBoards, StyledBoardsHeader, StyledBoardsList } from 'Pages/index.style';
 import { useState } from 'react';
 
-const USERS = gql`
-  query Users {
-    users {
-      name
-    }
-  }
-`;
-
 const Boards = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { data } = useQuery(USERS);
-
-  const mockList = [
-    {
-      id: 0,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-      ],
-    },
-    {
-      id: 1,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      id: 2,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      id: 3,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      id: 4,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      id: 5,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      id: 6,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      id: 7,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      id: 8,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-    {
-      id: 9,
-      image: '/restaurant.jpeg',
-      title: 'Restaurant',
-      users: [
-        { image: '/user.jpeg', name: 'John Doe' },
-        { name: 'Tomasz Kasprowicz' },
-        { image: '/user.jpeg', name: 'Mark Black' },
-        { image: '/user.jpeg', name: 'Elon Musk' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-        { image: '/user.jpeg', name: 'Marion Cotilard' },
-      ],
-    },
-  ];
+  const { data } = useBoardsQuery();
+  const router = useRouter();
 
   const openModal = () => setIsModalOpen(true);
 
   const closeModal = () => setIsModalOpen(false);
-
-  console.log(data);
 
   return (
     <StyledBoards>
@@ -164,19 +26,23 @@ const Boards = () => {
           All Boards
         </Typography>
         <Button onClick={openModal} icon={<Icon name='plus' color='white' />} variant='h5'>
-          Add
+          Create Board
         </Button>
       </StyledBoardsHeader>
       <StyledBoardsList>
-        {mockList.map((board, index) => (
-          <Card
-            id={board.id}
-            key={index}
-            image={board.image}
-            title={board.title}
-            users={board.users}
-          />
-        ))}
+        {data?.boards.map(board => {
+          if (board !== null)
+            return (
+              <Card
+                id={board.id}
+                key={board.id}
+                image={board.image || undefined}
+                title={board.name}
+                users={board.users}
+                onClick={() => router.push(`/board/${board.id}`)}
+              />
+            );
+        })}
       </StyledBoardsList>
       {isModalOpen && <AddBoardModal closeModal={closeModal} />}
     </StyledBoards>

@@ -1,8 +1,14 @@
 import bcrypt from 'bcryptjs';
 import { registerSchema } from 'common/validations';
 import { authenticate } from 'graphql/authenticate';
-import type { Context } from 'graphql/context';
-import { MutationAddBoardArgs, MutationRegisterArgs, MutationResolvers } from 'graphql/typesGen';
+import { Context } from 'graphql/context';
+import { MutationResolvers } from 'graphql/generated/resolvers';
+import {
+  MutationAddBoardArgs,
+  MutationAddUsersToBoardArgs,
+  MutationChangeBoardVisibilityArgs,
+  MutationRegisterArgs,
+} from 'graphql/generated/types';
 
 const register = async (_parent: unknown, args: MutationRegisterArgs, context: Context) => {
   const { credentials } = args;
@@ -42,7 +48,7 @@ const addBoard = async (_parent: unknown, args: MutationAddBoardArgs, context: C
   const { session } = await authenticate(context);
 
   const { board } = args;
-  const { name, image, visibility } = board;
+  const { name, image, visibility, description } = board;
 
   const newBoard = await context.prisma.board.create({
     data: {
@@ -64,6 +70,7 @@ const addBoard = async (_parent: unknown, args: MutationAddBoardArgs, context: C
           ],
         },
       },
+      description,
       image,
       name,
       owner: {
@@ -87,4 +94,55 @@ const addBoard = async (_parent: unknown, args: MutationAddBoardArgs, context: C
   return newBoard;
 };
 
-export const mutation: MutationResolvers = { addBoard, register };
+const changeBoardVisibility = async (
+  _parent: unknown,
+  args: MutationChangeBoardVisibilityArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { visbility } = args;
+
+  const board = await context.prisma.board.update({
+    data: {
+      visibility: visbility.visibility,
+    },
+    where: {
+      id: visbility.id,
+    },
+  });
+
+  return board;
+};
+
+const addUsersToBoard = async (
+  _parent: unknown,
+  args: MutationAddUsersToBoardArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { users } = args;
+
+  const board = Promise.all(
+    users.userIds.map(async id => {
+      if (typeof id === 'string')
+        await context.prisma.board.update({
+          data: {
+            usersIds: {
+              push: id,
+            },
+          },
+          where: {
+            id: users.boardId,
+          },
+        });
+    }),
+  );
+
+  return board;
+};
+export const mutation: MutationResolvers = {
+  addBoard,
+  addUsersToBoard,
+  changeBoardVisibility,
+  register,
+};

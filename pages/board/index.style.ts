@@ -13,8 +13,3 @@ export const StyledBoardNavigation = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
-export const StyledBoardNavigationUsers = styled.div`
-  display: flex;
-  gap: 1.2rem;
-`;

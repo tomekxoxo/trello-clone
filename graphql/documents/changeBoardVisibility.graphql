@@ -1,0 +1,7 @@
+mutation ChangeBoardVisibility($visbility: VisibilityInput!) {
+  changeBoardVisibility(visbility: $visbility) {
+    name
+    visibility
+    id
+  }
+}

@@ -9,7 +9,7 @@ datasource db {
 
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
-  userId            String
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String
@@ -45,18 +45,19 @@ model User {
 }
 
 model Board {
-  id         String     @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  image      String?
-  visibility Visibility @default(PUBLIC)
-  createdAt  DateTime   @default(now())
-  updatedAt  DateTime   @updatedAt
-  usersIds   String[]   @db.ObjectId
-  users      User[]     @relation("boards", fields: [usersIds], references: [id])
-  ownerId    String
-  owner      User       @relation("owner", fields: [ownerId], references: [id], onDelete: Cascade)
-  columns    Column[]   @relation("board-column")
-  tasks      Task[]     @relation("board-task")
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  image       String?
+  description String?
+  visibility  Visibility @default(PUBLIC)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  usersIds    String[]   @db.ObjectId
+  users       User[]     @relation("boards", fields: [usersIds], references: [id])
+  ownerId     String     @db.ObjectId
+  owner       User       @relation("owner", fields: [ownerId], references: [id], onDelete: Cascade)
+  columns     Column[]   @relation("board-column")
+  tasks       Task[]     @relation("board-task")
 }
 
 model Column {

@@ -1,23 +1,10 @@
-import { gql, useMutation } from '@apollo/client';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useRegisterMutation } from 'graphql/generated/hooks';
 import useSnackbar from 'Hooks/useSnackbar';
 import router from 'next/router';
 import { signIn } from 'next-auth/react';
 import { FieldValues, useForm } from 'react-hook-form';
 import type { AnyObjectSchema } from 'yup';
-
-const REGISTER = gql`
-  mutation Register($credentials: RegisterInput!) {
-    register(credentials: $credentials) {
-      id
-      name
-      email
-      emailVerified
-      image
-      origin
-    }
-  }
-`;
 
 function useAuth<Inputs extends FieldValues>({
   schema,
@@ -36,7 +23,7 @@ function useAuth<Inputs extends FieldValues>({
 
   const showSnackbar = useSnackbar(state => state.showSnackbar);
 
-  const [registerMutation] = useMutation(REGISTER);
+  const [registerMutation] = useRegisterMutation();
 
   const changeAuth = () => router.push(changeTo);
 

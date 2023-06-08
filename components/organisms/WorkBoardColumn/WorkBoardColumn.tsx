@@ -2,23 +2,26 @@ import AddAnotherButton from 'Components/molecules/AddAnotherButton/AddAnotherBu
 import Card, { CardProps } from 'Components/molecules/Card/Card';
 import ColumnHeader from 'Components/molecules/ColumnHeader/ColumnHeader';
 import Multiline from 'Components/molecules/Multiline/Multiline';
+import CardDetailsModal from 'Components/organisms/CardDetailsModal/CardDetailsModal';
 import {
   StyledWorkBoardColumn,
   StyledWorkBoardContent,
   StyledWorkBoardMultilineWrapper,
 } from 'Components/organisms/WorkBoardColumn/WorkBoardColumn.style';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 export interface WorkBoardColumnProps {
   status: string;
-  cards: any;
-  setCards: Dispatch<SetStateAction<any>>;
+  cards: CardProps[];
+  // setCards: Dispatch<SetStateAction<any>>;
   cardIds: number[];
+  index: number;
 }
 
-const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
+const WorkBoardColumn = ({ status, cards, cardIds, index }: WorkBoardColumnProps) => {
   const [isMultilineOpen, setIsMultilineOpen] = useState(false);
+  const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
 
   return (
     <StyledWorkBoardColumn>
@@ -31,7 +34,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
             isHovered={snapshot.isDraggingOver}
           >
             {cardIds
-              .map(cardId => cards?.find((card: CardProps) => card.id === cardId))
+              .map(cardId => cards?.find((card: CardProps) => +card.id === cardId))
               .map((card, index) => {
                 if (!card) return;
                 return (
@@ -50,6 +53,7 @@ const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
                         messagesCount={card.messagesCount}
                         attachmentsCount={card.attachmentsCount}
                         canAddUser
+                        onClick={() => setIsDetailsModalOpen(true)}
                       />
                     )}
                   </Draggable>
@@ -72,10 +76,13 @@ const WorkBoardColumn = ({ status, cards, cardIds }: WorkBoardColumnProps) => {
           />
         </StyledWorkBoardMultilineWrapper>
       )}
-      <AddAnotherButton
-        text='Add another card'
-        onClick={() => setIsMultilineOpen(prevState => !prevState)}
-      />
+      {isDetailsModalOpen && <CardDetailsModal onCloseModal={() => setIsDetailsModalOpen(false)} />}
+      {index === 0 && (
+        <AddAnotherButton
+          text='Add another card'
+          onClick={() => setIsMultilineOpen(prevState => !prevState)}
+        />
+      )}
     </StyledWorkBoardColumn>
   );
 };

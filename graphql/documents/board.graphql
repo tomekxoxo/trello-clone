@@ -1,0 +1,9 @@
+query Board($boardId: ID!) {
+  board(id: $boardId) {
+    id
+    image
+    name
+    ownerId
+    visibility
+  }
+}

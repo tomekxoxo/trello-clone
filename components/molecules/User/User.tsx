@@ -3,7 +3,7 @@ import Typography from 'Components/atoms/Typography/Typography';
 import { StyledUser, StyledUserImage } from 'Components/molecules/User/User.style';
 
 export interface UserProps {
-  image?: string;
+  image?: string | null;
   name: string;
   withName?: boolean;
 }

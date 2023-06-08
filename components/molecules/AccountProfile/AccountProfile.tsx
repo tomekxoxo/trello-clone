@@ -17,6 +17,8 @@ const AccountProfile = () => {
   const image = session?.user?.image;
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  if (!userName) return null;
+
   const handleLogout = async () => {
     await signOut({ callbackUrl: '/login' });
   };

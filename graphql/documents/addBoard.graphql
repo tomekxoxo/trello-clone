@@ -1,0 +1,15 @@
+mutation AddBoard($board: BoardInput!) {
+  addBoard(board: $board) {
+    name
+    ownerId
+    users {
+      name
+      email
+      id
+    }
+    columns {
+      boardId
+      name
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import Button from 'Components/atoms/Button/Button';
+import Textarea from 'Components/atoms/Textarea/Textarea';
 import {
-  StyledMultiline,
   StyledMultilineButtons,
   StyledMultilineContainer,
 } from 'Components/molecules/Multiline/Multiline.style';
@@ -75,14 +75,14 @@ const Multiline = ({
     <StyledMultilineContainer
       isEditMode={isEditMode}
       ref={containerRef}
-      height={height}
       onClick={handleOnMultilineContainerClick}
     >
-      <StyledMultiline
+      <Textarea
         onChange={handleOnChange}
         ref={multilineRef}
         value={innerValue}
         readOnly={!isEditMode}
+        height={height}
         {...restProps}
       />
       {isEditMode && (

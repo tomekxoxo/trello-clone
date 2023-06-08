@@ -22,7 +22,7 @@ export const typeDefs = gql`
     name: String!
     ownerId: String!
     image: String
-    visibility: Visiblity!
+    visibility: Visibility!
     owner: User!
     users: [User]!
     tasks: [Task]
@@ -81,7 +81,7 @@ export const typeDefs = gql`
     GOOGLE
   }
 
-  enum Visiblity {
+  enum Visibility {
     PUBLIC
     PRIVATE
   }
@@ -102,15 +102,32 @@ export const typeDefs = gql`
   input BoardInput {
     name: String!
     image: String
-    visibility: Visiblity!
+    description: String
+    visibility: Visibility!
+  }
+
+  input AddUsersInput {
+    userIds: [String]!
+    boardId: ID!
+  }
+
+  input VisibilityInput {
+    id: ID!
+    visibility: Visibility!
   }
 
   type Query {
     users: [User]!
+    usersNotAssignedToBoard(boardId: ID!): [User]!
+    boardUsers(id: ID!): [User]!
+    board(id: ID!): Board!
+    boards: [Board]!
   }
 
   type Mutation {
     register(credentials: RegisterInput!): User!
     addBoard(board: BoardInput!): Board!
+    changeBoardVisibility(visbility: VisibilityInput!): Board!
+    addUsersToBoard(users: AddUsersInput!): Board!
   }
 `;

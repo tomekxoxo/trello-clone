@@ -1,0 +1,7 @@
+mutation AddUsersToBoard($users: AddUsersInput!) {
+  addUsersToBoard(users: $users) {
+    id
+    name
+    image
+  }
+}

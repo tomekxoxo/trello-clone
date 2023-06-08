@@ -3,32 +3,27 @@ import Icon from 'Components/atoms/Icon/Icon';
 import Input from 'Components/atoms/Input/Input';
 import Link from 'Components/atoms/Link/Link';
 import AccountProfile from 'Components/molecules/AccountProfile/AccountProfile';
-import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigation';
+import TopbarNavigation from 'Components/molecules/TopbarNavigation/TopbarNavigation';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
 import { StyledTopBar, StyledTopBarSide } from './TopBar.style';
 
-interface TopBarProps {
-  boardName?: string;
-}
-
-const TobBar = ({ boardName }: TopBarProps) => {
+const TopBar = () => {
   const { route } = useRouter();
   const isBoardsPage = route === '/';
   const { data: session } = useSession();
 
   const authenticate = session?.user?.email;
 
-  console.log(boardName, authenticate);
   return (
     <StyledTopBar>
       <StyledTopBarSide>
         <Link href='/'>
           <Image src='/logo.svg' alt='Application Logo' width={98} height={34} />
         </Link>
-        {!isBoardsPage && authenticate && <BoardNavigation />}
+        {!isBoardsPage && authenticate && <TopbarNavigation />}
       </StyledTopBarSide>
       {authenticate && (
         <StyledTopBarSide>
@@ -43,4 +38,4 @@ const TobBar = ({ boardName }: TopBarProps) => {
   );
 };
 
-export default TobBar;
+export default TopBar;
