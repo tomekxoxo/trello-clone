@@ -37,8 +37,7 @@ model User {
   boardsIds     String[]  @db.ObjectId
   boards        Board[]   @relation("boards", fields: [boardsIds], references: [id])
   ownerBoards   Board[]   @relation("owner")
-  tasksIds      String[]  @db.ObjectId
-  tasks         Task[]    @relation("task-user", fields: [tasksIds], references: [id])
+  tasks         Task[]
   comments      Comment[] @relation("comment-user")
 
   @@unique([email])
@@ -82,8 +81,8 @@ model Task {
   column      Column    @relation("task-column", fields: [columnId], references: [id], onUpdate: Cascade)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  usersIds    String[]  @db.ObjectId
-  users       User[]    @relation("task-user", fields: [usersIds], references: [id])
+  userId      String    @db.ObjectId
+  user        User      @relation(fields: [userId], references: [id])
   labelsIds   String[]  @db.ObjectId
   labels      Label[]   @relation("task-label", fields: [labelsIds], references: [id])
   comments    Comment[] @relation("task-comment")
