@@ -12,6 +12,11 @@ export type Scalars = {
   Float: number;
 };
 
+export type AddUsersInput = {
+  boardId: Scalars['ID'];
+  userIds: Array<InputMaybe<Scalars['String']>>;
+};
+
 export type Board = {
   __typename?: 'Board';
   columns: Array<Maybe<Column>>;
@@ -68,12 +73,17 @@ export type Label = {
 export type Mutation = {
   __typename?: 'Mutation';
   addBoard: Board;
+  addUsersToBoard: Board;
   changeBoardVisibility: Board;
   register: User;
 };
 
 export type MutationAddBoardArgs = {
   board: BoardInput;
+};
+
+export type MutationAddUsersToBoardArgs = {
+  users: AddUsersInput;
 };
 
 export type MutationChangeBoardVisibilityArgs = {
@@ -95,6 +105,7 @@ export type Query = {
   boardUsers: Array<Maybe<User>>;
   boards: Array<Maybe<Board>>;
   users: Array<Maybe<User>>;
+  usersNotAssignedToBoard: Array<Maybe<User>>;
 };
 
 export type QueryBoardArgs = {
@@ -103,6 +114,10 @@ export type QueryBoardArgs = {
 
 export type QueryBoardUsersArgs = {
   id: Scalars['ID'];
+};
+
+export type QueryUsersNotAssignedToBoardArgs = {
+  boardId: Scalars['ID'];
 };
 
 export type RegisterInput = {

@@ -106,6 +106,11 @@ export const typeDefs = gql`
     visibility: Visibility!
   }
 
+  input AddUsersInput {
+    userIds: [String]!
+    boardId: ID!
+  }
+
   input VisibilityInput {
     id: ID!
     visibility: Visibility!
@@ -113,6 +118,7 @@ export const typeDefs = gql`
 
   type Query {
     users: [User]!
+    usersNotAssignedToBoard(boardId: ID!): [User]!
     boardUsers(id: ID!): [User]!
     board(id: ID!): Board!
     boards: [Board]!
@@ -122,5 +128,6 @@ export const typeDefs = gql`
     register(credentials: RegisterInput!): User!
     addBoard(board: BoardInput!): Board!
     changeBoardVisibility(visbility: VisibilityInput!): Board!
+    addUsersToBoard(users: AddUsersInput!): Board!
   }
 `;

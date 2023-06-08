@@ -1,6 +1,7 @@
+import * as Types from 'graphql/generated/types';
+
 import { GraphQLResolveInfo } from 'graphql';
 import { Context } from 'graphql/context';
-import * as Types from 'graphql/generated/types';
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -87,6 +88,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AddUsersInput: Types.AddUsersInput;
   Board: ResolverTypeWrapper<Types.Board>;
   BoardInput: Types.BoardInput;
   Boolean: ResolverTypeWrapper<Types.Scalars['Boolean']>;
@@ -108,6 +110,7 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AddUsersInput: Types.AddUsersInput;
   Board: Types.Board;
   BoardInput: Types.BoardInput;
   Boolean: Types.Scalars['Boolean'];
@@ -200,6 +203,12 @@ export type MutationResolvers<
     ContextType,
     RequireFields<Types.MutationAddBoardArgs, 'board'>
   >;
+  addUsersToBoard?: Resolver<
+    ResolversTypes['Board'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationAddUsersToBoardArgs, 'users'>
+  >;
   changeBoardVisibility?: Resolver<
     ResolversTypes['Board'],
     ParentType,
@@ -232,6 +241,12 @@ export type QueryResolvers<
   >;
   boards?: Resolver<Array<Types.Maybe<ResolversTypes['Board']>>, ParentType, ContextType>;
   users?: Resolver<Array<Types.Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
+  usersNotAssignedToBoard?: Resolver<
+    Array<Types.Maybe<ResolversTypes['User']>>,
+    ParentType,
+    ContextType,
+    RequireFields<Types.QueryUsersNotAssignedToBoardArgs, 'boardId'>
+  >;
 };
 
 export type TaskResolvers<

@@ -1,7 +1,11 @@
 import { authenticate } from 'graphql/authenticate';
 import type { Context } from 'graphql/context';
 import { QueryResolvers } from 'graphql/generated/resolvers';
-import { QueryBoardArgs, QueryBoardUsersArgs } from 'graphql/generated/types';
+import {
+  QueryBoardArgs,
+  QueryBoardUsersArgs,
+  QueryUsersNotAssignedToBoardArgs,
+} from 'graphql/generated/types';
 
 const users = async (_parent: unknown, _args: unknown, context: Context) => {
   await authenticate(context);
@@ -15,6 +19,24 @@ const boardUsers = async (_parent: unknown, args: QueryBoardUsersArgs, context: 
     where: {
       boardsIds: {
         has: args.id,
+      },
+    },
+  });
+  return users;
+};
+
+const usersNotAssignedToBoard = async (
+  _parent: unknown,
+  args: QueryUsersNotAssignedToBoardArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const users = await context.prisma.user.findMany({
+    where: {
+      NOT: {
+        boardsIds: {
+          has: args.boardId,
+        },
       },
     },
   });
@@ -54,4 +76,4 @@ const boards = async (_parent: unknown, _args: unknown, context: Context) => {
   return boards;
 };
 
-export const query: QueryResolvers = { board, boardUsers, boards, users };
+export const query: QueryResolvers = { board, boardUsers, boards, users, usersNotAssignedToBoard };

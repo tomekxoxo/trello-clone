@@ -15,6 +15,15 @@ export type AddBoardMutation = {
   };
 };
 
+export type AddUsersToBoardMutationVariables = Types.Exact<{
+  users: Types.AddUsersInput;
+}>;
+
+export type AddUsersToBoardMutation = {
+  __typename?: 'Mutation';
+  addUsersToBoard: { __typename?: 'Board'; id: string; name: string; image?: string | null };
+};
+
 export type BoardQueryVariables = Types.Exact<{
   boardId: Types.Scalars['ID'];
 }>;
@@ -71,4 +80,42 @@ export type ChangeBoardVisibilityMutation = {
     visibility: Types.Visibility;
     id: string;
   };
+};
+
+export type RegisterMutationVariables = Types.Exact<{
+  credentials: Types.RegisterInput;
+}>;
+
+export type RegisterMutation = {
+  __typename?: 'Mutation';
+  register: {
+    __typename?: 'User';
+    id: string;
+    name: string;
+    email: string;
+    emailVerified?: string | null;
+    image?: string | null;
+    origin: Types.Origin;
+  };
+};
+
+export type UsersQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type UsersQuery = {
+  __typename?: 'Query';
+  users: Array<{ __typename?: 'User'; id: string; image?: string | null; name: string } | null>;
+};
+
+export type UsersNotAssignedToBoardQueryVariables = Types.Exact<{
+  boardId: Types.Scalars['ID'];
+}>;
+
+export type UsersNotAssignedToBoardQuery = {
+  __typename?: 'Query';
+  usersNotAssignedToBoard: Array<{
+    __typename?: 'User';
+    name: string;
+    id: string;
+    image?: string | null;
+  } | null>;
 };

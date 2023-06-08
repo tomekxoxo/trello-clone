@@ -1,0 +1,7 @@
+query UsersNotAssignedToBoard($boardId: ID!) {
+  usersNotAssignedToBoard(boardId: $boardId) {
+    name
+    id
+    image
+  }
+}

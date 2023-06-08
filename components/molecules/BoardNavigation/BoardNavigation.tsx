@@ -52,6 +52,7 @@ const BoardNavigation = ({ userData, visibility, id }: BoardNavigationProps) => 
         return <User key={index} image={user?.image} name={user.name} />;
       })}
       <InviteUserPopup
+        boardId={id}
         closePopup={() => setIsInvitationModalOpen(false)}
         isOpen={isInvitationModalOpen}
         anchor={

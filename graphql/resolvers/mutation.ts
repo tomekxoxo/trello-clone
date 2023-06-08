@@ -5,6 +5,7 @@ import { Context } from 'graphql/context';
 import { MutationResolvers } from 'graphql/generated/resolvers';
 import {
   MutationAddBoardArgs,
+  MutationAddUsersToBoardArgs,
   MutationChangeBoardVisibilityArgs,
   MutationRegisterArgs,
 } from 'graphql/generated/types';
@@ -112,4 +113,36 @@ const changeBoardVisibility = async (
 
   return board;
 };
-export const mutation: MutationResolvers = { addBoard, changeBoardVisibility, register };
+
+const addUsersToBoard = async (
+  _parent: unknown,
+  args: MutationAddUsersToBoardArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { users } = args;
+
+  const board = Promise.all(
+    users.userIds.map(async id => {
+      if (typeof id === 'string')
+        await context.prisma.board.update({
+          data: {
+            usersIds: {
+              push: id,
+            },
+          },
+          where: {
+            id: users.boardId,
+          },
+        });
+    }),
+  );
+
+  return board;
+};
+export const mutation: MutationResolvers = {
+  addBoard,
+  addUsersToBoard,
+  changeBoardVisibility,
+  register,
+};
