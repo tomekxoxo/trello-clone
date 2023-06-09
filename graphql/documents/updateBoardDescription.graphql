@@ -1,0 +1,5 @@
+mutation UpdateBoardDescription($board: UpdateBoardDescriptionInput!) {
+  updateBoardDescription(board: $board) {
+    id
+  }
+}

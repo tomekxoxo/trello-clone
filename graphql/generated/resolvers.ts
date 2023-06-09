@@ -105,6 +105,7 @@ export type ResolversTypes = {
   Task: ResolverTypeWrapper<Types.Task>;
   TaskInput: Types.TaskInput;
   TaskPositionInput: Types.TaskPositionInput;
+  UpdateBoardDescriptionInput: Types.UpdateBoardDescriptionInput;
   User: ResolverTypeWrapper<Types.User>;
   Visibility: Types.Visibility;
   VisibilityInput: Types.VisibilityInput;
@@ -128,6 +129,7 @@ export type ResolversParentTypes = {
   Task: Types.Task;
   TaskInput: Types.TaskInput;
   TaskPositionInput: Types.TaskPositionInput;
+  UpdateBoardDescriptionInput: Types.UpdateBoardDescriptionInput;
   User: Types.User;
   VisibilityInput: Types.VisibilityInput;
 };
@@ -137,6 +139,8 @@ export type BoardResolvers<
   ParentType extends ResolversParentTypes['Board'] = ResolversParentTypes['Board'],
 > = {
   columns?: Resolver<Array<Types.Maybe<ResolversTypes['Column']>>, ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  description?: Resolver<Types.Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   image?: Resolver<Types.Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
@@ -147,6 +151,7 @@ export type BoardResolvers<
     ParentType,
     ContextType
   >;
+  updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   users?: Resolver<Array<Types.Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
   usersIds?: Resolver<
     Types.Maybe<Array<Types.Maybe<ResolversTypes['String']>>>,
@@ -231,6 +236,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<Types.MutationRegisterArgs, 'credentials'>
+  >;
+  updateBoardDescription?: Resolver<
+    ResolversTypes['Board'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationUpdateBoardDescriptionArgs, 'board'>
   >;
   updateTaskPosition?: Resolver<
     ResolversTypes['Task'],

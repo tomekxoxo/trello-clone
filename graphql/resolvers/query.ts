@@ -50,8 +50,24 @@ const board = async (_parent: unknown, args: QueryBoardArgs, context: Context) =
       columns: {
         include: {
           tasks: {
+            include: {
+              labels: true,
+            },
             orderBy: { order: 'asc' },
           },
+        },
+      },
+      owner: {
+        select: {
+          name: true,
+        },
+      },
+      users: {
+        select: {
+          id: true,
+          image: true,
+          name: true,
+          ownerBoards: true,
         },
       },
     },

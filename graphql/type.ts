@@ -20,14 +20,17 @@ export const typeDefs = gql`
   type Board {
     id: ID!
     name: String!
-    ownerId: String!
     image: String
+    description: String
     visibility: Visibility!
-    owner: User!
-    users: [User]!
-    tasks: [Task]
-    columns: [Column]!
+    createdAt: String!
+    updatedAt: String!
     usersIds: [String]
+    users: [User]!
+    ownerId: String!
+    owner: User!
+    columns: [Column]!
+    tasks: [Task]
   }
 
   type Column {
@@ -108,6 +111,11 @@ export const typeDefs = gql`
     visibility: Visibility!
   }
 
+  input UpdateBoardDescriptionInput {
+    boardId: ID!
+    description: String!
+  }
+
   input AddUsersInput {
     userIds: [String]!
     boardId: ID!
@@ -141,6 +149,7 @@ export const typeDefs = gql`
   type Mutation {
     register(credentials: RegisterInput!): User!
     addBoard(board: BoardInput!): Board!
+    updateBoardDescription(board: UpdateBoardDescriptionInput!): Board!
     addTask(task: TaskInput!): Task!
     updateTaskPosition(position: TaskPositionInput!): Task!
     changeBoardVisibility(visbility: VisibilityInput!): Board!

@@ -180,6 +180,17 @@ export const BoardDocument = gql`
           name
         }
       }
+      owner {
+        name
+      }
+      createdAt
+      description
+      users {
+        id
+        name
+        ownerBoardsIds
+        image
+      }
     }
   }
 `;
@@ -413,6 +424,56 @@ export type RegisterMutationResult = Apollo.MutationResult<Types.RegisterMutatio
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<
   Types.RegisterMutation,
   Types.RegisterMutationVariables
+>;
+export const UpdateBoardDescriptionDocument = gql`
+  mutation UpdateBoardDescription($board: UpdateBoardDescriptionInput!) {
+    updateBoardDescription(board: $board) {
+      id
+    }
+  }
+`;
+export type UpdateBoardDescriptionMutationFn = Apollo.MutationFunction<
+  Types.UpdateBoardDescriptionMutation,
+  Types.UpdateBoardDescriptionMutationVariables
+>;
+
+/**
+ * __useUpdateBoardDescriptionMutation__
+ *
+ * To run a mutation, you first call `useUpdateBoardDescriptionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBoardDescriptionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBoardDescriptionMutation, { data, loading, error }] = useUpdateBoardDescriptionMutation({
+ *   variables: {
+ *      board: // value for 'board'
+ *   },
+ * });
+ */
+export function useUpdateBoardDescriptionMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.UpdateBoardDescriptionMutation,
+    Types.UpdateBoardDescriptionMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.UpdateBoardDescriptionMutation,
+    Types.UpdateBoardDescriptionMutationVariables
+  >(UpdateBoardDescriptionDocument, options);
+}
+export type UpdateBoardDescriptionMutationHookResult = ReturnType<
+  typeof useUpdateBoardDescriptionMutation
+>;
+export type UpdateBoardDescriptionMutationResult =
+  Apollo.MutationResult<Types.UpdateBoardDescriptionMutation>;
+export type UpdateBoardDescriptionMutationOptions = Apollo.BaseMutationOptions<
+  Types.UpdateBoardDescriptionMutation,
+  Types.UpdateBoardDescriptionMutationVariables
 >;
 export const UpdateTaskPositionDocument = gql`
   mutation UpdateTaskPosition($position: TaskPositionInput!) {

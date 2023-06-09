@@ -10,36 +10,33 @@ import {
   StyledMenuSidebarContent,
   StyledMenuSidebarHeader,
 } from 'Components/organisms/MenuSidebar/MenuSidebar.style';
+import { useUpdateBoardDescriptionMutation } from 'graphql/generated/hooks';
+import { BoardQuery } from 'graphql/generated/operations';
 import useClickOutside from 'Hooks/useClickOutside';
 import { useRef } from 'react';
 
-const membersMock = [
-  { isAdmin: true, userImage: '', userName: 'Tomasz kasprowicz' },
-  { isAdmin: false, userImage: '', userName: 'łukasz kasprowicz' },
-  { isAdmin: false, userImage: '', userName: 'Michał Mostowiak' },
-];
-
 interface MenuSidebarProps {
   closeSidebar: () => void;
+  boardData: BoardQuery;
 }
 
-const MenuSidebar = ({ closeSidebar }: MenuSidebarProps) => {
+const MenuSidebar = ({ closeSidebar, boardData }: MenuSidebarProps) => {
   const ref = useRef<HTMLDivElement>(null);
   useClickOutside(ref, closeSidebar);
 
-  const mockDescription = `Simple board to start on a project.
+  const [updateBoardDescription] = useUpdateBoardDescriptionMutation();
 
-  Each list can hold items (cards) that represent ideas or tasks.
-  
-  There 4 lists here:
-  
-  * Backlog 🤔 : Ideas are created here. Here people can describe the idea following three simple questions: Why you wish to do it, What it is, how can you do it.
-  
-  *   In Progress📚: Once the ideas is clearly defined, the task can move to #todo stage. Here the owner of the idea can move to #doing once s/he is ready. He can also wait a bit for other members to join.
-  * In Review ⚙️: On-going
-  * Completed 🙌🏽**: Finished
-  
-  You could add other lists like labels holding labels (with colors) in order to tag each card by a label if you wish.`;
+  const onChangeDescription = async (value: string) => {
+    await updateBoardDescription({
+      refetchQueries: ['Board'],
+      variables: {
+        board: {
+          boardId: boardData.board.id,
+          description: value,
+        },
+      },
+    });
+  };
 
   return (
     <StyledMenuSidebar ref={ref}>
@@ -55,26 +52,34 @@ const MenuSidebar = ({ closeSidebar }: MenuSidebarProps) => {
       </StyledMenuSidebarHeader>
       <Separator orientation='horizontal' />
       <StyledMenuSidebarContent>
-        <SidebarSectionHeader title='Made by' iconName='user' description='Tomasz Kasprowicz' />
-        <SidebarSectionHeader title='Made on' iconName='calendar' description='May 26 2022' />
+        <SidebarSectionHeader
+          title='Made by'
+          iconName='user'
+          description={boardData.board.owner.name}
+        />
+        <SidebarSectionHeader
+          title='Made on'
+          iconName='calendar'
+          description={new Date(Number(boardData.board.createdAt)).toDateString()}
+        />
         <SidebarSectionHeader title='Description' iconName='file-lines' />
         <Multiline
           height='30rem'
-          defaultValue={mockDescription}
+          defaultValue={boardData.board.description || ''}
           submitButtonText='Save'
           secondButtonText='Cancel'
-          onSubmitButtonClick={value => {
-            console.log('save', value);
-          }}
+          onSubmitButtonClick={onChangeDescription}
         />
         <SidebarSectionHeader title='Team' iconName='file-lines' />
-        {membersMock.map((member, index) => {
+        {boardData.board.users.map(user => {
+          const isAdmin = user?.id === boardData.board.ownerId;
+
           return (
             <SidebarTeamMember
-              key={index}
-              userImage={member.userImage}
-              userName={member.userName}
-              isAdmin={member.isAdmin}
+              key={user?.id}
+              userImage={user?.image}
+              userName={user?.name}
+              isAdmin={isAdmin}
               removeMember={() => {
                 return;
               }}

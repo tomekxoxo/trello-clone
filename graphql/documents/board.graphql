@@ -20,5 +20,16 @@ query Board($boardId: ID!) {
         name
       }
     }
+    owner {
+      name
+    }
+    createdAt
+    description
+    users {
+      id
+      name
+      ownerBoardsIds
+      image
+    }
   }
 }

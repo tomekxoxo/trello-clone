@@ -9,6 +9,7 @@ import {
   MutationAddUsersToBoardArgs,
   MutationChangeBoardVisibilityArgs,
   MutationRegisterArgs,
+  MutationUpdateBoardDescriptionArgs,
   MutationUpdateTaskPositionArgs,
 } from 'graphql/generated/types';
 
@@ -266,11 +267,32 @@ const updateTaskPosition = async (
   return updatedTask;
 };
 
+const updateBoardDescription = async (
+  _parent: unknown,
+  args: MutationUpdateBoardDescriptionArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { board } = args;
+
+  const updatedBoard = await context.prisma.board.update({
+    data: {
+      description: board.description,
+    },
+    where: {
+      id: board.boardId,
+    },
+  });
+
+  return updatedBoard;
+};
+
 export const mutation: MutationResolvers = {
   addBoard,
   addTask,
   addUsersToBoard,
   changeBoardVisibility,
   register,
+  updateBoardDescription,
   updateTaskPosition,
 };

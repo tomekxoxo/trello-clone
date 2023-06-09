@@ -43,8 +43,8 @@ const Index = () => {
         >
           Show menu
         </Button>
-        {isShowMenuSidebarOpen && (
-          <MenuSidebar closeSidebar={() => setIsShowMenuSidebarOpen(false)} />
+        {isShowMenuSidebarOpen && boardData && (
+          <MenuSidebar boardData={boardData} closeSidebar={() => setIsShowMenuSidebarOpen(false)} />
         )}
       </StyledBoardNavigation>
       {boardData && <WorkBoard boardData={boardData} />}

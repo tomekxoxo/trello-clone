@@ -20,12 +20,15 @@ export type AddUsersInput = {
 export type Board = {
   __typename?: 'Board';
   columns: Array<Maybe<Column>>;
+  createdAt: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   image?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   owner: User;
   ownerId: Scalars['String'];
   tasks?: Maybe<Array<Maybe<Task>>>;
+  updatedAt: Scalars['String'];
   users: Array<Maybe<User>>;
   usersIds?: Maybe<Array<Maybe<Scalars['String']>>>;
   visibility: Visibility;
@@ -77,6 +80,7 @@ export type Mutation = {
   addUsersToBoard: Board;
   changeBoardVisibility: Board;
   register: User;
+  updateBoardDescription: Board;
   updateTaskPosition: Task;
 };
 
@@ -98,6 +102,10 @@ export type MutationChangeBoardVisibilityArgs = {
 
 export type MutationRegisterArgs = {
   credentials: RegisterInput;
+};
+
+export type MutationUpdateBoardDescriptionArgs = {
+  board: UpdateBoardDescriptionInput;
 };
 
 export type MutationUpdateTaskPositionArgs = {
@@ -173,6 +181,11 @@ export type TaskPositionInput = {
   newColumnId: Scalars['String'];
   newIndex: Scalars['Int'];
   taskId: Scalars['String'];
+};
+
+export type UpdateBoardDescriptionInput = {
+  boardId: Scalars['ID'];
+  description: Scalars['String'];
 };
 
 export type User = {

@@ -56,6 +56,8 @@ export type BoardQuery = {
     name: string;
     ownerId: string;
     visibility: Types.Visibility;
+    createdAt: string;
+    description?: string | null;
     columns: Array<{
       __typename?: 'Column';
       id: string;
@@ -73,6 +75,14 @@ export type BoardQuery = {
           name: string;
         } | null> | null;
       } | null>;
+    } | null>;
+    owner: { __typename?: 'User'; name: string };
+    users: Array<{
+      __typename?: 'User';
+      id: string;
+      name: string;
+      ownerBoardsIds?: Array<string | null> | null;
+      image?: string | null;
     } | null>;
   };
 };
@@ -134,6 +144,15 @@ export type RegisterMutation = {
     image?: string | null;
     origin: Types.Origin;
   };
+};
+
+export type UpdateBoardDescriptionMutationVariables = Types.Exact<{
+  board: Types.UpdateBoardDescriptionInput;
+}>;
+
+export type UpdateBoardDescriptionMutation = {
+  __typename?: 'Mutation';
+  updateBoardDescription: { __typename?: 'Board'; id: string };
 };
 
 export type UpdateTaskPositionMutationVariables = Types.Exact<{
