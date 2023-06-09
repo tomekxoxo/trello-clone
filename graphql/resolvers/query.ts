@@ -46,6 +46,15 @@ const usersNotAssignedToBoard = async (
 const board = async (_parent: unknown, args: QueryBoardArgs, context: Context) => {
   await authenticate(context);
   const board = await context.prisma.board.findUnique({
+    include: {
+      columns: {
+        include: {
+          tasks: {
+            orderBy: { order: 'asc' },
+          },
+        },
+      },
+    },
     where: {
       id: args.id,
     },

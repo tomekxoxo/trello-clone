@@ -61,7 +61,7 @@ model Board {
 
 model Column {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
+  name      Status    @default(BACKLOG)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   boardId   String   @db.ObjectId
@@ -73,7 +73,6 @@ model Task {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   description String?
-  status      Status    @default(BACKLOG)
   image       String?
   boardId     String    @db.ObjectId
   board       Board     @relation("board-task", fields: [boardId], references: [id], onUpdate: Cascade)
@@ -86,6 +85,7 @@ model Task {
   labelsIds   String[]  @db.ObjectId
   labels      Label[]   @relation("task-label", fields: [labelsIds], references: [id])
   comments    Comment[] @relation("task-comment")
+  order Int
 }
 
 model Label {

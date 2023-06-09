@@ -1,121 +1,53 @@
 import { StyledWorkBoard } from 'Components/organisms/WorkBoard/WorkBoard.style';
 import WorkBoardColumn from 'Components/organisms/WorkBoardColumn/WorkBoardColumn';
+import { useUpdateTaskPositionMutation } from 'graphql/generated/hooks';
+import { BoardQuery } from 'graphql/generated/operations';
 import { produce } from 'immer';
 import { useEffect, useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 export interface WorkBoardProps {
-  data?: string[];
+  boardData: BoardQuery;
 }
 
-const cardsMock = [
-  {
-    id: 0,
-    labels: [
-      { color: 'black', name: 'label1' },
-      { color: 'green', name: 'label2' },
-    ],
-    title: 'Restaurant1',
-    users: [],
-  },
-  {
-    id: 1,
-    image: '/restaurant.jpeg',
-    title: 'Restaurant2',
-    users: [
-      { image: '/user.jpeg', name: 'John Doe' },
-      { name: 'Tomasz Kasprowicz' },
-      { image: '/user.jpeg', name: 'Mark Black' },
-      { image: '/user.jpeg', name: 'Elon Musk' },
-      { image: '/user.jpeg', name: 'Marion Cotilard' },
-      { image: '/user.jpeg', name: 'Marion Cotilard' },
-    ],
-  },
-  {
-    attachmentsCount: 3,
-    id: 2,
-    image: '/restaurant.jpeg',
-    messagesCount: 8,
-    title: 'Restaurant3',
-    users: [
-      { image: '/user.jpeg', name: 'John Doe' },
-      { name: 'Tomasz Kasprowicz' },
-      { image: '/user.jpeg', name: 'Mark Black' },
-      { image: '/user.jpeg', name: 'Elon Musk' },
-      { image: '/user.jpeg', name: 'Marion Cotilard' },
-      { image: '/user.jpeg', name: 'Marion Cotilard' },
-    ],
-  },
-  {
-    attachmentsCount: 31,
-    id: 3,
-    image: '/restaurant.jpeg',
-    messagesCount: 42,
-    title: 'Restaurant4',
-    users: [
-      { image: '/user.jpeg', name: 'John Doe' },
-      { name: 'Tomasz Kasprowicz' },
-      { image: '/user.jpeg', name: 'Mark Black' },
-      { image: '/user.jpeg', name: 'Elon Musk' },
-      { image: '/user.jpeg', name: 'Marion Cotilard' },
-      { image: '/user.jpeg', name: 'Marion Cotilard' },
-    ],
-  },
-  {
-    attachmentsCount: 8,
-    id: 4,
-    image: '/restaurant.jpeg',
-    messagesCount: 4,
-    title: 'Restaurant5',
-    users: [],
-  },
-  {
-    attachmentsCount: 10,
-    id: 5,
-    image: '/restaurant.jpeg',
-    messagesCount: 41,
-    title: 'Restaurant6',
-    users: [
-      { image: '/user.jpeg', name: 'John Doe' },
-      { name: 'Tomasz Kasprowicz' },
-      { image: '/user.jpeg', name: 'Mark Black' },
-      { image: '/user.jpeg', name: 'Elon Musk' },
-      { image: '/user.jpeg', name: 'Marion Cotilard' },
-      { image: '/user.jpeg', name: 'Marion Cotilard' },
-    ],
-  },
-];
-
-const columnsMock = [
-  { cardIds: [0, 1, 2, 3, 4, 5], status: 'backlog' },
-  { cardIds: [], status: 'wip' },
-  { cardIds: [], status: 'qa' },
-  { cardIds: [], status: 'done' },
-];
-
-const WorkBoard = ({ data }: WorkBoardProps) => {
-  const [cards, setCards] = useState(cardsMock);
-  const [columns, setCloumns] = useState(columnsMock);
+const WorkBoard = ({ boardData }: WorkBoardProps) => {
+  const [columns, setCloumns] = useState(boardData.board.columns);
   const columnsCount = columns.length;
+  const [updateTaskPosition] = useUpdateTaskPositionMutation();
 
-  console.log(data);
-
-  const onDragEnd = (result: DropResult) => {
+  const onDragEnd = async (result: DropResult) => {
     const { source, destination, draggableId } = result;
     if (!destination?.droppableId) return;
 
     setCloumns(prevColumns =>
-      produce(prevColumns, columns => {
-        const indexOfReducedColumn = columns.findIndex(
-          column => column.status === source.droppableId,
+      produce(prevColumns, proxyColumns => {
+        const tasks = columns.reduce((acc, curr) => {
+          return acc.concat(curr?.tasks);
+        }, []);
+        const indexOfReducedColumn = proxyColumns.findIndex(
+          column => column?.id === source.droppableId,
         );
-        columns[indexOfReducedColumn].cardIds.splice(source.index, 1);
-        const indexOfGainedColumn = columns.findIndex(
-          column => column.status === destination.droppableId,
+        proxyColumns[indexOfReducedColumn]?.tasks.splice(source.index, 1);
+        const indexOfGainedColumn = proxyColumns.findIndex(
+          column => column?.id === destination.droppableId,
         );
-        columns[indexOfGainedColumn].cardIds.splice(destination.index, 0, +draggableId);
+        proxyColumns[indexOfGainedColumn]?.tasks.splice(
+          destination.index,
+          0,
+          tasks.find(task => task.id === draggableId),
+        );
       }),
     );
+
+    await updateTaskPosition({
+      variables: {
+        position: {
+          newColumnId: destination.droppableId,
+          newIndex: destination.index,
+          taskId: draggableId,
+        },
+      },
+    });
   };
 
   const [isBrowser, setIsBrowser] = useState(false);
@@ -129,14 +61,14 @@ const WorkBoard = ({ data }: WorkBoardProps) => {
       {isBrowser ? (
         <DragDropContext onDragEnd={onDragEnd}>
           <StyledWorkBoard columnsCount={columnsCount}>
-            {columns.map(({ status, cardIds }, index) => (
+            {columns.map((column, index) => (
               <WorkBoardColumn
                 key={index}
                 index={index}
-                status={status}
-                cardIds={cardIds}
-                cards={cards}
-                setCards={setCards}
+                status={column?.name}
+                tasks={column?.tasks}
+                boardId={boardData.board.id}
+                columnId={column?.id}
               />
             ))}
           </StyledWorkBoard>

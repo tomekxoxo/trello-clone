@@ -32,7 +32,7 @@ export const typeDefs = gql`
 
   type Column {
     id: ID!
-    name: String!
+    name: Status!
     createdAt: String!
     updatedAt: String!
     boardId: String!
@@ -44,8 +44,6 @@ export const typeDefs = gql`
     id: ID!
     name: String!
     description: String
-    labels: [Label]
-    status: Status!
     image: String
     boardId: String!
     board: Board!
@@ -53,8 +51,12 @@ export const typeDefs = gql`
     column: Column!
     createdAt: String!
     updatedAt: String!
-    usersIds: [String!]!
-    users: [User!]!
+    userId: String!
+    user: User
+    labelsIds: [String]
+    labels: [Label]
+    comments: [Comment]
+    order: Int!
   }
 
   type Label {
@@ -116,6 +118,18 @@ export const typeDefs = gql`
     visibility: Visibility!
   }
 
+  input TaskInput {
+    name: String!
+    boardId: String!
+    columnId: String!
+  }
+
+  input TaskPositionInput {
+    taskId: String!
+    newColumnId: String!
+    newIndex: Int!
+  }
+
   type Query {
     users: [User]!
     usersNotAssignedToBoard(boardId: ID!): [User]!
@@ -127,6 +141,8 @@ export const typeDefs = gql`
   type Mutation {
     register(credentials: RegisterInput!): User!
     addBoard(board: BoardInput!): Board!
+    addTask(task: TaskInput!): Task!
+    updateTaskPosition(position: TaskPositionInput!): Task!
     changeBoardVisibility(visbility: VisibilityInput!): Board!
     addUsersToBoard(users: AddUsersInput!): Board!
   }

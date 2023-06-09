@@ -4,7 +4,9 @@ import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigatio
 import MenuSidebar from 'Components/organisms/MenuSidebar/MenuSidebar';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
 import { useBoardQuery, useBoardUsersQuery } from 'graphql/generated/hooks';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
+import { getSession } from 'next-auth/react';
 import { StyledBoard, StyledBoardNavigation } from 'Pages/board/index.style';
 import { useState } from 'react';
 
@@ -45,9 +47,26 @@ const Index = () => {
           <MenuSidebar closeSidebar={() => setIsShowMenuSidebarOpen(false)} />
         )}
       </StyledBoardNavigation>
-      <WorkBoard />
+      {boardData && <WorkBoard boardData={boardData} />}
     </StyledBoard>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async context => {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/login',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default Index;

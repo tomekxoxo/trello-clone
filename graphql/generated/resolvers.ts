@@ -1,7 +1,6 @@
-import * as Types from 'graphql/generated/types';
-
 import { GraphQLResolveInfo } from 'graphql';
 import { Context } from 'graphql/context';
+import * as Types from 'graphql/generated/types';
 export type RequireFields<T, K extends keyof T> = Omit<T, K> & { [P in K]-?: NonNullable<T[P]> };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -95,6 +94,7 @@ export type ResolversTypes = {
   Column: ResolverTypeWrapper<Types.Column>;
   Comment: ResolverTypeWrapper<Types.Comment>;
   ID: ResolverTypeWrapper<Types.Scalars['ID']>;
+  Int: ResolverTypeWrapper<Types.Scalars['Int']>;
   Label: ResolverTypeWrapper<Types.Label>;
   Mutation: ResolverTypeWrapper<{}>;
   Origin: Types.Origin;
@@ -103,6 +103,8 @@ export type ResolversTypes = {
   Status: Types.Status;
   String: ResolverTypeWrapper<Types.Scalars['String']>;
   Task: ResolverTypeWrapper<Types.Task>;
+  TaskInput: Types.TaskInput;
+  TaskPositionInput: Types.TaskPositionInput;
   User: ResolverTypeWrapper<Types.User>;
   Visibility: Types.Visibility;
   VisibilityInput: Types.VisibilityInput;
@@ -117,12 +119,15 @@ export type ResolversParentTypes = {
   Column: Types.Column;
   Comment: Types.Comment;
   ID: Types.Scalars['ID'];
+  Int: Types.Scalars['Int'];
   Label: Types.Label;
   Mutation: {};
   Query: {};
   RegisterInput: Types.RegisterInput;
   String: Types.Scalars['String'];
   Task: Types.Task;
+  TaskInput: Types.TaskInput;
+  TaskPositionInput: Types.TaskPositionInput;
   User: Types.User;
   VisibilityInput: Types.VisibilityInput;
 };
@@ -160,7 +165,7 @@ export type ColumnResolvers<
   boardId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['Status'], ParentType, ContextType>;
   tasks?: Resolver<Array<Types.Maybe<ResolversTypes['Task']>>, ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -203,6 +208,12 @@ export type MutationResolvers<
     ContextType,
     RequireFields<Types.MutationAddBoardArgs, 'board'>
   >;
+  addTask?: Resolver<
+    ResolversTypes['Task'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationAddTaskArgs, 'task'>
+  >;
   addUsersToBoard?: Resolver<
     ResolversTypes['Board'],
     ParentType,
@@ -220,6 +231,12 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<Types.MutationRegisterArgs, 'credentials'>
+  >;
+  updateTaskPosition?: Resolver<
+    ResolversTypes['Task'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationUpdateTaskPositionArgs, 'position'>
   >;
 };
 
@@ -257,6 +274,11 @@ export type TaskResolvers<
   boardId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   column?: Resolver<ResolversTypes['Column'], ParentType, ContextType>;
   columnId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  comments?: Resolver<
+    Types.Maybe<Array<Types.Maybe<ResolversTypes['Comment']>>>,
+    ParentType,
+    ContextType
+  >;
   createdAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   description?: Resolver<Types.Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -266,11 +288,16 @@ export type TaskResolvers<
     ParentType,
     ContextType
   >;
+  labelsIds?: Resolver<
+    Types.Maybe<Array<Types.Maybe<ResolversTypes['String']>>>,
+    ParentType,
+    ContextType
+  >;
   name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  status?: Resolver<ResolversTypes['Status'], ParentType, ContextType>;
+  order?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
   updatedAt?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
-  usersIds?: Resolver<Array<ResolversTypes['String']>, ParentType, ContextType>;
+  user?: Resolver<Types.Maybe<ResolversTypes['User']>, ParentType, ContextType>;
+  userId?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

@@ -1,0 +1,12 @@
+mutation UpdateTaskPosition($position: TaskPositionInput!) {
+  updateTaskPosition(position: $position) {
+    id
+    name
+    description
+    image
+    boardId
+    columnId
+    createdAt
+    updatedAt
+  }
+}

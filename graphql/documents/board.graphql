@@ -5,5 +5,20 @@ query Board($boardId: ID!) {
     name
     ownerId
     visibility
+    columns {
+      id
+      name
+      tasks {
+        description
+        id
+        image
+        labels {
+          color
+          id
+          name
+        }
+        name
+      }
+    }
   }
 }

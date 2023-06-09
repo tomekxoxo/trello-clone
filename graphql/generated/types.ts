@@ -44,7 +44,7 @@ export type Column = {
   boardId: Scalars['String'];
   createdAt: Scalars['String'];
   id: Scalars['ID'];
-  name: Scalars['String'];
+  name: Status;
   tasks: Array<Maybe<Task>>;
   updatedAt: Scalars['String'];
 };
@@ -73,13 +73,19 @@ export type Label = {
 export type Mutation = {
   __typename?: 'Mutation';
   addBoard: Board;
+  addTask: Task;
   addUsersToBoard: Board;
   changeBoardVisibility: Board;
   register: User;
+  updateTaskPosition: Task;
 };
 
 export type MutationAddBoardArgs = {
   board: BoardInput;
+};
+
+export type MutationAddTaskArgs = {
+  task: TaskInput;
 };
 
 export type MutationAddUsersToBoardArgs = {
@@ -92,6 +98,10 @@ export type MutationChangeBoardVisibilityArgs = {
 
 export type MutationRegisterArgs = {
   credentials: RegisterInput;
+};
+
+export type MutationUpdateTaskPositionArgs = {
+  position: TaskPositionInput;
 };
 
 export enum Origin {
@@ -139,16 +149,30 @@ export type Task = {
   boardId: Scalars['String'];
   column: Column;
   columnId: Scalars['String'];
+  comments?: Maybe<Array<Maybe<Comment>>>;
   createdAt: Scalars['String'];
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   image?: Maybe<Scalars['String']>;
   labels?: Maybe<Array<Maybe<Label>>>;
+  labelsIds?: Maybe<Array<Maybe<Scalars['String']>>>;
   name: Scalars['String'];
-  status: Status;
+  order: Scalars['Int'];
   updatedAt: Scalars['String'];
-  users: Array<User>;
-  usersIds: Array<Scalars['String']>;
+  user?: Maybe<User>;
+  userId: Scalars['String'];
+};
+
+export type TaskInput = {
+  boardId: Scalars['String'];
+  columnId: Scalars['String'];
+  name: Scalars['String'];
+};
+
+export type TaskPositionInput = {
+  newColumnId: Scalars['String'];
+  newIndex: Scalars['Int'];
+  taskId: Scalars['String'];
 };
 
 export type User = {

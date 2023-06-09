@@ -57,6 +57,57 @@ export type AddBoardMutationOptions = Apollo.BaseMutationOptions<
   Types.AddBoardMutation,
   Types.AddBoardMutationVariables
 >;
+export const AddTaskDocument = gql`
+  mutation AddTask($task: TaskInput!) {
+    addTask(task: $task) {
+      id
+      name
+      description
+      image
+      boardId
+      columnId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export type AddTaskMutationFn = Apollo.MutationFunction<
+  Types.AddTaskMutation,
+  Types.AddTaskMutationVariables
+>;
+
+/**
+ * __useAddTaskMutation__
+ *
+ * To run a mutation, you first call `useAddTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addTaskMutation, { data, loading, error }] = useAddTaskMutation({
+ *   variables: {
+ *      task: // value for 'task'
+ *   },
+ * });
+ */
+export function useAddTaskMutation(
+  baseOptions?: Apollo.MutationHookOptions<Types.AddTaskMutation, Types.AddTaskMutationVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<Types.AddTaskMutation, Types.AddTaskMutationVariables>(
+    AddTaskDocument,
+    options,
+  );
+}
+export type AddTaskMutationHookResult = ReturnType<typeof useAddTaskMutation>;
+export type AddTaskMutationResult = Apollo.MutationResult<Types.AddTaskMutation>;
+export type AddTaskMutationOptions = Apollo.BaseMutationOptions<
+  Types.AddTaskMutation,
+  Types.AddTaskMutationVariables
+>;
 export const AddUsersToBoardDocument = gql`
   mutation AddUsersToBoard($users: AddUsersInput!) {
     addUsersToBoard(users: $users) {
@@ -114,6 +165,21 @@ export const BoardDocument = gql`
       name
       ownerId
       visibility
+      columns {
+        id
+        name
+        tasks {
+          description
+          id
+          image
+          labels {
+            color
+            id
+            name
+          }
+          name
+        }
+      }
     }
   }
 `;
@@ -347,6 +413,61 @@ export type RegisterMutationResult = Apollo.MutationResult<Types.RegisterMutatio
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<
   Types.RegisterMutation,
   Types.RegisterMutationVariables
+>;
+export const UpdateTaskPositionDocument = gql`
+  mutation UpdateTaskPosition($position: TaskPositionInput!) {
+    updateTaskPosition(position: $position) {
+      id
+      name
+      description
+      image
+      boardId
+      columnId
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export type UpdateTaskPositionMutationFn = Apollo.MutationFunction<
+  Types.UpdateTaskPositionMutation,
+  Types.UpdateTaskPositionMutationVariables
+>;
+
+/**
+ * __useUpdateTaskPositionMutation__
+ *
+ * To run a mutation, you first call `useUpdateTaskPositionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTaskPositionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTaskPositionMutation, { data, loading, error }] = useUpdateTaskPositionMutation({
+ *   variables: {
+ *      position: // value for 'position'
+ *   },
+ * });
+ */
+export function useUpdateTaskPositionMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.UpdateTaskPositionMutation,
+    Types.UpdateTaskPositionMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.UpdateTaskPositionMutation,
+    Types.UpdateTaskPositionMutationVariables
+  >(UpdateTaskPositionDocument, options);
+}
+export type UpdateTaskPositionMutationHookResult = ReturnType<typeof useUpdateTaskPositionMutation>;
+export type UpdateTaskPositionMutationResult =
+  Apollo.MutationResult<Types.UpdateTaskPositionMutation>;
+export type UpdateTaskPositionMutationOptions = Apollo.BaseMutationOptions<
+  Types.UpdateTaskPositionMutation,
+  Types.UpdateTaskPositionMutationVariables
 >;
 export const UsersDocument = gql`
   query Users {

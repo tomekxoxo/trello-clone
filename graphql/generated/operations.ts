@@ -11,7 +11,26 @@ export type AddBoardMutation = {
     name: string;
     ownerId: string;
     users: Array<{ __typename?: 'User'; name: string; email: string; id: string } | null>;
-    columns: Array<{ __typename?: 'Column'; boardId: string; name: string } | null>;
+    columns: Array<{ __typename?: 'Column'; boardId: string; name: Types.Status } | null>;
+  };
+};
+
+export type AddTaskMutationVariables = Types.Exact<{
+  task: Types.TaskInput;
+}>;
+
+export type AddTaskMutation = {
+  __typename?: 'Mutation';
+  addTask: {
+    __typename?: 'Task';
+    id: string;
+    name: string;
+    description?: string | null;
+    image?: string | null;
+    boardId: string;
+    columnId: string;
+    createdAt: string;
+    updatedAt: string;
   };
 };
 
@@ -37,6 +56,24 @@ export type BoardQuery = {
     name: string;
     ownerId: string;
     visibility: Types.Visibility;
+    columns: Array<{
+      __typename?: 'Column';
+      id: string;
+      name: Types.Status;
+      tasks: Array<{
+        __typename?: 'Task';
+        description?: string | null;
+        id: string;
+        image?: string | null;
+        name: string;
+        labels?: Array<{
+          __typename?: 'Label';
+          color: string;
+          id: string;
+          name: string;
+        } | null> | null;
+      } | null>;
+    } | null>;
   };
 };
 
@@ -96,6 +133,25 @@ export type RegisterMutation = {
     emailVerified?: string | null;
     image?: string | null;
     origin: Types.Origin;
+  };
+};
+
+export type UpdateTaskPositionMutationVariables = Types.Exact<{
+  position: Types.TaskPositionInput;
+}>;
+
+export type UpdateTaskPositionMutation = {
+  __typename?: 'Mutation';
+  updateTaskPosition: {
+    __typename?: 'Task';
+    id: string;
+    name: string;
+    description?: string | null;
+    image?: string | null;
+    boardId: string;
+    columnId: string;
+    createdAt: string;
+    updatedAt: string;
   };
 };
 

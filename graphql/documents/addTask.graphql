@@ -1,0 +1,12 @@
+mutation AddTask($task: TaskInput!) {
+  addTask(task: $task) {
+    id
+    name
+    description
+    image
+    boardId
+    columnId
+    createdAt
+    updatedAt
+  }
+}
