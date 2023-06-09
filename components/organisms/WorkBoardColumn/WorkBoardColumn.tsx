@@ -85,6 +85,7 @@ const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardC
             placeholder='Enter a title for this card...'
             defaultValue=''
             onSubmitButtonClick={onAddTask}
+            onClickOutside={() => setIsMultilineOpen(false)}
           />
         </StyledWorkBoardMultilineWrapper>
       )}
