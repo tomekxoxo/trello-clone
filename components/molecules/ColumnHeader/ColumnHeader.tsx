@@ -1,35 +1,35 @@
-import Button from 'Components/atoms/Button/Button';
-import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
-import Icon from 'Components/atoms/Icon/Icon';
-import Popup from 'Components/atoms/Popup/Popup';
+// import Button from 'Components/atoms/Button/Button';
+// import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
+// import Icon from 'Components/atoms/Icon/Icon';
+// import Popup from 'Components/atoms/Popup/Popup';
 import Typography from 'Components/atoms/Typography/Typography';
 import { StyledColumnHeader } from 'Components/molecules/ColumnHeader/ColumnHeader.style';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export interface ColumnHeaderProps {
   status: string;
 }
 
-const ColumnOptions = [
-  {
-    label: 'Rename',
-  },
-  {
-    label: 'Delete this list',
-  },
-];
+// const ColumnOptions = [
+//   {
+//     label: 'Rename',
+//   },
+//   {
+//     label: 'Delete this list',
+//   },
+// ];
 
 const ColumnHeader = ({ status }: ColumnHeaderProps) => {
-  const [isOptionsDropdownOpen, setIsOptionsDropdownOpen] = useState(false);
+  // const [isOptionsDropdownOpen, setIsOptionsDropdownOpen] = useState(false);
 
-  const handleVisibilityDropdownOpen = () => setIsOptionsDropdownOpen(prevState => !prevState);
+  // const handleVisibilityDropdownOpen = () => setIsOptionsDropdownOpen(prevState => !prevState);
 
   return (
     <StyledColumnHeader>
       <Typography color='dark' variant='h3'>
         {status}
       </Typography>
-      <Popup
+      {/* <Popup
         attachmentSide='right'
         closePopup={() => setIsOptionsDropdownOpen(false)}
         isOpen={isOptionsDropdownOpen}
@@ -51,7 +51,7 @@ const ColumnHeader = ({ status }: ColumnHeaderProps) => {
             </DropdownItem>
           ))}
         </>
-      </Popup>
+      </Popup> */}
     </StyledColumnHeader>
   );
 };
