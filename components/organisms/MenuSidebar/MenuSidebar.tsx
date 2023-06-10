@@ -31,7 +31,7 @@ const MenuSidebar = ({ closeSidebar, boardData }: MenuSidebarProps) => {
 
   const onChangeDescription = async (value: string) => {
     await updateBoardDescription({
-      refetchQueries: ['Board'],
+      refetchQueries: 'active',
       variables: {
         board: {
           boardId: boardData.board.id,
@@ -45,6 +45,7 @@ const MenuSidebar = ({ closeSidebar, boardData }: MenuSidebarProps) => {
 
   const onRemoveMember = async (userId: string) => {
     await removeUserFromBoard({
+      refetchQueries: 'active',
       variables: {
         board: {
           boardId: boardData.board.id,
@@ -88,14 +89,14 @@ const MenuSidebar = ({ closeSidebar, boardData }: MenuSidebarProps) => {
         />
         <SidebarSectionHeader title='Team' iconName='file-lines' />
         {boardData.board.users.map(user => {
-          const isAdmin = user?.id === boardData.board.ownerId;
+          const isOwner = user?.id === boardData.board.ownerId;
 
           return (
             <SidebarTeamMember
               key={user?.id}
               userImage={user?.image}
               userName={user?.name}
-              isAdmin={isAdmin}
+              isOwner={isOwner}
               removeMember={() => onRemoveMember(user?.id)}
             />
           );

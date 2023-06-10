@@ -75,7 +75,7 @@ const InviteUserPopup = ({
     event.preventDefault();
 
     await setBoardUsers({
-      refetchQueries: ['Users'],
+      refetchQueries: 'active',
       variables: {
         users: {
           boardId,

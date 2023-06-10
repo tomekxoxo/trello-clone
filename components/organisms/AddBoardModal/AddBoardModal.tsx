@@ -37,7 +37,7 @@ const AddBoardModal = ({ closeModal }: AddBoardModalProps) => {
 
   const onSubmit = async (data: Schema) => {
     addBoardMutation({
-      refetchQueries: ['Boards'],
+      refetchQueries: 'active',
       variables: {
         board: {
           description: data.boardDescription,

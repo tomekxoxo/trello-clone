@@ -56,6 +56,10 @@ const WorkBoard = ({ boardData }: WorkBoardProps) => {
     setIsBrowser(process.browser);
   }, []);
 
+  useEffect(() => {
+    setCloumns(boardData.board.columns);
+  }, [boardData]);
+
   return (
     <>
       {isBrowser ? (

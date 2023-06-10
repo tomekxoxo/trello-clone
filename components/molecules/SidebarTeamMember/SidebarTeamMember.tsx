@@ -6,21 +6,21 @@ import User from 'Components/molecules/User/User';
 interface SidebarTeamMemberProps {
   userImage?: string;
   userName: string;
-  isAdmin?: boolean;
+  isOwner?: boolean;
   removeMember?: () => void;
 }
 
 const SidebarTeamMember = ({
   userImage,
   userName,
-  isAdmin,
+  isOwner,
   removeMember,
 }: SidebarTeamMemberProps) => (
   <StyledSidebarTeamMember>
     <User name={userName} image={userImage} withName />
-    {isAdmin ? (
+    {isOwner ? (
       <Typography color='gray3' variant='h5'>
-        Admin
+        Owner
       </Typography>
     ) : (
       <Button

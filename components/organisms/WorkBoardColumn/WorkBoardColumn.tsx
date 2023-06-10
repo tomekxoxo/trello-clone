@@ -28,7 +28,7 @@ const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardC
 
   const onAddTask = async (name: string) => {
     await AddTask({
-      refetchQueries: ['Board'],
+      refetchQueries: 'active',
       variables: {
         task: {
           boardId,
