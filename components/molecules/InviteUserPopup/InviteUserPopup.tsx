@@ -11,6 +11,7 @@ import SearchDropdown from 'Components/molecules/SearchDropdown/SearchDropdown';
 import User from 'Components/molecules/User/User';
 import { useSetBoardUsersMutation, useUsersNotAssignedToBoardQuery } from 'graphql/generated/hooks';
 import { BoardQuery } from 'graphql/generated/operations';
+import { FormEvent } from 'react';
 import { useState } from 'react';
 
 interface InviteUserPopupProps {
@@ -70,7 +71,9 @@ const InviteUserPopup = ({
     }
   };
 
-  const onSubmit = async () => {
+  const onSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+
     await setBoardUsers({
       refetchQueries: ['Users'],
       variables: {
@@ -80,6 +83,7 @@ const InviteUserPopup = ({
         },
       },
     });
+    closePopup();
   };
 
   return (
