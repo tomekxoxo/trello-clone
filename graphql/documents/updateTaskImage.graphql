@@ -1,0 +1,27 @@
+mutation UpdateTaskImage($task: UpdateTaskImageInput!) {
+  updateTaskImage(task: $task) {
+    id
+    comments {
+      content
+      id
+      user {
+        id
+        name
+        image
+      }
+    }
+    description
+    image
+    name
+    user {
+      id
+      name
+      image
+    }
+    labels {
+      id
+      color
+      name
+    }
+  }
+}

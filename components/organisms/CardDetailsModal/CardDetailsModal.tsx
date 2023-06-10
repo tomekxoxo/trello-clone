@@ -16,23 +16,18 @@ import {
   StyledCardDetailsMainSection,
   StyledCardDetailsModal,
 } from 'Components/organisms/CardDetailsModal/CardDetailsModal.style';
-import { useState } from 'react';
+import {
+  useAddCommentMutation,
+  useTaskQuery,
+  useUpdateTaskDescriptionMutation,
+  useUpdateTaskImageMutation,
+} from 'graphql/generated/hooks';
+import { useEffect, useState } from 'react';
 
 export interface CardDetailsModalProps {
   onCloseModal: () => void;
+  id: string;
 }
-
-const title = '✋🏿 Move anything that is actually started here';
-
-const mockDescription = `Ideas are created and share here through a card. 
-Here you can describe what you'd like to accomplish.
-For example you can follow three simple questions to create the card related to your idea:
-
-  * Why  ? (Why do you wish to do it ?)
-  * What ? (What it  is it, what are the goals, who is concerned)
-  * How  ? (How do you think you can do it ? What are the required steps ?)
-
-After creation, you can move your card to the todo list.`;
 
 const attachmentsMock = [
   {
@@ -50,14 +45,67 @@ const attachmentsMock = [
   },
 ];
 
-const commentsMock = [
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet',
+const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
+  const [cover, setCover] = useState('');
 
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet',
-];
+  const { data } = useTaskQuery({
+    variables: {
+      taskId: id,
+    },
+  });
 
-const CardDetailsModal = ({ onCloseModal }: CardDetailsModalProps) => {
-  const [cover, setCover] = useState('/wayne-bishop-7YUW7fvIYoQ-unsplash.jpg');
+  const [updateTaskImage] = useUpdateTaskImageMutation();
+  const [updateTaskDescription] = useUpdateTaskDescriptionMutation();
+
+  const onUpdateDescription = async (value: string) => {
+    await updateTaskDescription({
+      refetchQueries: 'active',
+      variables: {
+        task: {
+          description: value,
+          taskId: id,
+        },
+      },
+    });
+  };
+
+  const [addComment] = useAddCommentMutation();
+
+  const onAddComment = async (value: string) => {
+    await addComment({
+      refetchQueries: 'active',
+      variables: {
+        comment: {
+          content: value,
+          taskId: id,
+        },
+      },
+    });
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (!cover) return;
+      await updateTaskImage({
+        refetchQueries: 'active',
+        variables: {
+          task: {
+            image: cover,
+            taskId: id,
+          },
+        },
+      });
+    })();
+  }, [cover, id, setCover, updateTaskImage]);
+
+  useEffect(() => {
+    if (!data?.task.image) return;
+    setCover(data.task.image);
+  }, [data?.task.image]);
+
+  if (!data) return null;
+
+  console.log('data', data);
 
   return (
     <Modal closeModal={onCloseModal} width='66rem'>
@@ -66,18 +114,17 @@ const CardDetailsModal = ({ onCloseModal }: CardDetailsModalProps) => {
         <StyledCardDetailsInfoSection>
           <StyledCardDetailsMainSection>
             <Typography weight='400' color='dark' variant='h2'>
-              {title}
+              {data.task.name}
             </Typography>
-            <SidebarSectionHeader title='Status' description='Backlog' />
+            <SidebarSectionHeader title='Status' description={data.task.column.name} />
+            <SidebarSectionHeader title='Assigned to' description={data.task.user.name} />
             <SidebarSectionHeader title='Description' iconName='file-lines' />
             <Multiline
               height='23rem'
-              defaultValue={mockDescription}
+              defaultValue={data.task.description || ''}
               submitButtonText='Save'
               secondButtonText='Cancel'
-              onSubmitButtonClick={value => {
-                console.log('save', value);
-              }}
+              onSubmitButtonClick={onUpdateDescription}
             />
             <SidebarSectionHeader
               title='Attachments'
@@ -110,16 +157,15 @@ const CardDetailsModal = ({ onCloseModal }: CardDetailsModalProps) => {
               <SidebarSectionHeader title='Comments' iconName='pen' />
               <Multiline
                 height='10rem'
-                defaultValue='Write a comment...'
+                placeholder='Write a comment...'
                 submitButtonText='Comment'
                 secondButtonText='Cancel'
-                onSubmitButtonClick={value => {
-                  console.log('save', value);
-                }}
+                onSubmitButtonClick={onAddComment}
               />
-              {commentsMock.map((comment, index) => (
-                <Comment comment={comment} key={index} />
-              ))}
+              {data.task.comments &&
+                [...data.task.comments]
+                  ?.sort((a, b) => Number(b?.updatedAt) - Number(a?.updatedAt))
+                  ?.map(comment => <Comment comment={comment} key={comment?.id} />)}
             </StyledCardDetailsCommentsSection>
           </StyledCardDetailsMainSection>
           <StyledCardDetailsAsideSection>

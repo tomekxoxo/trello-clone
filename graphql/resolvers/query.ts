@@ -4,6 +4,7 @@ import { QueryResolvers } from 'graphql/generated/resolvers';
 import {
   QueryBoardArgs,
   QueryBoardUsersArgs,
+  QueryTaskArgs,
   QueryUsersNotAssignedToBoardArgs,
 } from 'graphql/generated/types';
 
@@ -20,6 +21,28 @@ const boardUsers = async (_parent: unknown, args: QueryBoardUsersArgs, context: 
       boardsIds: {
         has: args.id,
       },
+    },
+  });
+  return users;
+};
+
+const task = async (_parent: unknown, args: QueryTaskArgs, context: Context) => {
+  await authenticate(context);
+  const { id } = args;
+
+  const users = await context.prisma.task.findUnique({
+    include: {
+      column: true,
+      comments: {
+        include: {
+          user: true,
+        },
+      },
+      labels: true,
+      user: true,
+    },
+    where: {
+      id,
     },
   });
   return users;
@@ -51,6 +74,11 @@ const board = async (_parent: unknown, args: QueryBoardArgs, context: Context) =
         include: {
           tasks: {
             include: {
+              comments: {
+                include: {
+                  user: true,
+                },
+              },
               labels: true,
             },
             orderBy: { order: 'asc' },
@@ -101,4 +129,11 @@ const boards = async (_parent: unknown, _args: unknown, context: Context) => {
   return boards;
 };
 
-export const query: QueryResolvers = { board, boardUsers, boards, users, usersNotAssignedToBoard };
+export const query: QueryResolvers = {
+  board,
+  boardUsers,
+  boards,
+  task,
+  users,
+  usersNotAssignedToBoard,
+};

@@ -15,6 +15,21 @@ export type AddBoardMutation = {
   };
 };
 
+export type AddCommentMutationVariables = Types.Exact<{
+  comment: Types.AddCommentInput;
+}>;
+
+export type AddCommentMutation = {
+  __typename?: 'Mutation';
+  addComment: {
+    __typename?: 'Comment';
+    id: string;
+    createdAt: string;
+    content: string;
+    user: { __typename?: 'User'; id: string; name: string; image?: string | null };
+  };
+};
+
 export type AddTaskMutationVariables = Types.Exact<{
   task: Types.TaskInput;
 }>;
@@ -64,6 +79,11 @@ export type BoardQuery = {
           color: string;
           id: string;
           name: string;
+        } | null> | null;
+        comments?: Array<{
+          __typename?: 'Comment';
+          id: string;
+          user: { __typename?: 'User'; id: string; image?: string | null; name: string };
         } | null> | null;
       } | null>;
     } | null>;
@@ -120,6 +140,24 @@ export type ChangeBoardVisibilityMutation = {
   };
 };
 
+export type DeleteCommentMutationVariables = Types.Exact<{
+  deleteCommentId: Types.Scalars['ID'];
+}>;
+
+export type DeleteCommentMutation = {
+  __typename?: 'Mutation';
+  deleteComment: { __typename?: 'Comment'; id: string };
+};
+
+export type EditCommentMutationVariables = Types.Exact<{
+  comment: Types.EditCommentInput;
+}>;
+
+export type EditCommentMutation = {
+  __typename?: 'Mutation';
+  editComment: { __typename?: 'Comment'; id: string };
+};
+
 export type RegisterMutationVariables = Types.Exact<{
   credentials: Types.RegisterInput;
 }>;
@@ -155,6 +193,31 @@ export type SetBoardUsersMutation = {
   setBoardUsers: { __typename?: 'Board'; id: string; name: string; image?: string | null };
 };
 
+export type TaskQueryVariables = Types.Exact<{
+  taskId: Types.Scalars['ID'];
+}>;
+
+export type TaskQuery = {
+  __typename?: 'Query';
+  task: {
+    __typename?: 'Task';
+    id: string;
+    description?: string | null;
+    image?: string | null;
+    name: string;
+    comments?: Array<{
+      __typename?: 'Comment';
+      id: string;
+      content: string;
+      updatedAt: string;
+      user: { __typename?: 'User'; id: string; name: string; image?: string | null };
+    } | null> | null;
+    labels?: Array<{ __typename?: 'Label'; id: string; color: string; name: string } | null> | null;
+    column: { __typename?: 'Column'; name: Types.Status };
+    user?: { __typename?: 'User'; id: string; name: string } | null;
+  };
+};
+
 export type UpdateBoardDescriptionMutationVariables = Types.Exact<{
   board: Types.UpdateBoardDescriptionInput;
 }>;
@@ -162,6 +225,52 @@ export type UpdateBoardDescriptionMutationVariables = Types.Exact<{
 export type UpdateBoardDescriptionMutation = {
   __typename?: 'Mutation';
   updateBoardDescription: { __typename?: 'Board'; id: string };
+};
+
+export type UpdateTaskDescriptionMutationVariables = Types.Exact<{
+  task: Types.UpdateTaskDescriptionInput;
+}>;
+
+export type UpdateTaskDescriptionMutation = {
+  __typename?: 'Mutation';
+  updateTaskDescription: {
+    __typename?: 'Task';
+    id: string;
+    description?: string | null;
+    image?: string | null;
+    name: string;
+    comments?: Array<{
+      __typename?: 'Comment';
+      content: string;
+      id: string;
+      user: { __typename?: 'User'; id: string; name: string; image?: string | null };
+    } | null> | null;
+    user?: { __typename?: 'User'; id: string; name: string; image?: string | null } | null;
+    labels?: Array<{ __typename?: 'Label'; id: string; color: string; name: string } | null> | null;
+  };
+};
+
+export type UpdateTaskImageMutationVariables = Types.Exact<{
+  task: Types.UpdateTaskImageInput;
+}>;
+
+export type UpdateTaskImageMutation = {
+  __typename?: 'Mutation';
+  updateTaskImage: {
+    __typename?: 'Task';
+    id: string;
+    description?: string | null;
+    image?: string | null;
+    name: string;
+    comments?: Array<{
+      __typename?: 'Comment';
+      content: string;
+      id: string;
+      user: { __typename?: 'User'; id: string; name: string; image?: string | null };
+    } | null> | null;
+    user?: { __typename?: 'User'; id: string; name: string; image?: string | null } | null;
+    labels?: Array<{ __typename?: 'Label'; id: string; color: string; name: string } | null> | null;
+  };
 };
 
 export type UpdateTaskPositionMutationVariables = Types.Exact<{

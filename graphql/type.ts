@@ -147,11 +147,32 @@ export const typeDefs = gql`
     ownerId: ID!
   }
 
+  input UpdateTaskDescriptionInput {
+    taskId: ID!
+    description: String!
+  }
+
+  input UpdateTaskImageInput {
+    taskId: ID!
+    image: String!
+  }
+
+  input AddCommentInput {
+    taskId: ID!
+    content: String!
+  }
+
+  input EditCommentInput {
+    commentId: ID!
+    content: String!
+  }
+
   type Query {
     users: [User]!
     usersNotAssignedToBoard(board: UsersNotAssignedToBoardInput!): [User]!
     boardUsers(id: ID!): [User]!
     board(id: ID!): Board!
+    task(id: ID!): Task!
     boards: [Board]!
   }
 
@@ -161,6 +182,11 @@ export const typeDefs = gql`
     updateBoardDescription(board: UpdateBoardDescriptionInput!): Board!
     addTask(task: TaskInput!): Task!
     updateTaskPosition(position: TaskPositionInput!): Task!
+    addComment(comment: AddCommentInput!): Comment!
+    editComment(comment: EditCommentInput!): Comment!
+    deleteComment(id: ID!): Comment!
+    updateTaskDescription(task: UpdateTaskDescriptionInput!): Task!
+    updateTaskImage(task: UpdateTaskImageInput!): Task!
     changeBoardVisibility(visbility: VisibilityInput!): Board!
     setBoardUsers(users: SetBoardUsersInput!): Board!
     removeUserFromBoard(board: RemoveUserFromBoardInput!): Board!

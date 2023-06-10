@@ -1,5 +1,3 @@
-import Button from 'Components/atoms/Button/Button';
-import Icon from 'Components/atoms/Icon/Icon';
 import Image from 'Components/atoms/Image/Image';
 import Label, { LabelProps } from 'Components/atoms/Label/Label';
 import Typography from 'Components/atoms/Typography/Typography';
@@ -18,31 +16,25 @@ export interface CardProps {
   title: string;
   labels?: LabelProps[];
   users?: UserProps[];
-  canAddUser?: boolean;
   attachmentsCount?: number;
-  messagesCount?: number;
-  id: string;
+  commentsCount?: number;
   onClick: () => void;
 }
 
 const Card = (
   {
-    image = '/panorama.svg',
-    id,
+    image,
     title,
     users,
     attachmentsCount,
-    messagesCount,
+    commentsCount,
     labels,
-    canAddUser,
     onClick,
     ...restProps
   }: CardProps,
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
-  console.log(id);
-
-  const maxUsers = canAddUser ? 2 : 3;
+  const maxUsers = 3;
   const usersToShow = users?.slice(0, maxUsers);
   const hiddenUsers = users && users?.length - maxUsers;
   const hasAnyHiddenUsers = hiddenUsers && hiddenUsers > 0;
@@ -73,14 +65,11 @@ const Card = (
               {hiddenUsersInfo}
             </Typography>
           )}
-          {canAddUser && (
-            <Button icon={<Icon name='plus' size='12' color='white' />} iconPosition='right' />
-          )}
         </StyledCardUsers>
-        {(attachmentsCount || messagesCount) && (
+        {(attachmentsCount || commentsCount) && (
           <StyledCardActions>
             {attachmentsCount && <ItemCounter icon='paperclip' count={2} />}
-            {messagesCount && <ItemCounter icon='message' count={5} />}
+            {commentsCount && <ItemCounter icon='message' count={commentsCount} />}
           </StyledCardActions>
         )}
       </StyledCard>

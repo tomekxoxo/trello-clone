@@ -18,6 +18,14 @@ query Board($boardId: ID!) {
           name
         }
         name
+        comments {
+          id
+          user {
+            id
+            image
+            name
+          }
+        }
       }
     }
     owner {

@@ -1,0 +1,30 @@
+query Task($taskId: ID!) {
+  task(id: $taskId) {
+    id
+    description
+    comments {
+      id
+      content
+      user {
+        id
+        name
+        image
+      }
+      updatedAt
+    }
+    image
+    labels {
+      id
+      color
+      name
+    }
+    name
+    column {
+      name
+    }
+    user {
+      id
+      name
+    }
+  }
+}

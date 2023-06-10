@@ -5,12 +5,17 @@ import { Context } from 'graphql/context';
 import { MutationResolvers } from 'graphql/generated/resolvers';
 import {
   MutationAddBoardArgs,
+  MutationAddCommentArgs,
   MutationAddTaskArgs,
   MutationChangeBoardVisibilityArgs,
+  MutationDeleteCommentArgs,
+  MutationEditCommentArgs,
   MutationRegisterArgs,
   MutationRemoveUserFromBoardArgs,
   MutationSetBoardUsersArgs,
   MutationUpdateBoardDescriptionArgs,
+  MutationUpdateTaskDescriptionArgs,
+  MutationUpdateTaskImageArgs,
   MutationUpdateTaskPositionArgs,
 } from 'graphql/generated/types';
 
@@ -396,13 +401,111 @@ const updateBoardDescription = async (
   return updatedBoard;
 };
 
+const updateTaskDescription = async (
+  _parent: unknown,
+  args: MutationUpdateTaskDescriptionArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { task } = args;
+  const { taskId, description } = task;
+
+  const updatedTask = await context.prisma.task.update({
+    data: { description },
+    where: {
+      id: taskId,
+    },
+  });
+
+  return updatedTask;
+};
+
+const updateTaskImage = async (
+  _parent: unknown,
+  args: MutationUpdateTaskImageArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { task } = args;
+  const { taskId, image } = task;
+
+  const updatedTask = await context.prisma.task.update({
+    data: { image },
+    where: {
+      id: taskId,
+    },
+  });
+
+  return updatedTask;
+};
+
+const addComment = async (_parent: unknown, args: MutationAddCommentArgs, context: Context) => {
+  const { session } = await authenticate(context);
+  const { comment } = args;
+  const { taskId, content } = comment;
+
+  const userId = session.user.id;
+
+  const createdComment = await context.prisma.comment.create({
+    data: {
+      content,
+      taskId,
+      userId,
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  return createdComment;
+};
+
+const editComment = async (_parent: unknown, args: MutationEditCommentArgs, context: Context) => {
+  await authenticate(context);
+  const { comment } = args;
+  const { commentId, content } = comment;
+
+  const editedComment = await context.prisma.comment.update({
+    data: {
+      content,
+    },
+    where: {
+      id: commentId,
+    },
+  });
+
+  return editedComment;
+};
+
+const deleteComment = async (
+  _parent: unknown,
+  args: MutationDeleteCommentArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { id } = args;
+
+  const deletedComment = await context.prisma.comment.delete({
+    where: {
+      id,
+    },
+  });
+
+  return deletedComment;
+};
+
 export const mutation: MutationResolvers = {
   addBoard,
+  addComment,
   addTask,
   changeBoardVisibility,
+  deleteComment,
+  editComment,
   register,
   removeUserFromBoard,
   setBoardUsers,
   updateBoardDescription,
+  updateTaskDescription,
+  updateTaskImage,
   updateTaskPosition,
 };

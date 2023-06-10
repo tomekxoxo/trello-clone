@@ -23,6 +23,7 @@ export interface WorkBoardColumnProps {
 const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardColumnProps) => {
   const [isMultilineOpen, setIsMultilineOpen] = useState(false);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
+  const [detailsCardId, setDetailsCardId] = useState('');
 
   const [AddTask] = useAddTaskMutation();
 
@@ -40,6 +41,16 @@ const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardC
     setIsMultilineOpen(false);
   };
 
+  const onClickCard = (id: string) => {
+    setIsDetailsModalOpen(true);
+    setDetailsCardId(id);
+  };
+
+  const onCloseCardDetails = () => {
+    setIsDetailsModalOpen(false);
+    setDetailsCardId('');
+  };
+
   return (
     <StyledWorkBoardColumn>
       <ColumnHeader status={status} />
@@ -54,23 +65,28 @@ const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardC
               if (!task) return;
               return (
                 <Draggable draggableId={task.id} index={index} key={task.id}>
-                  {provided => (
-                    <Card
-                      ref={provided.innerRef}
-                      {...provided.draggableProps}
-                      {...provided.dragHandleProps}
-                      key={task.id}
-                      id={task.id}
-                      image={task?.image}
-                      title={task.name}
-                      // users={card.users}
-                      labels={task.labels}
-                      // messagesCount={card.messagesCount}
-                      // attachmentsCount={card.attachmentsCount}
-                      canAddUser
-                      onClick={() => setIsDetailsModalOpen(true)}
-                    />
-                  )}
+                  {provided => {
+                    const commentUsers = task.comments?.map(comment => comment.user);
+                    const reducedUsers = Array.from(new Set(commentUsers.map(user => user.id))).map(
+                      id => commentUsers.find(u => u.id === id),
+                    );
+
+                    return (
+                      <Card
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        key={task.id}
+                        image={task?.image}
+                        title={task.name}
+                        users={reducedUsers}
+                        labels={task.labels}
+                        commentsCount={task.comments.length}
+                        // attachmentsCount={card.attachmentsCount}
+                        onClick={() => onClickCard(task.id)}
+                      />
+                    );
+                  }}
                 </Draggable>
               );
             })}
@@ -89,7 +105,9 @@ const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardC
           />
         </StyledWorkBoardMultilineWrapper>
       )}
-      {isDetailsModalOpen && <CardDetailsModal onCloseModal={() => setIsDetailsModalOpen(false)} />}
+      {isDetailsModalOpen && detailsCardId && (
+        <CardDetailsModal id={detailsCardId} onCloseModal={onCloseCardDetails} />
+      )}
       {index === 0 && (
         <AddAnotherButton
           text='Add another card'

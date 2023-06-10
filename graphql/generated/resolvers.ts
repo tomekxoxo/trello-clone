@@ -87,11 +87,13 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
+  AddCommentInput: Types.AddCommentInput;
   Board: ResolverTypeWrapper<Types.Board>;
   BoardInput: Types.BoardInput;
   Boolean: ResolverTypeWrapper<Types.Scalars['Boolean']>;
   Column: ResolverTypeWrapper<Types.Column>;
   Comment: ResolverTypeWrapper<Types.Comment>;
+  EditCommentInput: Types.EditCommentInput;
   ID: ResolverTypeWrapper<Types.Scalars['ID']>;
   Int: ResolverTypeWrapper<Types.Scalars['Int']>;
   Label: ResolverTypeWrapper<Types.Label>;
@@ -107,6 +109,8 @@ export type ResolversTypes = {
   TaskInput: Types.TaskInput;
   TaskPositionInput: Types.TaskPositionInput;
   UpdateBoardDescriptionInput: Types.UpdateBoardDescriptionInput;
+  UpdateTaskDescriptionInput: Types.UpdateTaskDescriptionInput;
+  UpdateTaskImageInput: Types.UpdateTaskImageInput;
   User: ResolverTypeWrapper<Types.User>;
   UsersNotAssignedToBoardInput: Types.UsersNotAssignedToBoardInput;
   Visibility: Types.Visibility;
@@ -115,11 +119,13 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
+  AddCommentInput: Types.AddCommentInput;
   Board: Types.Board;
   BoardInput: Types.BoardInput;
   Boolean: Types.Scalars['Boolean'];
   Column: Types.Column;
   Comment: Types.Comment;
+  EditCommentInput: Types.EditCommentInput;
   ID: Types.Scalars['ID'];
   Int: Types.Scalars['Int'];
   Label: Types.Label;
@@ -133,6 +139,8 @@ export type ResolversParentTypes = {
   TaskInput: Types.TaskInput;
   TaskPositionInput: Types.TaskPositionInput;
   UpdateBoardDescriptionInput: Types.UpdateBoardDescriptionInput;
+  UpdateTaskDescriptionInput: Types.UpdateTaskDescriptionInput;
+  UpdateTaskImageInput: Types.UpdateTaskImageInput;
   User: Types.User;
   UsersNotAssignedToBoardInput: Types.UsersNotAssignedToBoardInput;
   VisibilityInput: Types.VisibilityInput;
@@ -217,6 +225,12 @@ export type MutationResolvers<
     ContextType,
     RequireFields<Types.MutationAddBoardArgs, 'board'>
   >;
+  addComment?: Resolver<
+    ResolversTypes['Comment'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationAddCommentArgs, 'comment'>
+  >;
   addTask?: Resolver<
     ResolversTypes['Task'],
     ParentType,
@@ -228,6 +242,18 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<Types.MutationChangeBoardVisibilityArgs, 'visbility'>
+  >;
+  deleteComment?: Resolver<
+    ResolversTypes['Comment'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationDeleteCommentArgs, 'id'>
+  >;
+  editComment?: Resolver<
+    ResolversTypes['Comment'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationEditCommentArgs, 'comment'>
   >;
   register?: Resolver<
     ResolversTypes['User'],
@@ -252,6 +278,18 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<Types.MutationUpdateBoardDescriptionArgs, 'board'>
+  >;
+  updateTaskDescription?: Resolver<
+    ResolversTypes['Task'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationUpdateTaskDescriptionArgs, 'task'>
+  >;
+  updateTaskImage?: Resolver<
+    ResolversTypes['Task'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationUpdateTaskImageArgs, 'task'>
   >;
   updateTaskPosition?: Resolver<
     ResolversTypes['Task'],
@@ -278,6 +316,12 @@ export type QueryResolvers<
     RequireFields<Types.QueryBoardUsersArgs, 'id'>
   >;
   boards?: Resolver<Array<Types.Maybe<ResolversTypes['Board']>>, ParentType, ContextType>;
+  task?: Resolver<
+    ResolversTypes['Task'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.QueryTaskArgs, 'id'>
+  >;
   users?: Resolver<Array<Types.Maybe<ResolversTypes['User']>>, ParentType, ContextType>;
   usersNotAssignedToBoard?: Resolver<
     Array<Types.Maybe<ResolversTypes['User']>>,

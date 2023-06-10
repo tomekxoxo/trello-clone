@@ -12,7 +12,7 @@ interface MultilineProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   submitButtonText?: string;
   secondButtonText?: string;
   height?: string;
-  defaultValue: string;
+  defaultValue?: string;
   onSubmitButtonClick: (value: string) => void;
   onSecondButtonClick?: () => void;
   onClickOutside?: () => void;

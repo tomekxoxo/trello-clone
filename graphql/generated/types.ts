@@ -12,6 +12,11 @@ export type Scalars = {
   Float: number;
 };
 
+export type AddCommentInput = {
+  content: Scalars['String'];
+  taskId: Scalars['ID'];
+};
+
 export type Board = {
   __typename?: 'Board';
   columns: Array<Maybe<Column>>;
@@ -59,6 +64,11 @@ export type Comment = {
   userId: Scalars['String'];
 };
 
+export type EditCommentInput = {
+  commentId: Scalars['ID'];
+  content: Scalars['String'];
+};
+
 export type Label = {
   __typename?: 'Label';
   color: Scalars['String'];
@@ -71,17 +81,26 @@ export type Label = {
 export type Mutation = {
   __typename?: 'Mutation';
   addBoard: Board;
+  addComment: Comment;
   addTask: Task;
   changeBoardVisibility: Board;
+  deleteComment: Comment;
+  editComment: Comment;
   register: User;
   removeUserFromBoard: Board;
   setBoardUsers: Board;
   updateBoardDescription: Board;
+  updateTaskDescription: Task;
+  updateTaskImage: Task;
   updateTaskPosition: Task;
 };
 
 export type MutationAddBoardArgs = {
   board: BoardInput;
+};
+
+export type MutationAddCommentArgs = {
+  comment: AddCommentInput;
 };
 
 export type MutationAddTaskArgs = {
@@ -90,6 +109,14 @@ export type MutationAddTaskArgs = {
 
 export type MutationChangeBoardVisibilityArgs = {
   visbility: VisibilityInput;
+};
+
+export type MutationDeleteCommentArgs = {
+  id: Scalars['ID'];
+};
+
+export type MutationEditCommentArgs = {
+  comment: EditCommentInput;
 };
 
 export type MutationRegisterArgs = {
@@ -108,6 +135,14 @@ export type MutationUpdateBoardDescriptionArgs = {
   board: UpdateBoardDescriptionInput;
 };
 
+export type MutationUpdateTaskDescriptionArgs = {
+  task: UpdateTaskDescriptionInput;
+};
+
+export type MutationUpdateTaskImageArgs = {
+  task: UpdateTaskImageInput;
+};
+
 export type MutationUpdateTaskPositionArgs = {
   position: TaskPositionInput;
 };
@@ -122,6 +157,7 @@ export type Query = {
   board: Board;
   boardUsers: Array<Maybe<User>>;
   boards: Array<Maybe<Board>>;
+  task: Task;
   users: Array<Maybe<User>>;
   usersNotAssignedToBoard: Array<Maybe<User>>;
 };
@@ -131,6 +167,10 @@ export type QueryBoardArgs = {
 };
 
 export type QueryBoardUsersArgs = {
+  id: Scalars['ID'];
+};
+
+export type QueryTaskArgs = {
   id: Scalars['ID'];
 };
 
@@ -196,6 +236,16 @@ export type TaskPositionInput = {
 export type UpdateBoardDescriptionInput = {
   boardId: Scalars['ID'];
   description: Scalars['String'];
+};
+
+export type UpdateTaskDescriptionInput = {
+  description: Scalars['String'];
+  taskId: Scalars['ID'];
+};
+
+export type UpdateTaskImageInput = {
+  image: Scalars['String'];
+  taskId: Scalars['ID'];
 };
 
 export type User = {

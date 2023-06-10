@@ -1,0 +1,12 @@
+mutation AddComment($comment: AddCommentInput!) {
+  addComment(comment: $comment) {
+    id
+    createdAt
+    content
+    user {
+      id
+      name
+      image
+    }
+  }
+}
