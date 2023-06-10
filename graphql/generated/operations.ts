@@ -34,15 +34,6 @@ export type AddTaskMutation = {
   };
 };
 
-export type AddUsersToBoardMutationVariables = Types.Exact<{
-  users: Types.AddUsersInput;
-}>;
-
-export type AddUsersToBoardMutation = {
-  __typename?: 'Mutation';
-  addUsersToBoard: { __typename?: 'Board'; id: string; name: string; image?: string | null };
-};
-
 export type BoardQueryVariables = Types.Exact<{
   boardId: Types.Scalars['ID'];
 }>;
@@ -146,6 +137,24 @@ export type RegisterMutation = {
   };
 };
 
+export type RemoveUserFromBoardMutationVariables = Types.Exact<{
+  board: Types.RemoveUserFromBoardInput;
+}>;
+
+export type RemoveUserFromBoardMutation = {
+  __typename?: 'Mutation';
+  removeUserFromBoard: { __typename?: 'Board'; id: string; name: string };
+};
+
+export type SetBoardUsersMutationVariables = Types.Exact<{
+  users: Types.SetBoardUsersInput;
+}>;
+
+export type SetBoardUsersMutation = {
+  __typename?: 'Mutation';
+  setBoardUsers: { __typename?: 'Board'; id: string; name: string; image?: string | null };
+};
+
 export type UpdateBoardDescriptionMutationVariables = Types.Exact<{
   board: Types.UpdateBoardDescriptionInput;
 }>;
@@ -182,7 +191,7 @@ export type UsersQuery = {
 };
 
 export type UsersNotAssignedToBoardQueryVariables = Types.Exact<{
-  boardId: Types.Scalars['ID'];
+  board: Types.UsersNotAssignedToBoardInput;
 }>;
 
 export type UsersNotAssignedToBoardQuery = {

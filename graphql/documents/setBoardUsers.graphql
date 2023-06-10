@@ -1,0 +1,7 @@
+mutation SetBoardUsers($users: SetBoardUsersInput!) {
+  setBoardUsers(users: $users) {
+    id
+    name
+    image
+  }
+}

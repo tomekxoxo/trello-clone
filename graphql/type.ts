@@ -116,7 +116,7 @@ export const typeDefs = gql`
     description: String!
   }
 
-  input AddUsersInput {
+  input SetBoardUsersInput {
     userIds: [String]!
     boardId: ID!
   }
@@ -138,9 +138,18 @@ export const typeDefs = gql`
     newIndex: Int!
   }
 
+  input RemoveUserFromBoardInput {
+    boardId: ID!
+    userId: ID!
+  }
+
+  input UsersNotAssignedToBoardInput {
+    ownerId: ID!
+  }
+
   type Query {
     users: [User]!
-    usersNotAssignedToBoard(boardId: ID!): [User]!
+    usersNotAssignedToBoard(board: UsersNotAssignedToBoardInput!): [User]!
     boardUsers(id: ID!): [User]!
     board(id: ID!): Board!
     boards: [Board]!
@@ -153,6 +162,7 @@ export const typeDefs = gql`
     addTask(task: TaskInput!): Task!
     updateTaskPosition(position: TaskPositionInput!): Task!
     changeBoardVisibility(visbility: VisibilityInput!): Board!
-    addUsersToBoard(users: AddUsersInput!): Board!
+    setBoardUsers(users: SetBoardUsersInput!): Board!
+    removeUserFromBoard(board: RemoveUserFromBoardInput!): Board!
   }
 `;

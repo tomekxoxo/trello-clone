@@ -1,0 +1,6 @@
+mutation RemoveUserFromBoard($board: RemoveUserFromBoardInput!) {
+  removeUserFromBoard(board: $board) {
+    id
+    name
+  }
+}

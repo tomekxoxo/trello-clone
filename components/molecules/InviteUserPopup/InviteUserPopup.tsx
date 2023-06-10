@@ -1,6 +1,7 @@
 import Checkbox from 'Components/atoms/Checkbox/Checkbox';
 import DropdownItem from 'Components/atoms/DropdownItem/DropdownItem';
 import Popup from 'Components/atoms/Popup/Popup';
+import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledInviteButton,
   StyledInviteUserForm,
@@ -8,10 +9,8 @@ import {
 import PopupHeader from 'Components/molecules/PopupHeader/PopupHeader';
 import SearchDropdown from 'Components/molecules/SearchDropdown/SearchDropdown';
 import User from 'Components/molecules/User/User';
-import {
-  useAddUsersToBoardMutation,
-  useUsersNotAssignedToBoardQuery,
-} from 'graphql/generated/hooks';
+import { useSetBoardUsersMutation, useUsersNotAssignedToBoardQuery } from 'graphql/generated/hooks';
+import { BoardQuery } from 'graphql/generated/operations';
 import { useState } from 'react';
 
 interface InviteUserPopupProps {
@@ -20,6 +19,7 @@ interface InviteUserPopupProps {
   closePopup: () => void;
   anchor: JSX.Element;
   boardId: string;
+  boardData: BoardQuery;
 }
 
 interface UserInterface {
@@ -33,16 +33,22 @@ const InviteUserPopup = ({
   closePopup,
   isOpen,
   boardId,
+  boardData,
 }: InviteUserPopupProps) => {
+  const defaultBoardUsers = boardData.board.users
+    .map(u => ({ id: u.id, name: u?.name }))
+    .filter(user => user?.id !== boardData.board.ownerId);
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [value, setValue] = useState('');
-  const [chosenElements, setChosenElements] = useState<UserInterface[]>([]);
+  const [chosenElements, setChosenElements] = useState<UserInterface[]>(defaultBoardUsers);
 
-  const [addUsersToBoard] = useAddUsersToBoardMutation();
+  const [setBoardUsers] = useSetBoardUsersMutation();
 
   const { data } = useUsersNotAssignedToBoardQuery({
     variables: {
-      boardId,
+      board: {
+        ownerId: boardData.board.ownerId,
+      },
     },
   });
 
@@ -54,7 +60,6 @@ const InviteUserPopup = ({
 
   const handleCheck = (isChecked: boolean, user: UserInterface) => {
     if (isChecked) {
-      console.log(user);
       setChosenElements(prevState => {
         return prevState?.concat(user);
       });
@@ -66,7 +71,7 @@ const InviteUserPopup = ({
   };
 
   const onSubmit = async () => {
-    await addUsersToBoard({
+    await setBoardUsers({
       refetchQueries: ['Users'],
       variables: {
         users: {
@@ -89,24 +94,32 @@ const InviteUserPopup = ({
           closeDropdown={() => setIsDropdownOpen(false)}
           onClick={() => setIsDropdownOpen(true)}
         >
-          {filteredList?.map(user => {
-            return (
-              <Checkbox
-                key={user.id}
-                value={chosenElements?.some(el => el.id === user.id)}
-                onChange={isChecked =>
-                  handleCheck(isChecked, {
-                    id: user?.id,
-                    name: user?.name,
-                  })
-                }
-              >
-                <DropdownItem>
-                  <User name={user.name} withName />
-                </DropdownItem>
-              </Checkbox>
-            );
-          })}
+          {filteredList.length ? (
+            filteredList?.map(user => {
+              return (
+                <Checkbox
+                  key={user.id}
+                  value={chosenElements?.some(el => el.id === user.id)}
+                  onChange={isChecked =>
+                    handleCheck(isChecked, {
+                      id: user?.id,
+                      name: user?.name,
+                    })
+                  }
+                >
+                  <DropdownItem>
+                    <User name={user.name} withName />
+                  </DropdownItem>
+                </Checkbox>
+              );
+            })
+          ) : (
+            <DropdownItem>
+              <Typography color='gray1' variant='h4' weight='700'>
+                No results
+              </Typography>
+            </DropdownItem>
+          )}
         </SearchDropdown>
         <div>
           {chosenElements?.map(user => {

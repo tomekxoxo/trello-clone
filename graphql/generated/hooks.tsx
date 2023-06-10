@@ -108,55 +108,6 @@ export type AddTaskMutationOptions = Apollo.BaseMutationOptions<
   Types.AddTaskMutation,
   Types.AddTaskMutationVariables
 >;
-export const AddUsersToBoardDocument = gql`
-  mutation AddUsersToBoard($users: AddUsersInput!) {
-    addUsersToBoard(users: $users) {
-      id
-      name
-      image
-    }
-  }
-`;
-export type AddUsersToBoardMutationFn = Apollo.MutationFunction<
-  Types.AddUsersToBoardMutation,
-  Types.AddUsersToBoardMutationVariables
->;
-
-/**
- * __useAddUsersToBoardMutation__
- *
- * To run a mutation, you first call `useAddUsersToBoardMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAddUsersToBoardMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [addUsersToBoardMutation, { data, loading, error }] = useAddUsersToBoardMutation({
- *   variables: {
- *      users: // value for 'users'
- *   },
- * });
- */
-export function useAddUsersToBoardMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    Types.AddUsersToBoardMutation,
-    Types.AddUsersToBoardMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<Types.AddUsersToBoardMutation, Types.AddUsersToBoardMutationVariables>(
-    AddUsersToBoardDocument,
-    options,
-  );
-}
-export type AddUsersToBoardMutationHookResult = ReturnType<typeof useAddUsersToBoardMutation>;
-export type AddUsersToBoardMutationResult = Apollo.MutationResult<Types.AddUsersToBoardMutation>;
-export type AddUsersToBoardMutationOptions = Apollo.BaseMutationOptions<
-  Types.AddUsersToBoardMutation,
-  Types.AddUsersToBoardMutationVariables
->;
 export const BoardDocument = gql`
   query Board($boardId: ID!) {
     board(id: $boardId) {
@@ -425,6 +376,106 @@ export type RegisterMutationOptions = Apollo.BaseMutationOptions<
   Types.RegisterMutation,
   Types.RegisterMutationVariables
 >;
+export const RemoveUserFromBoardDocument = gql`
+  mutation RemoveUserFromBoard($board: RemoveUserFromBoardInput!) {
+    removeUserFromBoard(board: $board) {
+      id
+      name
+    }
+  }
+`;
+export type RemoveUserFromBoardMutationFn = Apollo.MutationFunction<
+  Types.RemoveUserFromBoardMutation,
+  Types.RemoveUserFromBoardMutationVariables
+>;
+
+/**
+ * __useRemoveUserFromBoardMutation__
+ *
+ * To run a mutation, you first call `useRemoveUserFromBoardMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRemoveUserFromBoardMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [removeUserFromBoardMutation, { data, loading, error }] = useRemoveUserFromBoardMutation({
+ *   variables: {
+ *      board: // value for 'board'
+ *   },
+ * });
+ */
+export function useRemoveUserFromBoardMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.RemoveUserFromBoardMutation,
+    Types.RemoveUserFromBoardMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.RemoveUserFromBoardMutation,
+    Types.RemoveUserFromBoardMutationVariables
+  >(RemoveUserFromBoardDocument, options);
+}
+export type RemoveUserFromBoardMutationHookResult = ReturnType<
+  typeof useRemoveUserFromBoardMutation
+>;
+export type RemoveUserFromBoardMutationResult =
+  Apollo.MutationResult<Types.RemoveUserFromBoardMutation>;
+export type RemoveUserFromBoardMutationOptions = Apollo.BaseMutationOptions<
+  Types.RemoveUserFromBoardMutation,
+  Types.RemoveUserFromBoardMutationVariables
+>;
+export const SetBoardUsersDocument = gql`
+  mutation SetBoardUsers($users: SetBoardUsersInput!) {
+    setBoardUsers(users: $users) {
+      id
+      name
+      image
+    }
+  }
+`;
+export type SetBoardUsersMutationFn = Apollo.MutationFunction<
+  Types.SetBoardUsersMutation,
+  Types.SetBoardUsersMutationVariables
+>;
+
+/**
+ * __useSetBoardUsersMutation__
+ *
+ * To run a mutation, you first call `useSetBoardUsersMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSetBoardUsersMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [setBoardUsersMutation, { data, loading, error }] = useSetBoardUsersMutation({
+ *   variables: {
+ *      users: // value for 'users'
+ *   },
+ * });
+ */
+export function useSetBoardUsersMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.SetBoardUsersMutation,
+    Types.SetBoardUsersMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<Types.SetBoardUsersMutation, Types.SetBoardUsersMutationVariables>(
+    SetBoardUsersDocument,
+    options,
+  );
+}
+export type SetBoardUsersMutationHookResult = ReturnType<typeof useSetBoardUsersMutation>;
+export type SetBoardUsersMutationResult = Apollo.MutationResult<Types.SetBoardUsersMutation>;
+export type SetBoardUsersMutationOptions = Apollo.BaseMutationOptions<
+  Types.SetBoardUsersMutation,
+  Types.SetBoardUsersMutationVariables
+>;
 export const UpdateBoardDescriptionDocument = gql`
   mutation UpdateBoardDescription($board: UpdateBoardDescriptionInput!) {
     updateBoardDescription(board: $board) {
@@ -571,8 +622,8 @@ export type UsersQueryHookResult = ReturnType<typeof useUsersQuery>;
 export type UsersLazyQueryHookResult = ReturnType<typeof useUsersLazyQuery>;
 export type UsersQueryResult = Apollo.QueryResult<Types.UsersQuery, Types.UsersQueryVariables>;
 export const UsersNotAssignedToBoardDocument = gql`
-  query UsersNotAssignedToBoard($boardId: ID!) {
-    usersNotAssignedToBoard(boardId: $boardId) {
+  query UsersNotAssignedToBoard($board: UsersNotAssignedToBoardInput!) {
+    usersNotAssignedToBoard(board: $board) {
       name
       id
       image
@@ -592,7 +643,7 @@ export const UsersNotAssignedToBoardDocument = gql`
  * @example
  * const { data, loading, error } = useUsersNotAssignedToBoardQuery({
  *   variables: {
- *      boardId: // value for 'boardId'
+ *      board: // value for 'board'
  *   },
  * });
  */

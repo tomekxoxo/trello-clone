@@ -6,9 +6,10 @@ import { MutationResolvers } from 'graphql/generated/resolvers';
 import {
   MutationAddBoardArgs,
   MutationAddTaskArgs,
-  MutationAddUsersToBoardArgs,
   MutationChangeBoardVisibilityArgs,
   MutationRegisterArgs,
+  MutationRemoveUserFromBoardArgs,
+  MutationSetBoardUsersArgs,
   MutationUpdateBoardDescriptionArgs,
   MutationUpdateTaskPositionArgs,
 } from 'graphql/generated/types';
@@ -117,25 +118,82 @@ const changeBoardVisibility = async (
   return board;
 };
 
-const addUsersToBoard = async (
+const setBoardUsers = async (
   _parent: unknown,
-  args: MutationAddUsersToBoardArgs,
+  args: MutationSetBoardUsersArgs,
   context: Context,
 ) => {
   await authenticate(context);
   const { users } = args;
 
-  const board = Promise.all(
+  const boardOwner = await context.prisma.board.findUnique({
+    select: {
+      ownerId: true,
+    },
+    where: {
+      id: users.boardId,
+    },
+  });
+
+  if (!boardOwner?.ownerId) return;
+
+  await context.prisma.board.update({
+    data: {
+      usersIds: {
+        set: [boardOwner.ownerId],
+      },
+    },
+    where: {
+      id: users.boardId,
+    },
+  });
+
+  const usersIds = users.userIds as string[];
+
+  const board = await context.prisma.board.update({
+    data: {
+      usersIds: {
+        push: usersIds,
+      },
+    },
+    where: {
+      id: users.boardId,
+    },
+  });
+
+  await context.prisma.user.updateMany({
+    data: {
+      boardsIds: {
+        set: [],
+      },
+    },
+    where: {
+      AND: [
+        {
+          boardsIds: {
+            has: users.boardId,
+          },
+        },
+        {
+          id: {
+            not: boardOwner?.ownerId,
+          },
+        },
+      ],
+    },
+  });
+
+  await Promise.all(
     users.userIds.map(async id => {
       if (typeof id === 'string')
-        await context.prisma.board.update({
+        await context.prisma.user.update({
           data: {
-            usersIds: {
-              push: id,
+            boardsIds: {
+              set: users.boardId,
             },
           },
           where: {
-            id: users.boardId,
+            id,
           },
         });
     }),
@@ -167,6 +225,57 @@ const addTask = async (_parent: unknown, args: MutationAddTaskArgs, context: Con
   });
 
   return newTask;
+};
+
+const removeUserFromBoard = async (
+  _parent: unknown,
+  args: MutationRemoveUserFromBoardArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { board } = args;
+
+  const usersIds = await context.prisma.board.findUnique({
+    select: {
+      usersIds: true,
+    },
+    where: {
+      id: board.boardId,
+    },
+  });
+
+  const boardsIds = await context.prisma.user.findUnique({
+    select: {
+      boardsIds: true,
+    },
+    where: {
+      id: board.userId,
+    },
+  });
+
+  const updatedBoard = await context.prisma.board.update({
+    data: {
+      usersIds: {
+        set: usersIds?.usersIds.filter(id => id !== board.userId),
+      },
+    },
+    where: {
+      id: board.boardId,
+    },
+  });
+
+  await context.prisma.user.update({
+    data: {
+      boardsIds: {
+        set: boardsIds?.boardsIds.filter(id => id !== board.boardId),
+      },
+    },
+    where: {
+      id: board.userId,
+    },
+  });
+
+  return updatedBoard;
 };
 
 const updateTaskPosition = async (
@@ -290,9 +399,10 @@ const updateBoardDescription = async (
 export const mutation: MutationResolvers = {
   addBoard,
   addTask,
-  addUsersToBoard,
   changeBoardVisibility,
   register,
+  removeUserFromBoard,
+  setBoardUsers,
   updateBoardDescription,
   updateTaskPosition,
 };

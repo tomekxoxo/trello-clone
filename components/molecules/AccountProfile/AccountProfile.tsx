@@ -9,9 +9,7 @@ import { signOut, useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 const AccountProfile = () => {
-  const { data: session, status } = useSession();
-
-  console.log(session, status);
+  const { data: session } = useSession();
 
   const userName = session?.user?.name;
   const image = session?.user?.image;

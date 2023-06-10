@@ -87,7 +87,6 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  AddUsersInput: Types.AddUsersInput;
   Board: ResolverTypeWrapper<Types.Board>;
   BoardInput: Types.BoardInput;
   Boolean: ResolverTypeWrapper<Types.Scalars['Boolean']>;
@@ -100,6 +99,8 @@ export type ResolversTypes = {
   Origin: Types.Origin;
   Query: ResolverTypeWrapper<{}>;
   RegisterInput: Types.RegisterInput;
+  RemoveUserFromBoardInput: Types.RemoveUserFromBoardInput;
+  SetBoardUsersInput: Types.SetBoardUsersInput;
   Status: Types.Status;
   String: ResolverTypeWrapper<Types.Scalars['String']>;
   Task: ResolverTypeWrapper<Types.Task>;
@@ -107,13 +108,13 @@ export type ResolversTypes = {
   TaskPositionInput: Types.TaskPositionInput;
   UpdateBoardDescriptionInput: Types.UpdateBoardDescriptionInput;
   User: ResolverTypeWrapper<Types.User>;
+  UsersNotAssignedToBoardInput: Types.UsersNotAssignedToBoardInput;
   Visibility: Types.Visibility;
   VisibilityInput: Types.VisibilityInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  AddUsersInput: Types.AddUsersInput;
   Board: Types.Board;
   BoardInput: Types.BoardInput;
   Boolean: Types.Scalars['Boolean'];
@@ -125,12 +126,15 @@ export type ResolversParentTypes = {
   Mutation: {};
   Query: {};
   RegisterInput: Types.RegisterInput;
+  RemoveUserFromBoardInput: Types.RemoveUserFromBoardInput;
+  SetBoardUsersInput: Types.SetBoardUsersInput;
   String: Types.Scalars['String'];
   Task: Types.Task;
   TaskInput: Types.TaskInput;
   TaskPositionInput: Types.TaskPositionInput;
   UpdateBoardDescriptionInput: Types.UpdateBoardDescriptionInput;
   User: Types.User;
+  UsersNotAssignedToBoardInput: Types.UsersNotAssignedToBoardInput;
   VisibilityInput: Types.VisibilityInput;
 };
 
@@ -219,12 +223,6 @@ export type MutationResolvers<
     ContextType,
     RequireFields<Types.MutationAddTaskArgs, 'task'>
   >;
-  addUsersToBoard?: Resolver<
-    ResolversTypes['Board'],
-    ParentType,
-    ContextType,
-    RequireFields<Types.MutationAddUsersToBoardArgs, 'users'>
-  >;
   changeBoardVisibility?: Resolver<
     ResolversTypes['Board'],
     ParentType,
@@ -236,6 +234,18 @@ export type MutationResolvers<
     ParentType,
     ContextType,
     RequireFields<Types.MutationRegisterArgs, 'credentials'>
+  >;
+  removeUserFromBoard?: Resolver<
+    ResolversTypes['Board'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationRemoveUserFromBoardArgs, 'board'>
+  >;
+  setBoardUsers?: Resolver<
+    ResolversTypes['Board'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationSetBoardUsersArgs, 'users'>
   >;
   updateBoardDescription?: Resolver<
     ResolversTypes['Board'],
@@ -273,7 +283,7 @@ export type QueryResolvers<
     Array<Types.Maybe<ResolversTypes['User']>>,
     ParentType,
     ContextType,
-    RequireFields<Types.QueryUsersNotAssignedToBoardArgs, 'boardId'>
+    RequireFields<Types.QueryUsersNotAssignedToBoardArgs, 'board'>
   >;
 };
 

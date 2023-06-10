@@ -1,5 +1,5 @@
-query UsersNotAssignedToBoard($boardId: ID!) {
-  usersNotAssignedToBoard(boardId: $boardId) {
+query UsersNotAssignedToBoard($board: UsersNotAssignedToBoardInput!) {
+  usersNotAssignedToBoard(board: $board) {
     name
     id
     image

@@ -31,9 +31,7 @@ const Index = () => {
   return (
     <StyledBoard>
       <StyledBoardNavigation>
-        {boardData?.board.visibility && (
-          <BoardNavigation userData={userData} visibility={boardData?.board.visibility} id={id} />
-        )}
+        {boardData && <BoardNavigation userData={userData} boardData={boardData} id={id} />}
         <Button
           color='gray3'
           variant='h4'

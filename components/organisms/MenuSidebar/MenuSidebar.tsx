@@ -10,7 +10,10 @@ import {
   StyledMenuSidebarContent,
   StyledMenuSidebarHeader,
 } from 'Components/organisms/MenuSidebar/MenuSidebar.style';
-import { useUpdateBoardDescriptionMutation } from 'graphql/generated/hooks';
+import {
+  useRemoveUserFromBoardMutation,
+  useUpdateBoardDescriptionMutation,
+} from 'graphql/generated/hooks';
 import { BoardQuery } from 'graphql/generated/operations';
 import useClickOutside from 'Hooks/useClickOutside';
 import { useRef } from 'react';
@@ -33,6 +36,19 @@ const MenuSidebar = ({ closeSidebar, boardData }: MenuSidebarProps) => {
         board: {
           boardId: boardData.board.id,
           description: value,
+        },
+      },
+    });
+  };
+
+  const [removeUserFromBoard] = useRemoveUserFromBoardMutation();
+
+  const onRemoveMember = async (userId: string) => {
+    await removeUserFromBoard({
+      variables: {
+        board: {
+          boardId: boardData.board.id,
+          userId,
         },
       },
     });
@@ -80,9 +96,7 @@ const MenuSidebar = ({ closeSidebar, boardData }: MenuSidebarProps) => {
               userImage={user?.image}
               userName={user?.name}
               isAdmin={isAdmin}
-              removeMember={() => {
-                return;
-              }}
+              removeMember={() => onRemoveMember(user?.id)}
             />
           );
         })}

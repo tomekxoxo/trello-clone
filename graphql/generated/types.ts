@@ -12,11 +12,6 @@ export type Scalars = {
   Float: number;
 };
 
-export type AddUsersInput = {
-  boardId: Scalars['ID'];
-  userIds: Array<InputMaybe<Scalars['String']>>;
-};
-
 export type Board = {
   __typename?: 'Board';
   columns: Array<Maybe<Column>>;
@@ -77,9 +72,10 @@ export type Mutation = {
   __typename?: 'Mutation';
   addBoard: Board;
   addTask: Task;
-  addUsersToBoard: Board;
   changeBoardVisibility: Board;
   register: User;
+  removeUserFromBoard: Board;
+  setBoardUsers: Board;
   updateBoardDescription: Board;
   updateTaskPosition: Task;
 };
@@ -92,16 +88,20 @@ export type MutationAddTaskArgs = {
   task: TaskInput;
 };
 
-export type MutationAddUsersToBoardArgs = {
-  users: AddUsersInput;
-};
-
 export type MutationChangeBoardVisibilityArgs = {
   visbility: VisibilityInput;
 };
 
 export type MutationRegisterArgs = {
   credentials: RegisterInput;
+};
+
+export type MutationRemoveUserFromBoardArgs = {
+  board: RemoveUserFromBoardInput;
+};
+
+export type MutationSetBoardUsersArgs = {
+  users: SetBoardUsersInput;
 };
 
 export type MutationUpdateBoardDescriptionArgs = {
@@ -135,13 +135,23 @@ export type QueryBoardUsersArgs = {
 };
 
 export type QueryUsersNotAssignedToBoardArgs = {
-  boardId: Scalars['ID'];
+  board: UsersNotAssignedToBoardInput;
 };
 
 export type RegisterInput = {
   email: Scalars['String'];
   name: Scalars['String'];
   password: Scalars['String'];
+};
+
+export type RemoveUserFromBoardInput = {
+  boardId: Scalars['ID'];
+  userId: Scalars['ID'];
+};
+
+export type SetBoardUsersInput = {
+  boardId: Scalars['ID'];
+  userIds: Array<InputMaybe<Scalars['String']>>;
 };
 
 export enum Status {
@@ -203,6 +213,10 @@ export type User = {
   ownerBoardsIds?: Maybe<Array<Maybe<Scalars['String']>>>;
   tasks?: Maybe<Array<Maybe<Task>>>;
   tasksIds?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type UsersNotAssignedToBoardInput = {
+  ownerId: Scalars['ID'];
 };
 
 export enum Visibility {

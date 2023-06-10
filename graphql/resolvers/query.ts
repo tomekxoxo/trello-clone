@@ -31,12 +31,12 @@ const usersNotAssignedToBoard = async (
   context: Context,
 ) => {
   await authenticate(context);
+  const { board } = args;
+
   const users = await context.prisma.user.findMany({
     where: {
-      NOT: {
-        boardsIds: {
-          has: args.boardId,
-        },
+      id: {
+        not: board.ownerId,
       },
     },
   });
