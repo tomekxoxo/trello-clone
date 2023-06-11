@@ -5,6 +5,7 @@ export const StyledCardDetailsModal = styled.div`
   flex-direction: column;
   gap: 1.2rem;
   overflow-y: scroll;
+  width: inherit;
 `;
 
 export const StyledCardDetailsInfoSection = styled.main`
