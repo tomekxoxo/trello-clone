@@ -3,7 +3,7 @@ import Icon from 'Components/atoms/Icon/Icon';
 import BoardNavigation from 'Components/molecules/BoardNavigation/BoardNavigation';
 import MenuSidebar from 'Components/organisms/MenuSidebar/MenuSidebar';
 import WorkBoard from 'Components/organisms/WorkBoard/WorkBoard';
-import { useBoardQuery, useBoardUsersQuery } from 'graphql/generated/hooks';
+import { useBoardQuery } from 'graphql/generated/hooks';
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { getSession } from 'next-auth/react';
@@ -16,12 +16,6 @@ const Index = () => {
   const router = useRouter();
   const id = router.query.id as unknown as string;
 
-  const { data: userData } = useBoardUsersQuery({
-    variables: {
-      boardUsersId: id,
-    },
-  });
-
   const { data: boardData } = useBoardQuery({
     variables: {
       boardId: id,
@@ -31,7 +25,7 @@ const Index = () => {
   return (
     <StyledBoard>
       <StyledBoardNavigation>
-        {boardData && <BoardNavigation userData={userData} boardData={boardData} id={id} />}
+        {boardData && <BoardNavigation boardData={boardData} id={id} />}
         <Button
           color='gray3'
           variant='h4'

@@ -17,6 +17,11 @@ export type AddCommentInput = {
   taskId: Scalars['ID'];
 };
 
+export type AssignLabelsToTaskInput = {
+  labelsIds?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  taskId: Scalars['ID'];
+};
+
 export type Board = {
   __typename?: 'Board';
   columns: Array<Maybe<Column>>;
@@ -64,6 +69,11 @@ export type Comment = {
   userId: Scalars['String'];
 };
 
+export type CreateLabelInput = {
+  color: Scalars['String'];
+  name: Scalars['String'];
+};
+
 export type EditCommentInput = {
   commentId: Scalars['ID'];
   content: Scalars['String'];
@@ -83,7 +93,9 @@ export type Mutation = {
   addBoard: Board;
   addComment: Comment;
   addTask: Task;
+  assignLabelsToTask: Task;
   changeBoardVisibility: Board;
+  createLabel: Label;
   deleteComment: Comment;
   editComment: Comment;
   register: User;
@@ -107,8 +119,16 @@ export type MutationAddTaskArgs = {
   task: TaskInput;
 };
 
+export type MutationAssignLabelsToTaskArgs = {
+  labels: AssignLabelsToTaskInput;
+};
+
 export type MutationChangeBoardVisibilityArgs = {
   visbility: VisibilityInput;
+};
+
+export type MutationCreateLabelArgs = {
+  label: CreateLabelInput;
 };
 
 export type MutationDeleteCommentArgs = {
@@ -155,18 +175,14 @@ export enum Origin {
 export type Query = {
   __typename?: 'Query';
   board: Board;
-  boardUsers: Array<Maybe<User>>;
   boards: Array<Maybe<Board>>;
+  labels?: Maybe<Array<Maybe<Label>>>;
   task: Task;
   users: Array<Maybe<User>>;
   usersNotAssignedToBoard: Array<Maybe<User>>;
 };
 
 export type QueryBoardArgs = {
-  id: Scalars['ID'];
-};
-
-export type QueryBoardUsersArgs = {
   id: Scalars['ID'];
 };
 

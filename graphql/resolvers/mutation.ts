@@ -7,7 +7,9 @@ import {
   MutationAddBoardArgs,
   MutationAddCommentArgs,
   MutationAddTaskArgs,
+  MutationAssignLabelsToTaskArgs,
   MutationChangeBoardVisibilityArgs,
+  MutationCreateLabelArgs,
   MutationDeleteCommentArgs,
   MutationEditCommentArgs,
   MutationRegisterArgs,
@@ -494,11 +496,52 @@ const deleteComment = async (
   return deletedComment;
 };
 
+const createLabel = async (_parent: unknown, args: MutationCreateLabelArgs, context: Context) => {
+  await authenticate(context);
+  const { label } = args;
+
+  const createdLabel = await context.prisma.label.create({
+    data: {
+      color: label.color,
+      name: label.name,
+    },
+  });
+
+  return createdLabel;
+};
+
+const assignLabelsToTask = async (
+  _parent: unknown,
+  args: MutationAssignLabelsToTaskArgs,
+  context: Context,
+) => {
+  await authenticate(context);
+  const { labels } = args;
+  const { taskId, labelsIds } = labels;
+
+  const ids = labelsIds as string[];
+
+  console.log('starszaki', ids);
+
+  const createdLabel = await context.prisma.task.update({
+    data: {
+      labelsIds: ids?.length ? ids : [],
+    },
+    where: {
+      id: taskId,
+    },
+  });
+
+  return createdLabel;
+};
+
 export const mutation: MutationResolvers = {
   addBoard,
   addComment,
   addTask,
+  assignLabelsToTask,
   changeBoardVisibility,
+  createLabel,
   deleteComment,
   editComment,
   register,

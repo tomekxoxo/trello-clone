@@ -1,0 +1,8 @@
+query Labels {
+  labels {
+    id
+    color
+    name
+    tasksIds
+  }
+}

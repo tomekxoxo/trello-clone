@@ -88,11 +88,13 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   AddCommentInput: Types.AddCommentInput;
+  AssignLabelsToTaskInput: Types.AssignLabelsToTaskInput;
   Board: ResolverTypeWrapper<Types.Board>;
   BoardInput: Types.BoardInput;
   Boolean: ResolverTypeWrapper<Types.Scalars['Boolean']>;
   Column: ResolverTypeWrapper<Types.Column>;
   Comment: ResolverTypeWrapper<Types.Comment>;
+  CreateLabelInput: Types.CreateLabelInput;
   EditCommentInput: Types.EditCommentInput;
   ID: ResolverTypeWrapper<Types.Scalars['ID']>;
   Int: ResolverTypeWrapper<Types.Scalars['Int']>;
@@ -120,11 +122,13 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   AddCommentInput: Types.AddCommentInput;
+  AssignLabelsToTaskInput: Types.AssignLabelsToTaskInput;
   Board: Types.Board;
   BoardInput: Types.BoardInput;
   Boolean: Types.Scalars['Boolean'];
   Column: Types.Column;
   Comment: Types.Comment;
+  CreateLabelInput: Types.CreateLabelInput;
   EditCommentInput: Types.EditCommentInput;
   ID: Types.Scalars['ID'];
   Int: Types.Scalars['Int'];
@@ -237,11 +241,23 @@ export type MutationResolvers<
     ContextType,
     RequireFields<Types.MutationAddTaskArgs, 'task'>
   >;
+  assignLabelsToTask?: Resolver<
+    ResolversTypes['Task'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationAssignLabelsToTaskArgs, 'labels'>
+  >;
   changeBoardVisibility?: Resolver<
     ResolversTypes['Board'],
     ParentType,
     ContextType,
     RequireFields<Types.MutationChangeBoardVisibilityArgs, 'visbility'>
+  >;
+  createLabel?: Resolver<
+    ResolversTypes['Label'],
+    ParentType,
+    ContextType,
+    RequireFields<Types.MutationCreateLabelArgs, 'label'>
   >;
   deleteComment?: Resolver<
     ResolversTypes['Comment'],
@@ -309,13 +325,12 @@ export type QueryResolvers<
     ContextType,
     RequireFields<Types.QueryBoardArgs, 'id'>
   >;
-  boardUsers?: Resolver<
-    Array<Types.Maybe<ResolversTypes['User']>>,
-    ParentType,
-    ContextType,
-    RequireFields<Types.QueryBoardUsersArgs, 'id'>
-  >;
   boards?: Resolver<Array<Types.Maybe<ResolversTypes['Board']>>, ParentType, ContextType>;
+  labels?: Resolver<
+    Types.Maybe<Array<Types.Maybe<ResolversTypes['Label']>>>,
+    ParentType,
+    ContextType
+  >;
   task?: Resolver<
     ResolversTypes['Task'],
     ParentType,

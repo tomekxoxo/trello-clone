@@ -3,7 +3,6 @@ import type { Context } from 'graphql/context';
 import { QueryResolvers } from 'graphql/generated/resolvers';
 import {
   QueryBoardArgs,
-  QueryBoardUsersArgs,
   QueryTaskArgs,
   QueryUsersNotAssignedToBoardArgs,
 } from 'graphql/generated/types';
@@ -11,18 +10,6 @@ import {
 const users = async (_parent: unknown, _args: unknown, context: Context) => {
   await authenticate(context);
   const users = await context.prisma.user.findMany();
-  return users;
-};
-
-const boardUsers = async (_parent: unknown, args: QueryBoardUsersArgs, context: Context) => {
-  await authenticate(context);
-  const users = await context.prisma.user.findMany({
-    where: {
-      boardsIds: {
-        has: args.id,
-      },
-    },
-  });
   return users;
 };
 
@@ -129,10 +116,17 @@ const boards = async (_parent: unknown, _args: unknown, context: Context) => {
   return boards;
 };
 
+const labels = async (_parent: unknown, _args: unknown, context: Context) => {
+  await authenticate(context);
+  const labels = await context.prisma.label.findMany({});
+
+  return labels;
+};
+
 export const query: QueryResolvers = {
   board,
-  boardUsers,
   boards,
+  labels,
   task,
   users,
   usersNotAssignedToBoard,

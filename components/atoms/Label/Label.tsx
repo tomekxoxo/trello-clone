@@ -1,19 +1,16 @@
 import { StyledLabel } from 'Components/atoms/Label/Label.style';
 import Typography from 'Components/atoms/Typography/Typography';
-import { useTheme } from 'styled-components';
-import { ThemeColors } from 'Utils/theme';
+import { ColorResult } from 'react-color';
 
 export interface LabelProps {
   name: string;
-  color: ThemeColors;
+  color: ColorResult['hex'];
 }
 
-const Label = ({ name, color = 'brightYellow' }: LabelProps) => {
-  const { colors } = useTheme();
-
+const Label = ({ name, color }: LabelProps) => {
   return (
-    <StyledLabel color={colors[color]}>
-      <Typography variant='h5' color='yellow'>
+    <StyledLabel color={color}>
+      <Typography variant='h5' color='white'>
         {name}
       </Typography>
     </StyledLabel>

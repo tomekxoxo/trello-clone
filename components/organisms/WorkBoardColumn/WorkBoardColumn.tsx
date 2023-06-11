@@ -82,7 +82,7 @@ const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardC
                         users={reducedUsers}
                         labels={task.labels}
                         commentsCount={task.comments.length}
-                        // attachmentsCount={card.attachmentsCount}
+                        attachmentsCount={4}
                         onClick={() => onClickCard(task.id)}
                       />
                     );

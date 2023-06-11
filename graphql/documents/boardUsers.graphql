@@ -1,7 +1,0 @@
-query BoardUsers($boardUsersId: ID!) {
-  boardUsers(id: $boardUsersId) {
-    id
-    name
-    image
-  }
-}

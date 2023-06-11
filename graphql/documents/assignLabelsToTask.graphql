@@ -1,0 +1,5 @@
+mutation AssignLabelsToTask($labels: AssignLabelsToTaskInput!) {
+  assignLabelsToTask(labels: $labels) {
+    id
+  }
+}

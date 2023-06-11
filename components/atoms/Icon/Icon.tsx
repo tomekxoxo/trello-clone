@@ -17,6 +17,7 @@ export type IconName =
   | 'message'
   | 'earth'
   | 'user'
+  | 'tag'
   | 'file-lines'
   | 'calendar'
   | 'pen'

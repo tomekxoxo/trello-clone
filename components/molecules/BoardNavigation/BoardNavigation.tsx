@@ -43,11 +43,10 @@ const BoardNavigation = ({ userData, boardData, id }: BoardNavigationProps) => {
     });
     setChosenOption(option);
   };
-
   return (
     <StyledBoardNavigation>
       <VisibilityPopup chosenOption={chosenOption} setChosenOption={handleChange} />
-      {userData?.boardUsers.map((user, index) => {
+      {boardData.board.users.map((user, index) => {
         if (!user) return;
         return <User key={index} image={user?.image} name={user.name} />;
       })}

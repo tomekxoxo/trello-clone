@@ -167,16 +167,27 @@ export const typeDefs = gql`
     content: String!
   }
 
+  input CreateLabelInput {
+    name: String!
+    color: String!
+  }
+
+  input AssignLabelsToTaskInput {
+    taskId: ID!
+    labelsIds: [String]
+  }
+
   type Query {
     users: [User]!
+    labels: [Label]
     usersNotAssignedToBoard(board: UsersNotAssignedToBoardInput!): [User]!
-    boardUsers(id: ID!): [User]!
     board(id: ID!): Board!
     task(id: ID!): Task!
     boards: [Board]!
   }
 
   type Mutation {
+    createLabel(label: CreateLabelInput!): Label!
     register(credentials: RegisterInput!): User!
     addBoard(board: BoardInput!): Board!
     updateBoardDescription(board: UpdateBoardDescriptionInput!): Board!
@@ -186,6 +197,7 @@ export const typeDefs = gql`
     editComment(comment: EditCommentInput!): Comment!
     deleteComment(id: ID!): Comment!
     updateTaskDescription(task: UpdateTaskDescriptionInput!): Task!
+    assignLabelsToTask(labels: AssignLabelsToTaskInput!): Task!
     updateTaskImage(task: UpdateTaskImageInput!): Task!
     changeBoardVisibility(visbility: VisibilityInput!): Board!
     setBoardUsers(users: SetBoardUsersInput!): Board!

@@ -162,6 +162,54 @@ export type AddTaskMutationOptions = Apollo.BaseMutationOptions<
   Types.AddTaskMutation,
   Types.AddTaskMutationVariables
 >;
+export const AssignLabelsToTaskDocument = gql`
+  mutation AssignLabelsToTask($labels: AssignLabelsToTaskInput!) {
+    assignLabelsToTask(labels: $labels) {
+      id
+    }
+  }
+`;
+export type AssignLabelsToTaskMutationFn = Apollo.MutationFunction<
+  Types.AssignLabelsToTaskMutation,
+  Types.AssignLabelsToTaskMutationVariables
+>;
+
+/**
+ * __useAssignLabelsToTaskMutation__
+ *
+ * To run a mutation, you first call `useAssignLabelsToTaskMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAssignLabelsToTaskMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [assignLabelsToTaskMutation, { data, loading, error }] = useAssignLabelsToTaskMutation({
+ *   variables: {
+ *      labels: // value for 'labels'
+ *   },
+ * });
+ */
+export function useAssignLabelsToTaskMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.AssignLabelsToTaskMutation,
+    Types.AssignLabelsToTaskMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.AssignLabelsToTaskMutation,
+    Types.AssignLabelsToTaskMutationVariables
+  >(AssignLabelsToTaskDocument, options);
+}
+export type AssignLabelsToTaskMutationHookResult = ReturnType<typeof useAssignLabelsToTaskMutation>;
+export type AssignLabelsToTaskMutationResult =
+  Apollo.MutationResult<Types.AssignLabelsToTaskMutation>;
+export type AssignLabelsToTaskMutationOptions = Apollo.BaseMutationOptions<
+  Types.AssignLabelsToTaskMutation,
+  Types.AssignLabelsToTaskMutationVariables
+>;
 export const BoardDocument = gql`
   query Board($boardId: ID!) {
     board(id: $boardId) {
@@ -239,56 +287,6 @@ export function useBoardLazyQuery(
 export type BoardQueryHookResult = ReturnType<typeof useBoardQuery>;
 export type BoardLazyQueryHookResult = ReturnType<typeof useBoardLazyQuery>;
 export type BoardQueryResult = Apollo.QueryResult<Types.BoardQuery, Types.BoardQueryVariables>;
-export const BoardUsersDocument = gql`
-  query BoardUsers($boardUsersId: ID!) {
-    boardUsers(id: $boardUsersId) {
-      id
-      name
-      image
-    }
-  }
-`;
-
-/**
- * __useBoardUsersQuery__
- *
- * To run a query within a React component, call `useBoardUsersQuery` and pass it any options that fit your needs.
- * When your component renders, `useBoardUsersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useBoardUsersQuery({
- *   variables: {
- *      boardUsersId: // value for 'boardUsersId'
- *   },
- * });
- */
-export function useBoardUsersQuery(
-  baseOptions: Apollo.QueryHookOptions<Types.BoardUsersQuery, Types.BoardUsersQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<Types.BoardUsersQuery, Types.BoardUsersQueryVariables>(
-    BoardUsersDocument,
-    options,
-  );
-}
-export function useBoardUsersLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<Types.BoardUsersQuery, Types.BoardUsersQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<Types.BoardUsersQuery, Types.BoardUsersQueryVariables>(
-    BoardUsersDocument,
-    options,
-  );
-}
-export type BoardUsersQueryHookResult = ReturnType<typeof useBoardUsersQuery>;
-export type BoardUsersLazyQueryHookResult = ReturnType<typeof useBoardUsersLazyQuery>;
-export type BoardUsersQueryResult = Apollo.QueryResult<
-  Types.BoardUsersQuery,
-  Types.BoardUsersQueryVariables
->;
 export const BoardsDocument = gql`
   query Boards {
     boards {
@@ -389,6 +387,55 @@ export type ChangeBoardVisibilityMutationOptions = Apollo.BaseMutationOptions<
   Types.ChangeBoardVisibilityMutation,
   Types.ChangeBoardVisibilityMutationVariables
 >;
+export const CreateLabelDocument = gql`
+  mutation CreateLabel($label: CreateLabelInput!) {
+    createLabel(label: $label) {
+      id
+      name
+      color
+    }
+  }
+`;
+export type CreateLabelMutationFn = Apollo.MutationFunction<
+  Types.CreateLabelMutation,
+  Types.CreateLabelMutationVariables
+>;
+
+/**
+ * __useCreateLabelMutation__
+ *
+ * To run a mutation, you first call `useCreateLabelMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateLabelMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createLabelMutation, { data, loading, error }] = useCreateLabelMutation({
+ *   variables: {
+ *      label: // value for 'label'
+ *   },
+ * });
+ */
+export function useCreateLabelMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.CreateLabelMutation,
+    Types.CreateLabelMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<Types.CreateLabelMutation, Types.CreateLabelMutationVariables>(
+    CreateLabelDocument,
+    options,
+  );
+}
+export type CreateLabelMutationHookResult = ReturnType<typeof useCreateLabelMutation>;
+export type CreateLabelMutationResult = Apollo.MutationResult<Types.CreateLabelMutation>;
+export type CreateLabelMutationOptions = Apollo.BaseMutationOptions<
+  Types.CreateLabelMutation,
+  Types.CreateLabelMutationVariables
+>;
 export const DeleteCommentDocument = gql`
   mutation DeleteComment($deleteCommentId: ID!) {
     deleteComment(id: $deleteCommentId) {
@@ -483,6 +530,50 @@ export type EditCommentMutationOptions = Apollo.BaseMutationOptions<
   Types.EditCommentMutation,
   Types.EditCommentMutationVariables
 >;
+export const LabelsDocument = gql`
+  query Labels {
+    labels {
+      id
+      color
+      name
+      tasksIds
+    }
+  }
+`;
+
+/**
+ * __useLabelsQuery__
+ *
+ * To run a query within a React component, call `useLabelsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLabelsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLabelsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLabelsQuery(
+  baseOptions?: Apollo.QueryHookOptions<Types.LabelsQuery, Types.LabelsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Types.LabelsQuery, Types.LabelsQueryVariables>(LabelsDocument, options);
+}
+export function useLabelsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<Types.LabelsQuery, Types.LabelsQueryVariables>,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Types.LabelsQuery, Types.LabelsQueryVariables>(
+    LabelsDocument,
+    options,
+  );
+}
+export type LabelsQueryHookResult = ReturnType<typeof useLabelsQuery>;
+export type LabelsLazyQueryHookResult = ReturnType<typeof useLabelsLazyQuery>;
+export type LabelsQueryResult = Apollo.QueryResult<Types.LabelsQuery, Types.LabelsQueryVariables>;
 export const RegisterDocument = gql`
   mutation Register($credentials: RegisterInput!) {
     register(credentials: $credentials) {

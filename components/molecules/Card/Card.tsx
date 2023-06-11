@@ -52,7 +52,7 @@ const Card = (
         {!!labels?.length && (
           <StyledCardLabels>
             {labels.map(label => (
-              <Label key={label.name} name={label.name} color='blue2' />
+              <Label key={label.name} name={label.name} color={label.color} />
             ))}
           </StyledCardLabels>
         )}
@@ -68,8 +68,8 @@ const Card = (
         </StyledCardUsers>
         {(attachmentsCount || commentsCount) && (
           <StyledCardActions>
-            {attachmentsCount && <ItemCounter icon='paperclip' count={2} />}
-            {commentsCount && <ItemCounter icon='message' count={commentsCount} />}
+            {!!attachmentsCount && <ItemCounter icon='paperclip' count={attachmentsCount} />}
+            {!!commentsCount && <ItemCounter icon='message' count={commentsCount} />}
           </StyledCardActions>
         )}
       </StyledCard>

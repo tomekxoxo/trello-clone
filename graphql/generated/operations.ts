@@ -49,6 +49,15 @@ export type AddTaskMutation = {
   };
 };
 
+export type AssignLabelsToTaskMutationVariables = Types.Exact<{
+  labels: Types.AssignLabelsToTaskInput;
+}>;
+
+export type AssignLabelsToTaskMutation = {
+  __typename?: 'Mutation';
+  assignLabelsToTask: { __typename?: 'Task'; id: string };
+};
+
 export type BoardQueryVariables = Types.Exact<{
   boardId: Types.Scalars['ID'];
 }>;
@@ -98,20 +107,6 @@ export type BoardQuery = {
   };
 };
 
-export type BoardUsersQueryVariables = Types.Exact<{
-  boardUsersId: Types.Scalars['ID'];
-}>;
-
-export type BoardUsersQuery = {
-  __typename?: 'Query';
-  boardUsers: Array<{
-    __typename?: 'User';
-    id: string;
-    name: string;
-    image?: string | null;
-  } | null>;
-};
-
 export type BoardsQueryVariables = Types.Exact<{ [key: string]: never }>;
 
 export type BoardsQuery = {
@@ -140,6 +135,15 @@ export type ChangeBoardVisibilityMutation = {
   };
 };
 
+export type CreateLabelMutationVariables = Types.Exact<{
+  label: Types.CreateLabelInput;
+}>;
+
+export type CreateLabelMutation = {
+  __typename?: 'Mutation';
+  createLabel: { __typename?: 'Label'; id: string; name: string; color: string };
+};
+
 export type DeleteCommentMutationVariables = Types.Exact<{
   deleteCommentId: Types.Scalars['ID'];
 }>;
@@ -156,6 +160,19 @@ export type EditCommentMutationVariables = Types.Exact<{
 export type EditCommentMutation = {
   __typename?: 'Mutation';
   editComment: { __typename?: 'Comment'; id: string };
+};
+
+export type LabelsQueryVariables = Types.Exact<{ [key: string]: never }>;
+
+export type LabelsQuery = {
+  __typename?: 'Query';
+  labels?: Array<{
+    __typename?: 'Label';
+    id: string;
+    color: string;
+    name: string;
+    tasksIds: Array<string | null>;
+  } | null> | null;
 };
 
 export type RegisterMutationVariables = Types.Exact<{

@@ -6,6 +6,7 @@ import Typography from 'Components/atoms/Typography/Typography';
 import Attachment from 'Components/molecules/Attachment/Attachment';
 import Comment from 'Components/molecules/Comment/Comment';
 import CoverPopup from 'Components/molecules/CoverPopup/CoverPopup';
+import LabelsPopup from 'Components/molecules/LabelsPopup/LabelsPopup';
 import Multiline from 'Components/molecules/Multiline/Multiline';
 import SidebarSectionHeader from 'Components/molecules/SidebarSectionHeader/SidebarSectionHeader';
 import {
@@ -171,6 +172,9 @@ const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
           <StyledCardDetailsAsideSection>
             <SidebarSectionHeader title='Actions' iconName='user' />
             <CoverPopup setCover={setCover} attachmentSide='right' />
+            {id && (
+              <LabelsPopup attachmentSide='right' taskId={id} defaultLabels={data.task.labels} />
+            )}
           </StyledCardDetailsAsideSection>
         </StyledCardDetailsInfoSection>
       </StyledCardDetailsModal>

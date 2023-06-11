@@ -1,7 +1,8 @@
+import { ColorResult } from 'react-color';
 import styled from 'styled-components';
 
 interface StyledLabelProps {
-  color: string;
+  color: ColorResult['hex'];
 }
 
 export const StyledLabel = styled.label<StyledLabelProps>`
