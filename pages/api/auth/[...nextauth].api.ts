@@ -10,6 +10,7 @@ import { prisma } from '../../../database/prisma';
 
 const clientId = process.env.GOOGLE_CLIENT_ID as string;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET as string;
+const authSecret = process.env.NEXTAUTH_SECRET as string;
 
 const cookiesPolicy =
   process.env.NODE_ENV === 'development'
@@ -78,6 +79,7 @@ export const authOptions: NextAuthOptions = {
       type: 'credentials',
     }),
   ],
+  secret: authSecret,
   session: {
     strategy: 'jwt',
   },
