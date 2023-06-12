@@ -5,26 +5,33 @@ query Task($taskId: ID!) {
     comments {
       id
       content
-      user {
-        id
-        name
-        image
-      }
       updatedAt
+      user {
+        ...UserFragment
+      }
     }
     image
     labels {
-      id
-      color
-      name
+      ...LabelFragment
     }
     name
     column {
       name
     }
     user {
-      id
-      name
+      ...UserFragment
     }
   }
+}
+
+fragment LabelFragment on Label {
+  id
+  color
+  name
+}
+
+fragment UserFragment on User {
+  id
+  name
+  image
 }

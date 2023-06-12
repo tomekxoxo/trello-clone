@@ -2,7 +2,40 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 import * as Types from 'graphql/generated/operations';
 const defaultOptions = {} as const;
-
+export const UserFragmentFragmentDoc = gql`
+  fragment UserFragment on User {
+    id
+    name
+    image
+  }
+`;
+export const TaskFragmentFragmentDoc = gql`
+  fragment TaskFragment on Task {
+    id
+    description
+    image
+    labels {
+      color
+      id
+      name
+    }
+    name
+    comments {
+      id
+      user {
+        ...UserFragment
+      }
+    }
+  }
+  ${UserFragmentFragmentDoc}
+`;
+export const LabelFragmentFragmentDoc = gql`
+  fragment LabelFragment on Label {
+    id
+    color
+    name
+  }
+`;
 export const AddBoardDocument = gql`
   mutation AddBoard($board: BoardInput!) {
     addBoard(board: $board) {
@@ -222,23 +255,7 @@ export const BoardDocument = gql`
         id
         name
         tasks {
-          description
-          id
-          image
-          labels {
-            color
-            id
-            name
-          }
-          name
-          comments {
-            id
-            user {
-              id
-              image
-              name
-            }
-          }
+          ...TaskFragment
         }
       }
       owner {
@@ -247,13 +264,12 @@ export const BoardDocument = gql`
       createdAt
       description
       users {
-        id
-        name
-        ownerBoardsIds
-        image
+        ...UserFragment
       }
     }
   }
+  ${TaskFragmentFragmentDoc}
+  ${UserFragmentFragmentDoc}
 `;
 
 /**
@@ -732,29 +748,26 @@ export const TaskDocument = gql`
       comments {
         id
         content
-        user {
-          id
-          name
-          image
-        }
         updatedAt
+        user {
+          ...UserFragment
+        }
       }
       image
       labels {
-        id
-        color
-        name
+        ...LabelFragment
       }
       name
       column {
         name
       }
       user {
-        id
-        name
+        ...UserFragment
       }
     }
   }
+  ${UserFragmentFragmentDoc}
+  ${LabelFragmentFragmentDoc}
 `;
 
 /**

@@ -79,8 +79,8 @@ export type BoardQuery = {
       name: Types.Status;
       tasks: Array<{
         __typename?: 'Task';
-        description?: string | null;
         id: string;
+        description?: string | null;
         image?: string | null;
         name: string;
         labels?: Array<{
@@ -92,19 +92,41 @@ export type BoardQuery = {
         comments?: Array<{
           __typename?: 'Comment';
           id: string;
-          user: { __typename?: 'User'; id: string; image?: string | null; name: string };
+          user: { __typename?: 'User'; id: string; name: string; image?: string | null };
         } | null> | null;
       } | null>;
     } | null>;
     owner: { __typename?: 'User'; name: string };
-    users: Array<{
-      __typename?: 'User';
-      id: string;
-      name: string;
-      ownerBoardsIds?: Array<string | null> | null;
-      image?: string | null;
-    } | null>;
+    users: Array<{ __typename?: 'User'; id: string; name: string; image?: string | null } | null>;
   };
+};
+
+export type TaskFragmentFragment = {
+  __typename?: 'Task';
+  id: string;
+  description?: string | null;
+  image?: string | null;
+  name: string;
+  labels?: Array<{ __typename?: 'Label'; color: string; id: string; name: string } | null> | null;
+  comments?: Array<{
+    __typename?: 'Comment';
+    id: string;
+    user: { __typename?: 'User'; id: string; name: string; image?: string | null };
+  } | null> | null;
+};
+
+export type LabelFragmentFragment = {
+  __typename?: 'Label';
+  id: string;
+  color: string;
+  name: string;
+};
+
+export type UserFragmentFragment = {
+  __typename?: 'User';
+  id: string;
+  name: string;
+  image?: string | null;
 };
 
 export type BoardsQueryVariables = Types.Exact<{ [key: string]: never }>;
@@ -231,7 +253,7 @@ export type TaskQuery = {
     } | null> | null;
     labels?: Array<{ __typename?: 'Label'; id: string; color: string; name: string } | null> | null;
     column: { __typename?: 'Column'; name: Types.Status };
-    user?: { __typename?: 'User'; id: string; name: string } | null;
+    user?: { __typename?: 'User'; id: string; name: string; image?: string | null } | null;
   };
 };
 

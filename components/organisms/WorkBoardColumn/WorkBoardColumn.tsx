@@ -9,13 +9,13 @@ import {
   StyledWorkBoardMultilineWrapper,
 } from 'Components/organisms/WorkBoardColumn/WorkBoardColumn.style';
 import { useAddTaskMutation } from 'graphql/generated/hooks';
-import { BoardQuery } from 'graphql/generated/operations';
+import { TaskFragmentFragment } from 'graphql/generated/operations';
 import { useState } from 'react';
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 export interface WorkBoardColumnProps {
   status: string;
-  tasks: NonNullable<BoardQuery['board']['columns'][number]>['tasks'];
+  tasks: TaskFragmentFragment[];
   index: number;
   boardId: string;
   columnId: string;
@@ -74,6 +74,9 @@ const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardC
                       .filter((c): c is Exclude<typeof c, null> => !!c)
                       .map(id => commentUsers?.find(u => u.id === id))
                       .filter((user): user is NonNullable<typeof user> => user !== undefined);
+                    const labels = task.labels?.filter(
+                      (l): l is Exclude<typeof l, null> => l !== null,
+                    );
 
                     return (
                       <Card
@@ -84,7 +87,7 @@ const WorkBoardColumn = ({ status, columnId, boardId, tasks, index }: WorkBoardC
                         image={task?.image}
                         title={task.name}
                         users={reducedUsers}
-                        labels={task.labels}
+                        labels={labels}
                         commentsCount={task.comments?.length}
                         attachmentsCount={4}
                         onClick={() => onClickCard(task.id)}

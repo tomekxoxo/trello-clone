@@ -14,14 +14,14 @@ import {
   useCreateLabelMutation,
   useLabelsQuery,
 } from 'graphql/generated/hooks';
-import { TaskQuery } from 'graphql/generated/operations';
+import { LabelFragmentFragment } from 'graphql/generated/operations';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { CirclePicker, ColorResult } from 'react-color';
 
 interface LabelsPopupProps {
   attachmentSide?: 'left' | 'right';
   taskId: string;
-  defaultLabels?: TaskQuery['task']['labels'];
+  defaultLabels?: LabelFragmentFragment[];
 }
 
 const LabelsPopup = ({ attachmentSide = 'left', taskId, defaultLabels }: LabelsPopupProps) => {

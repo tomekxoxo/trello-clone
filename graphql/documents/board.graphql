@@ -9,23 +9,7 @@ query Board($boardId: ID!) {
       id
       name
       tasks {
-        description
-        id
-        image
-        labels {
-          color
-          id
-          name
-        }
-        name
-        comments {
-          id
-          user {
-            id
-            image
-            name
-          }
-        }
+        ...TaskFragment
       }
     }
     owner {
@@ -34,10 +18,37 @@ query Board($boardId: ID!) {
     createdAt
     description
     users {
-      id
-      name
-      ownerBoardsIds
-      image
+      ...UserFragment
     }
   }
+}
+
+fragment TaskFragment on Task {
+  id
+  description
+  image
+  labels {
+    color
+    id
+    name
+  }
+  name
+  comments {
+    id
+    user {
+      ...UserFragment
+    }
+  }
+}
+
+fragment LabelFragment on Label {
+  id
+  color
+  name
+}
+
+fragment UserFragment on User {
+  id
+  name
+  image
 }

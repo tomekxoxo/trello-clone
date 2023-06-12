@@ -9,26 +9,14 @@ import {
 } from 'Components/molecules/Card/Card.style';
 import ItemCounter from 'Components/molecules/ItemCounter/ItemCounter';
 import User from 'Components/molecules/User/User';
-import { BoardQuery } from 'graphql/generated/operations';
+import { LabelFragmentFragment, UserFragmentFragment } from 'graphql/generated/operations';
 import { ForwardedRef, forwardRef } from 'react';
 
 export interface CardProps {
   image?: string | null;
   title: string;
-  labels?: NonNullable<
-    NonNullable<NonNullable<BoardQuery['board']['columns']>[number]>['tasks'][number]
-  >['labels'];
-  users?: Array<
-    NonNullable<
-      NonNullable<
-        NonNullable<
-          NonNullable<
-            NonNullable<NonNullable<BoardQuery['board']['columns']>[number]>['tasks'][number]
-          >['comments']
-        >[number]
-      >['user']
-    >
-  >;
+  labels?: LabelFragmentFragment[];
+  users?: UserFragmentFragment[];
   attachmentsCount?: number;
   commentsCount?: number;
   onClick: () => void;

@@ -106,6 +106,8 @@ const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
 
   if (!data) return null;
 
+  const defaultLabels = data.task.labels?.filter((s): s is Exclude<typeof s, null> => Boolean(s));
+
   return (
     <Modal closeModal={onCloseModal} width='66rem'>
       <StyledCardDetailsModal>
@@ -174,9 +176,7 @@ const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
           <StyledCardDetailsAsideSection>
             <SidebarSectionHeader title='Actions' iconName='user' />
             <CoverPopup setCover={setCover} attachmentSide='right' />
-            {id && (
-              <LabelsPopup attachmentSide='right' taskId={id} defaultLabels={data.task.labels} />
-            )}
+            {id && <LabelsPopup attachmentSide='right' taskId={id} defaultLabels={defaultLabels} />}
           </StyledCardDetailsAsideSection>
         </StyledCardDetailsInfoSection>
       </StyledCardDetailsModal>

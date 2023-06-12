@@ -65,16 +65,20 @@ const WorkBoard = ({ boardData }: WorkBoardProps) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <StyledWorkBoard columnsCount={columnsCount}>
-        {columns.map((column, index) => (
-          <WorkBoardColumn
-            key={index}
-            index={index}
-            status={column?.name}
-            tasks={column?.tasks}
-            boardId={boardData.board.id}
-            columnId={column?.id}
-          />
-        ))}
+        {columns.map((column, index) => {
+          const tasks = column?.tasks.filter((t): t is Exclude<typeof t, null> => Boolean(t));
+
+          return (
+            <WorkBoardColumn
+              key={index}
+              index={index}
+              status={column?.name}
+              tasks={tasks}
+              boardId={boardData.board.id}
+              columnId={column?.id}
+            />
+          );
+        })}
       </StyledWorkBoard>
     </DragDropContext>
   );
