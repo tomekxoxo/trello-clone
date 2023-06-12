@@ -11,6 +11,7 @@ export const StyledWorkBoard = styled.div<StyledWorkBoardProps>`
   gap: 2.4rem;
   grid-template-columns: ${({ columnsCount }) => `repeat(${columnsCount},24.7rem)`};
   height: 100%;
+  justify-content: center;
   overflow: scroll;
   padding: 0 2.4rem;
 `;
