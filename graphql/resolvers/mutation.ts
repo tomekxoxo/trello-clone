@@ -2,7 +2,6 @@ import bcrypt from 'bcryptjs';
 import { registerSchema } from 'common/validations';
 import { authenticate } from 'graphql/authenticate';
 import { Context } from 'graphql/context';
-import { MutationResolvers } from 'graphql/generated/resolvers';
 import {
   MutationAddBoardArgs,
   MutationAddCommentArgs,
@@ -521,8 +520,6 @@ const assignLabelsToTask = async (
 
   const ids = labelsIds as string[];
 
-  console.log('starszaki', ids);
-
   const createdLabel = await context.prisma.task.update({
     data: {
       labelsIds: ids?.length ? ids : [],
@@ -535,7 +532,7 @@ const assignLabelsToTask = async (
   return createdLabel;
 };
 
-export const mutation: MutationResolvers = {
+export const mutation = {
   addBoard,
   addComment,
   addTask,

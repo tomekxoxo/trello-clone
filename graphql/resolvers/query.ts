@@ -1,6 +1,5 @@
 import { authenticate } from 'graphql/authenticate';
 import type { Context } from 'graphql/context';
-import { QueryResolvers } from 'graphql/generated/resolvers';
 import {
   QueryBoardArgs,
   QueryTaskArgs,
@@ -123,7 +122,7 @@ const labels = async (_parent: unknown, _args: unknown, context: Context) => {
   return labels;
 };
 
-export const query: QueryResolvers = {
+export const query = {
   board,
   boards,
   labels,
