@@ -21,6 +21,7 @@ interface MultilineProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   secondButtonColor?: ThemeColors;
   secondButtonTextColor?: ThemeColors;
   justifyContent?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around';
+  cleanOnSubmit?: boolean;
 }
 
 const Multiline = ({
@@ -36,6 +37,7 @@ const Multiline = ({
   firstButtonColor = 'green1',
   secondButtonTextColor = 'gray3',
   onClickOutside,
+  cleanOnSubmit,
   ...restProps
 }: MultilineProps) => {
   const [isEditMode, setIsEditMode] = useState(false);
@@ -63,7 +65,7 @@ const Multiline = ({
     e.stopPropagation();
     onSubmitButtonClick(innerValue);
     setIsEditMode(false);
-    setInnerValue('');
+    cleanOnSubmit && setInnerValue('');
   };
 
   const handleOnSecondButtonClick = (e: MouseEvent<HTMLButtonElement>) => {

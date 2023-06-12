@@ -155,6 +155,7 @@ const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
             <StyledCardDetailsCommentsSection>
               <SidebarSectionHeader title='Comments' iconName='pen' />
               <Multiline
+                cleanOnSubmit
                 height='10rem'
                 placeholder='Write a comment...'
                 submitButtonText='Comment'
