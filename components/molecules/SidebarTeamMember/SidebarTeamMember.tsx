@@ -4,8 +4,8 @@ import { StyledSidebarTeamMember } from 'Components/molecules/SidebarTeamMember/
 import User from 'Components/molecules/User/User';
 
 interface SidebarTeamMemberProps {
-  userImage?: string;
-  userName: string;
+  userImage?: string | null;
+  userName?: string;
   isOwner?: boolean;
   removeMember?: () => void;
 }
@@ -17,7 +17,7 @@ const SidebarTeamMember = ({
   removeMember,
 }: SidebarTeamMemberProps) => (
   <StyledSidebarTeamMember>
-    <User name={userName} image={userImage} withName />
+    {userName && <User name={userName} image={userImage} withName />}
     {isOwner ? (
       <Typography color='gray3' variant='h5'>
         Owner

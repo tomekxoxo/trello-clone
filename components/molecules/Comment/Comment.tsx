@@ -10,10 +10,11 @@ import Multiline from 'Components/molecules/Multiline/Multiline';
 import SidebarSectionHeader from 'Components/molecules/SidebarSectionHeader/SidebarSectionHeader';
 import User from 'Components/molecules/User/User';
 import { useDeleteCommentMutation, useEditCommentMutation } from 'graphql/generated/hooks';
+import { TaskQuery } from 'graphql/generated/operations';
 import { useState } from 'react';
 
 interface CommentProps {
-  comment: unknown;
+  comment: NonNullable<TaskQuery['task']['comments']>[number];
 }
 
 const Comment = ({ comment }: CommentProps) => {
@@ -27,6 +28,8 @@ const Comment = ({ comment }: CommentProps) => {
   const [deleteComment] = useDeleteCommentMutation();
 
   const onEditComment = async (value: string) => {
+    if (!comment?.id) return null;
+
     await editCommentMutation({
       refetchQueries: 'active',
       variables: {
@@ -40,6 +43,8 @@ const Comment = ({ comment }: CommentProps) => {
   };
 
   const onDeleteComment = async () => {
+    if (!comment?.id) return null;
+
     await deleteComment({
       refetchQueries: 'active',
       variables: {
@@ -48,10 +53,14 @@ const Comment = ({ comment }: CommentProps) => {
     });
   };
 
+  if (!comment) return null;
+
   return (
     <StyledComment>
       <StyledCommentHeader>
-        <User withName name={comment?.user?.name} image={comment?.user?.image} />
+        {comment?.user?.name && (
+          <User withName name={comment?.user?.name} image={comment?.user?.image} />
+        )}
         <StyledCommentButtons>
           <Button color='gray3' variant='h5' backgroundColor='transparent' onClick={editComment}>
             Edit

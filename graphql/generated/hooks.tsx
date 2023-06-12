@@ -295,6 +295,7 @@ export const BoardsDocument = gql`
       ownerId
       image
       users {
+        id
         name
         image
       }

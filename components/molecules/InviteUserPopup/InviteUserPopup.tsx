@@ -37,8 +37,10 @@ const InviteUserPopup = ({
   boardData,
 }: InviteUserPopupProps) => {
   const defaultBoardUsers = boardData.board.users
-    .map(u => ({ id: u.id, name: u?.name }))
-    .filter(user => user?.id !== boardData.board.ownerId);
+    .map(u => u && { id: u.id, name: u?.name })
+    .filter(user => user?.id !== boardData.board.ownerId)
+    .filter((s): s is Exclude<typeof s, null> => Boolean(s));
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(true);
   const [value, setValue] = useState('');
   const [chosenElements, setChosenElements] = useState<UserInterface[]>(defaultBoardUsers);
@@ -55,9 +57,16 @@ const InviteUserPopup = ({
 
   if (!data?.usersNotAssignedToBoard) return null;
 
-  const filteredList = data?.usersNotAssignedToBoard.filter(user =>
-    user?.name.toLowerCase().replace(/ /g, '').includes(value),
-  );
+  const filteredList = data?.usersNotAssignedToBoard
+    .filter(user => user?.name.toLowerCase().replace(/ /g, '').includes(value))
+    .filter(
+      (
+        s,
+      ): s is {
+        id: string;
+        name: string;
+      } => Boolean(s),
+    );
 
   const handleCheck = (isChecked: boolean, user: UserInterface) => {
     if (isChecked) {
@@ -98,32 +107,32 @@ const InviteUserPopup = ({
           closeDropdown={() => setIsDropdownOpen(false)}
           onClick={() => setIsDropdownOpen(true)}
         >
-          {filteredList.length ? (
-            filteredList?.map(user => {
-              return (
-                <Checkbox
-                  key={user.id}
-                  value={chosenElements?.some(el => el.id === user.id)}
-                  onChange={isChecked =>
-                    handleCheck(isChecked, {
-                      id: user?.id,
-                      name: user?.name,
-                    })
-                  }
-                >
-                  <DropdownItem>
-                    <User name={user.name} withName />
-                  </DropdownItem>
-                </Checkbox>
-              );
-            })
-          ) : (
-            <DropdownItem>
-              <Typography color='gray1' variant='h4' weight='700'>
-                No results
-              </Typography>
-            </DropdownItem>
-          )}
+          {filteredList.length
+            ? filteredList?.map(user => {
+                return (
+                  <Checkbox
+                    key={user.id}
+                    value={chosenElements?.some(el => el.id === user.id)}
+                    onChange={isChecked =>
+                      handleCheck(isChecked, {
+                        id: user?.id,
+                        name: user?.name,
+                      })
+                    }
+                  >
+                    <DropdownItem>
+                      <User name={user.name} withName />
+                    </DropdownItem>
+                  </Checkbox>
+                );
+              })
+            : [
+                <DropdownItem key={0}>
+                  <Typography color='gray1' variant='h4' weight='700'>
+                    No results
+                  </Typography>
+                </DropdownItem>,
+              ]}
         </SearchDropdown>
         <div>
           {chosenElements?.map(user => {

@@ -3,7 +3,7 @@ import WorkBoardColumn from 'Components/organisms/WorkBoardColumn/WorkBoardColum
 import { useUpdateTaskPositionMutation } from 'graphql/generated/hooks';
 import { BoardQuery } from 'graphql/generated/operations';
 import { produce } from 'immer';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 export interface WorkBoardProps {
@@ -11,7 +11,10 @@ export interface WorkBoardProps {
 }
 
 const WorkBoard = ({ boardData }: WorkBoardProps) => {
-  const [columns, setCloumns] = useState(boardData.board.columns);
+  const defaultColumns = boardData.board.columns.filter(
+    (c): c is Exclude<typeof c, null> => c !== null,
+  );
+  const [columns, setCloumns] = useState(defaultColumns);
   const columnsCount = columns.length;
   const [updateTaskPosition] = useUpdateTaskPositionMutation();
 
@@ -21,21 +24,30 @@ const WorkBoard = ({ boardData }: WorkBoardProps) => {
 
     setCloumns(prevColumns =>
       produce(prevColumns, proxyColumns => {
-        const tasks = columns.reduce((acc, curr) => {
-          return acc.concat(curr?.tasks);
-        }, []);
+        const tasks = columns.reduce<NonNullable<BoardQuery['board']['columns'][number]>['tasks']>(
+          (acc, curr) => {
+            const tasks = curr.tasks.filter((t): t is Exclude<typeof t, null> => t !== null);
+            return acc.concat(tasks);
+          },
+          [],
+        );
         const indexOfReducedColumn = proxyColumns.findIndex(
           column => column?.id === source.droppableId,
         );
+
         proxyColumns[indexOfReducedColumn]?.tasks.splice(source.index, 1);
+
         const indexOfGainedColumn = proxyColumns.findIndex(
           column => column?.id === destination.droppableId,
         );
-        proxyColumns[indexOfGainedColumn]?.tasks.splice(
-          destination.index,
-          0,
-          tasks.find(task => task.id === draggableId),
-        );
+
+        const draggedTask = tasks
+          .filter((t): t is Exclude<typeof t, null> => t !== null)
+          .find(task => task.id === draggableId);
+
+        if (!draggedTask) return;
+
+        proxyColumns[indexOfGainedColumn]?.tasks.splice(destination.index, 0, draggedTask);
       }),
     );
 
@@ -50,35 +62,21 @@ const WorkBoard = ({ boardData }: WorkBoardProps) => {
     });
   };
 
-  const [isBrowser, setIsBrowser] = useState(false);
-
-  useEffect(() => {
-    setIsBrowser(process.browser);
-  }, []);
-
-  useEffect(() => {
-    setCloumns(boardData.board.columns);
-  }, [boardData]);
-
   return (
-    <>
-      {isBrowser ? (
-        <DragDropContext onDragEnd={onDragEnd}>
-          <StyledWorkBoard columnsCount={columnsCount}>
-            {columns.map((column, index) => (
-              <WorkBoardColumn
-                key={index}
-                index={index}
-                status={column?.name}
-                tasks={column?.tasks}
-                boardId={boardData.board.id}
-                columnId={column?.id}
-              />
-            ))}
-          </StyledWorkBoard>
-        </DragDropContext>
-      ) : null}
-    </>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <StyledWorkBoard columnsCount={columnsCount}>
+        {columns.map((column, index) => (
+          <WorkBoardColumn
+            key={index}
+            index={index}
+            status={column?.name}
+            tasks={column?.tasks}
+            boardId={boardData.board.id}
+            columnId={column?.id}
+          />
+        ))}
+      </StyledWorkBoard>
+    </DragDropContext>
   );
 };
 

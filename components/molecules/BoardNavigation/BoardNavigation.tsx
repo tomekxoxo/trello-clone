@@ -5,18 +5,17 @@ import InviteUserPopup from 'Components/molecules/InviteUserPopup/InviteUserPopu
 import User from 'Components/molecules/User/User';
 import VisibilityPopup from 'Components/molecules/VisibilityPopup/VisibilityPopup';
 import { useChangeBoardVisibilityMutation } from 'graphql/generated/hooks';
-import { BoardQuery, BoardUsersQuery } from 'graphql/generated/operations';
+import { BoardQuery } from 'graphql/generated/operations';
 import { Visibility } from 'graphql/generated/types';
 import useVisibilityPopup from 'Hooks/useVisibilityPopup';
 import React, { useState } from 'react';
 
 interface BoardNavigationProps {
-  userData: BoardUsersQuery | undefined;
   boardData: BoardQuery;
   id: string;
 }
 
-const BoardNavigation = ({ userData, boardData, id }: BoardNavigationProps) => {
+const BoardNavigation = ({ boardData, id }: BoardNavigationProps) => {
   const { chosenOption, setChosenOption } = useVisibilityPopup(boardData.board.visibility);
   const [isInvitationModalOpen, setIsInvitationModalOpen] = useState(false);
   const [changeBoardVisibility] = useChangeBoardVisibilityMutation();

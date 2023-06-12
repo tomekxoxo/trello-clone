@@ -31,17 +31,17 @@ const Boards = () => {
       </StyledBoardsHeader>
       <StyledBoardsList>
         {data?.boards.map(board => {
-          if (board !== null)
-            return (
-              <Card
-                id={board.id}
-                key={board.id}
-                image={board.image || undefined}
-                title={board.name}
-                users={board.users}
-                onClick={() => router.push(`/board/${board.id}`)}
-              />
-            );
+          if (!board) return null;
+          const filteredUsers = board.users.filter((l): l is Exclude<typeof l, null> => Boolean(l));
+          return (
+            <Card
+              key={board.id}
+              image={board.image || undefined}
+              title={board.name}
+              users={filteredUsers}
+              onClick={() => router.push(`/board/${board.id}`)}
+            />
+          );
         })}
       </StyledBoardsList>
       {isModalOpen && <AddBoardModal closeModal={closeModal} />}

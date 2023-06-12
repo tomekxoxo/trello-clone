@@ -14,14 +14,14 @@ import {
   useCreateLabelMutation,
   useLabelsQuery,
 } from 'graphql/generated/hooks';
-import { Label as LabelType } from 'graphql/generated/types';
+import { TaskQuery } from 'graphql/generated/operations';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { CirclePicker, ColorResult } from 'react-color';
 
 interface LabelsPopupProps {
   attachmentSide?: 'left' | 'right';
   taskId: string;
-  defaultLabels: LabelType[];
+  defaultLabels?: TaskQuery['task']['labels'];
 }
 
 const LabelsPopup = ({ attachmentSide = 'left', taskId, defaultLabels }: LabelsPopupProps) => {
@@ -29,9 +29,13 @@ const LabelsPopup = ({ attachmentSide = 'left', taskId, defaultLabels }: LabelsP
   const [inputValue, setInputValue] = useState('');
   const [color, setColor] = useState<ColorResult>();
 
-  const [chosenElements, setChosenElements] = useState<string[]>(
-    defaultLabels.map(label => label.id),
-  );
+  const defaultElements = defaultLabels?.length
+    ? defaultLabels
+        .map(label => label && label.id)
+        .filter((s): s is Exclude<typeof s, null> => Boolean(s))
+    : [''];
+
+  const [chosenElements, setChosenElements] = useState<string[]>(defaultElements);
 
   const [createLabel] = useCreateLabelMutation();
   const [assignLabelsToTask] = useAssignLabelsToTaskMutation();
@@ -113,10 +117,12 @@ const LabelsPopup = ({ attachmentSide = 'left', taskId, defaultLabels }: LabelsP
             <Button icon={<Icon name='plus' color='white' size='12' />} onClick={onCreatelabel} />
           }
         />
-        <CirclePicker width='240' color={color} onChangeComplete={handleChangeColor} />
+        <CirclePicker width='240' color={color?.hex} onChangeComplete={handleChangeColor} />
         <form onSubmit={onSubmitLabels}>
           <StyledLabelsPopupList>
-            {data?.labels.map(label => {
+            {data?.labels?.map(label => {
+              if (!label) return null;
+
               return (
                 <Checkbox
                   key={label.id}

@@ -5,6 +5,7 @@ query Boards {
     ownerId
     image
     users {
+      id
       name
       image
     }

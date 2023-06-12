@@ -116,7 +116,9 @@ const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
               {data.task.name}
             </Typography>
             <SidebarSectionHeader title='Status' description={data.task.column.name} />
-            <SidebarSectionHeader title='Assigned to' description={data.task.user.name} />
+            {data.task.user && (
+              <SidebarSectionHeader title='Assigned to' description={data.task.user.name} />
+            )}
             <SidebarSectionHeader title='Description' iconName='file-lines' />
             <Multiline
               height='23rem'
@@ -165,6 +167,7 @@ const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
               {data.task.comments &&
                 [...data.task.comments]
                   ?.sort((a, b) => Number(b?.updatedAt) - Number(a?.updatedAt))
+                  ?.filter((c): c is Exclude<typeof c, null> => c !== null)
                   ?.map(comment => <Comment comment={comment} key={comment?.id} />)}
             </StyledCardDetailsCommentsSection>
           </StyledCardDetailsMainSection>

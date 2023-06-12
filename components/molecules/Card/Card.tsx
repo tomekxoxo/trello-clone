@@ -1,5 +1,5 @@
 import Image from 'Components/atoms/Image/Image';
-import Label, { LabelProps } from 'Components/atoms/Label/Label';
+import Label from 'Components/atoms/Label/Label';
 import Typography from 'Components/atoms/Typography/Typography';
 import {
   StyledCard,
@@ -8,14 +8,27 @@ import {
   StyledCardUsers,
 } from 'Components/molecules/Card/Card.style';
 import ItemCounter from 'Components/molecules/ItemCounter/ItemCounter';
-import User, { UserProps } from 'Components/molecules/User/User';
+import User from 'Components/molecules/User/User';
+import { BoardQuery } from 'graphql/generated/operations';
 import { ForwardedRef, forwardRef } from 'react';
 
 export interface CardProps {
   image?: string | null;
   title: string;
-  labels?: LabelProps[];
-  users?: UserProps[];
+  labels?: NonNullable<
+    NonNullable<NonNullable<BoardQuery['board']['columns']>[number]>['tasks'][number]
+  >['labels'];
+  users?: Array<
+    NonNullable<
+      NonNullable<
+        NonNullable<
+          NonNullable<
+            NonNullable<NonNullable<BoardQuery['board']['columns']>[number]>['tasks'][number]
+          >['comments']
+        >[number]
+      >['user']
+    >
+  >;
   attachmentsCount?: number;
   commentsCount?: number;
   onClick: () => void;
@@ -35,7 +48,9 @@ const Card = (
   ref: ForwardedRef<HTMLDivElement>,
 ) => {
   const maxUsers = 3;
-  const usersToShow = users?.slice(0, maxUsers);
+  const usersToShow = users
+    ?.slice(0, maxUsers)
+    .filter((u): u is Exclude<typeof u, null> => Boolean(u));
   const hiddenUsers = users && users?.length - maxUsers;
   const hasAnyHiddenUsers = hiddenUsers && hiddenUsers > 0;
   const hiddenUsersInfo = hasAnyHiddenUsers ? `+ ${hiddenUsers} others` : '';
@@ -51,9 +66,11 @@ const Card = (
         </Typography>
         {!!labels?.length && (
           <StyledCardLabels>
-            {labels.map(label => (
-              <Label key={label.name} name={label.name} color={label.color} />
-            ))}
+            {labels
+              .filter((l): l is Exclude<typeof l, null> => Boolean(l))
+              .map(label => (
+                <Label key={label.name} name={label.name} color={label.color} />
+              ))}
           </StyledCardLabels>
         )}
         <StyledCardUsers>

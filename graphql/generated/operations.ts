@@ -117,7 +117,7 @@ export type BoardsQuery = {
     id: string;
     ownerId: string;
     image?: string | null;
-    users: Array<{ __typename?: 'User'; name: string; image?: string | null } | null>;
+    users: Array<{ __typename?: 'User'; id: string; name: string; image?: string | null } | null>;
   } | null>;
 };
 

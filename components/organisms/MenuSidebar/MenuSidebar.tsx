@@ -91,6 +91,8 @@ const MenuSidebar = ({ closeSidebar, boardData }: MenuSidebarProps) => {
         {boardData.board.users.map(user => {
           const isOwner = user?.id === boardData.board.ownerId;
 
+          if (!user?.id) return null;
+
           return (
             <SidebarTeamMember
               key={user?.id}
