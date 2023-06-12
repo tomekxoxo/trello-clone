@@ -106,8 +106,6 @@ const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
 
   if (!data) return null;
 
-  console.log('data', data);
-
   return (
     <Modal closeModal={onCloseModal} width='66rem'>
       <StyledCardDetailsModal>

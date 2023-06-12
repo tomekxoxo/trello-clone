@@ -60,7 +60,6 @@ const LabelsPopup = ({ attachmentSide = 'left', taskId, defaultLabels }: LabelsP
   };
 
   const handleCheck = (isChecked: boolean, id: string) => {
-    console.log('isChecked', isChecked, id);
     if (isChecked) {
       setChosenElements(prevState => {
         return prevState?.concat(id);
