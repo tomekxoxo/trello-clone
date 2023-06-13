@@ -6,16 +6,18 @@ import { StyledTopbarNavigation } from 'Components/molecules/TopbarNavigation/To
 import { useBoardQuery } from 'graphql/generated/hooks';
 import { useRouter } from 'next/router';
 
-const TopbarNavigation = () => {
-  const router = useRouter();
+interface TopbarNavigationProps {
+  boardId: string;
+}
 
-  const id = router.query.id as unknown as string;
+const TopbarNavigation = ({ boardId }: TopbarNavigationProps) => {
+  const router = useRouter();
 
   const goToBoards = () => router.push('/');
 
   const { data } = useBoardQuery({
     variables: {
-      boardId: id,
+      boardId,
     },
   });
 
