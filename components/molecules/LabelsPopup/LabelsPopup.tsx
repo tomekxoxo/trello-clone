@@ -3,7 +3,9 @@ import Checkbox from 'Components/atoms/Checkbox/Checkbox';
 import Icon from 'Components/atoms/Icon/Icon';
 import Input from 'Components/atoms/Input/Input';
 import Label from 'Components/atoms/Label/Label';
+import Separator from 'Components/atoms/Separator/Separator';
 import {
+  StyledAssignButton,
   StyledLabelsPopup,
   StyledLabelsPopupContent,
   StyledLabelsPopupList,
@@ -118,6 +120,7 @@ const LabelsPopup = ({ attachmentSide = 'left', taskId, defaultLabels }: LabelsP
           }
         />
         <CirclePicker width='240' color={color?.hex} onChangeComplete={handleChangeColor} />
+        <Separator orientation='horizontal' />
         <form onSubmit={onSubmitLabels}>
           <StyledLabelsPopupList>
             {data?.labels?.map(label => {
@@ -134,9 +137,9 @@ const LabelsPopup = ({ attachmentSide = 'left', taskId, defaultLabels }: LabelsP
               );
             })}
           </StyledLabelsPopupList>
-          <Button variant='h5' type='submit'>
-            Submit
-          </Button>
+          <StyledAssignButton variant='h5' type='submit'>
+            Assign
+          </StyledAssignButton>
         </form>
       </StyledLabelsPopupContent>
     </StyledLabelsPopup>

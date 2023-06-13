@@ -1,3 +1,4 @@
+import Button from 'Components/atoms/Button/Button';
 import Popup from 'Components/atoms/Popup/Popup';
 import styled from 'styled-components';
 
@@ -21,3 +22,7 @@ export const StyledLabelsPopupList = styled.div`
 `;
 
 export const StyledLabelsPopupNoResults = styled.h4``;
+
+export const StyledAssignButton = styled(Button)`
+  margin-top: 0.8rem;
+`;
