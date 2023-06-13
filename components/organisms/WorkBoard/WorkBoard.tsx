@@ -3,7 +3,7 @@ import WorkBoardColumn from 'Components/organisms/WorkBoardColumn/WorkBoardColum
 import { useUpdateTaskPositionMutation } from 'graphql/generated/hooks';
 import { BoardQuery } from 'graphql/generated/operations';
 import { produce } from 'immer';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 export interface WorkBoardProps {
@@ -11,12 +11,17 @@ export interface WorkBoardProps {
 }
 
 const WorkBoard = ({ boardData }: WorkBoardProps) => {
-  const defaultColumns = boardData.board.columns.filter(
-    (c): c is Exclude<typeof c, null> => c !== null,
+  const defaultColumns = useMemo(
+    () => boardData.board.columns.filter((c): c is Exclude<typeof c, null> => c !== null),
+    [boardData],
   );
   const [columns, setCloumns] = useState(defaultColumns);
   const columnsCount = columns.length;
   const [updateTaskPosition] = useUpdateTaskPositionMutation();
+
+  useEffect(() => {
+    setCloumns(defaultColumns);
+  }, [defaultColumns]);
 
   const onDragEnd = async (result: DropResult) => {
     const { source, destination, draggableId } = result;
