@@ -33,7 +33,7 @@ const LabelsPopup = ({ attachmentSide = 'left', taskId, defaultLabels }: LabelsP
     ? defaultLabels
         .map(label => label && label.id)
         .filter((s): s is Exclude<typeof s, null> => Boolean(s))
-    : [''];
+    : [];
 
   const [chosenElements, setChosenElements] = useState<string[]>(defaultElements);
 
