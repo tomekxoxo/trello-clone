@@ -8,7 +8,7 @@ import { NextApiRequest } from 'next';
 import { Session } from 'next-auth';
 import fetch from 'node-fetch';
 
-const NEXTAUTH_URL = process.env.NEXTAUTH_URL as string;
+const SESSION_URL = process.env.SESSION_URL as string;
 
 const typeDefs = gql`
   type User {
@@ -221,7 +221,7 @@ const server = new ApolloServer({
 });
 
 const getServerSession = async (cookie: string) => {
-  const res = await fetch(NEXTAUTH_URL, {
+  const res = await fetch(SESSION_URL, {
     headers: { cookie: cookie },
   });
   const session = await res.json();
