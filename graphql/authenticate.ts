@@ -1,5 +1,5 @@
 import { GraphQLError } from 'graphql';
-import type { Context } from 'graphql/context';
+import { Context } from 'graphql/context';
 import { Session } from 'next-auth';
 
 export const authenticate = async (context: Context): Promise<{ session: Session }> => {

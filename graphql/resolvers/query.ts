@@ -1,5 +1,5 @@
 import { authenticate } from 'graphql/authenticate';
-import type { Context } from 'graphql/context';
+import { Context } from 'graphql/context';
 import {
   QueryBoardArgs,
   QueryTaskArgs,
