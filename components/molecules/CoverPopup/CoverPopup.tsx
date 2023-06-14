@@ -104,7 +104,7 @@ const CoverPopup = ({ setCover, attachmentSide = 'left' }: CoverPopupProps) => {
                   width={50}
                   height={50}
                   key={photo.id}
-                  objectFit='cover'
+                  style={{ objectFit: 'cover' }}
                 />
               );
             })

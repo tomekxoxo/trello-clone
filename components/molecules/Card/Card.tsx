@@ -47,7 +47,13 @@ const Card = (
     <>
       <StyledCard onClick={onClick} ref={ref} {...restProps}>
         {image && (
-          <Image width={219} height={130} src={image} alt='restaurant image' objectFit='cover' />
+          <Image
+            width={219}
+            height={130}
+            src={image}
+            alt='restaurant image'
+            style={{ objectFit: 'cover' }}
+          />
         )}
         <Typography variant='h2' color='dark'>
           {title}

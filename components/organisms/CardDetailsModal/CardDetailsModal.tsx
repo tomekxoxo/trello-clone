@@ -111,7 +111,15 @@ const CardDetailsModal = ({ id, onCloseModal }: CardDetailsModalProps) => {
   return (
     <Modal closeModal={onCloseModal} width='66rem'>
       <StyledCardDetailsModal>
-        {cover && <Image width={612} height={130} src={cover} alt='thumbnail' objectFit='cover' />}
+        {cover && (
+          <Image
+            width={612}
+            height={130}
+            src={cover}
+            alt='thumbnail'
+            style={{ objectFit: 'cover' }}
+          />
+        )}
         <StyledCardDetailsInfoSection>
           <StyledCardDetailsMainSection>
             <Typography weight='400' color='dark' variant='h2'>

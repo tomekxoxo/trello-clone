@@ -53,7 +53,15 @@ const AddBoardModal = ({ closeModal }: AddBoardModalProps) => {
   return (
     <Modal width='307px' closeModal={closeModal}>
       <StyledAddBoardForm onSubmit={handleSubmit(onSubmit)}>
-        {cover && <Image width={259} height={140} src={cover} alt='thumbnail' objectFit='cover' />}
+        {cover && (
+          <Image
+            width={259}
+            height={140}
+            src={cover}
+            alt='thumbnail'
+            style={{ objectFit: 'cover' }}
+          />
+        )}
         <Input
           placeholder='Board title'
           {...register('boardName')}
